@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Primary Colors - Trust & Reliability */
+  --vendorsoluce-navy: #1E3B8A;
+  --supply-chain-teal: #2D7D7D;
+  --trust-blue: #3B82F6;
+  
+  /* Risk Communication Colors */
+  --risk-critical: #DC2626;
+  --risk-high: #EA580C;
+  --risk-medium: #F59E0B;
+  --risk-low: #16A34A;
+  
+  /* Neutral & Supporting Colors */
+  --neutral-gray: #6B7280;
+  --light-sky: #EFF6FF;
+  --charcoal-slate: #334155;
+  
+  /* Dark Theme Base */
+  --dark-base: #111827;
+  --dark-surface: #1E293B;
+  
+  /* Text Colors */
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-primary-dark: #F8FAFC;
+  --text-secondary-dark: #94A3B8;
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply antialiased text-gray-800;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Brand Gradients */
+  .vendor-trust-gradient {
+    @apply bg-gradient-to-r from-[#1E3B8A] to-[#2D7D7D];
+  }
+  
+  .risk-heatmap-gradient {
+    @apply bg-gradient-to-r from-[#16A34A] via-[#F59E0B] to-[#DC2626];
+  }
+  
+  .vendor-score-gradient {
+    @apply bg-gradient-to-r from-[#1E3B8A] to-[#3B82F6];
+  }
+  
+  /* Risk Level Indicators */
+  .risk-critical {
+    @apply bg-red-100 border-red-200 text-red-800;
+  }
+  
+  .risk-high {
+    @apply bg-orange-100 border-orange-200 text-orange-800;
+  }
+  
+  .risk-medium {
+    @apply bg-yellow-100 border-yellow-200 text-yellow-800;
+  }
+  
+  .risk-low {
+    @apply bg-green-100 border-green-200 text-green-800;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+}

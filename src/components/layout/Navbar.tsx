@@ -1,0 +1,177 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Menu, X, ChevronDown, Shield, FileJson, BarChart3, BookOpen, Phone } from 'lucide-react';
+import { MenuItem } from '../../types';
+import ThemeToggle from './ThemeToggle';
+import UserMenu from './UserMenu';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useTranslation } from 'react-i18next';
+
+const Navbar: React.FC = () => {
+  const { t } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleResources = () => setIsResourcesOpen(!isResourcesOpen);
+
+  const primaryNav: MenuItem[] = [
+    { title: t('navigation.assessment'), path: '/assessment', icon: 'Shield' },
+    { title: t('navigation.sbom'), path: '/sbom-analyzer', icon: 'FileJson' },
+    { title: t('navigation.vendorRisk'), path: '/vendor-risk', icon: 'BarChart3' },
+    { title: t('navigation.resources'), path: '#', icon: 'BookOpen' },
+    { title: t('navigation.contact'), path: '/contact', icon: 'Phone' },
+  ];
+
+  const resourceItems: MenuItem[] = [
+    { title: t('navigation.apiDocs'), path: '/api-docs' },
+    { title: t('navigation.integration'), path: '/integration-guides' },
+    { title: t('navigation.templates'), path: '/templates' },
+  ];
+
+  const getIcon = (iconName: string | undefined) => {
+    if (!iconName) return null;
+    
+    const icons = {
+      Shield: <Shield size={20} />,
+      FileJson: <FileJson size={20} />,
+      BarChart3: <BarChart3 size={20} />,
+      BookOpen: <BookOpen size={20} />,
+      Phone: <Phone size={20} />,
+    };
+    
+    return iconName in icons ? icons[iconName as keyof typeof icons] : null;
+  };
+
+  return (
+    <nav className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex items-center">
+            <Link to="/" className="flex-shrink-0 flex items-center">
+              <Shield className="h-8 w-8 text-vendorsoluce-navy dark:text-trust-blue" />
+              <span className="ml-2 text-xl font-bold text-vendorsoluce-navy dark:text-white">{t('app.name')}</span>
+            </Link>
+          </div>
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
+            {primaryNav.map((item) => 
+              item.title === t('navigation.resources') ? (
+                <div key={item.title} className="relative">
+                  <button
+                    onClick={toggleResources}
+                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                  >
+                    {getIcon(item.icon)}
+                    <span className="ml-1">{item.title}</span>
+                    <ChevronDown size={16} className="ml-1" />
+                  </button>
+                  
+                  {isResourcesOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-10 border border-gray-200 dark:border-gray-700">
+                      {resourceItems.map((resource) => (
+                        <Link
+                          key={resource.title}
+                          to={resource.path}
+                          className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          onClick={() => setIsResourcesOpen(false)}
+                        >
+                          {resource.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={item.title}
+                  to={item.path}
+                  className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                >
+                  {getIcon(item.icon)}
+                  <span className="ml-1">{item.title}</span>
+                </Link>
+              )
+            )}
+
+            <div className="ml-2 flex items-center space-x-2">
+              <LanguageSwitcher variant="icon" />
+              <ThemeToggle />
+              <UserMenu />
+            </div>
+          </div>
+          
+          {/* Mobile menu button */}
+          <div className="flex items-center md:hidden">
+            <LanguageSwitcher variant="icon" />
+            <ThemeToggle />
+            <button
+              onClick={toggleMenu}
+              className="ml-2 inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      {/* Mobile Navigation */}
+      {isOpen && (
+        <div className="md:hidden">
+          <div className="pt-2 pb-3 space-y-1">
+            {primaryNav.map((item) => 
+              item.title === t('navigation.resources') ? (
+                <div key={item.title}>
+                  <button
+                    onClick={toggleResources}
+                    className="w-full text-left px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                  >
+                    {getIcon(item.icon)}
+                    <span className="ml-2">{item.title}</span>
+                    <ChevronDown size={16} className="ml-1" />
+                  </button>
+                  
+                  {isResourcesOpen && (
+                    <div className="pl-6 py-2 space-y-1">
+                      {resourceItems.map((resource) => (
+                        <Link
+                          key={resource.title}
+                          to={resource.path}
+                          className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
+                          onClick={() => {
+                            setIsOpen(false);
+                            setIsResourcesOpen(false);
+                          }}
+                        >
+                          {resource.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={item.title}
+                  to={item.path}
+                  className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {getIcon(item.icon)}
+                  <span className="ml-2">{item.title}</span>
+                </Link>
+              )
+            )}
+          </div>
+          <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
+            <div className="px-4 py-2">
+              <UserMenu />
+            </div>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;
