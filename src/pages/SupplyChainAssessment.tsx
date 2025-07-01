@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { AlertTriangle, CheckCircle, Circle, Info, ArrowLeft, ArrowRight, Clipboard, FileText, Shield } from 'lucide-react';
@@ -19,16 +19,20 @@ const SupplyChainAssessment = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  
+  // Reference to track if we've already initialized from currentAssessment
+  const initializedRef = useRef(false);
 
   // Load saved answers if available
   useEffect(() => {
     if (loading) return;
     
-    if (currentAssessment?.answers) {
+    if (currentAssessment?.answers && !initializedRef.current) {
       // If there's an existing assessment in progress, go directly to assessment
       setAnswers(currentAssessment.answers as Record<string, string>);
       setAssessmentName(currentAssessment.assessment_name || 'Supply Chain Risk Assessment');
       setAssessmentStage('assessment');
+      initializedRef.current = true; // Mark as initialized so we don't set stage again
     }
   }, [currentAssessment, loading]);
 
@@ -318,17 +322,6 @@ const SupplyChainAssessment = () => {
     );
   };
 
-  // Determine if we have enough answers to show results
-  const hasCompletedMinimumSections = () => {
-    let completedSections = 0;
-    sections.forEach((_, index) => {
-      if (calculateSectionScore(index).completed) {
-        completedSections++;
-      }
-    });
-    return completedSections >= Math.ceil(sections.length / 2);
-  };
-
   const handleStartAssessment = () => {
     setAssessmentStage('onboarding');
   };
@@ -350,6 +343,17 @@ const SupplyChainAssessment = () => {
     }
     
     setAssessmentStage('assessment');
+  };
+
+  // Determine if we have enough answers to show results
+  const hasCompletedMinimumSections = () => {
+    let completedSections = 0;
+    sections.forEach((_, index) => {
+      if (calculateSectionScore(index).completed) {
+        completedSections++;
+      }
+    });
+    return completedSections >= Math.ceil(sections.length / 2);
   };
 
   const handleViewResults = async () => {
