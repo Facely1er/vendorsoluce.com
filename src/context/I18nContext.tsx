@@ -5,7 +5,6 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 // Import translations
 import enTranslation from '../locales/en/translation.json';
-import esTranslation from '../locales/es/translation.json';
 import frTranslation from '../locales/fr/translation.json';
 
 // Initialize i18next
@@ -15,7 +14,6 @@ i18n
   .init({
     resources: {
       en: { translation: enTranslation },
-      es: { translation: esTranslation },
       fr: { translation: frTranslation }
     },
     fallbackLng: 'en',
@@ -52,7 +50,6 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
   
   const supportedLanguages = [
     { code: 'en', name: 'English' },
-    { code: 'es', name: 'Español' },
     { code: 'fr', name: 'Français' }
   ];
 
