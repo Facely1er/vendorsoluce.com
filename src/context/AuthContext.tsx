@@ -30,9 +30,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Create or update profile if user exists
+        // Create or update user record if user exists
         if (session?.user) {
-          await ensureProfile(session.user);
+          await ensureUserRecord(session.user);
         }
       }
       setIsLoading(false);
@@ -47,7 +47,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(session?.user ?? null);
         
         if (session?.user && event === 'SIGNED_IN') {
-          await ensureProfile(session.user);
+          await ensureUserRecord(session.user);
         }
         
         setIsLoading(false);
@@ -57,28 +57,42 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => subscription.unsubscribe();
   }, []);
 
-  const ensureProfile = async (user: User) => {
+  const ensureUserRecord = async (user: User) => {
     try {
-      const { data: existingProfile } = await supabase
-        .from('profiles')
+      const { data: existingUser } = await supabase
+        .from('users')
         .select('*')
         .eq('id', user.id)
         .single();
 
-      if (!existingProfile) {
-        const { error } = await supabase.from('profiles').insert({
+      if (!existingUser) {
+        const { error } = await supabase.from('users').insert({
           id: user.id,
           email: user.email!,
-          full_name: user.user_metadata?.full_name || null,
+          name: user.user_metadata?.full_name || user.email?.split('@')[0] || 'User',
           avatar_url: user.user_metadata?.avatar_url || null,
+          email_verified: user.email_confirmed_at ? true : false,
         });
 
         if (error) {
-          console.error('Error creating profile:', error);
+          console.error('Error creating user record:', error);
+        }
+      } else {
+        // Update last login time
+        const { error } = await supabase
+          .from('users')
+          .update({ 
+            last_login_at: new Date().toISOString(),
+            email_verified: user.email_confirmed_at ? true : false 
+          })
+          .eq('id', user.id);
+
+        if (error) {
+          console.error('Error updating user record:', error);
         }
       }
     } catch (error) {
-      console.error('Error ensuring profile:', error);
+      console.error('Error ensuring user record:', error);
     }
   };
 
