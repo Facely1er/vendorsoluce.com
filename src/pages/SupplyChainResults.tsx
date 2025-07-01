@@ -1,23 +1,97 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { AssessmentResults } from '../components/assessments/AssessmentResults';
 import { generateResultsPdf } from '../utils/generatePdf';
+import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
+
+interface SectionScore {
+  title: string;
+  percentage: number;
+  completed: boolean;
+}
+
+interface ResultData {
+  overallScore: number;
+  sectionScores: SectionScore[];
+}
 
 const SupplyChainResults = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { assessments, loading } = useSupplyChainAssessments();
+  const [results, setResults] = useState<ResultData | null>(null);
   
-  // In a real application, this would be passed through the location state
-  const mockResults = {
-    overallScore: 62,
-    sectionScores: [
-      { title: "Supplier Risk Management", percentage: 70, completed: true },
-      { title: "Supply Chain Threat Management", percentage: 55, completed: true },
-      { title: "Vulnerability Management", percentage: 60, completed: true },
-      { title: "Information Sharing", percentage: 75, completed: true },
-      { title: "Incident Response", percentage: 50, completed: true },
-      { title: "Supplier Lifecycle Management", percentage: 65, completed: true }
-    ],
-    assessmentType: 'supplychain',
+  // Get results from location state or fetch from most recent completed assessment
+  useEffect(() => {
+    if (location.state?.overallScore && location.state?.sectionScores) {
+      // Use results from location state (from assessment page)
+      setResults({
+        overallScore: location.state.overallScore,
+        sectionScores: location.state.sectionScores
+      });
+    } else if (!loading && assessments.length > 0) {
+      // Find the most recent completed assessment
+      const completedAssessment = assessments.find(a => a.status === 'completed');
+      
+      if (completedAssessment) {
+        setResults({
+          overallScore: completedAssessment.overall_score || 0,
+          sectionScores: completedAssessment.section_scores as SectionScore[] || []
+        });
+      } else {
+        // If no completed assessment found, use mock data
+        setResults(getMockResults());
+      }
+    } else if (!loading) {
+      // If no assessments found, use mock data
+      setResults(getMockResults());
+    }
+  }, [location.state, assessments, loading]);
+  
+  // Mock results for demo purposes
+  const getMockResults = (): ResultData => {
+    return {
+      overallScore: 62,
+      sectionScores: [
+        { title: "Supplier Risk Management", percentage: 70, completed: true },
+        { title: "Supply Chain Threat Management", percentage: 55, completed: true },
+        { title: "Vulnerability Management", percentage: 60, completed: true },
+        { title: "Information Sharing", percentage: 75, completed: true },
+        { title: "Incident Response", percentage: 50, completed: true },
+        { title: "Supplier Lifecycle Management", percentage: 65, completed: true }
+      ]
+    };
+  };
+
+  const handleExport = async () => {
+    if (!results) return;
+    
+    await generateResultsPdf(
+      'Supply Chain Risk Assessment Results',
+      results.overallScore,
+      results.sectionScores,
+      new Date().toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      }),
+      'supply-chain-assessment-results.pdf'
+    );
+  };
+
+  if (loading || !results) {
+    return (
+      <div className="container mx-auto px-4 py-8 flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-vendortal-navy"></div>
+      </div>
+    );
+  }
+
+  // Prepare data for AssessmentResults component
+  const resultData = {
+    overallScore: results.overallScore,
+    sectionScores: results.sectionScores,
+    assessmentType: 'supplychain' as const,
     frameworkName: "NIST SP 800-161 Supply Chain Risk Management",
     completedDate: new Date().toLocaleDateString('en-US', { 
       year: 'numeric', 
@@ -26,22 +100,12 @@ const SupplyChainResults = () => {
     })
   };
 
-  const handleExport = () => {
-    generateResultsPdf(
-      'Supply Chain Risk Assessment Results',
-      mockResults.overallScore,
-      mockResults.sectionScores,
-      mockResults.completedDate,
-      'supply-chain-assessment-results.pdf'
-    );
-  };
-
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Supply Chain Risk Assessment Results</h1>
       
       <AssessmentResults 
-        data={mockResults as any}
+        data={resultData}
         onExport={handleExport}
       />
       
@@ -51,18 +115,28 @@ const SupplyChainResults = () => {
           <div className="p-4 bg-gray-100/30 dark:bg-gray-800/30 rounded-lg border border-gray-200 dark:border-gray-700">
             <h3 className="font-medium mb-2 text-gray-900 dark:text-white">Primary Risk Areas</h3>
             <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
-              <li>Incident response capabilities for supply chain events (50% compliance)</li>
-              <li>Supply chain threat management processes (55% compliance)</li>
-              <li>Vulnerability management processes need enhancement (60% compliance)</li>
+              {results.sectionScores
+                .filter(s => s.percentage < 60)
+                .map((section, index) => (
+                  <li key={index}>{section.title} ({section.percentage}% compliance)</li>
+                ))}
+              {results.sectionScores.filter(s => s.percentage < 60).length === 0 && (
+                <li>No critical risk areas identified</li>
+              )}
             </ul>
           </div>
           
           <div className="p-4 bg-gray-100/30 dark:bg-gray-800/30 rounded-lg border border-gray-200 dark:border-gray-700">
             <h3 className="font-medium mb-2 text-gray-900 dark:text-white">Strengths</h3>
             <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
-              <li>Good information sharing practices with suppliers (75% compliance)</li>
-              <li>Solid supplier risk management foundation (70% compliance)</li>
-              <li>Adequate supplier lifecycle management processes (65% compliance)</li>
+              {results.sectionScores
+                .filter(s => s.percentage >= 70)
+                .map((section, index) => (
+                  <li key={index}>{section.title} ({section.percentage}% compliance)</li>
+                ))}
+              {results.sectionScores.filter(s => s.percentage >= 70).length === 0 && (
+                <li>No significant strengths identified</li>
+              )}
             </ul>
           </div>
         </div>

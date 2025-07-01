@@ -1,64 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '../components/ui/Card';
 import VendorRiskTable from '../components/vendor/VendorRiskTable';
 import { VendorRisk } from '../types';
 import Button from '../components/ui/Button';
 import { useTranslation } from 'react-i18next';
-
-// Mock vendor data
-const vendors: VendorRisk[] = [
-  {
-    id: '1',
-    name: 'Acme Cloud Services',
-    riskScore: 85,
-    lastAssessment: '2025-04-15',
-    complianceStatus: 'Compliant',
-    riskLevel: 'Low'
-  },
-  {
-    id: '2',
-    name: 'TechSupply Inc.',
-    riskScore: 72,
-    lastAssessment: '2025-04-02',
-    complianceStatus: 'Partial',
-    riskLevel: 'Medium'
-  },
-  {
-    id: '3',
-    name: 'Global Data Systems',
-    riskScore: 35,
-    lastAssessment: '2025-03-18',
-    complianceStatus: 'Non-Compliant',
-    riskLevel: 'Critical'
-  },
-  {
-    id: '4',
-    name: 'Secure Networks LLC',
-    riskScore: 90,
-    lastAssessment: '2025-04-10',
-    complianceStatus: 'Compliant',
-    riskLevel: 'Low'
-  },
-  {
-    id: '5',
-    name: 'DataCore Solutions',
-    riskScore: 65,
-    lastAssessment: '2025-03-25',
-    complianceStatus: 'Partial',
-    riskLevel: 'Medium'
-  },
-  {
-    id: '6',
-    name: 'Cloud Nexus Partners',
-    riskScore: 42,
-    lastAssessment: '2025-02-28',
-    complianceStatus: 'Non-Compliant',
-    riskLevel: 'High'
-  }
-];
+import { useVendors } from '../hooks/useVendors';
+import { Plus, RefreshCw } from 'lucide-react';
+import AddVendorModal from '../components/vendor/AddVendorModal';
 
 const VendorRiskDashboard: React.FC = () => {
   const { t } = useTranslation();
+  const { vendors, loading, error, refetch } = useVendors();
+  const [showAddModal, setShowAddModal] = useState(false);
+
+  // Transform vendors data to match VendorRisk interface
+  const vendorRiskData: VendorRisk[] = vendors.map(vendor => ({
+    id: vendor.id,
+    name: vendor.name,
+    riskScore: vendor.risk_score || 0,
+    lastAssessment: vendor.last_assessment_date || 'Never',
+    complianceStatus: (vendor.compliance_status as any) || 'Non-Compliant',
+    riskLevel: (vendor.risk_level as any) || 'Medium'
+  }));
+
+  const riskCounts = {
+    high: vendorRiskData.filter(v => v.riskLevel === 'Critical' || v.riskLevel === 'High').length,
+    medium: vendorRiskData.filter(v => v.riskLevel === 'Medium').length,
+    low: vendorRiskData.filter(v => v.riskLevel === 'Low').length,
+  };
+
+  const complianceCounts = {
+    compliant: vendorRiskData.filter(v => v.complianceStatus === 'Compliant').length,
+    partial: vendorRiskData.filter(v => v.complianceStatus === 'Partial').length,
+    nonCompliant: vendorRiskData.filter(v => v.complianceStatus === 'Non-Compliant').length,
+  };
+
+  if (loading) {
+    return (
+      <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="flex items-center justify-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-vendortal-navy"></div>
+        </div>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="text-center">
+          <p className="text-red-600 dark:text-red-400 mb-4">Error loading vendors: {error}</p>
+          <Button onClick={refetch} variant="outline">
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Retry
+          </Button>
+        </div>
+      </main>
+    );
+  }
   
   return (
     <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -72,7 +71,7 @@ const VendorRiskDashboard: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <Card className="p-6">
           <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('vendorRisk.totalVendors')}</h2>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white">{vendors.length}</p>
+          <p className="text-3xl font-bold text-gray-900 dark:text-white">{vendorRiskData.length}</p>
           <div className="mt-2 text-sm text-gray-500 dark:text-gray-400">{t('vendorRisk.monitoredVendors')}</div>
         </Card>
         
@@ -80,15 +79,11 @@ const VendorRiskDashboard: React.FC = () => {
           <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('vendorRisk.riskOverview')}</h2>
           <div className="grid grid-cols-2 gap-2">
             <div className="text-center p-2 rounded-md bg-red-50 dark:bg-red-900/20">
-              <span className="text-xl font-bold text-red-600 dark:text-red-400">
-                {vendors.filter(v => v.riskLevel === 'Critical' || v.riskLevel === 'High').length}
-              </span>
+              <span className="text-xl font-bold text-red-600 dark:text-red-400">{riskCounts.high}</span>
               <div className="text-xs text-red-600 dark:text-red-400">{t('vendorRisk.highRisk')}</div>
             </div>
             <div className="text-center p-2 rounded-md bg-yellow-50 dark:bg-yellow-900/20">
-              <span className="text-xl font-bold text-yellow-600 dark:text-yellow-400">
-                {vendors.filter(v => v.riskLevel === 'Medium').length}
-              </span>
+              <span className="text-xl font-bold text-yellow-600 dark:text-yellow-400">{riskCounts.medium}</span>
               <div className="text-xs text-yellow-600 dark:text-yellow-400">{t('vendorRisk.mediumRisk')}</div>
             </div>
           </div>
@@ -98,21 +93,15 @@ const VendorRiskDashboard: React.FC = () => {
           <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('vendorRisk.complianceStatus')}</h2>
           <div className="grid grid-cols-3 gap-2">
             <div className="text-center p-2 rounded-md bg-green-50 dark:bg-green-900/20">
-              <span className="text-xl font-bold text-green-600 dark:text-green-400">
-                {vendors.filter(v => v.complianceStatus === 'Compliant').length}
-              </span>
+              <span className="text-xl font-bold text-green-600 dark:text-green-400">{complianceCounts.compliant}</span>
               <div className="text-xs text-green-600 dark:text-green-400">{t('vendorRisk.compliant')}</div>
             </div>
             <div className="text-center p-2 rounded-md bg-yellow-50 dark:bg-yellow-900/20">
-              <span className="text-xl font-bold text-yellow-600 dark:text-yellow-400">
-                {vendors.filter(v => v.complianceStatus === 'Partial').length}
-              </span>
+              <span className="text-xl font-bold text-yellow-600 dark:text-yellow-400">{complianceCounts.partial}</span>
               <div className="text-xs text-yellow-600 dark:text-yellow-400">{t('vendorRisk.partial')}</div>
             </div>
             <div className="text-center p-2 rounded-md bg-red-50 dark:bg-red-900/20">
-              <span className="text-xl font-bold text-red-600 dark:text-red-400">
-                {vendors.filter(v => v.complianceStatus === 'Non-Compliant').length}
-              </span>
+              <span className="text-xl font-bold text-red-600 dark:text-red-400">{complianceCounts.nonCompliant}</span>
               <div className="text-xs text-red-600 dark:text-red-400">{t('vendorRisk.nonCompliant')}</div>
             </div>
           </div>
@@ -124,14 +113,25 @@ const VendorRiskDashboard: React.FC = () => {
           <div className="flex flex-col sm:flex-row justify-between sm:items-center">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('vendorRisk.vendorOverview')}</h2>
             <div className="mt-4 sm:mt-0">
-              <Button variant="primary" size="sm">
+              <Button variant="primary" size="sm" onClick={() => setShowAddModal(true)}>
+                <Plus className="h-4 w-4 mr-2" />
                 {t('vendorRisk.addNewVendor')}
               </Button>
             </div>
           </div>
         </div>
         
-        <VendorRiskTable vendors={vendors} />
+        {vendorRiskData.length > 0 ? (
+          <VendorRiskTable vendors={vendorRiskData} />
+        ) : (
+          <div className="p-12 text-center">
+            <p className="text-gray-500 dark:text-gray-400 mb-4">No vendors added yet. Start by adding your first vendor.</p>
+            <Button variant="primary" onClick={() => setShowAddModal(true)}>
+              <Plus className="h-4 w-4 mr-2" />
+              Add First Vendor
+            </Button>
+          </div>
+        )}
       </Card>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -236,6 +236,16 @@ const VendorRiskDashboard: React.FC = () => {
           </ul>
         </Card>
       </div>
+
+      {showAddModal && (
+        <AddVendorModal 
+          onClose={() => setShowAddModal(false)}
+          onSuccess={() => {
+            setShowAddModal(false);
+            refetch();
+          }}
+        />
+      )}
     </main>
   );
 };

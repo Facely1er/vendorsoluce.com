@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/Ca
 import { Button } from '../../components/ui/Button';
 import RiskBadge from '../../components/ui/RiskBadge';
 import { useTranslation } from 'react-i18next';
+import { useVendors } from '../../hooks/useVendors';
+import { useAuth } from '../../context/AuthContext';
 
 interface RiskFactor {
   id: string;
@@ -17,9 +19,13 @@ interface RiskFactor {
 
 const VendorRiskCalculator: React.FC = () => {
   const { t } = useTranslation();
+  const { isAuthenticated } = useAuth();
+  const { createVendor } = useVendors();
   const [vendorName, setVendorName] = useState('');
   const [calculationComplete, setCalculationComplete] = useState(false);
   const [riskScore, setRiskScore] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
   // Define risk factors with initial values
   const [riskFactors, setRiskFactors] = useState<RiskFactor[]>([
@@ -73,22 +79,51 @@ const VendorRiskCalculator: React.FC = () => {
     );
   };
 
-  const calculateRiskScore = () => {
-    // Calculate weighted score
-    let totalWeight = 0;
-    let weightedSum = 0;
+  const calculateRiskScore = async () => {
+    if (!vendorName.trim()) {
+      setError('Please enter a vendor name');
+      return;
+    }
     
-    riskFactors.forEach(factor => {
-      totalWeight += factor.weight;
-      weightedSum += factor.weight * factor.value;
-    });
+    setIsLoading(true);
+    setError(null);
     
-    const maxPossibleScore = totalWeight * 5; // 5 is max value for each factor
-    // Convert to 0-100 scale, but invert (5 = low risk, 1 = high risk)
-    const calculatedRiskScore = Math.round((1 - ((weightedSum / maxPossibleScore) - 0.2)) * 100);
-    
-    setRiskScore(calculatedRiskScore);
-    setCalculationComplete(true);
+    try {
+      // Calculate weighted score
+      let totalWeight = 0;
+      let weightedSum = 0;
+      
+      riskFactors.forEach(factor => {
+        totalWeight += factor.weight;
+        weightedSum += factor.weight * factor.value;
+      });
+      
+      const maxPossibleScore = totalWeight * 5; // 5 is max value for each factor
+      // Convert to 0-100 scale, but invert (5 = low risk, 1 = high risk)
+      const calculatedRiskScore = Math.round((1 - ((weightedSum / maxPossibleScore) - 0.2)) * 100);
+      
+      setRiskScore(calculatedRiskScore);
+      
+      // Save to database if user is authenticated
+      if (isAuthenticated) {
+        const riskLevel = getRiskLevel(calculatedRiskScore);
+        await createVendor({
+          name: vendorName,
+          risk_score: calculatedRiskScore,
+          risk_level: riskLevel,
+          compliance_status: riskLevel === 'Low' ? 'Compliant' : 
+                            riskLevel === 'Medium' ? 'Partial' : 'Non-Compliant',
+          notes: `Risk calculation based on: ${riskFactors.map(f => `${f.name}: ${f.value}/5`).join(', ')}`
+        });
+      }
+      
+      setCalculationComplete(true);
+    } catch (err) {
+      console.error('Error calculating risk:', err);
+      setError(err instanceof Error ? err.message : 'Failed to calculate risk score');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const getRiskLevel = (score: number): 'Low' | 'Medium' | 'High' | 'Critical' => {
@@ -131,6 +166,13 @@ const VendorRiskCalculator: React.FC = () => {
               <CardTitle>{t('quickTools.riskCalculator.inputTitle')}</CardTitle>
             </CardHeader>
             <CardContent>
+              {error && (
+                <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 rounded-md flex items-start">
+                  <AlertTriangle className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
+                  <span>{error}</span>
+                </div>
+              )}
+              
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   {t('quickTools.riskCalculator.vendorName')}
@@ -183,10 +225,14 @@ const VendorRiskCalculator: React.FC = () => {
               <Button
                 variant="primary"
                 className="w-full mt-4"
-                disabled={!vendorName.trim()}
+                disabled={!vendorName.trim() || isLoading}
                 onClick={calculateRiskScore}
               >
-                <Send className="h-4 w-4 mr-2" />
+                {isLoading ? (
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                ) : (
+                  <Send className="h-4 w-4 mr-2" />
+                )}
                 {t('quickTools.riskCalculator.calculate')}
               </Button>
             </CardContent>

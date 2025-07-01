@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Clock, MessageSquare, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, MessageSquare, AlertCircle, CheckCircle } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 const Contact: React.FC = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -34,26 +36,74 @@ const Contact: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormError(null);
+    setIsSubmitting(true);
 
     // Basic validation
     if (!formData.email || !formData.firstName || !formData.lastName || !formData.message) {
       setFormError('Please fill in all required fields.');
+      setIsSubmitting(false);
       return;
     }
 
     if (!formData.terms) {
       setFormError('Please agree to the privacy policy.');
+      setIsSubmitting(false);
       return;
     }
 
-    // In a real application, you would send this data to a server
-    console.log('Form submitted:', formData);
-    
-    // Simulate successful form submission
-    setFormSubmitted(true);
+    try {
+      // Try to use the Supabase Edge Function if available
+      const { data, error } = await supabase.functions.invoke('contact-form', {
+        body: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          topic: formData.topic,
+          message: formData.message
+        }
+      });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      // If successful, show success message
+      setFormSubmitted(true);
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      
+      // Fallback to direct database insert if edge function fails
+      try {
+        const { error } = await supabase
+          .from('contact_submissions')
+          .insert({
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone || null,
+            company: formData.company || null,
+            topic: formData.topic || null,
+            message: formData.message
+          });
+
+        if (error) {
+          throw new Error(error.message);
+        }
+
+        // If successful, show success message
+        setFormSubmitted(true);
+      } catch (dbErr) {
+        console.error('Database error:', dbErr);
+        setFormError('There was an error submitting your message. Please try again later.');
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -71,9 +121,7 @@ const Contact: React.FC = () => {
             {formSubmitted ? (
               <div className="text-center py-8">
                 <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
+                  <CheckCircle className="h-8 w-8 text-green-600 dark:text-green-400" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Thank You!</h2>
                 <p className="text-gray-600 dark:text-gray-300 mb-6">
@@ -233,8 +281,21 @@ const Contact: React.FC = () => {
                     </div>
                   </div>
                   
-                  <Button variant="primary" size="lg" className="w-full" type="submit">
-                    Submit
+                  <Button 
+                    variant="primary" 
+                    size="lg" 
+                    className="w-full" 
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                        Submitting...
+                      </>
+                    ) : (
+                      'Submit'
+                    )}
                   </Button>
                 </form>
               </>
@@ -250,8 +311,8 @@ const Contact: React.FC = () => {
                 <Mail className="h-5 w-5 text-vendortal-navy dark:text-trust-blue mr-3 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">Email</p>
-                  <a href="mailto:contact@ermits.com" className="text-gray-600 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue">
-                    contact@ermits.com
+                  <a href="mailto:contact@vendorsoluce.com" className="text-gray-600 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue">
+                    contact@vendorsoluce.com
                   </a>
                 </div>
               </li>

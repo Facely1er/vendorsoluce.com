@@ -2,13 +2,49 @@ import React from 'react';
 import { VendorRisk } from '../../types';
 import RiskBadge from '../ui/RiskBadge';
 import { useTranslation } from 'react-i18next';
+import { Edit, Trash2, Eye } from 'lucide-react';
+import { Button } from '../ui/Button';
 
 interface VendorRiskTableProps {
   vendors: VendorRisk[];
+  onEdit?: (vendor: VendorRisk) => void;
+  onDelete?: (vendorId: string) => void;
+  onView?: (vendor: VendorRisk) => void;
 }
 
-const VendorRiskTable: React.FC<VendorRiskTableProps> = ({ vendors }) => {
+const VendorRiskTable: React.FC<VendorRiskTableProps> = ({ 
+  vendors,
+  onEdit,
+  onDelete,
+  onView
+}) => {
   const { t } = useTranslation();
+  
+  if (vendors.length === 0) {
+    return (
+      <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+        No vendors found.
+      </div>
+    );
+  }
+
+  const formatDate = (dateString: string) => {
+    try {
+      // Try to parse as ISO date string
+      const date = new Date(dateString);
+      if (!isNaN(date.getTime())) {
+        return new Intl.DateTimeFormat('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        }).format(date);
+      }
+      // If it's not a valid date, just return the original string
+      return dateString;
+    } catch {
+      return dateString;
+    }
+  };
   
   return (
     <div className="overflow-x-auto">
@@ -30,6 +66,11 @@ const VendorRiskTable: React.FC<VendorRiskTableProps> = ({ vendors }) => {
             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               {t('vendorRisk.table.lastAssessment')}
             </th>
+            {(onEdit || onDelete || onView) && (
+              <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                Actions
+              </th>
+            )}
           </tr>
         </thead>
         <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -41,14 +82,14 @@ const VendorRiskTable: React.FC<VendorRiskTableProps> = ({ vendors }) => {
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
                   <div 
-                    className={`h-2 w-16 rounded ${
-                      vendor.riskScore >= 80 ? 'bg-green-500' : 
-                      vendor.riskScore >= 60 ? 'bg-yellow-500' : 
-                      vendor.riskScore >= 40 ? 'bg-orange-500' : 'bg-red-500'
-                    }`}
+                    className={`h-2 w-16 rounded bg-gray-200 dark:bg-gray-700`}
                   >
                     <div 
-                      className="h-full rounded bg-green-500" 
+                      className={`h-full rounded ${
+                        vendor.riskScore >= 80 ? 'bg-green-500' : 
+                        vendor.riskScore >= 60 ? 'bg-yellow-500' : 
+                        vendor.riskScore >= 40 ? 'bg-orange-500' : 'bg-red-500'
+                      }`} 
                       style={{ width: `${vendor.riskScore}%` }}
                     ></div>
                   </div>
@@ -68,8 +109,44 @@ const VendorRiskTable: React.FC<VendorRiskTableProps> = ({ vendors }) => {
                 </span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                {vendor.lastAssessment}
+                {formatDate(vendor.lastAssessment)}
               </td>
+              {(onEdit || onDelete || onView) && (
+                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <div className="flex justify-end space-x-2">
+                    {onView && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onView(vendor)}
+                        className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                      >
+                        <Eye className="h-4 w-4" />
+                      </Button>
+                    )}
+                    {onEdit && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onEdit(vendor)}
+                        className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-200"
+                      >
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                    )}
+                    {onDelete && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => onDelete(vendor.id)}
+                        className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-200"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    )}
+                  </div>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

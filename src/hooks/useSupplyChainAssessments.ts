@@ -1,0 +1,179 @@
+import { useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
+import { useAuth } from '../context/AuthContext';
+import { Database } from '../lib/database.types';
+
+type Assessment = Database['public']['Tables']['supply_chain_assessments']['Row'];
+type AssessmentInsert = Database['public']['Tables']['supply_chain_assessments']['Insert'];
+type AssessmentUpdate = Database['public']['Tables']['supply_chain_assessments']['Update'];
+
+export const useSupplyChainAssessments = () => {
+  const { user } = useAuth();
+  const [assessments, setAssessments] = useState<Assessment[]>([]);
+  const [currentAssessment, setCurrentAssessment] = useState<Assessment | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchAssessments = async () => {
+    if (!user) {
+      setAssessments([]);
+      setLoading(false);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('supply_chain_assessments')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        throw error;
+      }
+
+      setAssessments(data || []);
+      
+      // Set current assessment to the most recent in_progress one or create new
+      const inProgress = data?.find(a => a.status === 'in_progress');
+      if (inProgress) {
+        setCurrentAssessment(inProgress);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch assessments');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const createOrUpdateAssessment = async (
+    assessmentData: Partial<Assessment>, 
+    answers: Record<string, string>
+  ) => {
+    if (!user) {
+      throw new Error('User not authenticated');
+    }
+
+    try {
+      if (currentAssessment) {
+        // Update existing assessment
+        const { data, error } = await supabase
+          .from('supply_chain_assessments')
+          .update({
+            ...assessmentData,
+            answers,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', currentAssessment.id)
+          .eq('user_id', user.id)
+          .select()
+          .single();
+
+        if (error) {
+          throw error;
+        }
+
+        setCurrentAssessment(data);
+        setAssessments(prev => prev.map(a => a.id === data.id ? data : a));
+        return data;
+      } else {
+        // Create new assessment
+        const { data, error } = await supabase
+          .from('supply_chain_assessments')
+          .insert({
+            user_id: user.id,
+            assessment_name: assessmentData.assessment_name || 'Supply Chain Assessment',
+            answers,
+            status: 'in_progress',
+            ...assessmentData,
+          })
+          .select()
+          .single();
+
+        if (error) {
+          throw error;
+        }
+
+        setCurrentAssessment(data);
+        setAssessments(prev => [data, ...prev]);
+        return data;
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to save assessment');
+      throw err;
+    }
+  };
+
+  const completeAssessment = async (
+    overallScore: number,
+    sectionScores: any[]
+  ) => {
+    if (!currentAssessment || !user) {
+      throw new Error('No current assessment to complete');
+    }
+
+    try {
+      const { data, error } = await supabase
+        .from('supply_chain_assessments')
+        .update({
+          overall_score: overallScore,
+          section_scores: sectionScores,
+          status: 'completed',
+          completed_at: new Date().toISOString(),
+        })
+        .eq('id', currentAssessment.id)
+        .eq('user_id', user.id)
+        .select()
+        .single();
+
+      if (error) {
+        throw error;
+      }
+
+      setCurrentAssessment(null);
+      setAssessments(prev => prev.map(a => a.id === data.id ? data : a));
+      return data;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to complete assessment');
+      throw err;
+    }
+  };
+
+  const deleteAssessment = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from('supply_chain_assessments')
+        .delete()
+        .eq('id', id)
+        .eq('user_id', user?.id);
+
+      if (error) {
+        throw error;
+      }
+
+      setAssessments(prev => prev.filter(a => a.id !== id));
+      if (currentAssessment?.id === id) {
+        setCurrentAssessment(null);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to delete assessment');
+      throw err;
+    }
+  };
+
+  useEffect(() => {
+    fetchAssessments();
+  }, [user]);
+
+  return {
+    assessments,
+    currentAssessment,
+    loading,
+    error,
+    createOrUpdateAssessment,
+    completeAssessment,
+    deleteAssessment,
+    refetch: fetchAssessments,
+  };
+};

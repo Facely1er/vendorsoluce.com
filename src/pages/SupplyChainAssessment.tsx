@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { AlertTriangle, CheckCircle, Circle, Info, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
+import { useAuth } from '../context/AuthContext';
 
 const SupplyChainAssessment = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+  const { currentAssessment, createOrUpdateAssessment, loading } = useSupplyChainAssessments();
+  
   const [currentSection, setCurrentSection] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+
+  // Load saved answers if available
+  useEffect(() => {
+    if (currentAssessment?.answers) {
+      setAnswers(currentAssessment.answers as Record<string, string>);
+    }
+  }, [currentAssessment]);
 
   const sections = [
     {
@@ -194,11 +207,30 @@ const SupplyChainAssessment = () => {
     }
   ];
 
-  const handleAnswer = (questionId: string, answer: string) => {
-    setAnswers(prev => ({
-      ...prev,
+  const handleAnswer = async (questionId: string, answer: string) => {
+    const newAnswers = {
+      ...answers,
       [questionId]: answer
-    }));
+    };
+    
+    setAnswers(newAnswers);
+    
+    // Save to database if user is authenticated
+    if (isAuthenticated) {
+      try {
+        setSaveStatus('saving');
+        await createOrUpdateAssessment({}, newAnswers);
+        setSaveStatus('saved');
+        
+        // Reset save status after a delay
+        setTimeout(() => {
+          setSaveStatus('idle');
+        }, 2000);
+      } catch (err) {
+        console.error('Error saving assessment:', err);
+        setSaveStatus('error');
+      }
+    }
   };
 
   const calculateSectionScore = (sectionIndex: number) => {
@@ -287,11 +319,55 @@ const SupplyChainAssessment = () => {
     return completedSections >= Math.ceil(sections.length / 2);
   };
 
-  const handleViewResults = () => {
-    // In a real application, you would save the assessment results
-    // before navigating to the results page
-    navigate('/supply-chain-results');
+  const handleViewResults = async () => {
+    if (isAuthenticated) {
+      // Calculate section scores
+      const sectionScores = sections.map((section, index) => {
+        const score = calculateSectionScore(index);
+        return {
+          title: section.title,
+          percentage: score.percentage,
+          completed: score.completed
+        };
+      });
+      
+      // Save assessment as completed
+      try {
+        await createOrUpdateAssessment({
+          assessment_name: 'Supply Chain Risk Assessment',
+          overall_score: getOverallScore(),
+          section_scores: sectionScores,
+          status: 'completed',
+          completed_at: new Date().toISOString()
+        }, answers);
+      } catch (err) {
+        console.error('Error completing assessment:', err);
+      }
+    }
+    
+    // Navigate to results page
+    navigate('/supply-chain-results', { 
+      state: { 
+        overallScore: getOverallScore(),
+        sectionScores: sections.map((section, index) => {
+          const score = calculateSectionScore(index);
+          return {
+            title: section.title,
+            percentage: score.percentage,
+            completed: score.completed
+          };
+        })
+      }
+    });
   };
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-8 flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-vendortal-navy"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -336,7 +412,16 @@ const SupplyChainAssessment = () => {
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">{sections[currentSection].title}</h2>
             <p className="text-gray-600 dark:text-gray-300">{sections[currentSection].description}</p>
           </div>
-          <div className="text-xl font-semibold text-gray-900 dark:text-white">
+          <div className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
+            {saveStatus === 'saving' && (
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-vendortal-navy mr-2"></div>
+            )}
+            {saveStatus === 'saved' && (
+              <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+            )}
+            {saveStatus === 'error' && (
+              <AlertTriangle className="h-4 w-4 text-red-500 mr-2" />
+            )}
             {t('assessment.overallScore')}: {getOverallScore()}%
           </div>
         </div>
