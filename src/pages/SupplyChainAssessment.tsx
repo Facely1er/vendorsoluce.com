@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Card } from '../components/ui/Card';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
-import { AlertTriangle, CheckCircle, Circle, Info, ArrowLeft, ArrowRight } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Circle, Info, ArrowLeft, ArrowRight, Clipboard, FileText, Shield } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
@@ -13,16 +13,24 @@ const SupplyChainAssessment = () => {
   const { isAuthenticated } = useAuth();
   const { currentAssessment, createOrUpdateAssessment, loading } = useSupplyChainAssessments();
   
+  // Assessment stage state ('startScreen', 'onboarding', 'assessment')
+  const [assessmentStage, setAssessmentStage] = useState<'startScreen' | 'onboarding' | 'assessment'>('startScreen');
+  const [assessmentName, setAssessmentName] = useState<string>('Supply Chain Risk Assessment');
   const [currentSection, setCurrentSection] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
 
   // Load saved answers if available
   useEffect(() => {
+    if (loading) return;
+    
     if (currentAssessment?.answers) {
+      // If there's an existing assessment in progress, go directly to assessment
       setAnswers(currentAssessment.answers as Record<string, string>);
+      setAssessmentName(currentAssessment.assessment_name || 'Supply Chain Risk Assessment');
+      setAssessmentStage('assessment');
     }
-  }, [currentAssessment]);
+  }, [currentAssessment, loading]);
 
   const sections = [
     {
@@ -219,7 +227,9 @@ const SupplyChainAssessment = () => {
     if (isAuthenticated) {
       try {
         setSaveStatus('saving');
-        await createOrUpdateAssessment({}, newAnswers);
+        await createOrUpdateAssessment({
+          assessment_name: assessmentName
+        }, newAnswers);
         setSaveStatus('saved');
         
         // Reset save status after a delay
@@ -319,6 +329,29 @@ const SupplyChainAssessment = () => {
     return completedSections >= Math.ceil(sections.length / 2);
   };
 
+  const handleStartAssessment = () => {
+    setAssessmentStage('onboarding');
+  };
+
+  const handleContinueToAssessment = async () => {
+    // Save assessment name and initialize assessment
+    if (isAuthenticated) {
+      try {
+        setSaveStatus('saving');
+        await createOrUpdateAssessment({
+          assessment_name: assessmentName,
+          status: 'in_progress'
+        }, answers);
+        setSaveStatus('saved');
+      } catch (err) {
+        console.error('Error initializing assessment:', err);
+        setSaveStatus('error');
+      }
+    }
+    
+    setAssessmentStage('assessment');
+  };
+
   const handleViewResults = async () => {
     if (isAuthenticated) {
       // Calculate section scores
@@ -334,7 +367,7 @@ const SupplyChainAssessment = () => {
       // Save assessment as completed
       try {
         await createOrUpdateAssessment({
-          assessment_name: 'Supply Chain Risk Assessment',
+          assessment_name: assessmentName,
           overall_score: getOverallScore(),
           section_scores: sectionScores,
           status: 'completed',
@@ -369,6 +402,169 @@ const SupplyChainAssessment = () => {
     );
   }
 
+  // Start Screen Component
+  const StartScreen = () => (
+    <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="mb-6">
+        <Link to="/" className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue transition-colors mb-4">
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          {t('assessment.backToHome')}
+        </Link>
+      </div>
+
+      <Card className="border-vendortal-navy dark:border-trust-blue border-l-4">
+        <CardHeader className="text-center pb-0">
+          <div className="mx-auto w-16 h-16 bg-vendortal-navy/10 dark:bg-vendortal-navy/30 rounded-full flex items-center justify-center mb-4">
+            <Shield className="h-8 w-8 text-vendortal-navy dark:text-trust-blue" />
+          </div>
+          <CardTitle className="text-3xl font-bold text-gray-900 dark:text-white">
+            {t('assessment.title')}
+          </CardTitle>
+          <p className="text-gray-600 dark:text-gray-300 mt-2 max-w-xl mx-auto">
+            {t('assessment.subtitle')}
+          </p>
+        </CardHeader>
+
+        <CardContent className="pt-8 pb-8 px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="bg-gray-50 dark:bg-gray-800/50 p-5 rounded-lg flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-vendortal-navy/10 dark:bg-vendortal-navy/30 rounded-full flex items-center justify-center mb-3">
+                <Shield className="h-6 w-6 text-vendortal-navy dark:text-trust-blue" />
+              </div>
+              <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">NIST Aligned</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Assessment based on NIST SP 800-161 Supply Chain Risk Management framework
+              </p>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-800/50 p-5 rounded-lg flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-vendortal-navy/10 dark:bg-vendortal-navy/30 rounded-full flex items-center justify-center mb-3">
+                <Clipboard className="h-6 w-6 text-vendortal-navy dark:text-trust-blue" />
+              </div>
+              <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">Comprehensive</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                24 questions across 6 key supply chain security domains
+              </p>
+            </div>
+
+            <div className="bg-gray-50 dark:bg-gray-800/50 p-5 rounded-lg flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-vendortal-navy/10 dark:bg-vendortal-navy/30 rounded-full flex items-center justify-center mb-3">
+                <FileText className="h-6 w-6 text-vendortal-navy dark:text-trust-blue" />
+              </div>
+              <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">Actionable</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Get personalized recommendations and a detailed compliance report
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md p-4 mb-8">
+            <div className="flex items-start">
+              <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 mr-3 flex-shrink-0" />
+              <div>
+                <p className="text-blue-800 dark:text-blue-300 text-sm">
+                  This assessment will help you evaluate your organization's supply chain security posture against NIST SP 800-161 guidelines. You'll receive a detailed score and actionable recommendations to improve your security posture.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <Button 
+            variant="primary" 
+            size="lg" 
+            className="w-full"
+            onClick={handleStartAssessment}
+          >
+            Start Assessment
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+  );
+
+  // Onboarding Component
+  const OnboardingScreen = () => (
+    <div className="container mx-auto px-4 py-8 max-w-2xl">
+      <div className="mb-6">
+        <button 
+          onClick={() => setAssessmentStage('startScreen')}
+          className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue transition-colors mb-4"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back
+        </button>
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-xl text-gray-900 dark:text-white">
+            Name Your Assessment
+          </CardTitle>
+        </CardHeader>
+
+        <CardContent>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
+            Give your assessment a descriptive name to help you identify it later. This name will appear in your assessment list and reports.
+          </p>
+
+          <div className="mb-6">
+            <label htmlFor="assessmentName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Assessment Name
+            </label>
+            <input
+              type="text"
+              id="assessmentName"
+              value={assessmentName}
+              onChange={(e) => setAssessmentName(e.target.value)}
+              className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendortal-navy focus:border-vendortal-navy bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              placeholder="e.g., Q3 2025 Supply Chain Assessment"
+            />
+          </div>
+
+          <div className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-md mb-6">
+            <h3 className="font-medium text-gray-900 dark:text-white mb-2">What to expect:</h3>
+            <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
+              <li className="flex items-start">
+                <span className="text-green-500 mr-2">✓</span>
+                <span>24 questions across 6 supply chain security domains</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-green-500 mr-2">✓</span>
+                <span>Approximately 15-20 minutes to complete</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-green-500 mr-2">✓</span>
+                <span>Your progress is automatically saved</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-green-500 mr-2">✓</span>
+                <span>Detailed results and recommendations</span>
+              </li>
+            </ul>
+          </div>
+
+          <Button 
+            variant="primary"
+            className="w-full"
+            onClick={handleContinueToAssessment}
+          >
+            Continue to Assessment
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+  );
+
+  // Render the appropriate screen based on assessmentStage
+  if (assessmentStage === 'startScreen') {
+    return <StartScreen />;
+  }
+
+  if (assessmentStage === 'onboarding') {
+    return <OnboardingScreen />;
+  }
+
+  // The main assessment UI (original code with minor adjustments)
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-6">
@@ -376,7 +572,7 @@ const SupplyChainAssessment = () => {
           <ArrowLeft className="mr-2 h-4 w-4" />
           {t('assessment.backToHome')}
         </Link>
-        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{t('assessment.title')}</h1>
+        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{assessmentName}</h1>
         <p className="text-gray-600 dark:text-gray-300 mb-6">{t('assessment.subtitle')}</p>
       </div>
       
