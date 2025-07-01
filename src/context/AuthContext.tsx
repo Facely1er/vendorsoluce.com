@@ -1,6 +1,17 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { User, Session } from '@supabase/supabase-js';
-import { supabase } from '../lib/supabase';
+
+// Define local interfaces to replace Supabase types
+interface User {
+  id: string;
+  email: string;
+  name?: string;
+  avatar_url?: string;
+  user_metadata?: Record<string, any>;
+}
+
+interface Session {
+  user: User;
+}
 
 interface AuthContextType {
   user: User | null;
@@ -10,8 +21,9 @@ interface AuthContextType {
   register: (email: string, password: string, fullName: string) => Promise<boolean>;
   logout: () => Promise<void>;
   isLoading: boolean;
-  resetPassword: (email: string) => Promise<boolean>;
 }
+
+const AUTH_STORAGE_KEY = 'vendorsoluce_auth';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -21,95 +33,53 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Get initial session
-    const getInitialSession = async () => {
-      const { data: { session }, error } = await supabase.auth.getSession();
-      if (error) {
-        console.error('Error getting session:', error);
-      } else {
-        setSession(session);
-        setUser(session?.user ?? null);
-        
-        // Create or update user record if user exists
-        if (session?.user) {
-          await ensureUserRecord(session.user);
+    // Get initial session from localStorage
+    const getInitialSession = () => {
+      try {
+        const storedAuth = localStorage.getItem(AUTH_STORAGE_KEY);
+        if (storedAuth) {
+          const parsedAuth = JSON.parse(storedAuth);
+          setUser(parsedAuth.user);
+          setSession({ user: parsedAuth.user });
         }
+      } catch (error) {
+        console.error('Error getting session from localStorage:', error);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     getInitialSession();
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        
-        if (session?.user && event === 'SIGNED_IN') {
-          await ensureUserRecord(session.user);
-        }
-        
-        setIsLoading(false);
-      }
-    );
-
-    return () => subscription.unsubscribe();
   }, []);
-
-  const ensureUserRecord = async (user: User) => {
-    try {
-      const { data: existingUser } = await supabase
-        .from('users')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-
-      if (!existingUser) {
-        const { error } = await supabase.from('users').insert({
-          id: user.id,
-          email: user.email!,
-          name: user.user_metadata?.full_name || user.email?.split('@')[0] || 'User',
-          avatar_url: user.user_metadata?.avatar_url || null,
-          email_verified: user.email_confirmed_at ? true : false,
-        });
-
-        if (error) {
-          console.error('Error creating user record:', error);
-        }
-      } else {
-        // Update last login time
-        const { error } = await supabase
-          .from('users')
-          .update({ 
-            last_login_at: new Date().toISOString(),
-            email_verified: user.email_confirmed_at ? true : false 
-          })
-          .eq('id', user.id);
-
-        if (error) {
-          console.error('Error updating user record:', error);
-        }
-      }
-    } catch (error) {
-      console.error('Error ensuring user record:', error);
-    }
-  };
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       setIsLoading(true);
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (error) {
-        console.error('Login error:', error);
-        return false;
+      
+      // In a real app, this would validate credentials against a backend
+      // For this local storage implementation, we'll just check if a user with this email exists
+      
+      // For demo purposes, always succeed with login if email and password are provided
+      if (email && password) {
+        // Create a mock user
+        const mockUser: User = {
+          id: generateUserId(email),
+          email: email,
+          name: email.split('@')[0], // Use the part before @ as the name
+          avatar_url: null
+        };
+        
+        // Store in localStorage
+        localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify({ user: mockUser }));
+        
+        // Update state
+        setUser(mockUser);
+        setSession({ user: mockUser });
+        
+        return true;
       }
-
-      return !!data.user;
+      
+      return false;
     } catch (error) {
       console.error('Login error:', error);
       return false;
@@ -121,22 +91,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const register = async (email: string, password: string, fullName: string): Promise<boolean> => {
     try {
       setIsLoading(true);
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            full_name: fullName,
-          },
-        },
-      });
-
-      if (error) {
-        console.error('Registration error:', error);
-        return false;
-      }
-
-      return !!data.user;
+      
+      // Create a mock user
+      const mockUser: User = {
+        id: generateUserId(email),
+        email: email,
+        name: fullName,
+        avatar_url: null,
+        user_metadata: {
+          full_name: fullName
+        }
+      };
+      
+      // Store in localStorage
+      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify({ user: mockUser }));
+      
+      // Update state
+      setUser(mockUser);
+      setSession({ user: mockUser });
+      
+      return true;
     } catch (error) {
       console.error('Registration error:', error);
       return false;
@@ -147,31 +121,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async (): Promise<void> => {
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) {
-        console.error('Logout error:', error);
-      }
+      // Remove from localStorage
+      localStorage.removeItem(AUTH_STORAGE_KEY);
+      
+      // Update state
+      setUser(null);
+      setSession(null);
     } catch (error) {
       console.error('Logout error:', error);
     }
   };
 
-  const resetPassword = async (email: string): Promise<boolean> => {
-    try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password`,
-      });
-
-      if (error) {
-        console.error('Password reset error:', error);
-        return false;
-      }
-
-      return true;
-    } catch (error) {
-      console.error('Password reset error:', error);
-      return false;
+  // Helper function to generate a consistent user ID from email
+  const generateUserId = (email: string): string => {
+    // Simple hash function to generate a deterministic ID from email
+    let hash = 0;
+    for (let i = 0; i < email.length; i++) {
+      const char = email.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32bit integer
     }
+    // Convert to a string ID
+    return `user-${Math.abs(hash).toString(16)}`;
   };
 
   return (
@@ -183,8 +154,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         login, 
         register,
         logout, 
-        isLoading,
-        resetPassword
+        isLoading
       }}
     >
       {children}

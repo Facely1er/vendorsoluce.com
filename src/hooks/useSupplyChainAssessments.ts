@@ -1,11 +1,20 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
-import { Database } from '../lib/database.types';
 
-type Assessment = Database['public']['Tables']['supply_chain_assessments']['Row'];
-type AssessmentInsert = Database['public']['Tables']['supply_chain_assessments']['Insert'];
-type AssessmentUpdate = Database['public']['Tables']['supply_chain_assessments']['Update'];
+type Assessment = {
+  id: string;
+  user_id: string;
+  assessment_name: string | null;
+  overall_score: number | null;
+  section_scores: any | null;
+  answers: Record<string, string> | null;
+  status: string | null;
+  completed_at: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+const ASSESSMENTS_STORAGE_KEY = 'vendorsoluce_assessments';
 
 export const useSupplyChainAssessments = () => {
   const { user } = useAuth();
@@ -17,28 +26,34 @@ export const useSupplyChainAssessments = () => {
   const fetchAssessments = async () => {
     if (!user) {
       setAssessments([]);
+      setCurrentAssessment(null);
       setLoading(false);
       return;
     }
 
     try {
       setLoading(true);
-      const { data, error } = await supabase
-        .from('supply_chain_assessments')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        throw error;
-      }
-
-      setAssessments(data || []);
       
-      // Set current assessment to the most recent in_progress one or create new
-      const inProgress = data?.find(a => a.status === 'in_progress');
-      if (inProgress) {
-        setCurrentAssessment(inProgress);
+      // Get assessments from localStorage
+      const storedAssessments = localStorage.getItem(ASSESSMENTS_STORAGE_KEY);
+      if (storedAssessments) {
+        const allAssessments: Assessment[] = JSON.parse(storedAssessments);
+        
+        // Filter assessments for current user
+        const userAssessments = allAssessments.filter(assessment => assessment.user_id === user.id);
+        
+        // Sort by created_at in descending order (newest first)
+        userAssessments.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        
+        setAssessments(userAssessments);
+        
+        // Set current assessment to the most recent in_progress one
+        const inProgress = userAssessments.find(a => a.status === 'in_progress');
+        if (inProgress) {
+          setCurrentAssessment(inProgress);
+        }
+      } else {
+        setAssessments([]);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch assessments');
@@ -56,48 +71,59 @@ export const useSupplyChainAssessments = () => {
     }
 
     try {
+      // Get existing assessments from localStorage
+      const storedAssessments = localStorage.getItem(ASSESSMENTS_STORAGE_KEY);
+      const allAssessments: Assessment[] = storedAssessments ? JSON.parse(storedAssessments) : [];
+      
       if (currentAssessment) {
         // Update existing assessment
-        const { data, error } = await supabase
-          .from('supply_chain_assessments')
-          .update({
-            ...assessmentData,
-            answers,
-            updated_at: new Date().toISOString(),
-          })
-          .eq('id', currentAssessment.id)
-          .eq('user_id', user.id)
-          .select()
-          .single();
-
-        if (error) {
-          throw error;
-        }
-
-        setCurrentAssessment(data);
-        setAssessments(prev => prev.map(a => a.id === data.id ? data : a));
-        return data;
+        const updatedAssessment = {
+          ...currentAssessment,
+          ...assessmentData,
+          answers,
+          updated_at: new Date().toISOString()
+        };
+        
+        // Find and update the assessment in the array
+        const updatedAssessments = allAssessments.map(a => 
+          a.id === currentAssessment.id ? updatedAssessment : a
+        );
+        
+        // Save back to localStorage
+        localStorage.setItem(ASSESSMENTS_STORAGE_KEY, JSON.stringify(updatedAssessments));
+        
+        // Update state
+        setCurrentAssessment(updatedAssessment);
+        setAssessments(prev => prev.map(a => a.id === updatedAssessment.id ? updatedAssessment : a));
+        
+        return updatedAssessment;
       } else {
         // Create new assessment
-        const { data, error } = await supabase
-          .from('supply_chain_assessments')
-          .insert({
-            user_id: user.id,
-            assessment_name: assessmentData.assessment_name || 'Supply Chain Assessment',
-            answers,
-            status: 'in_progress',
-            ...assessmentData,
-          })
-          .select()
-          .single();
-
-        if (error) {
-          throw error;
-        }
-
-        setCurrentAssessment(data);
-        setAssessments(prev => [data, ...prev]);
-        return data;
+        const newAssessment: Assessment = {
+          id: `assessment-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+          user_id: user.id,
+          assessment_name: assessmentData.assessment_name || 'Supply Chain Assessment',
+          overall_score: null,
+          section_scores: null,
+          answers,
+          status: 'in_progress',
+          completed_at: null,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          ...assessmentData
+        };
+        
+        // Add to array
+        allAssessments.push(newAssessment);
+        
+        // Save to localStorage
+        localStorage.setItem(ASSESSMENTS_STORAGE_KEY, JSON.stringify(allAssessments));
+        
+        // Update state
+        setCurrentAssessment(newAssessment);
+        setAssessments(prev => [newAssessment, ...prev]);
+        
+        return newAssessment;
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save assessment');
@@ -114,26 +140,37 @@ export const useSupplyChainAssessments = () => {
     }
 
     try {
-      const { data, error } = await supabase
-        .from('supply_chain_assessments')
-        .update({
-          overall_score: overallScore,
-          section_scores: sectionScores,
-          status: 'completed',
-          completed_at: new Date().toISOString(),
-        })
-        .eq('id', currentAssessment.id)
-        .eq('user_id', user.id)
-        .select()
-        .single();
-
-      if (error) {
-        throw error;
+      // Get existing assessments from localStorage
+      const storedAssessments = localStorage.getItem(ASSESSMENTS_STORAGE_KEY);
+      if (!storedAssessments) {
+        throw new Error('No assessments found in storage');
       }
-
-      setCurrentAssessment(null);
-      setAssessments(prev => prev.map(a => a.id === data.id ? data : a));
-      return data;
+      
+      const allAssessments: Assessment[] = JSON.parse(storedAssessments);
+      
+      // Update the current assessment
+      const completedAssessment: Assessment = {
+        ...currentAssessment,
+        overall_score: overallScore,
+        section_scores: sectionScores,
+        status: 'completed',
+        completed_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      };
+      
+      // Find and update the assessment in the array
+      const updatedAssessments = allAssessments.map(a => 
+        a.id === currentAssessment.id ? completedAssessment : a
+      );
+      
+      // Save back to localStorage
+      localStorage.setItem(ASSESSMENTS_STORAGE_KEY, JSON.stringify(updatedAssessments));
+      
+      // Update state
+      setCurrentAssessment(null); // Clear current assessment since it's completed
+      setAssessments(prev => prev.map(a => a.id === completedAssessment.id ? completedAssessment : a));
+      
+      return completedAssessment;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to complete assessment');
       throw err;
@@ -142,16 +179,21 @@ export const useSupplyChainAssessments = () => {
 
   const deleteAssessment = async (id: string) => {
     try {
-      const { error } = await supabase
-        .from('supply_chain_assessments')
-        .delete()
-        .eq('id', id)
-        .eq('user_id', user?.id);
-
-      if (error) {
-        throw error;
-      }
-
+      // Get existing assessments from localStorage
+      const storedAssessments = localStorage.getItem(ASSESSMENTS_STORAGE_KEY);
+      if (!storedAssessments) return;
+      
+      const allAssessments: Assessment[] = JSON.parse(storedAssessments);
+      
+      // Remove the specified assessment
+      const updatedAssessments = allAssessments.filter(assessment => 
+        !(assessment.id === id && assessment.user_id === user?.id)
+      );
+      
+      // Save back to localStorage
+      localStorage.setItem(ASSESSMENTS_STORAGE_KEY, JSON.stringify(updatedAssessments));
+      
+      // Update state
       setAssessments(prev => prev.filter(a => a.id !== id));
       if (currentAssessment?.id === id) {
         setCurrentAssessment(null);
