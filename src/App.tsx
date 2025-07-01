@@ -1,29 +1,32 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import HomePage from './pages/HomePage';
-import SupplyChainAssessment from './pages/SupplyChainAssessment';
-import SBOMAnalyzer from './pages/SBOMAnalyzer';
-import VendorRiskDashboard from './pages/VendorRiskDashboard';
-import APIDocumentation from './pages/APIDocumentation';
-import IntegrationGuides from './pages/IntegrationGuides';
-import Templates from './pages/Templates';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Privacy from './pages/Privacy';
-import SupplyChainResults from './pages/SupplyChainResults';
-import SupplyChainRecommendations from './pages/SupplyChainRecommendations';
-import Login from './pages/Login';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 import { I18nProvider } from './context/I18nContext';
-import SBOMQuickScan from './pages/tools/SBOMQuickScan';
-import VendorRiskCalculator from './pages/tools/VendorRiskCalculator';
-import NISTChecklist from './pages/tools/NISTChecklist';
 import { useAuth } from './context/AuthContext';
 import { Bell, X } from 'lucide-react';
+import LoadingSpinner from './components/common/LoadingSpinner';
+
+// Lazy load all page components
+const HomePage = React.lazy(() => import('./pages/HomePage'));
+const SupplyChainAssessment = React.lazy(() => import('./pages/SupplyChainAssessment'));
+const SBOMAnalyzer = React.lazy(() => import('./pages/SBOMAnalyzer'));
+const VendorRiskDashboard = React.lazy(() => import('./pages/VendorRiskDashboard'));
+const APIDocumentation = React.lazy(() => import('./pages/APIDocumentation'));
+const IntegrationGuides = React.lazy(() => import('./pages/IntegrationGuides'));
+const Templates = React.lazy(() => import('./pages/Templates'));
+const About = React.lazy(() => import('./pages/About'));
+const Contact = React.lazy(() => import('./pages/Contact'));
+const Privacy = React.lazy(() => import('./pages/Privacy'));
+const SupplyChainResults = React.lazy(() => import('./pages/SupplyChainResults'));
+const SupplyChainRecommendations = React.lazy(() => import('./pages/SupplyChainRecommendations'));
+const Login = React.lazy(() => import('./pages/Login'));
+const SBOMQuickScan = React.lazy(() => import('./pages/tools/SBOMQuickScan'));
+const VendorRiskCalculator = React.lazy(() => import('./pages/tools/VendorRiskCalculator'));
+const NISTChecklist = React.lazy(() => import('./pages/tools/NISTChecklist'));
 
 // Auth Banner component to show when users aren't logged in
 const AuthBanner: React.FC = () => {
@@ -51,6 +54,13 @@ const AuthBanner: React.FC = () => {
   );
 };
 
+// Page loading component
+const PageLoading: React.FC = () => (
+  <div className="flex items-center justify-center min-h-[50vh]">
+    <LoadingSpinner size="large" />
+  </div>
+);
+
 // AppContent component to avoid context hook usage outside provider
 const AppContent: React.FC = () => {
   return (
@@ -58,55 +68,57 @@ const AppContent: React.FC = () => {
       <AuthBanner />
       <Navbar />
       <div className="flex-grow">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={
-            <ProtectedRoute requireAuth={false}>
-              <Login />
-            </ProtectedRoute>
-          } />
-          <Route path="/assessment" element={
-            <ProtectedRoute requireAuth={false}>
-              <SupplyChainAssessment />
-            </ProtectedRoute>
-          } />
-          <Route path="/supply-chain-risk" element={
-            <ProtectedRoute requireAuth={false}>
-              <SupplyChainAssessment />
-            </ProtectedRoute>
-          } />
-          <Route path="/supply-chain-results" element={
-            <ProtectedRoute requireAuth={false}>
-              <SupplyChainResults />
-            </ProtectedRoute>
-          } />
-          <Route path="/supply-chain-recommendations" element={
-            <ProtectedRoute requireAuth={false}>
-              <SupplyChainRecommendations />
-            </ProtectedRoute>
-          } />
-          <Route path="/sbom-analyzer" element={
-            <ProtectedRoute requireAuth={false}>
-              <SBOMAnalyzer />
-            </ProtectedRoute>
-          } />
-          <Route path="/vendor-risk" element={
-            <ProtectedRoute requireAuth={false}>
-              <VendorRiskDashboard />
-            </ProtectedRoute>
-          } />
-          <Route path="/api-docs" element={<APIDocumentation />} />
-          <Route path="/integration-guides" element={<IntegrationGuides />} />
-          <Route path="/templates" element={<Templates />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/privacy" element={<Privacy />} />
-          
-          {/* Quick Tools Pages */}
-          <Route path="/tools/sbom-quick-scan" element={<SBOMQuickScan />} />
-          <Route path="/tools/vendor-risk-calculator" element={<VendorRiskCalculator />} />
-          <Route path="/tools/nist-checklist" element={<NISTChecklist />} />
-        </Routes>
+        <Suspense fallback={<PageLoading />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={
+              <ProtectedRoute requireAuth={false}>
+                <Login />
+              </ProtectedRoute>
+            } />
+            <Route path="/assessment" element={
+              <ProtectedRoute requireAuth={false}>
+                <SupplyChainAssessment />
+              </ProtectedRoute>
+            } />
+            <Route path="/supply-chain-risk" element={
+              <ProtectedRoute requireAuth={false}>
+                <SupplyChainAssessment />
+              </ProtectedRoute>
+            } />
+            <Route path="/supply-chain-results" element={
+              <ProtectedRoute requireAuth={false}>
+                <SupplyChainResults />
+              </ProtectedRoute>
+            } />
+            <Route path="/supply-chain-recommendations" element={
+              <ProtectedRoute requireAuth={false}>
+                <SupplyChainRecommendations />
+              </ProtectedRoute>
+            } />
+            <Route path="/sbom-analyzer" element={
+              <ProtectedRoute requireAuth={false}>
+                <SBOMAnalyzer />
+              </ProtectedRoute>
+            } />
+            <Route path="/vendor-risk" element={
+              <ProtectedRoute requireAuth={false}>
+                <VendorRiskDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/api-docs" element={<APIDocumentation />} />
+            <Route path="/integration-guides" element={<IntegrationGuides />} />
+            <Route path="/templates" element={<Templates />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            
+            {/* Quick Tools Pages */}
+            <Route path="/tools/sbom-quick-scan" element={<SBOMQuickScan />} />
+            <Route path="/tools/vendor-risk-calculator" element={<VendorRiskCalculator />} />
+            <Route path="/tools/nist-checklist" element={<NISTChecklist />} />
+          </Routes>
+        </Suspense>
       </div>
       <Footer />
     </div>
