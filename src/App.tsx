@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import HomePage from './pages/HomePage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import DashboardPage from './pages/DashboardPage';
@@ -50,6 +51,7 @@ function AppRoutes() {
   return (
     <Routes>
       {/* Public Routes */}
+     <Route path="/" element={<HomePage />} />
       <Route path="/signin" element={<SignInPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       
@@ -88,7 +90,7 @@ function AppRoutes() {
       />
       
       {/* Default Route */}
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+     <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
