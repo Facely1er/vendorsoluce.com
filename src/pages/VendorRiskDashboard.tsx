@@ -11,6 +11,7 @@ import ThreatIntelligenceFeed from '../components/vendor/ThreatIntelligenceFeed'
 import WorkflowAutomation from '../components/vendor/WorkflowAutomation';
 import CustomizableDashboard from '../components/dashboard/CustomizableDashboard';
 import PredictiveAnalytics from '../components/analytics/PredictiveAnalytics';
+import DataImportExport from '../components/data/DataImportExport';
 
 const VendorRiskDashboard: React.FC = () => {
   const { t } = useTranslation();
@@ -153,16 +154,33 @@ const VendorRiskDashboard: React.FC = () => {
           <div className="flex flex-col sm:flex-row justify-between sm:items-center">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('vendorRisk.vendorOverview')}</h2>
             <div className="mt-4 sm:mt-0">
+              <div className="flex flex-col sm:flex-row gap-2">
+                <DataImportExport
+                  dataType="vendors"
+                  data={vendors}
+                  onImportComplete={(result) => {
+                    if (result.success) {
+                      refetch();
+                    }
+                  }}
+                  onRefresh={refetch}
+                />
               <Button variant="primary" size="sm" onClick={() => setShowAddModal(true)}>
                 <Plus className="h-4 w-4 mr-2" />
                 {t('vendorRisk.addNewVendor')}
               </Button>
+              </div>
             </div>
           </div>
         </div>
         
         {vendorRiskData.length > 0 ? (
           <VendorRiskTable vendors={vendorRiskData} />
+        ) : (
+          <VendorRiskTable 
+            vendors={vendorRiskData} 
+            onRefresh={refetch}
+          />
         ) : (
           <div className="p-12 text-center">
             <p className="text-gray-500 dark:text-gray-400 mb-4">No vendors added yet. Start by adding your first vendor.</p>

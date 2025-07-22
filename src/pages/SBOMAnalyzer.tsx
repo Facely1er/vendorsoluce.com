@@ -8,11 +8,13 @@ import { useSBOMAnalyses } from '../hooks/useSBOMAnalyses';
 import { useAuth } from '../context/AuthContext';
 import { XMLParser } from 'fast-xml-parser';
 import EnhancedSBOMAnalysis from '../components/sbom/EnhancedSBOMAnalysis';
+import DataImportExport from '../components/data/DataImportExport';
 
 const SBOMAnalyzer = () => {
   const { t } = useTranslation();
   const { isAuthenticated } = useAuth();
   const { createAnalysis } = useSBOMAnalyses();
+  const { analyses, refetch } = useSBOMAnalyses();
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState(null);
   const [error, setError] = useState(null);
@@ -276,6 +278,21 @@ const SBOMAnalyzer = () => {
         <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl">
           {t('sbom.description')}
         </p>
+        
+        {isAuthenticated && analyses.length > 0 && (
+          <div className="mt-6 flex justify-end">
+            <DataImportExport
+              dataType="sbom_analyses"
+              data={analyses}
+              onImportComplete={(result) => {
+                if (result.success) {
+                  refetch();
+                }
+              }}
+              onRefresh={refetch}
+            />
+          </div>
+        )}
       </div>
 
       {!results && (

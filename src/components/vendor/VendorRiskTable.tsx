@@ -1,15 +1,18 @@
 import React from 'react';
+import { useState } from 'react';
 import { VendorRisk } from '../../types';
 import RiskBadge from '../ui/RiskBadge';
 import { useTranslation } from 'react-i18next';
 import { Edit, Trash2, Eye } from 'lucide-react';
 import { Button } from '../ui/Button';
+import BulkDataOperations from '../data/BulkDataOperations';
 
 interface VendorRiskTableProps {
   vendors: VendorRisk[];
   onEdit?: (vendor: VendorRisk) => void;
   onDelete?: (vendorId: string) => void;
   onView?: (vendor: VendorRisk) => void;
+  onRefresh?: () => void;
 }
 
 const VendorRiskTable: React.FC<VendorRiskTableProps> = ({ 
@@ -17,8 +20,22 @@ const VendorRiskTable: React.FC<VendorRiskTableProps> = ({
   onEdit,
   onDelete,
   onView
+  onRefresh
 }) => {
   const { t } = useTranslation();
+  const [selectedVendors, setSelectedVendors] = useState<string[]>([]);
+  
+  const handleSelectAll = (checked: boolean) => {
+    setSelectedVendors(checked ? vendors.map(v => v.id) : []);
+  };
+  
+  const handleSelectVendor = (vendorId: string, checked: boolean) => {
+    if (checked) {
+      setSelectedVendors(prev => [...prev, vendorId]);
+    } else {
+      setSelectedVendors(prev => prev.filter(id => id !== vendorId));
+    }
+  };
   
   if (vendors.length === 0) {
     return (
@@ -47,10 +64,28 @@ const VendorRiskTable: React.FC<VendorRiskTableProps> = ({
   };
   
   return (
+    <div>
+      <BulkDataOperations
+        dataType="vendors"
+        selectedItems={selectedVendors}
+        onSelectionChange={setSelectedVendors}
+        onOperationComplete={() => {
+          if (onRefresh) onRefresh();
+        }}
+      />
+      
     <div className="overflow-x-auto">
       <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
         <thead className="bg-gray-50 dark:bg-gray-800">
           <tr>
+            <th scope="col" className="px-6 py-3 text-left">
+              <input
+                type="checkbox"
+                checked={selectedVendors.length === vendors.length && vendors.length > 0}
+                onChange={(e) => handleSelectAll(e.target.checked)}
+                className="h-4 w-4 text-vendorsoluce-green focus:ring-vendorsoluce-green border-gray-300 rounded"
+              />
+            </th>
             <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               {t('vendorRisk.table.vendor')}
             </th>
@@ -76,6 +111,14 @@ const VendorRiskTable: React.FC<VendorRiskTableProps> = ({
         <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
           {vendors.map((vendor) => (
             <tr key={vendor.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              <td className="px-6 py-4 whitespace-nowrap">
+                <input
+                  type="checkbox"
+                  checked={selectedVendors.includes(vendor.id)}
+                  onChange={(e) => handleSelectVendor(vendor.id, e.target.checked)}
+                  className="h-4 w-4 text-vendorsoluce-green focus:ring-vendorsoluce-green border-gray-300 rounded"
+                />
+              </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div>
                   <div className="font-medium text-gray-900 dark:text-white">{vendor.name}</div>
@@ -157,6 +200,7 @@ const VendorRiskTable: React.FC<VendorRiskTableProps> = ({
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   );
 };

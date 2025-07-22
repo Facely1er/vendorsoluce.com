@@ -6,12 +6,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
 import { useAuth } from '../context/AuthContext';
+import DataImportExport from '../components/data/DataImportExport';
 
 const SupplyChainAssessment = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const { currentAssessment, createOrUpdateAssessment, loading } = useSupplyChainAssessments();
+  const { assessments, refetch } = useSupplyChainAssessments();
   
   // Assessment stage state ('startScreen', 'onboarding', 'assessment')
   const [assessmentStage, setAssessmentStage] = useState<'startScreen' | 'onboarding' | 'assessment'>('startScreen');
@@ -578,6 +580,21 @@ const SupplyChainAssessment = () => {
         </Link>
         <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{assessmentName}</h1>
         <p className="text-gray-600 dark:text-gray-300 mb-6">{t('assessment.subtitle')}</p>
+        
+        {isAuthenticated && assessments.length > 0 && (
+          <div className="mb-6 flex justify-end">
+            <DataImportExport
+              dataType="assessments"
+              data={assessments}
+              onImportComplete={(result) => {
+                if (result.success) {
+                  refetch();
+                }
+              }}
+              onRefresh={refetch}
+            />
+          </div>
+        )}
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
