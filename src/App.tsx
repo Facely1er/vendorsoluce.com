@@ -9,6 +9,7 @@ import { I18nProvider } from './context/I18nContext';
 import { useAuth } from './context/AuthContext';
 import { Bell, X } from 'lucide-react';
 import LoadingSpinner from './components/common/LoadingSpinner';
+import { Analytics } from "@vercel/analytics/react"
 
 // Lazy load all page components
 const HomePage = React.lazy(() => import('./pages/HomePage'));
@@ -121,6 +122,7 @@ const AppContent: React.FC = () => {
         </Suspense>
       </div>
       <Footer />
+     <Analytics />
     </div>
   );
 };
