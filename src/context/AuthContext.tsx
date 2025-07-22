@@ -1,16 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
+import type { User as SupabaseUser, Session } from '@supabase/supabase-js';
 
-// Define local interfaces to replace Supabase types
 interface User {
   id: string;
   email: string;
   name?: string;
-  avatar_url?: string;
+  avatar?: string;
   user_metadata?: Record<string, any>;
-}
-
-interface Session {
-  user: User;
 }
 
 interface AuthContextType {
@@ -23,8 +20,6 @@ interface AuthContextType {
   isLoading: boolean;
 }
 
-const AUTH_STORAGE_KEY = 'vendorsoluce_auth';
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -33,53 +28,70 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Get initial session from localStorage
-    const getInitialSession = () => {
-      try {
-        const storedAuth = localStorage.getItem(AUTH_STORAGE_KEY);
-        if (storedAuth) {
-          const parsedAuth = JSON.parse(storedAuth);
-          setUser(parsedAuth.user);
-          setSession({ user: parsedAuth.user });
-        }
-      } catch (error) {
-        console.error('Error getting session from localStorage:', error);
-      } finally {
-        setIsLoading(false);
+    // Get initial session from Supabase
+    const getInitialSession = async () => {
+      const { data: { session }, error } = await supabase.auth.getSession();
+      
+      if (error) {
+        console.error('Error getting session:', error);
       }
+      
+      if (session?.user) {
+        const user: User = {
+          id: session.user.id,
+          email: session.user.email || '',
+          name: session.user.user_metadata?.full_name || session.user.email?.split('@')[0],
+          avatar: session.user.user_metadata?.avatar_url,
+          user_metadata: session.user.user_metadata
+        };
+        setUser(user);
+        setSession(session);
+      }
+      
+      setIsLoading(false);
     };
 
     getInitialSession();
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (session?.user) {
+          const user: User = {
+            id: session.user.id,
+            email: session.user.email || '',
+            name: session.user.user_metadata?.full_name || session.user.email?.split('@')[0],
+            avatar: session.user.user_metadata?.avatar_url,
+            user_metadata: session.user.user_metadata
+          };
+          setUser(user);
+          setSession(session);
+        } else {
+          setUser(null);
+          setSession(null);
+        }
+        setIsLoading(false);
+      }
+    );
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       setIsLoading(true);
       
-      // In a real app, this would validate credentials against a backend
-      // For this local storage implementation, we'll just check if a user with this email exists
-      
-      // For demo purposes, always succeed with login if email and password are provided
-      if (email && password) {
-        // Create a mock user
-        const mockUser: User = {
-          id: generateUserId(email),
-          email: email,
-          name: email.split('@')[0], // Use the part before @ as the name
-          avatar_url: null
-        };
-        
-        // Store in localStorage
-        localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify({ user: mockUser }));
-        
-        // Update state
-        setUser(mockUser);
-        setSession({ user: mockUser });
-        
-        return true;
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        console.error('Login error:', error);
+        return false;
       }
       
-      return false;
+      return true;
     } catch (error) {
       console.error('Login error:', error);
       return false;
@@ -92,23 +104,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       setIsLoading(true);
       
-      // Create a mock user
-      const mockUser: User = {
-        id: generateUserId(email),
-        email: email,
-        name: fullName,
-        avatar_url: null,
-        user_metadata: {
-          full_name: fullName
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: fullName,
+          }
         }
-      };
-      
-      // Store in localStorage
-      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify({ user: mockUser }));
-      
-      // Update state
-      setUser(mockUser);
-      setSession({ user: mockUser });
+      });
+
+      if (error) {
+        console.error('Registration error:', error);
+        return false;
+      }
       
       return true;
     } catch (error) {
@@ -121,28 +130,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async (): Promise<void> => {
     try {
-      // Remove from localStorage
-      localStorage.removeItem(AUTH_STORAGE_KEY);
-      
-      // Update state
-      setUser(null);
-      setSession(null);
+      await supabase.auth.signOut();
     } catch (error) {
       console.error('Logout error:', error);
     }
-  };
-
-  // Helper function to generate a consistent user ID from email
-  const generateUserId = (email: string): string => {
-    // Simple hash function to generate a deterministic ID from email
-    let hash = 0;
-    for (let i = 0; i < email.length; i++) {
-      const char = email.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash; // Convert to 32bit integer
-    }
-    // Convert to a string ID
-    return `user-${Math.abs(hash).toString(16)}`;
   };
 
   return (
