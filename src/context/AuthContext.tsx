@@ -46,17 +46,51 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const fetchProfile = async (userId: string) => {
     try {
-      const { data, error } = await supabase
+      const { data: profileData, error } = await supabase
         .from('profiles')
         .select('*')
-        .eq('id', userId)
-        .single();
+        .eq('id', userId);
 
       if (error) throw error;
-      setProfile(data);
 
-      // Check if this is the first login
-      if (data?.is_first_login) {
+      // If no profile exists, create one
+      if (!profileData || profileData.length === 0) {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: newProfile, error: createError } = await supabase
+            .from('profiles')
+            .insert([
+              {
+                id: userId,
+                email: user.email || '',
+                full_name: user.user_metadata?.full_name || '',
+                is_first_login: true,
+              },
+            ])
+            .select()
+            .single();
+
+          if (createError) throw createError;
+          setProfile(newProfile);
+
+          // New user should go to onboarding
+          if (newProfile?.is_first_login) {
+            navigate('/onboarding');
+          }
+        }
+      } else {
+        const profile = profileData[0];
+        setProfile(profile);
+
+        // Check if this is the first login
+        if (profile?.is_first_login) {
+          navigate('/onboarding');
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching profile:', error);
+    }
+  };
         navigate('/onboarding');
       }
     } catch (error) {
