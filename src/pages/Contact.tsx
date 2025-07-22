@@ -4,7 +4,7 @@ import Button from '../components/ui/Button';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Clock, MessageSquare, AlertCircle, CheckCircle } from 'lucide-react';
 
-const CONTACT_SUBMISSIONS_STORAGE_KEY = 'vendorsoluce_contact_submissions';
+import { supabase } from '../lib/supabase';
 
 const Contact: React.FC = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -56,7 +56,48 @@ const Contact: React.FC = () => {
     }
 
     try {
-      // Create a new submission object
+      // Submit to Supabase via edge function
+      const { data, error } = await supabase.functions.invoke('contact-form', {
+        body: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone || null,
+          company: formData.company || null,
+          topic: formData.topic || null,
+          message: formData.message,
+        }
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      // Fallback to direct database insert if edge function fails
+      if (!data?.success) {
+        const { error: dbError } = await supabase
+          .from('contact_submissions')
+          .insert({
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone || null,
+            company: formData.company || null,
+            topic: formData.topic || null,
+            message: formData.message,
+          });
+
+        if (dbError) {
+          throw dbError;
+        }
+      }
+
+      // Show success message
+      setFormSubmitted(true);
+    } catch (err: any) {
+      console.error('Error submitting form:', err);
+      
+      // Fallback to localStorage if database fails
       const submission = {
         id: `contact-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
         first_name: formData.firstName,
@@ -70,21 +111,17 @@ const Contact: React.FC = () => {
         created_at: new Date().toISOString()
       };
 
-      // Get existing submissions from localStorage
-      const storedSubmissions = localStorage.getItem(CONTACT_SUBMISSIONS_STORAGE_KEY);
+      const storedSubmissions = localStorage.getItem('vendorsoluce_contact_submissions');
       const allSubmissions = storedSubmissions ? JSON.parse(storedSubmissions) : [];
       
       // Add new submission
       allSubmissions.push(submission);
       
       // Save back to localStorage
-      localStorage.setItem(CONTACT_SUBMISSIONS_STORAGE_KEY, JSON.stringify(allSubmissions));
+      localStorage.setItem('vendorsoluce_contact_submissions', JSON.stringify(allSubmissions));
 
       // Show success message
       setFormSubmitted(true);
-    } catch (err) {
-      console.error('Error submitting form:', err);
-      setFormError('There was an error submitting your message. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
