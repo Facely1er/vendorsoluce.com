@@ -4,6 +4,8 @@
   },
   "navigation": {
     "home": "Home",
+    "solutions": "Solutions",
+    "home": "Home",
     "assessment": "Supply Chain Assessment",
     "sbom": "SBOM Analyzer",
     "vendorRisk": "Vendor Risk Dashboard",

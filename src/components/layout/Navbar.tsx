@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ChevronDown, Shield, FileJson, BarChart3, BookOpen, Phone } from 'lucide-react';
+import { Menu, X, ChevronDown, Home, Layers, Shield, FileJson, BarChart3, BookOpen, Phone, Users } from 'lucide-react';
 import { MenuItem } from '../../types';
 import ThemeToggle from './ThemeToggle';
 import UserMenu from './UserMenu';
@@ -11,16 +11,24 @@ const Navbar: React.FC = () => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const toggleResources = () => setIsResourcesOpen(!isResourcesOpen);
+  const toggleSolutions = () => setIsSolutionsOpen(!isSolutionsOpen);
 
   const primaryNav: MenuItem[] = [
-    { title: t('navigation.assessment'), path: '/assessment', icon: 'Shield' },
-    { title: t('navigation.sbom'), path: '/sbom-analyzer', icon: 'FileJson' },
-    { title: t('navigation.vendorRisk'), path: '/vendor-risk', icon: 'BarChart3' },
+    { title: t('navigation.home'), path: '/', icon: 'Home' },
+    { title: t('navigation.solutions'), path: '#', icon: 'Layers' },
     { title: t('navigation.resources'), path: '#', icon: 'BookOpen' },
+    { title: t('navigation.about'), path: '/about', icon: 'Users' },
     { title: t('navigation.contact'), path: '/contact', icon: 'Phone' },
+  ];
+
+  const solutionItems: MenuItem[] = [
+    { title: t('navigation.assessment'), path: '/assessment' },
+    { title: t('navigation.sbom'), path: '/sbom-analyzer' },
+    { title: t('navigation.vendorRisk'), path: '/vendor-risk' },
   ];
 
   const resourceItems: MenuItem[] = [
@@ -33,10 +41,13 @@ const Navbar: React.FC = () => {
     if (!iconName) return null;
     
     const icons = {
+      Home: <Home size={20} />,
+      Layers: <Layers size={20} />,
       Shield: <Shield size={20} />,
       FileJson: <FileJson size={20} />,
       BarChart3: <BarChart3 size={20} />,
       BookOpen: <BookOpen size={20} />,
+      Users: <Users size={20} />,
       Phone: <Phone size={20} />,
     };
     
@@ -61,7 +72,33 @@ const Navbar: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
             {primaryNav.map((item) => 
-              item.title === t('navigation.resources') ? (
+              item.title === t('navigation.solutions') ? (
+                <div key={item.title} className="relative">
+                  <button
+                    onClick={toggleSolutions}
+                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                  >
+                    {getIcon(item.icon)}
+                    <span className="ml-1">{item.title}</span>
+                    <ChevronDown size={16} className="ml-1" />
+                  </button>
+                  
+                  {isSolutionsOpen && (
+                    <div className="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-10 border border-gray-200 dark:border-gray-700">
+                      {solutionItems.map((solution) => (
+                        <Link
+                          key={solution.title}
+                          to={solution.path}
+                          className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          onClick={() => setIsSolutionsOpen(false)}
+                        >
+                          {solution.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : item.title === t('navigation.resources') ? (
                 <div key={item.title} className="relative">
                   <button
                     onClick={toggleResources}
@@ -149,6 +186,35 @@ const Navbar: React.FC = () => {
                           }}
                         >
                           {resource.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : item.title === t('navigation.solutions') ? (
+                <div key={item.title}>
+                  <button
+                    onClick={toggleSolutions}
+                    className="w-full text-left px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                  >
+                    {getIcon(item.icon)}
+                    <span className="ml-2">{item.title}</span>
+                    <ChevronDown size={16} className="ml-1" />
+                  </button>
+                  
+                  {isSolutionsOpen && (
+                    <div className="pl-6 py-2 space-y-1">
+                      {solutionItems.map((solution) => (
+                        <Link
+                          key={solution.title}
+                          to={solution.path}
+                          className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
+                          onClick={() => {
+                            setIsOpen(false);
+                            setIsSolutionsOpen(false);
+                          }}
+                        >
+                          {solution.title}
                         </Link>
                       ))}
                     </div>
