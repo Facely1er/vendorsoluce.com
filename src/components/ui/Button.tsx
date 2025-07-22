@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   
   const variantClasses = {
     primary: 'bg-vendorsoluce-navy text-white hover:bg-vendorsoluce-navy/90 focus:ring-vendorsoluce-navy/50',
-    secondary: 'bg-supply-chain-teal text-white hover:bg-supply-chain-teal/90 focus:ring-supply-chain-teal/50',
+    secondary: 'bg-vendorsoluce-navy text-white hover:bg-vendorsoluce-navy/90 focus:ring-vendorsoluce-navy/50',
     outline: 'bg-transparent border border-vendorsoluce-navy text-vendorsoluce-navy hover:bg-vendorsoluce-navy/10 focus:ring-vendorsoluce-navy/30',
     ghost: 'bg-transparent text-vendorsoluce-navy hover:bg-vendorsoluce-navy/10 focus:ring-vendorsoluce-navy/30',
   };
