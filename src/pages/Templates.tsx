@@ -5,12 +5,18 @@ import { FileDown, Shield, FileJson, BarChart3, Info, Download } from 'lucide-re
 import { Link } from 'react-router-dom';
 import { downloadTemplateFile } from '../utils/generatePdf';
 import { useTranslation } from 'react-i18next';
+import { getTemplateUrl } from '../utils/supabaseStorage';
 
 const Templates: React.FC = () => {
   const { t } = useTranslation();
 
   const handleDownload = (templatePath: string, filename: string) => {
     downloadTemplateFile(templatePath, filename);
+  };
+  
+  // Get template URL for direct download link (optional, for future use)
+  const getDirectDownloadUrl = (templatePath: string) => {
+    return getTemplateUrl(templatePath);
   };
 
   return (
@@ -41,7 +47,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/vendor-questionnaires/nist-800-161-complete-assessment.html', 'nist-800-161-complete-assessment.docx')}
+                  onClick={() => handleDownload('vendor-questionnaires/nist-800-161-complete-assessment.html', 'nist-800-161-complete-assessment.docx')}
                 >
                   <FileDown size={16} />
                   <span>DOCX</span>
@@ -53,7 +59,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/vendor-questionnaires/vendor-security-quick-assessment.html', 'vendor-security-quick-assessment.docx')}
+                  onClick={() => handleDownload('vendor-questionnaires/vendor-security-quick-assessment.html', 'vendor-security-quick-assessment.docx')}
                 >
                   <FileDown size={16} />
                   <span>DOCX</span>
@@ -65,7 +71,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/vendor-questionnaires/cloud-provider-assessment.html', 'cloud-provider-assessment.docx')}
+                  onClick={() => handleDownload('vendor-questionnaires/cloud-provider-assessment.html', 'cloud-provider-assessment.docx')}
                 >
                   <FileDown size={16} />
                   <span>DOCX</span>
@@ -77,7 +83,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/vendor-questionnaires/software-provider-assessment.html', 'software-provider-assessment.docx')}
+                  onClick={() => handleDownload('vendor-questionnaires/software-provider-assessment.html', 'software-provider-assessment.docx')}
                 >
                   <FileDown size={16} />
                   <span>DOCX</span>
@@ -105,7 +111,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/sbom/spdx-sbom-template.json', 'spdx-sbom-template.json')}
+                  onClick={() => handleDownload('sbom/spdx-sbom-template.json', 'spdx-sbom-template.json')}
                 >
                   <FileDown size={16} />
                   <span>JSON</span>
@@ -117,7 +123,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/sbom/cyclonedx-sbom-template.json', 'cyclonedx-sbom-template.json')}
+                  onClick={() => handleDownload('sbom/cyclonedx-sbom-template.json', 'cyclonedx-sbom-template.json')}
                 >
                   <FileDown size={16} />
                   <span>JSON</span>
@@ -129,7 +135,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/sbom/sbom-generator.sh', 'sbom-generator.sh')}
+                  onClick={() => handleDownload('sbom/sbom-generator.sh', 'sbom-generator.sh')}
                 >
                   <FileDown size={16} />
                   <span>SCRIPT</span>
@@ -141,7 +147,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/sbom/sbom-example-report.html', 'sbom-example-report.pdf')}
+                  onClick={() => handleDownload('sbom/sbom-example-report.html', 'sbom-example-report.pdf')}
                 >
                   <FileDown size={16} />
                   <span>PDF</span>
@@ -169,7 +175,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/risk-assessment/vendor-risk-scoring-matrix.csv', 'vendor-risk-scoring-matrix.xlsx')}
+                  onClick={() => handleDownload('risk-assessment/vendor-risk-scoring-matrix.csv', 'vendor-risk-scoring-matrix.xlsx')}
                 >
                   <FileDown size={16} />
                   <span>XLSX</span>
@@ -181,7 +187,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/risk-assessment/risk-management-plan-template.html', 'risk-management-plan-template.docx')}
+                  onClick={() => handleDownload('risk-assessment/risk-management-plan-template.html', 'risk-management-plan-template.docx')}
                 >
                   <FileDown size={16} />
                   <span>DOCX</span>
@@ -193,7 +199,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/risk-assessment/supply-chain-risk-register.csv', 'supply-chain-risk-register.xlsx')}
+                  onClick={() => handleDownload('risk-assessment/supply-chain-risk-register.csv', 'supply-chain-risk-register.xlsx')}
                 >
                   <FileDown size={16} />
                   <span>XLSX</span>
@@ -205,7 +211,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/risk-assessment/exec-summary-template.html', 'exec-summary-template.pptx')}
+                  onClick={() => handleDownload('risk-assessment/exec-summary-template.html', 'exec-summary-template.pptx')}
                 >
                   <FileDown size={16} />
                   <span>PPT</span>
@@ -256,7 +262,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/nist/nist-quickstart.html', 'nist-sp-800-161-quickstart.pdf')}
+                  onClick={() => handleDownload('nist/nist-quickstart.html', 'nist-sp-800-161-quickstart.pdf')}
                 >
                   <Download size={16} />
                   <span>{t('resources.templates.download')} PDF</span>
@@ -277,7 +283,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/nist/nist-controls-mapping.csv', 'nist-controls-mapping.xlsx')}
+                  onClick={() => handleDownload('nist/nist-controls-mapping.csv', 'nist-controls-mapping.xlsx')}
                 >
                   <Download size={16} />
                   <span>{t('resources.templates.download')} XLSX</span>
@@ -303,7 +309,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/nist/federal-compliance-guide.html', 'federal-compliance-guide.pdf')}
+                  onClick={() => handleDownload('nist/federal-compliance-guide.html', 'federal-compliance-guide.pdf')}
                 >
                   <Download size={16} />
                   <span>{t('resources.templates.download')} PDF</span>
@@ -324,7 +330,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/nist/supply-chain-maturity-model.html', 'supply-chain-maturity-model.pdf')}
+                  onClick={() => handleDownload('nist/supply-chain-maturity-model.html', 'supply-chain-maturity-model.pdf')}
                 >
                   <Download size={16} />
                   <span>{t('resources.templates.download')} PDF</span>
@@ -345,7 +351,7 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('/templates/nist/sbom-implementation-guide.html', 'sbom-implementation-guide.pdf')}
+                  onClick={() => handleDownload('nist/sbom-implementation-guide.html', 'sbom-implementation-guide.pdf')}
                 >
                   <Download size={16} />
                   <span>{t('resources.templates.download')} PDF</span>

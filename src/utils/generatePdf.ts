@@ -1,5 +1,9 @@
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { getTemplateUrl, downloadFromStorage, fileExists } from './supabaseStorage';
+
+// Storage bucket for templates
+const TEMPLATES_BUCKET = 'templates';
 
 /**
  * Generate PDF from HTML content
@@ -222,51 +226,52 @@ export const downloadTemplateFile = async (templatePath: string, filename: strin
   let mimeType = 'text/plain';
   
   try {
+    // Convert local path to storage path
+    const storagePath = templatePath.startsWith('/templates/') 
+      ? templatePath.substring('/templates/'.length)
+      : templatePath.startsWith('templates/')
+      ? templatePath.substring('templates/'.length)
+      : templatePath;
+    
+    // Check if file exists in Supabase Storage
+    const exists = await fileExists(TEMPLATES_BUCKET, storagePath);
+    
+    if (exists) {
+      // Download from Supabase Storage
+      const blob = await downloadFromStorage(TEMPLATES_BUCKET, storagePath);
+      content = await blob.text();
+      mimeType = blob.type || 'text/plain';
+    } else {
+      // Fallback: try to fetch from public folder (for development)
+      const response = await fetch(templatePath);
+      if (response.ok) {
+        content = await response.text();
+        mimeType = response.headers.get('content-type') || 'text/plain';
+      } else {
+        throw new Error('Template not found in storage or public folder');
+      }
+    }
+    
     if (filename.endsWith('.html') || filename.endsWith('.docx')) {
-      // Fetch actual template content from public folder
-      const response = await fetch(templatePath);
-      if (response.ok) {
-        content = await response.text();
-        mimeType = 'text/html';
-      } else {
-        throw new Error('Template not found');
-      }
+      mimeType = 'text/html';
     } else if (filename.endsWith('.json')) {
-      // Fetch JSON templates
-      const response = await fetch(templatePath);
-      if (response.ok) {
-        content = await response.text();
-        mimeType = 'application/json';
-      } else {
-        throw new Error('Template not found');
-      }
+      mimeType = 'application/json';
     } else if (filename.endsWith('.csv') || filename.endsWith('.xlsx')) {
-      // Fetch CSV templates
-      const response = await fetch(templatePath);
-      if (response.ok) {
-        content = await response.text();
-        mimeType = 'text/csv';
-      } else {
-        throw new Error('Template not found');
-      }
+      mimeType = 'text/csv';
     } else if (filename.endsWith('.sh')) {
-      // Fetch shell script templates
-      const response = await fetch(templatePath);
-      if (response.ok) {
-        content = await response.text();
-        mimeType = 'text/plain';
-      } else {
-        throw new Error('Template not found');
-      }
+      mimeType = 'text/plain';
     } else if (filename.endsWith('.pdf')) {
       // Generate PDF from HTML template
-      const response = await fetch(templatePath.replace('.html', '.html'));
-      if (response.ok) {
-        const htmlContent = await response.text();
+      const htmlStoragePath = storagePath.replace('.pdf', '.html');
+      const htmlExists = await fileExists(TEMPLATES_BUCKET, htmlStoragePath);
+      
+      if (htmlExists) {
+        const htmlBlob = await downloadFromStorage(TEMPLATES_BUCKET, htmlStoragePath);
+        const htmlContent = await htmlBlob.text();
         await generatePdfFromHtml(htmlContent, filename);
         return;
       } else {
-        throw new Error('Template not found');
+        throw new Error('HTML template not found for PDF generation');
       }
     }
 
@@ -282,7 +287,7 @@ export const downloadTemplateFile = async (templatePath: string, filename: strin
     URL.revokeObjectURL(url);
   } catch (error) {
     console.error('Error downloading template:', error);
-    // Fallback to mock content if template file doesn't exist
+    // Fallback to mock content if template file doesn't exist in storage or public folder
     generateMockTemplate(filename);
   }
 };
