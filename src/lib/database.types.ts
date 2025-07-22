@@ -19,6 +19,7 @@ export interface Database {
           role: string | null
           created_at: string
           updated_at: string
+          is_first_login: boolean | null
         }
         Insert: {
           id: string
@@ -29,6 +30,7 @@ export interface Database {
           role?: string | null
           created_at?: string
           updated_at?: string
+          is_first_login?: boolean | null
         }
         Update: {
           id?: string
@@ -39,6 +41,7 @@ export interface Database {
           role?: string | null
           created_at?: string
           updated_at?: string
+          is_first_login?: boolean | null
         }
       }
       vendors: {

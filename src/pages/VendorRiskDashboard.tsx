@@ -12,10 +12,15 @@ import WorkflowAutomation from '../components/vendor/WorkflowAutomation';
 import CustomizableDashboard from '../components/dashboard/CustomizableDashboard';
 import PredictiveAnalytics from '../components/analytics/PredictiveAnalytics';
 import DataImportExport from '../components/data/DataImportExport';
+import GetStartedWidget from '../components/onboarding/GetStartedWidget';
+import { useSBOMAnalyses } from '../hooks/useSBOMAnalyses';
+import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
 
 const VendorRiskDashboard: React.FC = () => {
   const { t } = useTranslation();
   const { vendors, loading, error, refetch } = useVendors();
+  const { analyses } = useSBOMAnalyses();
+  const { assessments } = useSupplyChainAssessments();
   const [showAddModal, setShowAddModal] = useState(false);
   const [activeView, setActiveView] = useState<'dashboard' | 'workflows' | 'intelligence' | 'analytics'>('dashboard');
 
@@ -102,6 +107,11 @@ const VendorRiskDashboard: React.FC = () => {
       {/* Dashboard View */}
       {activeView === 'dashboard' && (
         <>
+          <GetStartedWidget 
+            vendorCount={vendors.length}
+            assessmentCount={assessments.length}
+            sbomCount={analyses.length}
+          />
           <CustomizableDashboard />
         </>
       )}

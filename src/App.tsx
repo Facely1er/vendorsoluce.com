@@ -10,6 +10,7 @@ import { useAuth } from './context/AuthContext';
 import { Bell, X } from 'lucide-react';
 import LoadingSpinner from './components/common/LoadingSpinner';
 import { Analytics } from "@vercel/analytics/react"
+import WelcomeScreen from './components/onboarding/WelcomeScreen';
 
 // Lazy load all page components
 const HomePage = React.lazy(() => import('./pages/HomePage'));
@@ -64,8 +65,25 @@ const PageLoading: React.FC = () => (
 
 // AppContent component to avoid context hook usage outside provider
 const AppContent: React.FC = () => {
+  const { user, isLoading } = useAuth();
+  const [showWelcome, setShowWelcome] = React.useState(false);
+  
+  // Show welcome screen for first-time users
+  React.useEffect(() => {
+    if (!isLoading && user?.isFirstLogin) {
+      setShowWelcome(true);
+    }
+  }, [user, isLoading]);
+  
+  const handleWelcomeComplete = () => {
+    setShowWelcome(false);
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      {showWelcome && (
+        <WelcomeScreen onComplete={handleWelcomeComplete} />
+      )}
       <AuthBanner />
       <Navbar />
       <div className="flex-grow">
