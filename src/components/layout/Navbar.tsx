@@ -49,7 +49,11 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center">
-              <Shield className="h-8 w-8 text-vendorsoluce-navy dark:text-trust-blue" />
+              <img 
+                src="/vendorsoluce.png" 
+                alt="VendorSoluce Logo" 
+                className="h-8 w-8" 
+              />
               <span className="ml-2 text-xl font-bold text-vendorsoluce-navy dark:text-white">{t('app.name')}</span>
             </Link>
           </div>

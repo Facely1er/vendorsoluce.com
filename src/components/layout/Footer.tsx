@@ -24,7 +24,11 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1">
             <Link to="/" className="flex items-center">
-              <Shield className="h-8 w-8 text-trust-blue" />
+              <img 
+                src="/vendorsoluce.png" 
+                alt="VendorSoluce Logo" 
+                className="h-8 w-8" 
+              />
               <span className="ml-2 text-xl font-bold">{t('app.name')}</span>
             </Link>
             <p className="mt-2 text-gray-400 text-sm">
