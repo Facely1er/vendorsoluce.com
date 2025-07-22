@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useSBOMAnalyses } from '../hooks/useSBOMAnalyses';
 import { useAuth } from '../context/AuthContext';
 import { XMLParser } from 'fast-xml-parser';
+import EnhancedSBOMAnalysis from '../components/sbom/EnhancedSBOMAnalysis';
 
 const SBOMAnalyzer = () => {
   const { t } = useTranslation();
@@ -16,6 +17,7 @@ const SBOMAnalyzer = () => {
   const [results, setResults] = useState(null);
   const [error, setError] = useState(null);
   const [expandedComponents, setExpandedComponents] = useState(new Set());
+  const [showEnhancedAnalysis, setShowEnhancedAnalysis] = useState(false);
 
   const handleSBOMUpload = async (file) => {
     setIsLoading(true);
@@ -310,15 +312,23 @@ const SBOMAnalyzer = () => {
                 <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">
                   {t('sbom.results.title')}
                 </CardTitle>
-                <button
-                  onClick={() => {
-                    setResults(null);
-                    setError(null);
-                  }}
-                  className="text-sm text-vendortal-navy dark:text-trust-blue hover:text-vendortal-navy/80 dark:hover:text-trust-blue/80"
-                >
-                  Analyze Another File
-                </button>
+                <div className="flex items-center space-x-4">
+                  <button
+                    onClick={() => {
+                      setResults(null);
+                      setError(null);
+                    }}
+                    className="text-sm text-vendortal-navy dark:text-trust-blue hover:text-vendortal-navy/80 dark:hover:text-trust-blue/80"
+                  >
+                    Analyze Another File
+                  </button>
+                  <button
+                    onClick={() => setShowEnhancedAnalysis(!showEnhancedAnalysis)}
+                    className="text-sm text-supply-chain-teal hover:text-supply-chain-teal/80"
+                  >
+                    {showEnhancedAnalysis ? 'Basic View' : 'Enhanced Analysis'}
+                  </button>
+                </div>
               </div>
             </CardHeader>
             <CardContent>
@@ -369,7 +379,18 @@ const SBOMAnalyzer = () => {
             </CardContent>
           </Card>
 
+          {/* Enhanced Analysis View */}
+          {showEnhancedAnalysis && (
+            <EnhancedSBOMAnalysis 
+              components={results.components}
+              onPolicyUpdate={(policies) => {
+                console.log('Policies updated:', policies);
+              }}
+            />
+          )}
+
           {/* Components List */}
+          {!showEnhancedAnalysis && (
           <Card>
             <CardHeader>
               <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">
@@ -441,6 +462,7 @@ const SBOMAnalyzer = () => {
               </div>
             </CardContent>
           </Card>
+          )}
         </div>
       )}
     </main>
