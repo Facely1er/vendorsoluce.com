@@ -91,12 +91,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       console.error('Error fetching profile:', error);
     }
   };
-        navigate('/onboarding');
-      }
-    } catch (error) {
-      console.error('Error fetching profile:', error);
-    }
-  };
 
   const signIn = async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({
