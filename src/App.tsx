@@ -1,162 +1,107 @@
-import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import { ThemeProvider } from './context/ThemeContext';
-import { AuthProvider } from './context/AuthContext';
-import { I18nProvider } from './context/I18nContext';
-import { useAuth } from './context/AuthContext';
-import { Bell, X } from 'lucide-react';
-import LoadingSpinner from './components/common/LoadingSpinner';
-import { Analytics } from "@vercel/analytics/react"
-import WelcomeScreen from './components/onboarding/WelcomeScreen';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
+import DashboardPage from './pages/DashboardPage';
+import OnboardingPage from './pages/OnboardingPage';
+import VendorsPage from './pages/VendorsPage';
+import SBOMAnalysisPage from './pages/SBOMAnalysisPage';
 
-// Lazy load all page components
-const HomePage = React.lazy(() => import('./pages/HomePage'));
-const SupplyChainAssessment = React.lazy(() => import('./pages/SupplyChainAssessment'));
-const SBOMAnalyzer = React.lazy(() => import('./pages/SBOMAnalyzer'));
-const VendorRiskDashboard = React.lazy(() => import('./pages/VendorRiskDashboard'));
-const APIDocumentation = React.lazy(() => import('./pages/APIDocumentation'));
-const IntegrationGuides = React.lazy(() => import('./pages/IntegrationGuides'));
-const Templates = React.lazy(() => import('./pages/Templates'));
-const About = React.lazy(() => import('./pages/About'));
-const Contact = React.lazy(() => import('./pages/Contact'));
-const Privacy = React.lazy(() => import('./pages/Privacy'));
-const SupplyChainResults = React.lazy(() => import('./pages/SupplyChainResults'));
-const SupplyChainRecommendations = React.lazy(() => import('./pages/SupplyChainRecommendations'));
-const Login = React.lazy(() => import('./pages/Login'));
-const SBOMQuickScan = React.lazy(() => import('./pages/tools/SBOMQuickScan'));
-const VendorRiskCalculator = React.lazy(() => import('./pages/tools/VendorRiskCalculator'));
-const NISTChecklist = React.lazy(() => import('./pages/tools/NISTChecklist'));
+// Protected Route Component
+function ProtectedRoute({ children, requireOnboarding = false }: { children: React.ReactNode; requireOnboarding?: boolean }) {
+  const { user, profile, isLoading } = useAuth();
 
-// Auth Banner component to show when users aren't logged in
-const AuthBanner: React.FC = () => {
-  const { isAuthenticated } = useAuth();
-  const [dismissed, setDismissed] = React.useState(false);
-
-  if (isAuthenticated || dismissed) return null;
-
-  return (
-    <div className="bg-blue-600 dark:bg-gray-800 text-white py-2 px-4">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <div className="flex items-center text-sm">
-          <Bell className="h-4 w-4 mr-2" />
-          <span>Sign in to save your assessments, analyses, and vendor data.</span>
-        </div>
-        <button 
-          onClick={() => setDismissed(true)}
-          className="text-white hover:text-gray-200 dark:text-gray-300 dark:hover:text-white"
-          aria-label="Dismiss"
-        >
-          <X className="h-4 w-4" />
-        </button>
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-gray-500">Loading...</div>
       </div>
-    </div>
-  );
-};
+    );
+  }
 
-// Page loading component
-const PageLoading: React.FC = () => (
-  <div className="flex items-center justify-center min-h-[50vh]">
-    <LoadingSpinner size="large" />
-  </div>
-);
+  if (!user) {
+    return <Navigate to="/signin" replace />;
+  }
 
-// AppContent component to avoid context hook usage outside provider
-const AppContent: React.FC = () => {
-  const { user, isLoading } = useAuth();
-  const [showWelcome, setShowWelcome] = React.useState(false);
-  
-  // Show welcome screen for first-time users
-  React.useEffect(() => {
-    if (!isLoading && user?.isFirstLogin) {
-      setShowWelcome(true);
-    }
-  }, [user, isLoading]);
-  
-  const handleWelcomeComplete = () => {
-    setShowWelcome(false);
-  };
-
-  return (
-    <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-      {showWelcome && (
-        <WelcomeScreen onComplete={handleWelcomeComplete} />
-      )}
-      <AuthBanner />
-      <Navbar />
-      <div className="flex-grow">
-        <Suspense fallback={<PageLoading />}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={
-              <ProtectedRoute requireAuth={false}>
-                <Login />
-              </ProtectedRoute>
-            } />
-            <Route path="/assessment" element={
-              <ProtectedRoute requireAuth={false}>
-                <SupplyChainAssessment />
-              </ProtectedRoute>
-            } />
-            <Route path="/supply-chain-risk" element={
-              <ProtectedRoute requireAuth={false}>
-                <SupplyChainAssessment />
-              </ProtectedRoute>
-            } />
-            <Route path="/supply-chain-results" element={
-              <ProtectedRoute requireAuth={false}>
-                <SupplyChainResults />
-              </ProtectedRoute>
-            } />
-            <Route path="/supply-chain-recommendations" element={
-              <ProtectedRoute requireAuth={false}>
-                <SupplyChainRecommendations />
-              </ProtectedRoute>
-            } />
-            <Route path="/sbom-analyzer" element={
-              <ProtectedRoute requireAuth={false}>
-                <SBOMAnalyzer />
-              </ProtectedRoute>
-            } />
-            <Route path="/vendor-risk" element={
-              <ProtectedRoute requireAuth={false}>
-                <VendorRiskDashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/api-docs" element={<APIDocumentation />} />
-            <Route path="/integration-guides" element={<IntegrationGuides />} />
-            <Route path="/templates" element={<Templates />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy" element={<Privacy />} />
-            
-            {/* Quick Tools Pages */}
-            <Route path="/tools/sbom-quick-scan" element={<SBOMQuickScan />} />
-            <Route path="/tools/vendor-risk-calculator" element={<VendorRiskCalculator />} />
-            <Route path="/tools/nist-checklist" element={<NISTChecklist />} />
-          </Routes>
-        </Suspense>
+  // If profile is still loading, show loading state
+  if (!profile) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-gray-500">Loading profile...</div>
       </div>
-      <Footer />
-     <Analytics />
-    </div>
-  );
-};
+    );
+  }
 
-const App: React.FC = () => {
+  // Handle onboarding logic
+  if (requireOnboarding && !profile.is_first_login) {
+    // User has already completed onboarding, redirect to dashboard
+    return <Navigate to="/dashboard" replace />;
+  } else if (!requireOnboarding && profile.is_first_login) {
+    // User hasn't completed onboarding, redirect to onboarding
+    return <Navigate to="/onboarding" replace />;
+  }
+
+  return <>{children}</>;
+}
+
+// Routes Component
+function AppRoutes() {
   return (
-    <AuthProvider>
-      <ThemeProvider>
-        <I18nProvider>
-          <Router>
-            <AppContent />
-          </Router>
-        </I18nProvider>
-      </ThemeProvider>
-    </AuthProvider>
+    <Routes>
+      {/* Public Routes */}
+      <Route path="/signin" element={<SignInPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
+      
+      {/* Protected Routes */}
+      <Route
+        path="/onboarding"
+        element={
+          <ProtectedRoute requireOnboarding={true}>
+            <OnboardingPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/vendors"
+        element={
+          <ProtectedRoute>
+            <VendorsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/sbom-analysis"
+        element={
+          <ProtectedRoute>
+            <SBOMAnalysisPage />
+          </ProtectedRoute>
+        }
+      />
+      
+      {/* Default Route */}
+      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+    </Routes>
   );
-};
+}
+
+// Main App Component - Router wraps AuthProvider
+function App() {
+  return (
+    <Router>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </Router>
+  );
+}
 
 export default App;
