@@ -233,14 +233,7 @@ const CustomizableDashboard: React.FC = () => {
             <Settings className="h-4 w-4 mr-2" />
             {editMode ? 'Save Layout' : 'Customize'}
           </Button>
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={() => {
-              // In a real app, this would open a widget selection modal
-              alert('Widget selection modal would open here');
-            }}
-          >
+          <Button variant="outline" size="sm">
             <Plus className="h-4 w-4 mr-2" />
             Add Widget
           </Button>
@@ -283,19 +276,38 @@ const CustomizableDashboard: React.FC = () => {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Button variant="outline" className="justify-start">
+            <Button 
+              variant="outline" 
+              className="justify-start"
+              onClick={() => window.location.href = '/vendor-risk'}
+            >
               <Plus className="h-4 w-4 mr-2" />
               Add Vendor
             </Button>
-            <Button variant="outline" className="justify-start">
+            <Button 
+              variant="outline" 
+              className="justify-start"
+              onClick={() => window.location.href = '/assessment'}
+            >
               <BarChart3 className="h-4 w-4 mr-2" />
               Run Assessment
             </Button>
-            <Button variant="outline" className="justify-start">
+            <Button 
+              variant="outline" 
+              className="justify-start"
+              onClick={() => window.location.href = '/sbom-analyzer'}
+            >
               <PieChart className="h-4 w-4 mr-2" />
               Analyze SBOM
             </Button>
-            <Button variant="outline" className="justify-start">
+            <Button 
+              variant="outline" 
+              className="justify-start"
+              onClick={() => {
+                // In a real app, this would generate a report
+                alert('Report generation would start here');
+              }}
+            >
               <TrendingUp className="h-4 w-4 mr-2" />
               Generate Report
             </Button>
