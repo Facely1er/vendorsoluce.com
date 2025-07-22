@@ -73,55 +73,11 @@ const Contact: React.FC = () => {
         throw error;
       }
 
-      // Fallback to direct database insert if edge function fails
-      if (!data?.success) {
-        const { error: dbError } = await supabase
-          .from('contact_submissions')
-          .insert({
-            first_name: formData.firstName,
-            last_name: formData.lastName,
-            email: formData.email,
-            phone: formData.phone || null,
-            company: formData.company || null,
-            topic: formData.topic || null,
-            message: formData.message,
-          });
-
-        if (dbError) {
-          throw dbError;
-        }
-      }
-
       // Show success message
       setFormSubmitted(true);
     } catch (err: any) {
       console.error('Error submitting form:', err);
-      
-      // Fallback to localStorage if database fails
-      const submission = {
-        id: `contact-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        email: formData.email,
-        phone: formData.phone || null,
-        company: formData.company || null,
-        topic: formData.topic || null,
-        message: formData.message,
-        status: 'pending',
-        created_at: new Date().toISOString()
-      };
-
-      const storedSubmissions = localStorage.getItem('vendorsoluce_contact_submissions');
-      const allSubmissions = storedSubmissions ? JSON.parse(storedSubmissions) : [];
-      
-      // Add new submission
-      allSubmissions.push(submission);
-      
-      // Save back to localStorage
-      localStorage.setItem('vendorsoluce_contact_submissions', JSON.stringify(allSubmissions));
-
-      // Show success message
-      setFormSubmitted(true);
+      setFormError('Failed to submit your message. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
