@@ -5,7 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 // Import translations
 import enTranslation from '../locales/en/translation.json';
-import frTranslation from '../locales/fr/translation.json';
+// import frTranslation from '../locales/fr/translation.json';
 
 // Initialize i18next
 i18n
@@ -13,8 +13,8 @@ i18n
   .use(initReactI18next) // Bind i18next to React
   .init({
     resources: {
-      en: { translation: enTranslation },
-      fr: { translation: frTranslation }
+      en: { translation: enTranslation }
+      // fr: { translation: frTranslation }
     },
     fallbackLng: 'en',
     debug: false,
@@ -49,8 +49,8 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const { i18n } = useTranslation();
   
   const supportedLanguages = [
-    { code: 'en', name: 'English' },
-    { code: 'fr', name: 'Français' }
+    { code: 'en', name: 'English' }
+    // { code: 'fr', name: 'Français' }
   ];
 
   const changeLanguage = (lng: string) => {
