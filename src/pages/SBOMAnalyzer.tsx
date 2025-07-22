@@ -1,98 +1,17 @@
 import React, { useState } from 'react';
 import { Upload, FileText, AlertCircle, Shield, Package, ChevronDown, ChevronUp } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card';
+import RiskBadge from '../components/ui/RiskBadge';
+import SBOMUploader from '../components/sbom/SBOMUploader';
+import { useTranslation } from 'react-i18next';
+import { useSBOMAnalyses } from '../hooks/useSBOMAnalyses';
+import { useAuth } from '../context/AuthContext';
+import { XMLParser } from 'fast-xml-parser';
 
-// UI Components
-const Card = ({ children, className = '' }) => (
-  <div className={`bg-white rounded-lg shadow-md p-6 ${className}`}>
-    {children}
-  </div>
-);
-
-const RiskBadge = ({ risk }) => {
-  const colors = {
-    Low: 'bg-green-100 text-green-800',
-    Medium: 'bg-yellow-100 text-yellow-800',
-    High: 'bg-orange-100 text-orange-800',
-    Critical: 'bg-red-100 text-red-800'
-  };
-  
-  return (
-    <span className={`px-2 py-1 rounded-full text-xs font-semibold ${colors[risk]}`}>
-      {risk}
-    </span>
-  );
-};
-
-// SBOM Uploader Component
-const SBOMUploader = ({ onUpload, isLoading }) => {
-  const [dragActive, setDragActive] = useState(false);
-
-  const handleDrag = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
-    }
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-    
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      onUpload(e.dataTransfer.files[0]);
-    }
-  };
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    if (e.target.files && e.target.files[0]) {
-      onUpload(e.target.files[0]);
-    }
-  };
-
-  return (
-    <div
-      className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
-        dragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
-      }`}
-      onDragEnter={handleDrag}
-      onDragLeave={handleDrag}
-      onDragOver={handleDrag}
-      onDrop={handleDrop}
-    >
-      <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-      <p className="text-lg font-medium text-gray-700 mb-2">
-        Drop your SBOM file here or click to browse
-      </p>
-      <p className="text-sm text-gray-500 mb-4">
-        Supports CycloneDX and SPDX formats (JSON/XML)
-      </p>
-      <input
-        type="file"
-        className="hidden"
-        onChange={handleChange}
-        accept=".json,.xml,.spdx,.cdx"
-        id="sbom-upload"
-        disabled={isLoading}
-      />
-      <label
-        htmlFor="sbom-upload"
-        className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 cursor-pointer ${
-          isLoading ? 'opacity-50 cursor-not-allowed' : ''
-        }`}
-      >
-        {isLoading ? 'Processing...' : 'Select File'}
-      </label>
-    </div>
-  );
-};
-
-// Main SBOM Analyzer Component
 const SBOMAnalyzer = () => {
+  const { t } = useTranslation();
+  const { isAuthenticated } = useAuth();
+  const { createAnalysis } = useSBOMAnalyses();
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState(null);
   const [error, setError] = useState(null);
@@ -111,6 +30,18 @@ const SBOMAnalyzer = () => {
       const avgRiskScore = Math.round(
         components.reduce((sum, comp) => sum + comp.riskScore, 0) / components.length
       );
+      
+      // Save analysis to database if user is authenticated
+      if (isAuthenticated) {
+        await createAnalysis({
+          filename: file.name,
+          file_type: file.type,
+          total_components: components.length,
+          total_vulnerabilities: totalVulnerabilities,
+          risk_score: avgRiskScore,
+          analysis_data: { components, totalVulnerabilities, avgRiskScore }
+        });
+      }
       
       setResults({
         filename: file.name,
@@ -161,7 +92,6 @@ const SBOMAnalyzer = () => {
     }
 
     return data.components.map((comp, index) => {
-      // Simulate vulnerability detection (in production, this would call a real API)
       const vulnCount = simulateVulnerabilityCount(comp.name, comp.version);
       const riskScore = calculateRiskScore(comp, vulnCount);
       
@@ -186,7 +116,6 @@ const SBOMAnalyzer = () => {
     }
 
     return packages.map((pkg, index) => {
-      // Simulate vulnerability detection
       const vulnCount = simulateVulnerabilityCount(pkg.name, pkg.versionInfo);
       const riskScore = calculateRiskScore(pkg, vulnCount);
       
@@ -205,14 +134,20 @@ const SBOMAnalyzer = () => {
   };
 
   const parseXMLCycloneDX = (content) => {
-    // Basic XML parsing for demonstration
-    const components = [];
-    const componentMatches = content.match(/<component[^>]*>[\s\S]*?<\/component>/g) || [];
+    const parser = new XMLParser();
+    const xmlDoc = parser.parse(content);
     
-    componentMatches.forEach((compXml, index) => {
-      const name = compXml.match(/<name>([^<]+)<\/name>/)?.[1] || 'Unknown';
-      const version = compXml.match(/<version>([^<]+)<\/version>/)?.[1] || 'Unknown';
-      const type = compXml.match(/type="([^"]+)"/)?.[1] || 'library';
+    const components = [];
+    const bomData = xmlDoc.bom || xmlDoc;
+    const componentList = bomData.components?.component || bomData.component || [];
+    const componentArray = Array.isArray(componentList) ? componentList : [componentList];
+    
+    componentArray.forEach((comp, index) => {
+      if (!comp) return;
+      
+      const name = comp.name || 'Unknown';
+      const version = comp.version || 'Unknown';
+      const type = comp['@_type'] || comp.type || 'library';
       
       const vulnCount = simulateVulnerabilityCount(name, version);
       const riskScore = calculateRiskScore({ name, version }, vulnCount);
@@ -238,13 +173,19 @@ const SBOMAnalyzer = () => {
   };
 
   const parseXMLSPDX = (content) => {
-    // Basic XML parsing for SPDX
-    const packages = [];
-    const packageMatches = content.match(/<Package[^>]*>[\s\S]*?<\/Package>/g) || [];
+    const parser = new XMLParser();
+    const xmlDoc = parser.parse(content);
     
-    packageMatches.forEach((pkgXml, index) => {
-      const name = pkgXml.match(/<name>([^<]+)<\/name>/)?.[1] || 'Unknown';
-      const version = pkgXml.match(/<versionInfo>([^<]+)<\/versionInfo>/)?.[1] || 'Unknown';
+    const packages = [];
+    const spdxData = xmlDoc.Document || xmlDoc;
+    const packageList = spdxData.Package || spdxData.packages || [];
+    const packageArray = Array.isArray(packageList) ? packageList : [packageList];
+    
+    packageArray.forEach((pkg, index) => {
+      if (!pkg) return;
+      
+      const name = pkg.name || 'Unknown';
+      const version = pkg.versionInfo || 'Unknown';
       
       const vulnCount = simulateVulnerabilityCount(name, version);
       const riskScore = calculateRiskScore({ name, version }, vulnCount);
@@ -281,17 +222,13 @@ const SBOMAnalyzer = () => {
   };
 
   const simulateVulnerabilityCount = (name, version) => {
-    // Simulate vulnerability detection based on common patterns
-    // In production, this would call a real vulnerability database API
     let count = 0;
     
-    // Simulate known vulnerable versions
-    if (version && version.includes('0.')) count += 2; // Early versions often have vulnerabilities
+    if (version && version.includes('0.')) count += 2;
     if (version && /alpha|beta|rc/i.test(version)) count += 1;
     if (name && /jquery|angular\.js|bootstrap/i.test(name) && version && version.match(/^[1-2]\./)) count += 3;
     if (name && /log4j/i.test(name) && version && version.match(/^2\.1[0-6]\./)) count += 5;
     
-    // Add some randomness for demonstration
     count += Math.floor(Math.random() * 2);
     
     return count;
@@ -300,18 +237,14 @@ const SBOMAnalyzer = () => {
   const calculateRiskScore = (component, vulnCount) => {
     let score = 100;
     
-    // Deduct points for vulnerabilities
     score -= vulnCount * 15;
     
-    // Deduct points for pre-release versions
     if (component.version && /alpha/i.test(component.version)) score -= 15;
     if (component.version && /beta/i.test(component.version)) score -= 10;
     if (component.version && /rc/i.test(component.version)) score -= 5;
     
-    // Deduct points for very old versions (simple heuristic)
     if (component.version && /^0\./i.test(component.version)) score -= 10;
     
-    // Deduct points for unknown licenses
     if (!component.license || component.license === 'Unknown') score -= 5;
     
     return Math.max(0, Math.min(100, score));
@@ -335,104 +268,120 @@ const SBOMAnalyzer = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">SBOM Analyzer</h1>
-          <p className="text-lg text-gray-600">
-            Upload your Software Bill of Materials to analyze components and identify potential risks
-          </p>
-        </div>
+    <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('sbom.title')}</h1>
+        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl">
+          {t('sbom.description')}
+        </p>
+      </div>
 
-        {!results && (
-          <Card className="max-w-2xl mx-auto">
+      {!results && (
+        <Card className="max-w-2xl mx-auto">
+          <CardHeader>
+            <CardTitle>{t('sbom.upload.title')}</CardTitle>
+          </CardHeader>
+          <CardContent>
             <SBOMUploader onUpload={handleSBOMUpload} isLoading={isLoading} />
-          </Card>
-        )}
+          </CardContent>
+        </Card>
+      )}
 
-        {error && (
-          <Card className="max-w-2xl mx-auto mt-4 border-red-200 bg-red-50">
+      {error && (
+        <Card className="max-w-2xl mx-auto mt-4 border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20">
+          <CardContent className="pt-6">
             <div className="flex items-start">
-              <AlertCircle className="h-5 w-5 text-red-400 mt-0.5 mr-2" />
+              <AlertCircle className="h-5 w-5 text-red-400 dark:text-red-400 mt-0.5 mr-2" />
               <div>
-                <h3 className="text-sm font-medium text-red-800">Error analyzing file</h3>
-                <p className="text-sm text-red-700 mt-1">{error}</p>
+                <h3 className="text-sm font-medium text-red-800 dark:text-red-300">Error analyzing file</h3>
+                <p className="text-sm text-red-700 dark:text-red-400 mt-1">{error}</p>
               </div>
             </div>
-          </Card>
-        )}
+          </CardContent>
+        </Card>
+      )}
 
-        {results && (
-          <div className="space-y-6">
-            {/* Summary Card */}
-            <Card>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-semibold text-gray-900">Analysis Summary</h2>
+      {results && (
+        <div className="space-y-6">
+          {/* Summary Card */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">
+                  {t('sbom.results.title')}
+                </CardTitle>
                 <button
                   onClick={() => {
                     setResults(null);
                     setError(null);
                   }}
-                  className="text-sm text-blue-600 hover:text-blue-700"
+                  className="text-sm text-vendortal-navy dark:text-trust-blue hover:text-vendortal-navy/80 dark:hover:text-trust-blue/80"
                 >
                   Analyze Another File
                 </button>
               </div>
-              
+            </CardHeader>
+            <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
                   <div className="flex items-center">
-                    <FileText className="h-8 w-8 text-gray-400 mr-3" />
+                    <FileText className="h-8 w-8 text-gray-400 dark:text-gray-500 mr-3" />
                     <div>
-                      <p className="text-sm text-gray-600">File</p>
-                      <p className="font-medium text-gray-900">{results.filename}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">File</p>
+                      <p className="font-medium text-gray-900 dark:text-white">{results.filename}</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
                   <div className="flex items-center">
-                    <Package className="h-8 w-8 text-blue-400 mr-3" />
+                    <Package className="h-8 w-8 text-supply-chain-teal mr-3" />
                     <div>
-                      <p className="text-sm text-gray-600">Components</p>
-                      <p className="text-2xl font-bold text-gray-900">{results.totalComponents}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('sbom.results.components')}</p>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-white">{results.totalComponents}</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
                   <div className="flex items-center">
                     <AlertCircle className="h-8 w-8 text-orange-400 mr-3" />
                     <div>
-                      <p className="text-sm text-gray-600">Vulnerabilities</p>
-                      <p className="text-2xl font-bold text-gray-900">{results.totalVulnerabilities}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('sbom.results.vulnerabilities')}</p>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-white">{results.totalVulnerabilities}</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
                   <div className="flex items-center">
                     <Shield className="h-8 w-8 text-green-400 mr-3" />
                     <div>
-                      <p className="text-sm text-gray-600">Risk Score</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Risk Score</p>
                       <div className="flex items-center">
-                        <p className="text-2xl font-bold text-gray-900 mr-2">{results.avgRiskScore}</p>
-                        <RiskBadge risk={getRiskLevel(results.avgRiskScore)} />
+                        <p className="text-2xl font-bold text-gray-900 dark:text-white mr-2">{results.avgRiskScore}</p>
+                        <RiskBadge level={getRiskLevel(results.avgRiskScore)} />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </Card>
+            </CardContent>
+          </Card>
 
-            {/* Components List */}
-            <Card>
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Components Analysis</h2>
+          {/* Components List */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">
+                Components Analysis
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
               <div className="space-y-2">
                 {results.components.map((component) => (
                   <div
                     key={component.id}
-                    className="border rounded-lg p-4 hover:bg-gray-50 transition-colors"
+                    className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
                   >
                     <div
                       className="flex items-center justify-between cursor-pointer"
@@ -440,48 +389,48 @@ const SBOMAnalyzer = () => {
                     >
                       <div className="flex-1">
                         <div className="flex items-center space-x-4">
-                          <h3 className="font-medium text-gray-900">
-                            {component.name} <span className="text-gray-500">v{component.version}</span>
+                          <h3 className="font-medium text-gray-900 dark:text-white">
+                            {component.name} <span className="text-gray-500 dark:text-gray-400">v{component.version}</span>
                           </h3>
-                          <RiskBadge risk={getRiskLevel(component.riskScore)} />
+                          <RiskBadge level={getRiskLevel(component.riskScore)} />
                           {component.vulnerabilityCount > 0 && (
-                            <span className="text-sm text-red-600">
+                            <span className="text-sm text-red-600 dark:text-red-400">
                               {component.vulnerabilityCount} vulnerabilities
                             </span>
                           )}
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <span className="text-sm text-gray-500">Score: {component.riskScore}</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">Score: {component.riskScore}</span>
                         {expandedComponents.has(component.id) ? (
-                          <ChevronUp className="h-5 w-5 text-gray-400" />
+                          <ChevronUp className="h-5 w-5 text-gray-400 dark:text-gray-500" />
                         ) : (
-                          <ChevronDown className="h-5 w-5 text-gray-400" />
+                          <ChevronDown className="h-5 w-5 text-gray-400 dark:text-gray-500" />
                         )}
                       </div>
                     </div>
                     
                     {expandedComponents.has(component.id) && (
-                      <div className="mt-4 pl-4 border-l-2 border-gray-200">
+                      <div className="mt-4 pl-4 border-l-2 border-gray-200 dark:border-gray-700">
                         <dl className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
                           <div>
-                            <dt className="text-gray-600">Type:</dt>
-                            <dd className="font-medium">{component.type}</dd>
+                            <dt className="text-gray-600 dark:text-gray-400">Type:</dt>
+                            <dd className="font-medium text-gray-900 dark:text-white">{component.type}</dd>
                           </div>
                           <div>
-                            <dt className="text-gray-600">License:</dt>
-                            <dd className="font-medium">{component.license}</dd>
+                            <dt className="text-gray-600 dark:text-gray-400">{t('sbom.results.license')}:</dt>
+                            <dd className="font-medium text-gray-900 dark:text-white">{component.license}</dd>
                           </div>
                           {component.purl && (
                             <div className="md:col-span-2">
-                              <dt className="text-gray-600">Package URL:</dt>
-                              <dd className="font-mono text-xs break-all">{component.purl}</dd>
+                              <dt className="text-gray-600 dark:text-gray-400">Package URL:</dt>
+                              <dd className="font-mono text-xs break-all text-gray-900 dark:text-white">{component.purl}</dd>
                             </div>
                           )}
                           {component.description && (
                             <div className="md:col-span-2">
-                              <dt className="text-gray-600">Description:</dt>
-                              <dd>{component.description}</dd>
+                              <dt className="text-gray-600 dark:text-gray-400">Description:</dt>
+                              <dd className="text-gray-900 dark:text-white">{component.description}</dd>
                             </div>
                           )}
                         </dl>
@@ -490,11 +439,11 @@ const SBOMAnalyzer = () => {
                   </div>
                 ))}
               </div>
-            </Card>
-          </div>
-        )}
-      </div>
-    </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+    </main>
   );
 };
 

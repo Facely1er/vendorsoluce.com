@@ -232,7 +232,7 @@
   },
   "sbom": {
     "title": "SBOM Analyzer",
-    "description": "Analyze your Software Bill of Materials (SBOM) for vulnerabilities, license compliance, and security risks.",
+    "description": "Comprehensive analysis of Software Bill of Materials (SBOM) for vulnerability detection, license compliance verification, and supply chain security assessment. Supports SPDX and CycloneDX formats aligned with NIST SP 800-161 requirements.",
     "upload": {
       "title": "Upload SBOM",
       "description": "Upload your SBOM file in SPDX or CycloneDX format to analyze for vulnerabilities and compliance issues.",

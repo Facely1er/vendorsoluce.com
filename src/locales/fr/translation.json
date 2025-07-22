@@ -232,7 +232,7 @@
   },
   "sbom": {
     "title": "Analyseur SBOM",
-    "description": "Analysez votre Liste des Matériaux Logiciels (SBOM) pour détecter les vulnérabilités, la conformité des licences et les risques de sécurité.",
+    "description": "Analyse complète de la Liste des Matériaux Logiciels (SBOM) pour la détection de vulnérabilités, la vérification de conformité des licences et l'évaluation de sécurité de la chaîne d'approvisionnement. Prend en charge les formats SPDX et CycloneDX alignés sur les exigences NIST SP 800-161.",
     "upload": {
       "title": "Télécharger SBOM",
       "description": "Téléchargez votre fichier SBOM au format SPDX ou CycloneDX pour analyser les vulnérabilités et les problèmes de conformité.",
