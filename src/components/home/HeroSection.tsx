@@ -8,7 +8,6 @@ const HeroSection: React.FC = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="bg-gradient-to-r from-vendorsoluce-navy to-supply-chain-teal text-white">
     <section className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -67,5 +66,3 @@ const HeroSection: React.FC = () => {
 };
 
 export default HeroSection;
-  )
-}
