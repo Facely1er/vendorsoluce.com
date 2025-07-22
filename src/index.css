@@ -3,21 +3,17 @@
 @tailwind utilities;
 
 :root {
-  /* Primary Colors - Trust & Reliability */
-  --vendorsoluce-navy: #1E3B8A;
-  --supply-chain-teal: #2D7D7D;
-  --trust-blue: #3B82F6;
+  /* Primary Colors - Growth & Trust */
+  --vendorsoluce-green: #33691E;
+  --vendorsoluce-light-green: #66BB6A;
+  --vendorsoluce-pale-green: #E8F5E8;
+  --neutral-gray: #6B7280;
   
   /* Risk Communication Colors */
   --risk-critical: #DC2626;
   --risk-high: #EA580C;
   --risk-medium: #F59E0B;
   --risk-low: #16A34A;
-  
-  /* Neutral & Supporting Colors */
-  --neutral-gray: #6B7280;
-  --light-sky: #EFF6FF;
-  --charcoal-slate: #334155;
   
   /* Dark Theme Base */
   --dark-base: #111827;
@@ -46,16 +42,16 @@
 
 @layer components {
   /* Brand Gradients */
-  .vendor-trust-gradient {
-    @apply bg-gradient-to-r from-[#1E3B8A] to-[#2D7D7D];
+  .vendorsoluce-gradient {
+    @apply bg-gradient-to-r from-[#33691E] to-[#66BB6A];
   }
   
   .risk-heatmap-gradient {
     @apply bg-gradient-to-r from-[#16A34A] via-[#F59E0B] to-[#DC2626];
   }
   
-  .vendor-score-gradient {
-    @apply bg-gradient-to-r from-[#1E3B8A] to-[#3B82F6];
+  .vendorsoluce-score-gradient {
+    @apply bg-gradient-to-r from-[#33691E] to-[#66BB6A];
   }
   
   /* Risk Level Indicators */

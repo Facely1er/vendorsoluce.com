@@ -149,7 +149,7 @@ const Navbar: React.FC = () => {
             <ThemeToggle />
             <button
               onClick={toggleMenu}
-              className="ml-2 inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none"
+              className="ml-2 inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
