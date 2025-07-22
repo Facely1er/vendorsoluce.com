@@ -19,7 +19,7 @@ const VendorRiskTable: React.FC<VendorRiskTableProps> = ({
   vendors,
   onEdit,
   onDelete,
-  onView
+  onView,
   onRefresh
 }) => {
   const { t } = useTranslation();
