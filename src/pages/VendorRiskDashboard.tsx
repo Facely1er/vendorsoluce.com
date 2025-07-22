@@ -175,10 +175,8 @@ const VendorRiskDashboard: React.FC = () => {
         </div>
         
         {vendorRiskData.length > 0 ? (
-          <VendorRiskTable vendors={vendorRiskData} />
-        ) : (
           <VendorRiskTable 
-            vendors={vendorRiskData} 
+            vendors={vendorRiskData}
             onRefresh={refetch}
           />
         ) : (
