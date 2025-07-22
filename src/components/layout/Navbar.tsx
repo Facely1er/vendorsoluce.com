@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
               <img 
                 src="/vendorsoluce.png" 
                 alt="VendorSoluce Logo" 
-                className="h-8 w-8" 
+                className="h-10 w-10" 
               />
               <span className="ml-2 text-xl font-bold text-vendorsoluce-navy dark:text-white">{t('app.name')}</span>
             </Link>

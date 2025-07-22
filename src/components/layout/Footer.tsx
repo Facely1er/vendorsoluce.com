@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
               <img 
                 src="/vendorsoluce.png" 
                 alt="VendorSoluce Logo" 
-                className="h-8 w-8" 
+                className="h-10 w-10" 
               />
               <span className="ml-2 text-xl font-bold">{t('app.name')}</span>
             </Link>
