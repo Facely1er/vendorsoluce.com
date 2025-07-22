@@ -7,11 +7,16 @@ import { useTranslation } from 'react-i18next';
 import { useVendors } from '../hooks/useVendors';
 import { Plus, RefreshCw } from 'lucide-react';
 import AddVendorModal from '../components/vendor/AddVendorModal';
+import ThreatIntelligenceFeed from '../components/vendor/ThreatIntelligenceFeed';
+import WorkflowAutomation from '../components/vendor/WorkflowAutomation';
+import CustomizableDashboard from '../components/dashboard/CustomizableDashboard';
+import PredictiveAnalytics from '../components/analytics/PredictiveAnalytics';
 
 const VendorRiskDashboard: React.FC = () => {
   const { t } = useTranslation();
   const { vendors, loading, error, refetch } = useVendors();
   const [showAddModal, setShowAddModal] = useState(false);
+  const [activeView, setActiveView] = useState<'dashboard' | 'workflows' | 'intelligence' | 'analytics'>('dashboard');
 
   // Transform vendors data to match VendorRisk interface
   const vendorRiskData: VendorRisk[] = vendors.map(vendor => ({
@@ -68,6 +73,41 @@ const VendorRiskDashboard: React.FC = () => {
         </p>
       </div>
       
+      {/* Enhanced Navigation */}
+      <div className="mb-6">
+        <nav className="flex space-x-8">
+          {[
+            { id: 'dashboard', label: 'Overview Dashboard', icon: '📊' },
+            { id: 'workflows', label: 'Workflow Automation', icon: '⚡' },
+            { id: 'intelligence', label: 'Threat Intelligence', icon: '🛡️' },
+            { id: 'analytics', label: 'Predictive Analytics', icon: '🔮' }
+          ].map(({ id, label, icon }) => (
+            <button
+              key={id}
+              onClick={() => setActiveView(id as any)}
+              className={`flex items-center px-3 py-2 rounded-md text-sm font-medium ${
+                activeView === id
+                  ? 'bg-vendortal-navy text-white'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+              }`}
+            >
+              <span className="mr-2">{icon}</span>
+              {label}
+            </button>
+          ))}
+        </nav>
+      </div>
+
+      {/* Dashboard View */}
+      {activeView === 'dashboard' && (
+        <>
+          <CustomizableDashboard />
+        </>
+      )}
+
+      {/* Traditional Vendor List View */}
+      {activeView === 'dashboard' && (
+        <>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <Card className="p-6">
           <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('vendorRisk.totalVendors')}</h2>
@@ -236,6 +276,42 @@ const VendorRiskDashboard: React.FC = () => {
           </ul>
         </Card>
       </div>
+        </>
+      )}
+
+      {/* Workflow Automation View */}
+      {activeView === 'workflows' && <WorkflowAutomation />}
+
+      {/* Threat Intelligence View */}
+      {activeView === 'intelligence' && (
+        <div className="space-y-6">
+          <ThreatIntelligenceFeed vendorIds={vendorRiskData.map(v => v.id)} />
+          <Card>
+            <CardHeader>
+              <CardTitle>Threat Intelligence Sources</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="text-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="text-lg font-bold text-gray-900 dark:text-white">5</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Active Sources</div>
+                </div>
+                <div className="text-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="text-lg font-bold text-gray-900 dark:text-white">142</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Threats Today</div>
+                </div>
+                <div className="text-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="text-lg font-bold text-gray-900 dark:text-white">98%</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Coverage</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Predictive Analytics View */}
+      {activeView === 'analytics' && <PredictiveAnalytics />}
 
       {showAddModal && (
         <AddVendorModal 
