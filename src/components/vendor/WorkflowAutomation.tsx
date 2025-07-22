@@ -367,7 +367,7 @@ const WorkflowAutomation: React.FC = () => {
                       Automatically assign high-risk vendor assessments to senior security analysts
                     </p>
                     <div className="text-xs text-gray-500 dark:text-gray-400">
-                      Trigger: New vendor with risk score > 70 | Action: Assign to Senior Security Team
+                      Trigger: New vendor with risk score &gt; 70 | Action: Assign to Senior Security Team
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
