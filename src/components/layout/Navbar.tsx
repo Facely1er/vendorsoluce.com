@@ -65,7 +65,6 @@ const Navbar: React.FC = () => {
                 alt="VendorSoluce Logo" 
                 className="h-10 w-10" 
               />
-              <span className="ml-2 text-xl font-bold text-vendorsoluce-navy dark:text-white">{t('app.name')}</span>
               <span className="ml-2 text-xl font-bold text-vendorsoluce-green dark:text-white">{t('app.name')}</span>
             </Link>
           </div>
