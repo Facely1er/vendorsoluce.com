@@ -37,7 +37,7 @@ const AuthBanner: React.FC = () => {
   if (isAuthenticated || dismissed) return null;
 
   return (
-    <div className="bg-vendortal-navy text-white py-2 px-4">
+    <div className="bg-blue-600 dark:bg-gray-800 text-white py-2 px-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center text-sm">
           <Bell className="h-4 w-4 mr-2" />
@@ -45,7 +45,7 @@ const AuthBanner: React.FC = () => {
         </div>
         <button 
           onClick={() => setDismissed(true)}
-          className="text-white hover:text-gray-200"
+          className="text-white hover:text-gray-200 dark:text-gray-300 dark:hover:text-white"
           aria-label="Dismiss"
         >
           <X className="h-4 w-4" />
