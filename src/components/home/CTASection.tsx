@@ -17,12 +17,12 @@ const CTASection: React.FC = () => {
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link to="/assessment">
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20 w-full sm:w-auto">
+            <Button variant="primary" size="lg" className="w-full sm:w-auto">
               {t('home.hero.cta1')}
             </Button>
           </Link>
           <Link to="/sbom-analyzer">
-            <Button variant="outline" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100 w-full sm:w-auto border-white">
+            <Button variant="secondary" size="lg" className="w-full sm:w-auto">
               {t('home.hero.cta2')}
             </Button>
           </Link>
