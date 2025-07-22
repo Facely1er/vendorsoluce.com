@@ -112,13 +112,25 @@ const VendorRiskDashboard: React.FC = () => {
             assessmentCount={assessments.length}
             sbomCount={analyses.length}
           />
-          <CustomizableDashboard />
         </>
       )}
 
       {/* Traditional Vendor List View */}
       {activeView === 'dashboard' && (
         <>
+      {/* Enhanced Dashboard Widget */}
+      {vendors.length > 3 || assessments.length > 2 || analyses.length > 2 ? (
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Advanced Dashboard</h2>
+            <Button variant="outline" size="sm">
+              View Full Dashboard
+            </Button>
+          </div>
+          <CustomizableDashboard />
+        </div>
+      ) : null}
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <Card className="p-6">
           <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('vendorRisk.totalVendors')}</h2>

@@ -149,21 +149,27 @@ const GetStartedWidget: React.FC<GetStartedWidgetProps> = ({
         <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
           <h4 className="font-medium text-gray-900 dark:text-white mb-3">Need Help Getting Started?</h4>
           <div className="flex flex-wrap gap-2">
-            <Link to="/templates">
-              <Button variant="outline" size="sm">
-                Download Templates
-              </Button>
-            </Link>
-            <Link to="/api-docs">
-              <Button variant="outline" size="sm">
-                View Documentation
-              </Button>
-            </Link>
-            <Link to="/contact">
-              <Button variant="outline" size="sm">
-                Contact Support
-              </Button>
-            </Link>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => window.open('/templates', '_blank')}
+            >
+              Download Templates
+            </Button>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => window.open('/api-docs', '_blank')}
+            >
+              View Documentation
+            </Button>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => window.open('/contact', '_blank')}
+            >
+              Contact Support
+            </Button>
           </div>
         </div>
       </CardContent>
