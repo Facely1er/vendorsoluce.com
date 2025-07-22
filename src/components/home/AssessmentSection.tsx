@@ -53,9 +53,9 @@ const AssessmentSection: React.FC = () => {
 
   const getIcon = (iconName: string) => {
     const icons = {
-      Shield: <Shield size={24} className="text-vendortal-navy" />,
-      FileJson: <FileJson size={24} className="text-supply-chain-teal" />,
-      BarChart3: <BarChart3 size={24} className="text-trust-blue" />
+      Shield: <Shield size={24} className="text-vendorsoluce-green" />,
+      FileJson: <FileJson size={24} className="text-vendorsoluce-light-green" />,
+      BarChart3: <BarChart3 size={24} className="text-vendorsoluce-green" />
     };
     
     return icons[iconName as keyof typeof icons] || null;

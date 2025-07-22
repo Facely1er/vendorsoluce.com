@@ -7,22 +7,22 @@ const FeatureSection: React.FC = () => {
   
   const features = [
     {
-      icon: <Shield className="h-8 w-8 text-vendortal-navy" />,
+      icon: <Shield className="h-8 w-8 text-vendorsoluce-green" />,
       title: t('home.features.feature1.title'),
       description: t('home.features.feature1.description')
     },
     {
-      icon: <FileJson className="h-8 w-8 text-supply-chain-teal" />,
+      icon: <FileJson className="h-8 w-8 text-vendorsoluce-light-green" />,
       title: t('home.features.feature2.title'),
       description: t('home.features.feature2.description')
     },
     {
-      icon: <BarChart3 className="h-8 w-8 text-trust-blue" />,
+      icon: <BarChart3 className="h-8 w-8 text-vendorsoluce-green" />,
       title: t('home.features.feature3.title'),
       description: t('home.features.feature3.description')
     },
     {
-      icon: <Zap className="h-8 w-8 text-orange-500" />,
+      icon: <Zap className="h-8 w-8 text-vendorsoluce-light-green" />,
       title: t('home.features.feature4.title'),
       description: t('home.features.feature4.description')
     }

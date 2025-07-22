@@ -66,6 +66,7 @@ const Navbar: React.FC = () => {
                 className="h-10 w-10" 
               />
               <span className="ml-2 text-xl font-bold text-vendorsoluce-navy dark:text-white">{t('app.name')}</span>
+              <span className="ml-2 text-xl font-bold text-vendorsoluce-green dark:text-white">{t('app.name')}</span>
             </Link>
           </div>
           
@@ -76,7 +77,7 @@ const Navbar: React.FC = () => {
                 <div key={item.title} className="relative">
                   <button
                     onClick={toggleSolutions}
-                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
                   >
                     {getIcon(item.icon)}
                     <span className="ml-1">{item.title}</span>
@@ -102,7 +103,7 @@ const Navbar: React.FC = () => {
                 <div key={item.title} className="relative">
                   <button
                     onClick={toggleResources}
-                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
                   >
                     {getIcon(item.icon)}
                     <span className="ml-1">{item.title}</span>
@@ -128,7 +129,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.title}
                   to={item.path}
-                  className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                  className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
                 >
                   {getIcon(item.icon)}
                   <span className="ml-1">{item.title}</span>
@@ -166,7 +167,7 @@ const Navbar: React.FC = () => {
                 <div key={item.title}>
                   <button
                     onClick={toggleResources}
-                    className="w-full text-left px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                    className="w-full text-left px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
                   >
                     {getIcon(item.icon)}
                     <span className="ml-2">{item.title}</span>
@@ -179,7 +180,7 @@ const Navbar: React.FC = () => {
                         <Link
                           key={resource.title}
                           to={resource.path}
-                          className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
+                          className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
                           onClick={() => {
                             setIsOpen(false);
                             setIsResourcesOpen(false);
@@ -195,7 +196,7 @@ const Navbar: React.FC = () => {
                 <div key={item.title}>
                   <button
                     onClick={toggleSolutions}
-                    className="w-full text-left px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                    className="w-full text-left px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
                   >
                     {getIcon(item.icon)}
                     <span className="ml-2">{item.title}</span>
@@ -208,7 +209,7 @@ const Navbar: React.FC = () => {
                         <Link
                           key={solution.title}
                           to={solution.path}
-                          className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
+                          className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
                           onClick={() => {
                             setIsOpen(false);
                             setIsSolutionsOpen(false);
@@ -224,7 +225,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.title}
                   to={item.path}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                  className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
                   onClick={() => setIsOpen(false)}
                 >
                   {getIcon(item.icon)}

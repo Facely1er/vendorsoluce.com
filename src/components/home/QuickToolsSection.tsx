@@ -35,9 +35,9 @@ const QuickToolsSection: React.FC = () => {
 
   const getIcon = (iconName: string) => {
     const icons = {
-      FileDigit: <FileDigit size={24} className="text-supply-chain-teal" />,
-      Calculator: <Calculator size={24} className="text-trust-blue" />,
-      CheckSquare: <CheckSquare size={24} className="text-vendortal-navy" />
+      FileDigit: <FileDigit size={24} className="text-vendorsoluce-light-green" />,
+      Calculator: <Calculator size={24} className="text-vendorsoluce-green" />,
+      CheckSquare: <CheckSquare size={24} className="text-vendorsoluce-green" />
     };
     
     return icons[iconName as keyof typeof icons] || null;

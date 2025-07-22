@@ -8,6 +8,7 @@ const CTASection: React.FC = () => {
   
   return (
     <section className="bg-gradient-to-r from-vendorsoluce-navy to-supply-chain-teal text-white py-16 px-4 sm:px-6 lg:px-8">
+    <section className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green text-white py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl font-bold mb-6">
           {t('home.cta.title')}
