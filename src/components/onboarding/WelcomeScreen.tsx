@@ -21,6 +21,18 @@ interface WelcomeScreenProps {
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onComplete }) => {
   const { user, markOnboardingComplete } = useAuth();
   const [currentStep, setCurrentStep] = useState(0);
+  const [profileData, setProfileData] = useState({
+    role: '',
+    company_size: '',
+    industry: ''
+  });
+
+  const handleProfileDataChange = (field: string, value: string) => {
+    setProfileData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
 
   const steps = [
     {
@@ -80,7 +92,11 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onComplete }) => {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Your Primary Role
               </label>
-              <select className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+              <select 
+                value={profileData.role}
+                onChange={(e) => handleProfileDataChange('role', e.target.value)}
+                className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              >
                 <option value="">Select your role</option>
                 <option value="security">Security Professional</option>
                 <option value="procurement">Procurement Manager</option>
@@ -96,7 +112,11 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onComplete }) => {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Organization Size
               </label>
-              <select className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+              <select 
+                value={profileData.company_size}
+                onChange={(e) => handleProfileDataChange('company_size', e.target.value)}
+                className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              >
                 <option value="">Select size</option>
                 <option value="startup">Startup (1-50 employees)</option>
                 <option value="small">Small Business (51-200 employees)</option>
@@ -109,7 +129,11 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onComplete }) => {
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Industry
               </label>
-              <select className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+              <select 
+                value={profileData.industry}
+                onChange={(e) => handleProfileDataChange('industry', e.target.value)}
+                className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              >
                 <option value="">Select industry</option>
                 <option value="technology">Technology</option>
                 <option value="healthcare">Healthcare</option>
@@ -285,7 +309,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onComplete }) => {
   };
 
   const handleComplete = async () => {
-    await markOnboardingComplete();
+    await markOnboardingComplete(profileData);
     onComplete();
   };
 

@@ -7,10 +7,18 @@ interface AuthContextType {
   user: User | null;
   profile: any | null;
   isLoading: boolean;
+  isAuthenticated: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, fullName: string) => Promise<void>;
   signOut: () => Promise<void>;
-  markOnboardingComplete: () => Promise<void>;
+  markOnboardingComplete: (profileData?: {
+    role?: string;
+    company_size?: string;
+    industry?: string;
+  }) => Promise<void>;
+  login: (email: string, password: string) => Promise<boolean>;
+  register: (email: string, password: string, fullName: string) => Promise<boolean>;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -137,19 +145,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     navigate('/');
   };
 
-  const markOnboardingComplete = async () => {
+  const markOnboardingComplete = async (profileData?: {
+    role?: string;
+    company_size?: string;
+    industry?: string;
+  }) => {
     if (!user) return;
 
     try {
+      const updateData: any = { is_first_login: false };
+      
+      // Add profile data if provided
+      if (profileData) {
+        if (profileData.role) updateData.role = profileData.role;
+        if (profileData.company_size) updateData.company_size = profileData.company_size;
+        if (profileData.industry) updateData.industry = profileData.industry;
+      }
+      
       const { error } = await supabase
         .from('profiles')
-        .update({ is_first_login: false })
+        .update(updateData)
         .eq('id', user.id);
 
       if (error) throw error;
 
       // Update local profile state
-      setProfile((prev: any) => ({ ...prev, is_first_login: false }));
+      setProfile((prev: any) => ({ ...prev, ...updateData }));
 
       // Navigate to dashboard after onboarding
       navigate('/dashboard');
@@ -158,14 +179,42 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // Add compatibility methods for the Login component
+  const login = async (email: string, password: string): Promise<boolean> => {
+    try {
+      await signIn(email, password);
+      return true;
+    } catch (error) {
+      console.error('Login error:', error);
+      return false;
+    }
+  };
+
+  const register = async (email: string, password: string, fullName: string): Promise<boolean> => {
+    try {
+      await signUp(email, password, fullName);
+      return true;
+    } catch (error) {
+      console.error('Registration error:', error);
+      return false;
+    }
+  };
+
+  const logout = async () => {
+    await signOut();
+  };
   const value = {
     user,
     profile,
     isLoading,
+    isAuthenticated: !!user,
     signIn,
     signUp,
     signOut,
     markOnboardingComplete,
+    login,
+    register,
+    logout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
