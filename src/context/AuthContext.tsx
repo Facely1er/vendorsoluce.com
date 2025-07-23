@@ -19,9 +19,6 @@ interface AuthContextType {
    markTourComplete: () => Promise<void>;
    startTour: () => void;
    isTourRunning: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
-  register: (email: string, password: string, fullName: string) => Promise<boolean>;
-  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -205,31 +202,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
    const startTour = () => {
      setIsTourRunning(true);
    };
- 
-  // Add compatibility methods for the Login component
-  const login = async (email: string, password: string): Promise<boolean> => {
-    try {
-      await signIn(email, password);
-      return true;
-    } catch (error) {
-      console.error('Login error:', error);
-      return false;
-    }
-  };
-
-  const register = async (email: string, password: string, fullName: string): Promise<boolean> => {
-    try {
-      await signUp(email, password, fullName);
-      return true;
-    } catch (error) {
-      console.error('Registration error:', error);
-      return false;
-    }
-  };
-
-  const logout = async () => {
-    await signOut();
-  };
   const value = {
     user,
     profile,
@@ -242,9 +214,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
      markTourComplete,
      startTour,
      isTourRunning,
-    login,
-    register,
-    logout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
