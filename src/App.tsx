@@ -27,7 +27,7 @@ import NISTChecklist from './pages/tools/NISTChecklist';
 import SBOMQuickScan from './pages/tools/SBOMQuickScan';
 import VendorRiskCalculator from './pages/tools/VendorRiskCalculator';
 import AppTour from './components/onboarding/AppTour';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 // Protected Route Component
 function ProtectedRoute({ children, requireOnboarding = false }: { children: React.ReactNode; requireOnboarding?: boolean }) {
