@@ -27,6 +27,7 @@ import NISTChecklist from './pages/tools/NISTChecklist';
 import SBOMQuickScan from './pages/tools/SBOMQuickScan';
 import VendorRiskCalculator from './pages/tools/VendorRiskCalculator';
 import AppTour from './components/onboarding/AppTour';
+import { Analytics } from "@vercel/analytics/next"
 
 // Protected Route Component
 function ProtectedRoute({ children, requireOnboarding = false }: { children: React.ReactNode; requireOnboarding?: boolean }) {
@@ -147,6 +148,7 @@ function AppRoutes() {
         {/* Default Route */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <Analytics/>
       <Footer />
     </div>
   );
