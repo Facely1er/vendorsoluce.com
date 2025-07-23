@@ -353,12 +353,6 @@ const Contact: React.FC = () => {
                    topicElement.focus();
                  }
                }, 100);
-                 const topicElement = document.getElementById('topic');
-                 if (topicElement) {
-                   topicElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                   topicElement.focus();
-                 }
-               }, 100);
               }}
             >
               Schedule Now
