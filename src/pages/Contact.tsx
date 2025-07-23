@@ -299,7 +299,7 @@ const Contact: React.FC = () => {
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">Phone</p>
                   <a href="tel:+18886186160" className="text-gray-600 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue">
-                    +1 (888) 618-6160
+                    +1 (240) 599-0102
                   </a>
                 </div>
               </li>
