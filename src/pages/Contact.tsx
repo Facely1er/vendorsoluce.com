@@ -346,7 +346,19 @@ const Contact: React.FC = () => {
                   ...formData,
                   topic: 'Schedule a Demo'
                 });
-                document.getElementById('topic')?.scrollIntoView({ behavior: 'smooth' });
+               setTimeout(() => {
+                 const topicElement = document.getElementById('topic');
+                 if (topicElement) {
+                   topicElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                   topicElement.focus();
+                 }
+               }, 100);
+                 const topicElement = document.getElementById('topic');
+                 if (topicElement) {
+                   topicElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                   topicElement.focus();
+                 }
+               }, 100);
               }}
             >
               Schedule Now
