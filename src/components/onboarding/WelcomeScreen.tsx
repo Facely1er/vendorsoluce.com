@@ -213,7 +213,10 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onComplete }) => {
             
             <div 
               className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:border-vendorsoluce-green transition-colors cursor-pointer"
-              onClick={() => setCurrentStep(3)}
+              onClick={() => {
+                handleComplete();
+                // Tour will be started after onboarding completion
+              }}
             >
               <div className="flex items-center">
                 <BookOpen className="h-8 w-8 text-vendorsoluce-green mr-4" />
@@ -309,12 +312,17 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onComplete }) => {
   };
 
   const handleComplete = async () => {
-    await markOnboardingComplete(profileData);
+    await markOnboardingComplete({
+      ...profileData,
+      tour_completed: false // Ensure tour is not marked as completed yet
+    });
     onComplete();
   };
 
   const handleSkip = async () => {
-    await markOnboardingComplete();
+    await markOnboardingComplete({
+      tour_completed: false // Ensure tour is not marked as completed yet
+    });
     onComplete();
   };
 

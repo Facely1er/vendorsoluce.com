@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
     <nav className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          <div className="flex items-center">
+          <div className="flex items-center" data-tour="main-nav">
             <Link to="/" className="flex-shrink-0 flex items-center">
               <img 
                 src="/vendorsoluce.png" 
@@ -138,8 +138,12 @@ const Navbar: React.FC = () => {
 
             <div className="ml-2 flex items-center space-x-2">
               <LanguageSwitcher variant="icon" />
-              <ThemeToggle />
+              <div data-tour="theme-toggle">
+                <ThemeToggle />
+              </div>
+              <div data-tour="user-menu">
               <UserMenu />
+              </div>
             </div>
           </div>
           

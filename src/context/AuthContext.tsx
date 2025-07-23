@@ -16,6 +16,9 @@ interface AuthContextType {
     company_size?: string;
     industry?: string;
   }) => Promise<void>;
+   markTourComplete: () => Promise<void>;
+   startTour: () => void;
+   isTourRunning: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   register: (email: string, password: string, fullName: string) => Promise<boolean>;
   logout: () => Promise<void>;
@@ -27,6 +30,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+   const [isTourRunning, setIsTourRunning] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -179,6 +183,29 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+   const markTourComplete = async () => {
+     if (!user) return;
+ 
+     try {
+       const { error } = await supabase
+         .from('profiles')
+         .update({ tour_completed: true })
+         .eq('id', user.id);
+ 
+       if (error) throw error;
+ 
+       // Update local profile state
+       setProfile((prev: any) => ({ ...prev, tour_completed: true }));
+       setIsTourRunning(false);
+     } catch (error) {
+       console.error('Error marking tour complete:', error);
+     }
+   };
+ 
+   const startTour = () => {
+     setIsTourRunning(true);
+   };
+ 
   // Add compatibility methods for the Login component
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
@@ -212,6 +239,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signUp,
     signOut,
     markOnboardingComplete,
+     markTourComplete,
+     startTour,
+     isTourRunning,
     login,
     register,
     logout,

@@ -74,7 +74,7 @@ const GetStartedWidget: React.FC<GetStartedWidgetProps> = ({
   }
 
   return (
-    <Card className="border-l-4 border-l-vendorsoluce-green mb-8">
+    <Card className="border-l-4 border-l-vendorsoluce-green mb-8" data-tour="get-started-widget">
       <CardHeader>
         <div className="flex justify-between items-start">
           <div>
@@ -127,7 +127,10 @@ const GetStartedWidget: React.FC<GetStartedWidgetProps> = ({
                 </div>
               ) : (
                 <Link to={item.href} className="block h-full">
-                  <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:border-vendorsoluce-green hover:shadow-md transition-all h-full">
+                  <div 
+                    className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:border-vendorsoluce-green hover:shadow-md transition-all h-full"
+                    data-tour={item.id === 'first-vendor' ? 'add-vendor' : item.id === 'run-assessment' ? 'run-assessment' : item.id === 'analyze-sbom' ? 'analyze-sbom' : undefined}
+                  >
                     <div className="flex items-center text-vendorsoluce-green mb-3">
                       {item.icon}
                       <ArrowRight className="h-4 w-4 ml-auto" />

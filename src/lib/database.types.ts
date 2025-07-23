@@ -19,6 +19,7 @@ export interface Database {
           role: string | null
           company_size: string | null
           industry: string | null
+          tour_completed: boolean | null
           created_at: string
           updated_at: string
           is_first_login: boolean | null
@@ -32,6 +33,7 @@ export interface Database {
           role?: string | null
           company_size?: string | null
           industry?: string | null
+          tour_completed?: boolean | null
           created_at?: string
           updated_at?: string
           is_first_login?: boolean | null
@@ -45,6 +47,7 @@ export interface Database {
           role?: string | null
           company_size?: string | null
           industry?: string | null
+          tour_completed?: boolean | null
           created_at?: string
           updated_at?: string
           is_first_login?: boolean | null

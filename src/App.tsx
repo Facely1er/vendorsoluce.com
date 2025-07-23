@@ -25,6 +25,7 @@ import SupplyChainRecommendations from './pages/SupplyChainRecommendations';
 import NISTChecklist from './pages/tools/NISTChecklist';
 import SBOMQuickScan from './pages/tools/SBOMQuickScan';
 import VendorRiskCalculator from './pages/tools/VendorRiskCalculator';
+import AppTour from './components/onboarding/AppTour';
 
 // Protected Route Component
 function ProtectedRoute({ children, requireOnboarding = false }: { children: React.ReactNode; requireOnboarding?: boolean }) {
@@ -65,9 +66,26 @@ function ProtectedRoute({ children, requireOnboarding = false }: { children: Rea
 
 // Routes Component
 function AppRoutes() {
+  const { isTourRunning, markTourComplete, profile, startTour } = useAuth();
+
+  // Auto-start tour for new users who completed onboarding but haven't taken the tour
+  React.useEffect(() => {
+    if (profile && !profile.is_first_login && !profile.tour_completed && window.location.pathname === '/dashboard') {
+      // Small delay to ensure components are mounted
+      setTimeout(() => {
+        startTour();
+      }, 1500);
+    }
+  }, [profile, startTour]);
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <Navbar />
+      <AppTour 
+        isRunning={isTourRunning}
+        onComplete={markTourComplete}
+        onSkip={markTourComplete}
+      />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<HomePage />} />
@@ -119,6 +137,10 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         />
+        
+        {/* Login/Signup Routes */}
+        <Route path="/login" element={<SignInPage />} />
+        <Route path="/signup" element={<SignInPage />} />
         
         {/* Default Route */}
         <Route path="*" element={<Navigate to="/" replace />} />

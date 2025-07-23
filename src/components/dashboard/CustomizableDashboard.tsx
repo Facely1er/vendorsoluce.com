@@ -275,7 +275,7 @@ const CustomizableDashboard: React.FC = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4" data-tour="quick-actions">
             <Button 
               variant="outline" 
               className="justify-start"

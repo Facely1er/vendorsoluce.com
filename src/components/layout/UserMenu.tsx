@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../ui/Button';
 import { useTranslation } from 'react-i18next';
+import { HelpCircle } from 'lucide-react';
 
 const UserMenu: React.FC = () => {
   const { t } = useTranslation();
-  const { user, logout, isAuthenticated } = useAuth();
+  const { user, logout, isAuthenticated, startTour } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -82,6 +83,17 @@ const UserMenu: React.FC = () => {
             <Settings className="h-4 w-4 mr-2" />
             {t('auth.account')}
           </Link>
+          
+          <button
+            onClick={() => {
+              startTour();
+              setIsOpen(false);
+            }}
+            className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
+          >
+            <HelpCircle className="h-4 w-4 mr-2" />
+            Take Product Tour
+          </button>
           
           <button
             onClick={() => {
