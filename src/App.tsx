@@ -20,6 +20,7 @@ import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import APIDocumentation from './pages/APIDocumentation';
 import IntegrationGuides from './pages/IntegrationGuides';
+import Pricing from './pages/Pricing';
 import SupplyChainResults from './pages/SupplyChainResults';
 import SupplyChainRecommendations from './pages/SupplyChainRecommendations';
 import NISTChecklist from './pages/tools/NISTChecklist';
@@ -97,6 +98,7 @@ function AppRoutes() {
         <Route path="/api-docs" element={<APIDocumentation />} />
         <Route path="/integration-guides" element={<IntegrationGuides />} />
         <Route path="/templates" element={<Templates />} />
+        <Route path="/pricing" element={<Pricing />} />
         
         {/* Public Assessment Pages */}
         <Route path="/assessment" element={<SupplyChainAssessment />} />

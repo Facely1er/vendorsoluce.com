@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ChevronDown, Home, Layers, Shield, FileJson, BarChart3, BookOpen, Phone, Users } from 'lucide-react';
+import { Menu, X, ChevronDown, Home, Layers, Shield, FileJson, BarChart3, BookOpen, Phone, Users, DollarSign } from 'lucide-react';
 import { MenuItem } from '../../types';
 import ThemeToggle from './ThemeToggle';
 import UserMenu from './UserMenu';
@@ -20,6 +20,7 @@ const Navbar: React.FC = () => {
   const primaryNav: MenuItem[] = [
     { title: t('navigation.home'), path: '/', icon: 'Home' },
     { title: t('navigation.solutions'), path: '#', icon: 'Layers' },
+    { title: t('navigation.pricing'), path: '/pricing', icon: 'DollarSign' },
     { title: t('navigation.resources'), path: '#', icon: 'BookOpen' },
     { title: t('navigation.about'), path: '/about', icon: 'Users' },
     { title: t('navigation.contact'), path: '/contact', icon: 'Phone' },
@@ -43,6 +44,7 @@ const Navbar: React.FC = () => {
     const icons = {
       Home: <Home size={20} />,
       Layers: <Layers size={20} />,
+      DollarSign: <DollarSign size={20} />,
       Shield: <Shield size={20} />,
       FileJson: <FileJson size={20} />,
       BarChart3: <BarChart3 size={20} />,
