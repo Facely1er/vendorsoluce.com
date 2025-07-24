@@ -185,7 +185,7 @@ const EnhancedSBOMAnalysis: React.FC<EnhancedSBOMAnalysisProps> = ({
                 <p className="text-sm text-gray-600 dark:text-gray-400">Components</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{enhancedComponents.length}</p>
               </div>
-              <FileJson className="h-8 w-8 text-supply-chain-teal" />
+              <FileJson className="h-8 w-8 text-vendorsoluce-teal" />
             </div>
           </CardContent>
         </Card>
@@ -241,7 +241,7 @@ const EnhancedSBOMAnalysis: React.FC<EnhancedSBOMAnalysisProps> = ({
               onClick={() => setActiveTab(id as any)}
               className={`flex items-center py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === id
-                  ? 'border-supply-chain-teal text-supply-chain-teal'
+                  ? 'border-vendorsoluce-teal text-vendorsoluce-teal'
                   : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
               }`}
             >
