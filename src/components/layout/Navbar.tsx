@@ -95,12 +95,15 @@ const Navbar: React.FC = () => {
                 alt="VendorSoluce Logo" 
                 className="h-10 w-10" 
               />
-              <span className="ml-2 text-xl font-bold text-vendorsoluce-green dark:text-white">{t('app.name')}</span>
+              <span className="ml-2 text-xl font-bold text-vendorsoluce-green dark:text-white">
+                VendorSoluce™
+                <span className="block text-xs text-gray-600 dark:text-gray-400 font-normal">by ERMITS</span>
+              </span>
             </Link>
           </div>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
+          <div className="hidden md:ml-6 md:flex md:items-center md:space-x-2">
             {primaryNav.map((item) => 
               item.title === t('navigation.solutions') ? (
                 <div key={item.title} className="relative">
