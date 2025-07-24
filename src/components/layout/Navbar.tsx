@@ -224,11 +224,11 @@ const Navbar: React.FC = () => {
                         <Link
                           key={resource.title}
                           to={resource.path}
-                          className={\`block px-3 py-2 text-base font-medium ${
+                          className={`block px-3 py-2 text-base font-medium ${
                             isActiveLink(resource.path)
                               ? 'text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
                               : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
-                          }\`}
+                          }`}
                           onClick={() => {
                             setIsOpen(false);
                             setIsResourcesOpen(false);
@@ -244,11 +244,11 @@ const Navbar: React.FC = () => {
                 <div key={item.title}>
                   <button
                     onClick={toggleSolutions}
-                    className={\`w-full text-left text-base font-medium flex items-center ${
+                    className={`w-full text-left text-base font-medium flex items-center ${
                       isActiveLink(item.path, solutionItems)
                         ? 'px-3 py-2 text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
                         : 'px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
-                    }\`}
+                    }`}
                   >
                     {getIcon(item.icon)}
                     <span className="ml-2">{item.title}</span>
@@ -277,11 +277,11 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.title}
                   to={item.path}
-                  className={\`block text-base font-medium flex items-center ${
+                  className={`block text-base font-medium flex items-center ${
                     isActiveLink(item.path)
                       ? 'px-3 py-2 text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
                       : 'px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
-                  }\`}
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {getIcon(item.icon)}
