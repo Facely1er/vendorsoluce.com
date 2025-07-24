@@ -994,5 +994,127 @@
         "resources": "Télécharger les Ressources"
       }
     }
+  },
+  "pricing": {
+    "title": "Tarification simple et transparente",
+    "subtitle": "Choisissez le plan qui correspond aux besoins de gestion des risques de la chaîne d'approvisionnement de votre organisation. Tous les plans incluent l'alignement NIST SP 800-161 et des fonctionnalités de sécurité complètes.",
+    "tiers": {
+      "starter": {
+        "name": "Débutant",
+        "description": "Parfait pour les petites entreprises qui commencent leur parcours de sécurité de la chaîne d'approvisionnement",
+        "maxVendors": "Jusqu'à 25 fournisseurs",
+        "maxUsers": "Jusqu'à 3 utilisateurs",
+        "features": {
+          "nistBasic": "Évaluations de base NIST SP 800-161",
+          "sbomAnalyzer": "Analyseur SBOM (jusqu'à 10 fichiers/mois)",
+          "vendorDashboard": "Tableau de bord des risques fournisseurs",
+          "emailSupport": "Support par e-mail",
+          "standardTemplates": "Modèles de sécurité standard",
+          "basicReporting": "Rapports de conformité de base"
+        },
+        "cta": "Commencer l'essai gratuit"
+      },
+      "professional": {
+        "name": "Professionnel",
+        "description": "Solution complète pour les organisations en croissance avec des besoins de sécurité renforcés",
+        "maxVendors": "Jusqu'à 100 fournisseurs",
+        "maxUsers": "Jusqu'à 10 utilisateurs",
+        "popular": "Le plus populaire",
+        "features": {
+          "everythingStarter": "Tout ce qui est inclus dans Débutant",
+          "advancedNist": "Évaluations avancées NIST SP 800-161",
+          "unlimitedSbom": "Analyse SBOM illimitée",
+          "apiAccess": "Accès API et intégrations",
+          "prioritySupport": "Support prioritaire",
+          "customTemplates": "Modèles d'évaluation personnalisés",
+          "advancedReporting": "Rapports et analyses avancés",
+          "workflowAutomation": "Automatisation des flux de travail",
+          "threatIntelligence": "Flux de renseignements sur les menaces"
+        },
+        "cta": "Commencer l'essai gratuit"
+      },
+      "enterprise": {
+        "name": "Entreprise",
+        "description": "Plateforme complète pour les grandes organisations avec des chaînes d'approvisionnement complexes",
+        "maxVendors": "Fournisseurs illimités",
+        "maxUsers": "Utilisateurs illimités",
+        "features": {
+          "everythingProfessional": "Tout ce qui est inclus dans Professionnel",
+          "dedicatedManager": "Gestionnaire de succès client dédié",
+          "customIntegrations": "Intégrations et API personnalisées",
+          "advancedAnalytics": "Analyses et rapports avancés",
+          "multiTenant": "Capacités multi-locataires",
+          "ssoSecurity": "SSO et sécurité avancée",
+          "customBranding": "Image de marque personnalisée",
+          "professionalServices": "Services professionnels inclus",
+          "slaGuarantees": "Garanties SLA"
+        },
+        "cta": "Contacter les ventes"
+      },
+      "federal": {
+        "name": "Fédéral",
+        "description": "Solution autorisée FedRAMP pour les agences fédérales et les contractants",
+        "maxVendors": "Fournisseurs illimités",
+        "maxUsers": "Utilisateurs illimités",
+        "features": {
+          "fedrampAuth": "Autorisation FedRAMP Modérée",
+          "fullNistCompliance": "Conformité complète NIST SP 800-161",
+          "govCloudDeployment": "Déploiement cloud gouvernemental",
+          "enhancedSecurity": "Contrôles de sécurité renforcés",
+          "federalReporting": "Rapports de conformité fédérale",
+          "cacPivAuth": "Support d'authentification CAC/PIV",
+          "atoSupport": "Support d'autorisation d'exploitation (ATO)",
+          "dedicatedFederalSupport": "Équipe de support fédéral dédiée",
+          "fismaCompliance": "Outils de conformité FISMA"
+        },
+        "cta": "Contacter les ventes fédérales"
+      }
+    },
+    "enterpriseFeatures": {
+      "title": "Fonctionnalités de niveau entreprise",
+      "features": {
+        "vulnerabilityManagement": "Gestion avancée des vulnérabilités",
+        "predictiveAnalytics": "Analyses prédictives des risques",
+        "supplyChainMapping": "Cartographie de la chaîne d'approvisionnement",
+        "incidentAutomation": "Automatisation de la réponse aux incidents",
+        "thirdPartyScoring": "Notation des risques tiers",
+        "regulatoryAutomation": "Automatisation de la conformité réglementaire"
+      }
+    },
+    "faq": {
+      "title": "Questions fréquemment posées",
+      "questions": {
+        "freeTrial": {
+          "question": "Offrez-vous un essai gratuit ?",
+          "answer": "Oui ! Nous offrons un essai gratuit de 14 jours pour tous les plans payants. Aucune carte de crédit n'est requise pour commencer."
+        },
+        "changePlans": {
+          "question": "Puis-je changer de plan plus tard ?",
+          "answer": "Absolument. Vous pouvez mettre à niveau ou rétrograder votre plan à tout moment. Les modifications prennent effet lors de votre prochain cycle de facturation."
+        },
+        "paymentMethods": {
+          "question": "Quels modes de paiement acceptez-vous ?",
+          "answer": "Nous acceptons toutes les principales cartes de crédit, les virements ACH, et pouvons accommoder les bons de commande pour les clients Entreprise et Fédéral."
+        },
+        "dataSecurity": {
+          "question": "Mes données sont-elles sécurisées ?",
+          "answer": "Oui. Nous sommes certifiés SOC 2 Type II et autorisés FedRAMP Modéré. Toutes les données sont chiffrées en transit et au repos."
+        },
+        "customIntegrations": {
+          "question": "Offrez-vous des intégrations personnalisées ?",
+          "answer": "Oui, nos plans Professionnel et Entreprise incluent l'accès API, et nous offrons des intégrations personnalisées pour les clients Entreprise."
+        },
+        "supportIncluded": {
+          "question": "Quel support est inclus ?",
+          "answer": "Tous les plans incluent le support par e-mail. Les plans Professionnel et Entreprise incluent le support prioritaire et le succès client dédié."
+        }
+      }
+    },
+    "cta": {
+      "title": "Prêt à sécuriser votre chaîne d'approvisionnement ?",
+      "subtitle": "Rejoignez des centaines d'organisations qui utilisent déjà VendorSoluce pour gérer leurs risques de chaîne d'approvisionnement et répondre aux exigences de conformité fédérale.",
+      "startTrial": "Commencer l'essai gratuit",
+      "scheduleDemo": "Planifier une démo"
+    }
   }
 }
