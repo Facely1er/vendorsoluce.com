@@ -262,7 +262,6 @@ const VendorRiskCalculator: React.FC = () => {
                 </div>
                 
                 <Link to="/vendor-risk">
-                <Link to="/vendor-risk-dashboard">
                   <Button variant="outline" className="w-full">
                     {t('quickTools.riskCalculator.viewDashboard')}
                   </Button>
