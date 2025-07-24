@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Check, Shield, Star, Users, Building, Crown } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
@@ -19,102 +20,104 @@ interface PricingTier {
 }
 
 const Pricing: React.FC = () => {
+  const { t } = useTranslation();
+  
   const pricingTiers: PricingTier[] = [
     {
-      name: 'Starter',
+      name: t('pricing.tiers.starter.name'),
       price: '$49',
       period: '/month',
-      description: 'Perfect for small businesses starting their supply chain security journey',
-      maxVendors: 'Up to 25 vendors',
-      maxUsers: 'Up to 3 users',
+      description: t('pricing.tiers.starter.description'),
+      maxVendors: t('pricing.tiers.starter.maxVendors'),
+      maxUsers: t('pricing.tiers.starter.maxUsers'),
       icon: <Shield className="h-8 w-8 text-vendorsoluce-green" />,
       features: [
-        'NIST SP 800-161 basic assessments',
-        'SBOM analyzer (up to 10 files/month)',
-        'Vendor risk dashboard',
-        'Email support',
-        'Standard security templates',
-        'Basic compliance reporting'
+        t('pricing.tiers.starter.features.nistBasic'),
+        t('pricing.tiers.starter.features.sbomAnalyzer'),
+        t('pricing.tiers.starter.features.vendorDashboard'),
+        t('pricing.tiers.starter.features.emailSupport'),
+        t('pricing.tiers.starter.features.standardTemplates'),
+        t('pricing.tiers.starter.features.basicReporting')
       ],
-      ctaText: 'Start Free Trial',
+      ctaText: t('pricing.tiers.starter.cta'),
       ctaLink: '/signup',
     },
     {
-      name: 'Professional',
+      name: t('pricing.tiers.professional.name'),
       price: '$149',
       period: '/month',
-      description: 'Comprehensive solution for growing organizations with enhanced security needs',
-      maxVendors: 'Up to 100 vendors',
-      maxUsers: 'Up to 10 users',
+      description: t('pricing.tiers.professional.description'),
+      maxVendors: t('pricing.tiers.professional.maxVendors'),
+      maxUsers: t('pricing.tiers.professional.maxUsers'),
       icon: <Users className="h-8 w-8 text-vendorsoluce-green" />,
       popular: true,
       features: [
-        'Everything in Starter',
-        'Advanced NIST SP 800-161 assessments',
-        'Unlimited SBOM analysis',
-        'API access and integrations',
-        'Priority support',
-        'Custom assessment templates',
-        'Advanced reporting and analytics',
-        'Workflow automation',
-        'Threat intelligence feed'
+        t('pricing.tiers.professional.features.everythingStarter'),
+        t('pricing.tiers.professional.features.advancedNist'),
+        t('pricing.tiers.professional.features.unlimitedSbom'),
+        t('pricing.tiers.professional.features.apiAccess'),
+        t('pricing.tiers.professional.features.prioritySupport'),
+        t('pricing.tiers.professional.features.customTemplates'),
+        t('pricing.tiers.professional.features.advancedReporting'),
+        t('pricing.tiers.professional.features.workflowAutomation'),
+        t('pricing.tiers.professional.features.threatIntelligence')
       ],
-      ctaText: 'Start Free Trial',
+      ctaText: t('pricing.tiers.professional.cta'),
       ctaLink: '/signup',
     },
     {
-      name: 'Enterprise',
+      name: t('pricing.tiers.enterprise.name'),
       price: '$449',
       period: '/month',
-      description: 'Full-featured platform for large organizations with complex supply chains',
-      maxVendors: 'Unlimited vendors',
-      maxUsers: 'Unlimited users',
+      description: t('pricing.tiers.enterprise.description'),
+      maxVendors: t('pricing.tiers.enterprise.maxVendors'),
+      maxUsers: t('pricing.tiers.enterprise.maxUsers'),
       icon: <Building className="h-8 w-8 text-vendorsoluce-green" />,
       features: [
-        'Everything in Professional',
-        'Dedicated customer success manager',
-        'Custom integrations and APIs',
-        'Advanced analytics and reporting',
-        'Multi-tenant capabilities',
-        'SSO and advanced security',
-        'Custom branding',
-        'Professional services included',
-        'SLA guarantees'
+        t('pricing.tiers.enterprise.features.everythingProfessional'),
+        t('pricing.tiers.enterprise.features.dedicatedManager'),
+        t('pricing.tiers.enterprise.features.customIntegrations'),
+        t('pricing.tiers.enterprise.features.advancedAnalytics'),
+        t('pricing.tiers.enterprise.features.multiTenant'),
+        t('pricing.tiers.enterprise.features.ssoSecurity'),
+        t('pricing.tiers.enterprise.features.customBranding'),
+        t('pricing.tiers.enterprise.features.professionalServices'),
+        t('pricing.tiers.enterprise.features.slaGuarantees')
       ],
-      ctaText: 'Contact Sales',
+      ctaText: t('pricing.tiers.enterprise.cta'),
       ctaLink: '/contact',
     },
     {
-      name: 'Federal',
+      name: t('pricing.tiers.federal.name'),
       price: 'Custom',
       period: 'pricing',
-      description: 'FedRAMP authorized solution for federal agencies and contractors',
-      maxVendors: 'Unlimited vendors',
-      maxUsers: 'Unlimited users',
+      description: t('pricing.tiers.federal.description'),
+      maxVendors: t('pricing.tiers.federal.maxVendors'),
+      maxUsers: t('pricing.tiers.federal.maxUsers'),
       icon: <Crown className="h-8 w-8 text-vendorsoluce-green" />,
       features: [
-        'FedRAMP Moderate authorization',
-        'Full NIST SP 800-161 compliance',
-        'Government cloud deployment',
-        'Enhanced security controls',
-        'Federal compliance reporting',
-        'CAC/PIV authentication support',
-        'Authority to Operate (ATO) support',
-        'Dedicated federal support team',
-        'FISMA compliance tools'
+        t('pricing.tiers.federal.features.fedrampAuth'),
+        t('pricing.tiers.federal.features.fullNistCompliance'),
+        t('pricing.tiers.federal.features.govCloudDeployment'),
+        t('pricing.tiers.federal.features.enhancedSecurity'),
+        t('pricing.tiers.federal.features.federalReporting'),
+        t('pricing.tiers.federal.features.cacPivAuth'),
+        t('pricing.tiers.federal.features.atoSupport'),
+        t('pricing.tiers.federal.features.federalSupportTeam'),
+        t('pricing.tiers.federal.features.fismaCompliance')
       ],
-      ctaText: 'Contact Federal Sales',
+      ctaText: t('pricing.tiers.federal.cta'),
       ctaLink: '/contact',
     }
   ];
 
   const enterpriseFeatures = [
-    'Advanced vulnerability management',
-    'Predictive risk analytics',
-    'Supply chain mapping',
-    'Incident response automation',
-    'Third-party risk scoring',
-    'Regulatory compliance automation'
+    t('pricing.enterpriseFeatures.features.advancedVulnerability'),
+    t('pricing.enterpriseFeatures.features.predictiveAnalytics'),
+    t('pricing.enterpriseFeatures.features.supplyChainMapping'),
+    t('pricing.enterpriseFeatures.features.incidentAutomation'),
+    t('pricing.enterpriseFeatures.features.thirdPartyScoring'),
+    t('pricing.enterpriseFeatures.features.regulatoryAutomation')
   ];
 
   return (
@@ -122,11 +125,10 @@ const Pricing: React.FC = () => {
       {/* Header Section */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-          Simple, Transparent Pricing
+          {t('pricing.title')}
         </h1>
         <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-          Choose the plan that fits your organization's supply chain risk management needs. 
-          All plans include NIST SP 800-161 alignment and comprehensive security features.
+          {t('pricing.subtitle')}
         </p>
       </div>
 
@@ -143,7 +145,7 @@ const Pricing: React.FC = () => {
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                 <span className="bg-vendorsoluce-green text-white px-4 py-1 rounded-full text-sm font-medium flex items-center">
                   <Star className="h-4 w-4 mr-1" />
-                  Most Popular
+                  {t('pricing.tiers.professional.popular')}
                 </span>
               </div>
             )}
@@ -194,7 +196,7 @@ const Pricing: React.FC = () => {
       {/* Features Comparison */}
       <div className="mb-16">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-          Enterprise-Grade Features
+          {t('pricing.enterpriseFeatures.title')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {enterpriseFeatures.map((feature, index) => (
@@ -211,34 +213,34 @@ const Pricing: React.FC = () => {
       {/* FAQ Section */}
       <div className="mb-16">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-          Frequently Asked Questions
+          {t('pricing.faq.title')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                Do you offer a free trial?
+                {t('pricing.faq.questions.freeTrial.question')}
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Yes! We offer a 14-day free trial for all paid plans. No credit card required to start.
+                {t('pricing.faq.questions.freeTrial.answer')}
               </p>
             </div>
             
             <div>
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                Can I change plans later?
+                {t('pricing.faq.questions.changePlans.question')}
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Absolutely. You can upgrade or downgrade your plan at any time. Changes take effect at your next billing cycle.
+                {t('pricing.faq.questions.changePlans.answer')}
               </p>
             </div>
             
             <div>
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                What payment methods do you accept?
+                {t('pricing.faq.questions.paymentMethods.question')}
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                We accept all major credit cards, ACH transfers, and can accommodate purchase orders for Enterprise and Federal customers.
+                {t('pricing.faq.questions.paymentMethods.answer')}
               </p>
             </div>
           </div>
@@ -246,28 +248,28 @@ const Pricing: React.FC = () => {
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                Is my data secure?
+                {t('pricing.faq.questions.dataSecure.question')}
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Yes. We're SOC 2 Type II certified and FedRAMP Moderate authorized. All data is encrypted in transit and at rest.
+                {t('pricing.faq.questions.dataSecure.answer')}
               </p>
             </div>
             
             <div>
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                Do you offer custom integrations?
+                {t('pricing.faq.questions.customIntegrations.question')}
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                Yes, our Professional and Enterprise plans include API access, and we offer custom integrations for Enterprise customers.
+                {t('pricing.faq.questions.customIntegrations.answer')}
               </p>
             </div>
             
             <div>
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                What support is included?
+                {t('pricing.faq.questions.supportIncluded.question')}
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
-                All plans include email support. Professional and Enterprise plans include priority support and dedicated customer success.
+                {t('pricing.faq.questions.supportIncluded.answer')}
               </p>
             </div>
           </div>
@@ -276,19 +278,19 @@ const Pricing: React.FC = () => {
 
       {/* CTA Section */}
       <div className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green text-white rounded-lg p-8 text-center">
-        <h2 className="text-3xl font-bold mb-4">Ready to Secure Your Supply Chain?</h2>
+        <h2 className="text-3xl font-bold mb-4">{t('pricing.cta.title')}</h2>
         <p className="text-xl text-gray-100 mb-8 max-w-2xl mx-auto">
-          Join hundreds of organizations already using VendorSoluce to manage their supply chain risks and meet federal compliance requirements.
+          {t('pricing.cta.subtitle')}
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link to="/signup">
             <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100">
-              Start Free Trial
+              {t('pricing.cta.startTrial')}
             </Button>
           </Link>
           <Link to="/contact">
             <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20">
-              Schedule Demo
+              {t('pricing.cta.scheduleDemo')}
             </Button>
           </Link>
         </div>
