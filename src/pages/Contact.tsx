@@ -145,7 +145,7 @@ const Contact: React.FC = () => {
                         id="firstName"
                         value={formData.firstName}
                         onChange={handleInputChange}
-                        className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendortal-navy focus:border-vendortal-navy bg-white dark:bg-gray-800 dark:text-white"
+                        className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendorsoluce-navy focus:border-vendorsoluce-navy bg-white dark:bg-gray-800 dark:text-white"
                         required
                       />
                     </div>
@@ -159,7 +159,7 @@ const Contact: React.FC = () => {
                         id="lastName"
                         value={formData.lastName}
                         onChange={handleInputChange}
-                        className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendortal-navy focus:border-vendortal-navy bg-white dark:bg-gray-800 dark:text-white"
+                        className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendorsoluce-navy focus:border-vendorsoluce-navy bg-white dark:bg-gray-800 dark:text-white"
                         required
                       />
                     </div>
@@ -175,7 +175,7 @@ const Contact: React.FC = () => {
                         id="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendortal-navy focus:border-vendortal-navy bg-white dark:bg-gray-800 dark:text-white"
+                        className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendorsoluce-navy focus:border-vendorsoluce-navy bg-white dark:bg-gray-800 dark:text-white"
                         required
                       />
                     </div>
@@ -189,7 +189,7 @@ const Contact: React.FC = () => {
                         id="phone"
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendortal-navy focus:border-vendortal-navy bg-white dark:bg-gray-800 dark:text-white"
+                        className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendorsoluce-navy focus:border-vendorsoluce-navy bg-white dark:bg-gray-800 dark:text-white"
                       />
                     </div>
                   </div>
@@ -203,7 +203,7 @@ const Contact: React.FC = () => {
                       id="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendortal-navy focus:border-vendortal-navy bg-white dark:bg-gray-800 dark:text-white"
+                      className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendorsoluce-navy focus:border-vendorsoluce-navy bg-white dark:bg-gray-800 dark:text-white"
                     />
                   </div>
                   
@@ -215,7 +215,7 @@ const Contact: React.FC = () => {
                       id="topic"
                       value={formData.topic}
                       onChange={handleInputChange}
-                      className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendortal-navy focus:border-vendortal-navy bg-white dark:bg-gray-800 dark:text-white"
+                      className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendorsoluce-navy focus:border-vendorsoluce-navy bg-white dark:bg-gray-800 dark:text-white"
                     >
                       <option value="">Select a topic</option>
                       <option value="Product Information">Product Information</option>
@@ -236,7 +236,7 @@ const Contact: React.FC = () => {
                       rows={4}
                       value={formData.message}
                       onChange={handleInputChange}
-                      className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendortal-navy focus:border-vendortal-navy bg-white dark:bg-gray-800 dark:text-white"
+                      className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendorsoluce-navy focus:border-vendorsoluce-navy bg-white dark:bg-gray-800 dark:text-white"
                       placeholder="Please provide details about your inquiry..."
                       required
                     ></textarea>
@@ -249,11 +249,11 @@ const Contact: React.FC = () => {
                         type="checkbox"
                         checked={formData.terms}
                         onChange={handleCheckboxChange}
-                        className="h-4 w-4 text-vendortal-navy focus:ring-vendortal-navy border-gray-300 dark:border-gray-600 rounded"
+                        className="h-4 w-4 text-vendorsoluce-navy focus:ring-vendorsoluce-navy border-gray-300 dark:border-gray-600 rounded"
                         required
                       />
                       <label htmlFor="terms" className="ml-2 text-sm text-gray-600 dark:text-gray-400">
-                        I agree to the <Link to="/privacy" className="text-vendortal-navy dark:text-trust-blue hover:underline">privacy policy</Link> and consent to being contacted regarding my inquiry.
+                        I agree to the <Link to="/privacy" className="text-vendorsoluce-navy dark:text-vendorsoluce-blue hover:underline">privacy policy</Link> and consent to being contacted regarding my inquiry.
                       </label>
                     </div>
                   </div>
@@ -285,27 +285,27 @@ const Contact: React.FC = () => {
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Contact Information</h2>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <Mail className="h-5 w-5 text-vendortal-navy dark:text-trust-blue mr-3 mt-0.5" />
+                <Mail className="h-5 w-5 text-vendorsoluce-navy dark:text-vendorsoluce-blue mr-3 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">Email</p>
-                  <a href="mailto:contact@ermits.com" className="text-gray-600 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue">
+                  <a href="mailto:contact@ermits.com" className="text-gray-600 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue">
                     contact@ermits.com
                   </a>
                 </div>
               </li>
               
               <li className="flex items-start">
-                <Phone className="h-5 w-5 text-vendortal-navy dark:text-trust-blue mr-3 mt-0.5" />
+                <Phone className="h-5 w-5 text-vendorsoluce-navy dark:text-vendorsoluce-blue mr-3 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">Phone</p>
-                  <a href="tel:+18886186160" className="text-gray-600 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue">
+                  <a href="tel:+18886186160" className="text-gray-600 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue">
                     +1 (240) 599-0102
                   </a>
                 </div>
               </li>
               
               <li className="flex items-start">
-                <MapPin className="h-5 w-5 text-vendortal-navy dark:text-trust-blue mr-3 mt-0.5" />
+                <MapPin className="h-5 w-5 text-vendorsoluce-navy dark:text-vendorsoluce-blue mr-3 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">Headquarters</p>
                   <p className="text-gray-600 dark:text-gray-300">
@@ -317,7 +317,7 @@ const Contact: React.FC = () => {
               </li>
               
               <li className="flex items-start">
-                <Clock className="h-5 w-5 text-vendortal-navy dark:text-trust-blue mr-3 mt-0.5" />
+                <Clock className="h-5 w-5 text-vendorsoluce-navy dark:text-vendorsoluce-blue mr-3 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">Hours</p>
                   <p className="text-gray-600 dark:text-gray-300">
@@ -335,7 +335,7 @@ const Contact: React.FC = () => {
               See how VendorSoluce can help secure your supply chain and meet federal compliance requirements.
             </p>
             <div className="flex items-center mb-4">
-              <MessageSquare className="h-5 w-5 text-supply-chain-teal mr-2" />
+              <MessageSquare className="h-5 w-5 text-vendorsoluce-teal mr-2" />
               <span className="text-sm text-gray-600 dark:text-gray-300">30-minute personalized demo</span>
             </div>
             <Button 
@@ -408,7 +408,7 @@ const Contact: React.FC = () => {
         </div>
       </section>
       
-      <section className="bg-gradient-to-r from-vendortal-navy to-supply-chain-teal text-white rounded-lg overflow-hidden">
+      <section className="bg-gradient-to-r from-vendorsoluce-navy to-vendorsoluce-teal text-white rounded-lg overflow-hidden">
         <div className="p-8 md:p-12">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
             <div className="mb-6 md:mb-0">
@@ -435,7 +435,7 @@ const Contact: React.FC = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="bg-white text-vendortal-navy hover:bg-gray-100"
+                className="bg-white text-vendorsoluce-navy hover:bg-gray-100"
                 onClick={() => window.location.href = '/assessment'}
               >
                 Try for Free

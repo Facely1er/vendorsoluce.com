@@ -132,14 +132,6 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/vendors"
-          element={
-            <ProtectedRoute>
-              <VendorsPage />
-            </ProtectedRoute>
-          }
-        />
         
         {/* Login/Signup Routes */}
         <Route path="/login" element={<SignInPage />} />

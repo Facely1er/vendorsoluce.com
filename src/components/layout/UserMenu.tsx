@@ -50,7 +50,7 @@ const UserMenu: React.FC = () => {
             className="h-8 w-8 rounded-full object-cover border border-gray-200"
           />
         ) : (
-          <div className="h-8 w-8 rounded-full bg-vendortal-navy text-white flex items-center justify-center">
+          <div className="h-8 w-8 rounded-full bg-vendorsoluce-navy text-white flex items-center justify-center">
             <User className="h-4 w-4" />
           </div>
         )}

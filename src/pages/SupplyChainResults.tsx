@@ -144,8 +144,7 @@ const SupplyChainResults = () => {
 
       <div className="mt-8 flex justify-end">
         <button
-          onClick={() => navigate('/supply-chain-recommendations')}
-          className="px-4 py-2 bg-vendortal-navy text-white rounded hover:bg-vendortal-navy/90 transition-colors"
+          className="px-4 py-2 bg-vendorsoluce-navy text-white rounded hover:bg-vendorsoluce-navy/90 transition-colors"
         >
           View Detailed Recommendations
         </button>

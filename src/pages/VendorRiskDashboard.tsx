@@ -93,7 +93,7 @@ const VendorRiskDashboard: React.FC = () => {
               onClick={() => setActiveView(id as any)}
               className={`flex items-center px-3 py-2 rounded-md text-sm font-medium ${
                 activeView === id
-                  ? 'bg-vendortal-navy text-white'
+                  ? 'bg-vendorsoluce-navy text-white'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
