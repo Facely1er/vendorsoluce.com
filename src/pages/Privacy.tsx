@@ -162,10 +162,10 @@ const Privacy: React.FC = () => {
         </p>
         <div className="text-gray-600 dark:text-gray-300">
           <p><strong className="text-gray-900 dark:text-white">VendorSoluce</strong></p>
-          <p>1234 Security Blvd, Suite 500</p>
-          <p>Arlington, VA 22209</p>
-          <p>Email: privacy@vendorsoluce.com</p>
-          <p>Phone: +1 (800) 555-1234</p>
+          <p>8300 McCullough Lane, Suite 203</p>
+          <p>Gaithersburg, MD 20877</p>
+          <p>Email: contact@ermits.com</p>
+          <p>Phone: +1 (240) 599-0102</p>
         </div>
       </Card>
     </main>
