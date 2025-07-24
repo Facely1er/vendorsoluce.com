@@ -58,6 +58,15 @@ function App() {
                   <Route path="/tools/sbom-quick-scan" element={<SBOMQuickScan />} />
                   <Route path="/tools/vendor-risk-calculator" element={<VendorRiskCalculator />} />
                   
+                  {/* Assessment routes - public access for better user experience */}
+                  <Route path="/supply-chain-assessment" element={<SupplyChainAssessment />} />
+                  <Route path="/supply-chain-results/:id" element={<SupplyChainResults />} />
+                  <Route path="/supply-chain-recommendations/:id" element={<SupplyChainRecommendations />} />
+                  <Route path="/sbom-analyzer" element={<SBOMAnalyzer />} />
+                  <Route path="/sbom-analysis/:id" element={<SBOMAnalysisPage />} />
+                  <Route path="/vendor-risk-dashboard" element={<VendorRiskDashboard />} />
+                  <Route path="/vendors" element={<VendorsPage />} />
+                  
                   {/* Protected routes */}
                   <Route path="/dashboard" element={
                     <ProtectedRoute>
@@ -67,41 +76,6 @@ function App() {
                   <Route path="/onboarding" element={
                     <ProtectedRoute>
                       <OnboardingPage />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/vendors" element={
-                    <ProtectedRoute>
-                      <VendorsPage />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/vendor-risk-dashboard" element={
-                    <ProtectedRoute>
-                      <VendorRiskDashboard />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/sbom-analyzer" element={
-                    <ProtectedRoute>
-                      <SBOMAnalyzer />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/sbom-analysis/:id" element={
-                    <ProtectedRoute>
-                      <SBOMAnalysisPage />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/supply-chain-assessment" element={
-                    <ProtectedRoute>
-                      <SupplyChainAssessment />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/supply-chain-results/:id" element={
-                    <ProtectedRoute>
-                      <SupplyChainResults />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/supply-chain-recommendations/:id" element={
-                    <ProtectedRoute>
-                      <SupplyChainRecommendations />
                     </ProtectedRoute>
                   } />
                   
