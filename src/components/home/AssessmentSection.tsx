@@ -11,7 +11,7 @@ const AssessmentSection: React.FC = () => {
   
   const assessments: Assessment[] = [
     {
-      id: 'supply-chain-risk',
+      id: 'supply-chain-assessment',
       title: t('assessment.supplyChain.title'),
       description: t('assessment.supplyChain.description'),
       frameworks: ['NIST SP 800-161', 'ISO 28000'],
