@@ -228,7 +228,7 @@ const Navbar: React.FC = () => {
                             isActiveLink(resource.path)
                               ? 'text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
                               : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
-                          }`}
+                          }\`}
                           onClick={() => {
                             setIsOpen(false);
                             setIsResourcesOpen(false);
@@ -248,7 +248,7 @@ const Navbar: React.FC = () => {
                       isActiveLink(item.path, solutionItems)
                         ? 'px-3 py-2 text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
                         : 'px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
-                    }`}
+                    }\`}
                   >
                     {getIcon(item.icon)}
                     <span className="ml-2">{item.title}</span>
@@ -281,7 +281,7 @@ const Navbar: React.FC = () => {
                     isActiveLink(item.path)
                       ? 'px-3 py-2 text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
                       : 'px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
-                  }`}
+                  }\`}
                   onClick={() => setIsOpen(false)}
                 >
                   {getIcon(item.icon)}
