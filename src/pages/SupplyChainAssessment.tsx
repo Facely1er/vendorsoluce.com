@@ -12,8 +12,7 @@ const SupplyChainAssessment = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
-  const { currentAssessment, createOrUpdateAssessment, loading } = useSupplyChainAssessments();
-  const { assessments, refetch } = useSupplyChainAssessments();
+  const { currentAssessment, createOrUpdateAssessment, loading, assessments, refetch } = useSupplyChainAssessments();
   
   // Assessment stage state ('startScreen', 'onboarding', 'assessment')
   const [assessmentStage, setAssessmentStage] = useState<'startScreen' | 'onboarding' | 'assessment'>('startScreen');
