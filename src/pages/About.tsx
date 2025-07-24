@@ -27,7 +27,6 @@ const About: React.FC = () => {
             </p>
           </div>
           
-          <div className="bg-gradient-to-r from-vendortal-navy to-supply-chain-teal p-8 rounded-lg text-white">
           <div className="bg-gradient-to-r from-vendorsoluce-navy to-vendorsoluce-teal p-8 rounded-lg text-white">
             <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
             <p className="text-gray-100 mb-6">
@@ -173,7 +172,7 @@ const About: React.FC = () => {
         </div>
         
         <div className="text-center">
-          <a href="/careers" className="inline-block bg-vendortal-navy text-white px-5 py-3 rounded-md font-medium hover:bg-vendortal-navy/90 transition-colors">
+          <a href="/careers" className="inline-block bg-vendorsoluce-navy text-white px-5 py-3 rounded-md font-medium hover:bg-vendorsoluce-navy/90 transition-colors">
             View All Open Positions
           </a>
         </div>
@@ -183,5 +182,3 @@ const About: React.FC = () => {
 };
 
 export default About;
-  )
-}
