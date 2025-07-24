@@ -4,6 +4,7 @@
   },
   "navigation": {
     "home": "Accueil",
+    "solutions": "Solutions",
     "assessment": "Évaluation de la Chaîne d'Approvisionnement",
     "sbom": "Analyseur SBOM",
     "vendorRisk": "Tableau de Bord des Risques Fournisseurs",
