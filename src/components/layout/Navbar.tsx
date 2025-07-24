@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Home, Layers, Shield, FileJson, BarChart3, BookOpen, Phone, Users, DollarSign } from 'lucide-react';
 import { MenuItem } from '../../types';
 import ThemeToggle from './ThemeToggle';
@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 const Navbar: React.FC = () => {
   const { t } = useTranslation();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
@@ -37,6 +38,32 @@ const Navbar: React.FC = () => {
     { title: t('navigation.integration'), path: '/integration-guides' },
     { title: t('navigation.templates'), path: '/templates' },
   ];
+
+  // Helper function to determine if a link is active
+  const isActiveLink = (path: string, subItems?: MenuItem[]): boolean => {
+    // Direct path match
+    if (location.pathname === path) return true;
+    
+    // For dropdown items, check if any sub-item matches
+    if (subItems) {
+      return subItems.some(item => location.pathname === item.path);
+    }
+    
+    return false;
+  };
+
+  // Define active and default link classes
+  const getActiveLinkClasses = (isActive: boolean) => {
+    return isActive
+      ? 'px-3 py-2 rounded-md text-sm font-medium text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20 flex items-center'
+      : 'px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center';
+  };
+
+  const getActiveButtonClasses = (isActive: boolean) => {
+    return isActive
+      ? 'px-3 py-2 rounded-md text-sm font-medium text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20 flex items-center'
+      : 'px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center';
+  };
 
   const getIcon = (iconName: string | undefined) => {
     if (!iconName) return null;
@@ -78,7 +105,7 @@ const Navbar: React.FC = () => {
                 <div key={item.title} className="relative">
                   <button
                     onClick={toggleSolutions}
-                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                    className={getActiveButtonClasses(isActiveLink(item.path, solutionItems))}
                   >
                     {getIcon(item.icon)}
                     <span className="ml-1">{item.title}</span>
@@ -91,7 +118,11 @@ const Navbar: React.FC = () => {
                         <Link
                           key={solution.title}
                           to={solution.path}
-                          className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          className={`block px-4 py-2 text-sm ${
+                            isActiveLink(solution.path)
+                              ? 'text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
+                              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                          }`}
                           onClick={() => setIsSolutionsOpen(false)}
                         >
                           {solution.title}
@@ -104,7 +135,7 @@ const Navbar: React.FC = () => {
                 <div key={item.title} className="relative">
                   <button
                     onClick={toggleResources}
-                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                    className={getActiveButtonClasses(isActiveLink(item.path, resourceItems))}
                   >
                     {getIcon(item.icon)}
                     <span className="ml-1">{item.title}</span>
@@ -117,7 +148,15 @@ const Navbar: React.FC = () => {
                         <Link
                           key={resource.title}
                           to={resource.path}
-                          className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          className={`block px-4 py-2 text-sm ${
+                            isActiveLink(solution.path)
+                              ? 'text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
+                              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                          className={`block px-4 py-2 text-sm ${
+                            isActiveLink(resource.path)
+                              ? 'text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
+                              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                          }`}
                           onClick={() => setIsResourcesOpen(false)}
                         >
                           {resource.title}
@@ -130,7 +169,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.title}
                   to={item.path}
-                  className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                  className={getActiveLinkClasses(isActiveLink(item.path))}
                 >
                   {getIcon(item.icon)}
                   <span className="ml-1">{item.title}</span>
@@ -172,7 +211,11 @@ const Navbar: React.FC = () => {
                 <div key={item.title}>
                   <button
                     onClick={toggleResources}
-                    className="w-full text-left px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                    className={`w-full text-left text-base font-medium flex items-center ${
+                      isActiveLink(item.path, resourceItems)
+                        ? 'px-3 py-2 text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
+                        : 'px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
+                    }`}
                   >
                     {getIcon(item.icon)}
                     <span className="ml-2">{item.title}</span>
@@ -185,7 +228,11 @@ const Navbar: React.FC = () => {
                         <Link
                           key={resource.title}
                           to={resource.path}
-                          className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
+                          className={`block px-3 py-2 text-base font-medium ${
+                            isActiveLink(resource.path)
+                              ? 'text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
+                              : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
+                          }`}
                           onClick={() => {
                             setIsOpen(false);
                             setIsResourcesOpen(false);
@@ -201,7 +248,11 @@ const Navbar: React.FC = () => {
                 <div key={item.title}>
                   <button
                     onClick={toggleSolutions}
-                    className="w-full text-left px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                    className={`w-full text-left text-base font-medium flex items-center ${
+                      isActiveLink(item.path, solutionItems)
+                        ? 'px-3 py-2 text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
+                        : 'px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
+                    }`}
                   >
                     {getIcon(item.icon)}
                     <span className="ml-2">{item.title}</span>
@@ -230,7 +281,11 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.title}
                   to={item.path}
-                  className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
+                  className={`block text-base font-medium flex items-center ${
+                    isActiveLink(item.path)
+                      ? 'px-3 py-2 text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
+                      : 'px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {getIcon(item.icon)}
