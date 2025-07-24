@@ -8,6 +8,7 @@ export default {
         'vendorsoluce-green': '#33691E',
         'vendorsoluce-light-green': '#66BB6A',
         'vendorsoluce-pale-green': '#E8F5E8',
+        'vendorsoluce-dark-green': '#2A5618',
         'vendorsoluce-navy': '#1E3B8A',
         'vendorsoluce-teal': '#2D7D7D',
         'vendorsoluce-blue': '#3B82F6',

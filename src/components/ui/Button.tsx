@@ -22,10 +22,10 @@ const Button: React.FC<ButtonProps> = ({
   const baseClasses = 'font-medium rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
   
   const variantClasses = {
-    primary: 'bg-vendorsoluce-green text-white hover:bg-vendorsoluce-green/90 focus:ring-vendorsoluce-green/50',
-    secondary: 'bg-white text-vendorsoluce-green hover:bg-gray-50 focus:ring-vendorsoluce-green/30 border border-white',
-    outline: 'bg-transparent border border-vendorsoluce-green text-vendorsoluce-green hover:bg-vendorsoluce-green/10 focus:ring-vendorsoluce-green/30',
-    ghost: 'bg-transparent text-vendorsoluce-green hover:bg-vendorsoluce-green/10 focus:ring-vendorsoluce-green/30',
+    primary: 'bg-vendorsoluce-green text-white hover:bg-vendorsoluce-dark-green focus:ring-vendorsoluce-green/50',
+    secondary: 'bg-white text-vendorsoluce-green hover:bg-gray-100 focus:ring-vendorsoluce-green/30 border border-white',
+    outline: 'bg-transparent border border-vendorsoluce-green text-vendorsoluce-green hover:bg-vendorsoluce-pale-green focus:ring-vendorsoluce-green/30',
+    ghost: 'bg-transparent text-vendorsoluce-green hover:bg-vendorsoluce-pale-green focus:ring-vendorsoluce-green/30',
   };
   
   const sizeClasses = {
