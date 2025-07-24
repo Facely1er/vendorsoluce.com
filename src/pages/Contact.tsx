@@ -436,7 +436,7 @@ const Contact: React.FC = () => {
                 variant="outline" 
                 size="lg" 
                 className="bg-white text-vendorsoluce-navy hover:bg-gray-100"
-                onClick={() => window.location.href = '/assessment'}
+                onClick={() => window.location.href = '/supply-chain-assessment'}
               >
                 Try for Free
               </Button>

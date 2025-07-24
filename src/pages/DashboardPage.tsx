@@ -45,28 +45,28 @@ const DashboardPage: React.FC = () => {
       title: 'Add Vendor',
       description: 'Add a new vendor to your risk portfolio',
       icon: <Plus className="h-6 w-6" />,
-      href: '/vendors',
+      href: '/vendor-risk-dashboard',
       color: 'bg-blue-500'
     },
     {
       title: 'Run Assessment',
       description: 'Start a new supply chain risk assessment',
       icon: <FileCheck className="h-6 w-6" />,
-      href: '/assessment',
+      href: '/supply-chain-assessment',
       color: 'bg-green-500'
     },
     {
       title: 'Analyze SBOM',
       description: 'Upload and analyze software components',
       icon: <FileJson className="h-6 w-6" />,
-      href: '/sbom-analysis',
+      href: '/sbom-analyzer',
       color: 'bg-purple-500'
     },
     {
       title: 'View Reports',
       description: 'Generate compliance and risk reports',
       icon: <BarChart3 className="h-6 w-6" />,
-      href: '/vendors',
+      href: '/vendor-risk-dashboard',
       color: 'bg-orange-500'
     }
   ];

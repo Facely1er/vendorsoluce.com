@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-medium mb-4">{t('navigation.assessment')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/assessment" className="text-gray-400 hover:text-white transition flex items-center">
+                <Link to="/supply-chain-assessment" className="text-gray-400 hover:text-white transition flex items-center">
                   <FileCheck className="h-4 w-4 mr-2" />
                   {t('navigation.assessment')}
                 </Link>
@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/vendor-risk" className="text-gray-400 hover:text-white transition flex items-center">
+                <Link to="/vendor-risk-dashboard" className="text-gray-400 hover:text-white transition flex items-center">
                   <BarChart3 className="h-4 w-4 mr-2" />
                   {t('navigation.vendorRisk')}
                 </Link>

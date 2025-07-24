@@ -29,9 +29,9 @@ const Navbar: React.FC = () => {
   ];
 
   const solutionItems: MenuItem[] = [
-    { title: t('navigation.assessment'), path: '/assessment' },
+    { title: t('navigation.assessment'), path: '/supply-chain-assessment' },
     { title: t('navigation.sbom'), path: '/sbom-analyzer' },
-    { title: t('navigation.vendorRisk'), path: '/vendor-risk' },
+    { title: t('navigation.vendorRisk'), path: '/vendor-risk-dashboard' },
   ];
 
   const resourceItems: MenuItem[] = [

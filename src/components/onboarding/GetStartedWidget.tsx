@@ -50,7 +50,7 @@ const GetStartedWidget: React.FC<GetStartedWidgetProps> = ({
       title: 'Run Supply Chain Assessment',
       description: 'Evaluate your organization\'s supply chain security posture.',
       icon: <FileCheck className="h-6 w-6" />,
-      href: '/assessment',
+      href: '/supply-chain-assessment',
       completed: assessmentCount > 0,
       completedText: `${assessmentCount} assessments completed`
     },

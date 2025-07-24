@@ -38,7 +38,7 @@ const HowItWorks: React.FC = () => {
         t('howItWorks.steps.assess.features.recommendations')
       ],
       ctaText: t('howItWorks.steps.assess.cta'),
-      ctaLink: '/assessment'
+      ctaLink: '/supply-chain-assessment'
     },
     {
       id: 2,
@@ -52,7 +52,7 @@ const HowItWorks: React.FC = () => {
         t('howItWorks.steps.vendors.features.reporting')
       ],
       ctaText: t('howItWorks.steps.vendors.cta'),
-      ctaLink: '/vendor-risk'
+      ctaLink: '/vendor-risk-dashboard'
     },
     {
       id: 3,
@@ -118,7 +118,7 @@ const HowItWorks: React.FC = () => {
           {t('howItWorks.subtitle')}
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Link to="/assessment">
+          <Link to="/supply-chain-assessment">
             <Button variant="primary" size="lg">
               <PlayCircle className="h-5 w-5 mr-2" />
               {t('howItWorks.hero.tryNow')}
@@ -391,7 +391,7 @@ const HowItWorks: React.FC = () => {
         </div>
         
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Link to="/signup">
+          <Link to="/supply-chain-assessment">
             <Button variant="primary" size="lg">
               {t('howItWorks.getStarted.cta.signup')}
             </Button>

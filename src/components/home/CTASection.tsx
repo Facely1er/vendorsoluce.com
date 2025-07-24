@@ -16,7 +16,7 @@ const CTASection: React.FC = () => {
           {t('home.cta.description')}
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Link to="/assessment">
+          <Link to="/supply-chain-assessment">
             <Button variant="primary" size="lg" className="w-full sm:w-auto">
               {t('home.hero.cta1')}
             </Button>

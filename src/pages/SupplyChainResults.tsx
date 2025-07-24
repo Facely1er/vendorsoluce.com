@@ -143,11 +143,24 @@ const SupplyChainResults = () => {
       </div>
 
       <div className="mt-8 flex justify-end">
+        {completedAssessment && (
+          <Link to={`/supply-chain-recommendations/${completedAssessment.id}`}>
         <button
           className="px-4 py-2 bg-vendorsoluce-navy text-white rounded hover:bg-vendorsoluce-navy/90 transition-colors"
         >
           View Detailed Recommendations
         </button>
+          </Link>
+        )}
+        {!completedAssessment && (
+          <Link to="/supply-chain-recommendations/demo">
+            <button
+              className="px-4 py-2 bg-vendorsoluce-navy text-white rounded hover:bg-vendorsoluce-navy/90 transition-colors"
+            >
+              View Detailed Recommendations
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );

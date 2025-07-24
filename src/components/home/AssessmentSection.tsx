@@ -37,7 +37,7 @@ const AssessmentSection: React.FC = () => {
       icon: 'FileJson'
     },
     {
-      id: 'vendor-risk',
+      id: 'vendor-risk-dashboard',
       title: t('assessment.vendor.title'),
       description: t('assessment.vendor.description'),
       frameworks: ['NIST SP 800-161', 'ISO 31000'],

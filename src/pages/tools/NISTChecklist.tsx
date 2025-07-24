@@ -267,6 +267,7 @@ const NISTChecklist: React.FC = () => {
                   </div>
                   
                   <Link to="/assessment">
+                  <Link to="/supply-chain-assessment">
                     <Button variant="outline" className="w-full">
                       {t('quickTools.nistChecklist.fullAssessment')}
                     </Button>
