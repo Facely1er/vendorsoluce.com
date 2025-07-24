@@ -35,8 +35,8 @@ function App() {
   return (
     <I18nProvider>
       <ThemeProvider>
-        <AuthProvider>
-          <Router>
+        <Router>
+          <AuthProvider>
             <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
               <Navbar />
               <main className="flex-1">
@@ -111,8 +111,8 @@ function App() {
               </main>
               <Footer />
             </div>
-          </Router>
-        </AuthProvider>
+          </AuthProvider>
+        </Router>
       </ThemeProvider>
     </I18nProvider>
   );
