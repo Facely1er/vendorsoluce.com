@@ -166,7 +166,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onComplete }) => {
           </div>
           
           <div className="grid grid-cols-1 gap-4">
-            <Link to="/assessment" className="block">
+            <Link to="/supply-chain-assessment" className="block">
               <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:border-vendorsoluce-green transition-colors cursor-pointer">
                 <div className="flex items-center">
                   <FileCheck className="h-8 w-8 text-vendorsoluce-green mr-4" />
@@ -181,7 +181,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onComplete }) => {
               </div>
             </Link>
             
-            <Link to="/vendor-risk" className="block">
+            <Link to="/vendor-risk-dashboard" className="block">
               <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 hover:border-vendorsoluce-green transition-colors cursor-pointer">
                 <div className="flex items-center">
                   <BarChart3 className="h-8 w-8 text-vendorsoluce-green mr-4" />

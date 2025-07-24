@@ -279,7 +279,7 @@ const CustomizableDashboard: React.FC = () => {
             <Button 
               variant="outline" 
               className="justify-start"
-              onClick={() => window.location.href = '/vendor-risk'}
+              onClick={() => window.location.href = '/vendor-risk-dashboard'}
             >
               <Plus className="h-4 w-4 mr-2" />
               Add Vendor
@@ -287,7 +287,7 @@ const CustomizableDashboard: React.FC = () => {
             <Button 
               variant="outline" 
               className="justify-start"
-              onClick={() => window.location.href = '/assessment'}
+              onClick={() => window.location.href = '/supply-chain-assessment'}
             >
               <BarChart3 className="h-4 w-4 mr-2" />
               Run Assessment
