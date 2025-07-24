@@ -120,7 +120,7 @@ const Footer: React.FC = () => {
         
         <div className="mt-12 pt-8 border-t border-gray-800 text-sm text-gray-400">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p>&copy; {new Date().getFullYear()} VendorSoluce. {t('footer.copyright')}</p>
+            <p>&copy; {new Date().getFullYear()} ERMITS LLC. {t('footer.copyright')}</p>
             <div className="mt-4 md:mt-0 flex space-x-6">
               <a href="#" className="hover:text-white">
                 {t('footer.terms')}
