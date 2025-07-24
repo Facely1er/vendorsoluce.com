@@ -49,6 +49,12 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/how-it-works" className="text-gray-400 hover:text-white transition flex items-center">
+                  <Users className="h-4 w-4 mr-2" />
+                  {t('navigation.howItWorks')}
+                </Link>
+              </li>
+              <li>
                 <Link to="/sbom-analyzer" className="text-gray-400 hover:text-white transition flex items-center">
                   <FileJson className="h-4 w-4 mr-2" />
                   {t('navigation.sbom')}
