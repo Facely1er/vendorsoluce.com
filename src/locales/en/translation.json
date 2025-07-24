@@ -5,7 +5,7 @@
   "navigation": {
     "home": "Home",
     "solutions": "Solutions",
-    "home": "Home",
+    "howItWorks": "How It Works",
     "assessment": "Supply Chain Assessment",
     "sbom": "SBOM Analyzer",
     "vendorRisk": "Vendor Risk Dashboard",
@@ -858,6 +858,141 @@
       "description": "Get started with VendorSoluce today and bring NIST SP 800-161 compliance to your organization.",
       "demoButton": "Schedule a Demo",
       "tryButton": "Try for Free"
+    }
+  },
+  "howItWorks": {
+    "title": "How VendorSoluce Works",
+    "subtitle": "Discover how our comprehensive supply chain risk management platform helps you assess, monitor, and mitigate third-party risks with NIST SP 800-161 alignment.",
+    "hero": {
+      "tryNow": "Try It Now",
+      "scheduleDemo": "Schedule Demo"
+    },
+    "process": {
+      "title": "Our 4-Step Process",
+      "description": "From assessment to continuous monitoring, VendorSoluce guides you through comprehensive supply chain risk management.",
+      "stepTitle": "Step"
+    },
+    "steps": {
+      "assess": {
+        "title": "Assess Your Supply Chain",
+        "description": "Start with a comprehensive NIST SP 800-161 aligned assessment to evaluate your organization's current supply chain security posture across six key domains.",
+        "features": {
+          "nist": "NIST SP 800-161 aligned framework",
+          "questions": "24 expert-crafted assessment questions",
+          "scoring": "Automated risk scoring and prioritization",
+          "recommendations": "Actionable improvement recommendations"
+        },
+        "cta": "Start Assessment"
+      },
+      "vendors": {
+        "title": "Manage Vendor Risks",
+        "description": "Build and maintain a comprehensive vendor risk portfolio with automated assessments, continuous monitoring, and compliance tracking.",
+        "features": {
+          "assessment": "Vendor security questionnaires and evaluations",
+          "monitoring": "Continuous risk monitoring and alerts",
+          "scoring": "Risk scoring methodology based on NIST controls",
+          "reporting": "Compliance status tracking and reporting"
+        },
+        "cta": "Explore Vendor Management"
+      },
+      "sbom": {
+        "title": "Analyze Software Components",
+        "description": "Upload and analyze Software Bill of Materials (SBOM) files to identify vulnerabilities, license compliance issues, and component risks.",
+        "features": {
+          "formats": "Support for SPDX and CycloneDX formats",
+          "vulnerability": "Comprehensive vulnerability scanning",
+          "license": "License compliance verification",
+          "compliance": "Federal compliance reporting"
+        },
+        "cta": "Analyze SBOM"
+      },
+      "monitor": {
+        "title": "Monitor & Report",
+        "description": "Maintain oversight of your supply chain security with real-time dashboards, automated alerts, and comprehensive compliance reporting.",
+        "features": {
+          "dashboard": "Real-time risk dashboards and metrics",
+          "alerts": "Automated risk threshold alerts",
+          "trends": "Risk trend analysis and forecasting",
+          "reports": "Executive and compliance reporting"
+        },
+        "cta": "View Dashboard"
+      }
+    },
+    "benefits": {
+      "title": "Why Organizations Choose VendorSoluce",
+      "description": "Our platform delivers measurable improvements in security posture, operational efficiency, and compliance readiness.",
+      "compliance": {
+        "title": "NIST SP 800-161 Compliance",
+        "description": "Built specifically for federal requirements with pre-configured controls and assessment templates."
+      },
+      "efficiency": {
+        "title": "Operational Efficiency",
+        "description": "Automate manual processes and reduce time spent on vendor assessments by up to 75%."
+      },
+      "insights": {
+        "title": "Actionable Insights",
+        "description": "Get clear, prioritized recommendations based on your assessment results and industry best practices."
+      },
+      "automation": {
+        "title": "Workflow Automation",
+        "description": "Streamline vendor onboarding, assessment scheduling, and risk monitoring with intelligent automation."
+      }
+    },
+    "quickTools": {
+      "title": "Quick Access Tools",
+      "description": "Get immediate insights with our rapid assessment tools designed for busy security professionals.",
+      "riskCalculator": {
+        "title": "Vendor Risk Calculator",
+        "description": "Quickly assess vendor risk levels based on key security and compliance factors.",
+        "cta": "Calculate Risk"
+      },
+      "sbomScan": {
+        "title": "SBOM Quick Scan",
+        "description": "Upload and analyze SBOM files in minutes to identify vulnerabilities and compliance issues.",
+        "cta": "Scan SBOM"
+      },
+      "nistChecklist": {
+        "title": "NIST 800-161 Checklist",
+        "description": "Verify your compliance with NIST SP 800-161 supply chain risk management requirements.",
+        "cta": "Check Compliance"
+      }
+    },
+    "integration": {
+      "title": "Seamless Integration",
+      "description": "VendorSoluce integrates with your existing tools and workflows to enhance your current security stack.",
+      "features": {
+        "api": "RESTful API",
+        "apiDesc": "Complete API access for custom integrations",
+        "export": "Data Export",
+        "exportDesc": "Export to CSV, JSON, PDF formats",
+        "alerts": "Real-time Alerts",
+        "alertsDesc": "Webhook notifications for risk changes",
+        "templates": "Ready Templates",
+        "templatesDesc": "Pre-built assessment and compliance templates"
+      },
+      "cta": "View Integration Options"
+    },
+    "getStarted": {
+      "title": "Ready to Get Started?",
+      "description": "Join hundreds of organizations already using VendorSoluce to manage their supply chain risks and meet federal compliance requirements.",
+      "steps": {
+        "step1": {
+          "title": "Sign Up Free",
+          "description": "Create your account and access all features with our 14-day free trial."
+        },
+        "step2": {
+          "title": "Run Your First Assessment",
+          "description": "Complete a supply chain assessment or add your first vendor in minutes."
+        },
+        "step3": {
+          "title": "Monitor & Improve",
+          "description": "Use our dashboards and reports to continuously improve your security posture."
+        }
+      },
+      "cta": {
+        "signup": "Start Free Trial",
+        "resources": "Download Resources"
+      }
     }
   }
 }

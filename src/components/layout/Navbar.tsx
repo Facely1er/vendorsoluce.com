@@ -20,6 +20,7 @@ const Navbar: React.FC = () => {
 
   const primaryNav: MenuItem[] = [
     { title: t('navigation.home'), path: '/', icon: 'Home' },
+    { title: t('navigation.howItWorks'), path: '/how-it-works', icon: 'Layers' },
     { title: t('navigation.solutions'), path: '#', icon: 'Layers' },
     { title: t('navigation.pricing'), path: '/pricing', icon: 'DollarSign' },
     { title: t('navigation.resources'), path: '#', icon: 'BookOpen' },

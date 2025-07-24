@@ -5,6 +5,7 @@
   "navigation": {
     "home": "Accueil",
     "solutions": "Solutions",
+    "howItWorks": "Comment Ça Marche",
     "assessment": "Évaluation de la Chaîne d'Approvisionnement",
     "sbom": "Analyseur SBOM",
     "vendorRisk": "Tableau de Bord des Risques Fournisseurs",
@@ -857,6 +858,141 @@
       "description": "Commencez avec VendorSoluce dès aujourd'hui et apportez la conformité NIST SP 800-161 à votre organisation.",
       "demoButton": "Planifier une Démo",
       "tryButton": "Essayer Gratuitement"
+    }
+  },
+  "howItWorks": {
+    "title": "Comment VendorSoluce Fonctionne",
+    "subtitle": "Découvrez comment notre plateforme complète de gestion des risques de la chaîne d'approvisionnement vous aide à évaluer, surveiller et atténuer les risques tiers avec l'alignement NIST SP 800-161.",
+    "hero": {
+      "tryNow": "Essayer Maintenant",
+      "scheduleDemo": "Planifier une Démo"
+    },
+    "process": {
+      "title": "Notre Processus en 4 Étapes",
+      "description": "De l'évaluation à la surveillance continue, VendorSoluce vous guide à travers une gestion complète des risques de la chaîne d'approvisionnement.",
+      "stepTitle": "Étape"
+    },
+    "steps": {
+      "assess": {
+        "title": "Évaluez Votre Chaîne d'Approvisionnement",
+        "description": "Commencez par une évaluation complète alignée sur NIST SP 800-161 pour évaluer la posture de sécurité actuelle de votre chaîne d'approvisionnement dans six domaines clés.",
+        "features": {
+          "nist": "Cadre aligné sur NIST SP 800-161",
+          "questions": "24 questions d'évaluation conçues par des experts",
+          "scoring": "Notation automatisée des risques et priorisation",
+          "recommendations": "Recommandations d'amélioration exploitables"
+        },
+        "cta": "Commencer l'Évaluation"
+      },
+      "vendors": {
+        "title": "Gérer les Risques Fournisseurs",
+        "description": "Construisez et maintenez un portefeuille complet de risques fournisseurs avec des évaluations automatisées, une surveillance continue et un suivi de conformité.",
+        "features": {
+          "assessment": "Questionnaires et évaluations de sécurité des fournisseurs",
+          "monitoring": "Surveillance continue des risques et alertes",
+          "scoring": "Méthodologie de notation des risques basée sur les contrôles NIST",
+          "reporting": "Suivi de l'état de conformité et rapports"
+        },
+        "cta": "Explorer la Gestion des Fournisseurs"
+      },
+      "sbom": {
+        "title": "Analyser les Composants Logiciels",
+        "description": "Téléchargez et analysez les fichiers de Liste des Matériaux Logiciels (SBOM) pour identifier les vulnérabilités, les problèmes de conformité des licences et les risques des composants.",
+        "features": {
+          "formats": "Support des formats SPDX et CycloneDX",
+          "vulnerability": "Analyse complète des vulnérabilités",
+          "license": "Vérification de la conformité des licences",
+          "compliance": "Rapports de conformité fédérale"
+        },
+        "cta": "Analyser SBOM"
+      },
+      "monitor": {
+        "title": "Surveiller et Rapporter",
+        "description": "Maintenez la surveillance de votre sécurité de chaîne d'approvisionnement avec des tableaux de bord en temps réel, des alertes automatisées et des rapports de conformité complets.",
+        "features": {
+          "dashboard": "Tableaux de bord et métriques de risque en temps réel",
+          "alerts": "Alertes automatisées de seuil de risque",
+          "trends": "Analyse des tendances de risque et prévisions",
+          "reports": "Rapports exécutifs et de conformité"
+        },
+        "cta": "Voir le Tableau de Bord"
+      }
+    },
+    "benefits": {
+      "title": "Pourquoi les Organisations Choisissent VendorSoluce",
+      "description": "Notre plateforme offre des améliorations mesurables en matière de posture de sécurité, d'efficacité opérationnelle et de préparation à la conformité.",
+      "compliance": {
+        "title": "Conformité NIST SP 800-161",
+        "description": "Conçu spécifiquement pour les exigences fédérales avec des contrôles préconfigurés et des modèles d'évaluation."
+      },
+      "efficiency": {
+        "title": "Efficacité Opérationnelle",
+        "description": "Automatisez les processus manuels et réduisez le temps consacré aux évaluations des fournisseurs jusqu'à 75%."
+      },
+      "insights": {
+        "title": "Informations Exploitables",
+        "description": "Obtenez des recommandations claires et priorisées basées sur vos résultats d'évaluation et les meilleures pratiques de l'industrie."
+      },
+      "automation": {
+        "title": "Automatisation des Flux de Travail",
+        "description": "Rationalisez l'intégration des fournisseurs, la planification des évaluations et la surveillance des risques avec une automatisation intelligente."
+      }
+    },
+    "quickTools": {
+      "title": "Outils d'Accès Rapide",
+      "description": "Obtenez des informations immédiates avec nos outils d'évaluation rapide conçus pour les professionnels de la sécurité occupés.",
+      "riskCalculator": {
+        "title": "Calculateur de Risque Fournisseur",
+        "description": "Évaluez rapidement les niveaux de risque des fournisseurs en fonction des facteurs clés de sécurité et de conformité.",
+        "cta": "Calculer le Risque"
+      },
+      "sbomScan": {
+        "title": "Analyse Rapide SBOM",
+        "description": "Téléchargez et analysez les fichiers SBOM en quelques minutes pour identifier les vulnérabilités et les problèmes de conformité.",
+        "cta": "Scanner SBOM"
+      },
+      "nistChecklist": {
+        "title": "Liste de Contrôle NIST 800-161",
+        "description": "Vérifiez votre conformité aux exigences de gestion des risques de la chaîne d'approvisionnement NIST SP 800-161.",
+        "cta": "Vérifier la Conformité"
+      }
+    },
+    "integration": {
+      "title": "Intégration Transparente",
+      "description": "VendorSoluce s'intègre à vos outils et flux de travail existants pour améliorer votre pile de sécurité actuelle.",
+      "features": {
+        "api": "API RESTful",
+        "apiDesc": "Accès API complet pour les intégrations personnalisées",
+        "export": "Exportation de Données",
+        "exportDesc": "Exportation vers les formats CSV, JSON, PDF",
+        "alerts": "Alertes en Temps Réel",
+        "alertsDesc": "Notifications webhook pour les changements de risque",
+        "templates": "Modèles Prêts",
+        "templatesDesc": "Modèles d'évaluation et de conformité préconstruits"
+      },
+      "cta": "Voir les Options d'Intégration"
+    },
+    "getStarted": {
+      "title": "Prêt à Commencer ?",
+      "description": "Rejoignez des centaines d'organisations qui utilisent déjà VendorSoluce pour gérer leurs risques de chaîne d'approvisionnement et répondre aux exigences de conformité fédérale.",
+      "steps": {
+        "step1": {
+          "title": "Inscription Gratuite",
+          "description": "Créez votre compte et accédez à toutes les fonctionnalités avec notre essai gratuit de 14 jours."
+        },
+        "step2": {
+          "title": "Exécutez Votre Première Évaluation",
+          "description": "Complétez une évaluation de chaîne d'approvisionnement ou ajoutez votre premier fournisseur en quelques minutes."
+        },
+        "step3": {
+          "title": "Surveiller et Améliorer",
+          "description": "Utilisez nos tableaux de bord et rapports pour améliorer continuellement votre posture de sécurité."
+        }
+      },
+      "cta": {
+        "signup": "Commencer l'Essai Gratuit",
+        "resources": "Télécharger les Ressources"
+      }
     }
   }
 }

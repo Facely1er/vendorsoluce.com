@@ -26,6 +26,7 @@ import SupplyChainRecommendations from './pages/SupplyChainRecommendations';
 import NISTChecklist from './pages/tools/NISTChecklist';
 import SBOMQuickScan from './pages/tools/SBOMQuickScan';
 import VendorRiskCalculator from './pages/tools/VendorRiskCalculator';
+import HowItWorks from './pages/HowItWorks';
 import AppTour from './components/onboarding/AppTour';
 import { Analytics } from "@vercel/analytics/react"
 
@@ -91,6 +92,7 @@ function AppRoutes() {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<HomePage />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignInPage />} />
         <Route path="/about" element={<About />} />
@@ -107,7 +109,6 @@ function AppRoutes() {
         <Route path="/supply-chain-results" element={<SupplyChainResults />} />
         <Route path="/supply-chain-recommendations" element={<SupplyChainRecommendations />} />
         <Route path="/sbom-analyzer" element={<SBOMAnalyzer />} />
-        <Route path="/sbom-analysis" element={<SBOMAnalyzer />} />
         <Route path="/vendor-risk" element={<VendorRiskDashboard />} />
         
         {/* Quick Tools */}
