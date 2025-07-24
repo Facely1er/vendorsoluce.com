@@ -43,7 +43,7 @@ const VendorRiskCalculator: React.FC = () => {
       description: t('quickTools.riskCalculator.factors.criticality.description'),
       weight: 3,
       value: 1,
-      icon: <Briefcase className="h-5 w-5 text-supply-chain-teal" />
+      icon: <Briefcase className="h-5 w-5 text-vendorsoluce-teal" />
     },
     {
       id: 'security_controls',
@@ -51,7 +51,7 @@ const VendorRiskCalculator: React.FC = () => {
       description: t('quickTools.riskCalculator.factors.securityControls.description'),
       weight: 3,
       value: 1,
-      icon: <Shield className="h-5 w-5 text-trust-blue" />
+      icon: <Shield className="h-5 w-5 text-vendorsoluce-blue" />
     },
     {
       id: 'compliance',
@@ -59,7 +59,7 @@ const VendorRiskCalculator: React.FC = () => {
       description: t('quickTools.riskCalculator.factors.compliance.description'),
       weight: 2,
       value: 1,
-      icon: <Building className="h-5 w-5 text-vendortal-navy" />
+      icon: <Building className="h-5 w-5 text-vendorsoluce-navy" />
     },
     {
       id: 'system_exposure',
@@ -67,7 +67,7 @@ const VendorRiskCalculator: React.FC = () => {
       description: t('quickTools.riskCalculator.factors.systemExposure.description'),
       weight: 3,
       value: 1,
-      icon: <Server className="h-5 w-5 text-supply-chain-teal" />
+      icon: <Server className="h-5 w-5 text-vendorsoluce-teal" />
     }
   ]);
 
@@ -151,7 +151,7 @@ const VendorRiskCalculator: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-6">
-        <Link to="/" className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue transition-colors mb-4">
+        <Link to="/" className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue transition-colors mb-4">
           <ArrowLeft className="mr-2 h-4 w-4" />
           {t('navigation.home')}
         </Link>
@@ -209,7 +209,7 @@ const VendorRiskCalculator: React.FC = () => {
                           key={value}
                           className={`flex-1 py-2 rounded-md transition ${
                             factor.value === value 
-                              ? 'bg-vendortal-navy text-white'
+                              ? 'bg-vendorsoluce-navy text-white'
                               : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600'
                           }`}
                           onClick={() => handleRiskFactorChange(factor.id, value)}
@@ -276,7 +276,7 @@ const VendorRiskCalculator: React.FC = () => {
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-start">
-                    <div className="bg-gray-100 dark:bg-gray-800 w-6 h-6 rounded-full flex items-center justify-center text-vendortal-navy dark:text-trust-blue mr-3 mt-0.5 flex-shrink-0">
+                    <div className="bg-gray-100 dark:bg-gray-800 w-6 h-6 rounded-full flex items-center justify-center text-vendorsoluce-navy dark:text-vendorsoluce-blue mr-3 mt-0.5 flex-shrink-0">
                       1
                     </div>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">
@@ -284,7 +284,7 @@ const VendorRiskCalculator: React.FC = () => {
                     </p>
                   </div>
                   <div className="flex items-start">
-                    <div className="bg-gray-100 dark:bg-gray-800 w-6 h-6 rounded-full flex items-center justify-center text-vendortal-navy dark:text-trust-blue mr-3 mt-0.5 flex-shrink-0">
+                    <div className="bg-gray-100 dark:bg-gray-800 w-6 h-6 rounded-full flex items-center justify-center text-vendorsoluce-navy dark:text-vendorsoluce-blue mr-3 mt-0.5 flex-shrink-0">
                       2
                     </div>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">
@@ -292,7 +292,7 @@ const VendorRiskCalculator: React.FC = () => {
                     </p>
                   </div>
                   <div className="flex items-start">
-                    <div className="bg-gray-100 dark:bg-gray-800 w-6 h-6 rounded-full flex items-center justify-center text-vendortal-navy dark:text-trust-blue mr-3 mt-0.5 flex-shrink-0">
+                    <div className="bg-gray-100 dark:bg-gray-800 w-6 h-6 rounded-full flex items-center justify-center text-vendorsoluce-navy dark:text-vendorsoluce-blue mr-3 mt-0.5 flex-shrink-0">
                       3
                     </div>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">

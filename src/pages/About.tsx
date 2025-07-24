@@ -28,6 +28,7 @@ const About: React.FC = () => {
           </div>
           
           <div className="bg-gradient-to-r from-vendortal-navy to-supply-chain-teal p-8 rounded-lg text-white">
+          <div className="bg-gradient-to-r from-vendorsoluce-navy to-vendorsoluce-teal p-8 rounded-lg text-white">
             <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
             <p className="text-gray-100 mb-6">
               To secure the digital supply chain by making enterprise-grade security assessments accessible to all organizations and aligning them with federal compliance requirements.
@@ -45,8 +46,8 @@ const About: React.FC = () => {
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Values</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <Card className="p-6 text-center">
-            <div className="mx-auto w-12 h-12 bg-vendortal-navy/10 dark:bg-vendortal-navy/30 rounded-full flex items-center justify-center mb-4">
-              <Shield className="h-6 w-6 text-vendortal-navy dark:text-trust-blue" />
+            <div className="mx-auto w-12 h-12 bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 rounded-full flex items-center justify-center mb-4">
+              <Shield className="h-6 w-6 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
             </div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Security First</h3>
             <p className="text-gray-600 dark:text-gray-300">
@@ -55,8 +56,8 @@ const About: React.FC = () => {
           </Card>
           
           <Card className="p-6 text-center">
-            <div className="mx-auto w-12 h-12 bg-vendortal-navy/10 dark:bg-vendortal-navy/30 rounded-full flex items-center justify-center mb-4">
-              <Award className="h-6 w-6 text-vendortal-navy dark:text-trust-blue" />
+            <div className="mx-auto w-12 h-12 bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 rounded-full flex items-center justify-center mb-4">
+              <Award className="h-6 w-6 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
             </div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Excellence</h3>
             <p className="text-gray-600 dark:text-gray-300">
@@ -65,8 +66,8 @@ const About: React.FC = () => {
           </Card>
           
           <Card className="p-6 text-center">
-            <div className="mx-auto w-12 h-12 bg-vendortal-navy/10 dark:bg-vendortal-navy/30 rounded-full flex items-center justify-center mb-4">
-              <UserCheck className="h-6 w-6 text-vendortal-navy dark:text-trust-blue" />
+            <div className="mx-auto w-12 h-12 bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 rounded-full flex items-center justify-center mb-4">
+              <UserCheck className="h-6 w-6 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
             </div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Integrity</h3>
             <p className="text-gray-600 dark:text-gray-300">
@@ -81,8 +82,8 @@ const About: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="flex">
             <div className="flex-shrink-0 mt-1">
-              <div className="h-10 w-10 rounded-full bg-vendortal-navy/10 dark:bg-vendortal-navy/30 flex items-center justify-center">
-                <FileDigit className="h-5 w-5 text-vendortal-navy dark:text-trust-blue" />
+              <div className="h-10 w-10 rounded-full bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 flex items-center justify-center">
+                <FileDigit className="h-5 w-5 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
               </div>
             </div>
             <div className="ml-4">
@@ -95,8 +96,8 @@ const About: React.FC = () => {
           
           <div className="flex">
             <div className="flex-shrink-0 mt-1">
-              <div className="h-10 w-10 rounded-full bg-vendortal-navy/10 dark:bg-vendortal-navy/30 flex items-center justify-center">
-                <Building className="h-5 w-5 text-vendortal-navy dark:text-trust-blue" />
+              <div className="h-10 w-10 rounded-full bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 flex items-center justify-center">
+                <Building className="h-5 w-5 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
               </div>
             </div>
             <div className="ml-4">
@@ -109,8 +110,8 @@ const About: React.FC = () => {
           
           <div className="flex">
             <div className="flex-shrink-0 mt-1">
-              <div className="h-10 w-10 rounded-full bg-vendortal-navy/10 dark:bg-vendortal-navy/30 flex items-center justify-center">
-                <Shield className="h-5 w-5 text-vendortal-navy dark:text-trust-blue" />
+              <div className="h-10 w-10 rounded-full bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 flex items-center justify-center">
+                <Shield className="h-5 w-5 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
               </div>
             </div>
             <div className="ml-4">
@@ -123,8 +124,8 @@ const About: React.FC = () => {
           
           <div className="flex">
             <div className="flex-shrink-0 mt-1">
-              <div className="h-10 w-10 rounded-full bg-vendortal-navy/10 dark:bg-vendortal-navy/30 flex items-center justify-center">
-                <Network className="h-5 w-5 text-vendortal-navy dark:text-trust-blue" />
+              <div className="h-10 w-10 rounded-full bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 flex items-center justify-center">
+                <Network className="h-5 w-5 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
               </div>
             </div>
             <div className="ml-4">

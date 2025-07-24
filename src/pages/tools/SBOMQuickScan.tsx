@@ -151,7 +151,7 @@ const SBOMQuickScan: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-6">
-        <Link to="/" className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue transition-colors mb-4">
+        <Link to="/" className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue transition-colors mb-4">
           <ArrowLeft className="mr-2 h-4 w-4" />
           {t('navigation.home')}
         </Link>
@@ -199,7 +199,7 @@ const SBOMQuickScan: React.FC = () => {
           {isLoading ? (
             <Card className="h-64 flex justify-center items-center">
               <div className="text-center">
-                <div className="spinner-border mb-3 h-8 w-8 border-b-2 border-t-2 border-supply-chain-teal rounded-full animate-spin"></div>
+                <div className="spinner-border mb-3 h-8 w-8 border-b-2 border-t-2 border-vendorsoluce-teal rounded-full animate-spin"></div>
                 <p className="text-gray-600 dark:text-gray-300">{t('sbom.upload.analyzing')}</p>
               </div>
             </Card>
@@ -237,7 +237,7 @@ const SBOMQuickScan: React.FC = () => {
                 </div>
                 
                 <Link to="/sbom-analyzer">
-                  <button className="w-full bg-supply-chain-teal hover:bg-supply-chain-teal/90 text-white py-2 rounded-md transition">
+                  <button className="w-full bg-vendorsoluce-teal hover:bg-vendorsoluce-teal/90 text-white py-2 rounded-md transition">
                     {t('quickTools.sbomScan.fullAnalysis')}
                   </button>
                 </Link>

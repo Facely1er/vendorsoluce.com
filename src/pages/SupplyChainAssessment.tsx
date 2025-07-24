@@ -420,8 +420,8 @@ const SupplyChainAssessment = () => {
 
       <Card className="border-vendortal-navy dark:border-trust-blue border-l-4">
         <CardHeader className="text-center pb-0">
-          <div className="mx-auto w-16 h-16 bg-vendortal-navy/10 dark:bg-vendortal-navy/30 rounded-full flex items-center justify-center mb-4">
-            <Shield className="h-8 w-8 text-vendortal-navy dark:text-trust-blue" />
+          <div className="mx-auto w-16 h-16 bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 rounded-full flex items-center justify-center mb-4">
+            <Shield className="h-8 w-8 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
           </div>
           <CardTitle className="text-3xl font-bold text-gray-900 dark:text-white">
             {t('assessment.title')}
@@ -434,8 +434,8 @@ const SupplyChainAssessment = () => {
         <CardContent className="pt-8 pb-8 px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="bg-gray-50 dark:bg-gray-800/50 p-5 rounded-lg flex flex-col items-center text-center">
-              <div className="w-12 h-12 bg-vendortal-navy/10 dark:bg-vendortal-navy/30 rounded-full flex items-center justify-center mb-3">
-                <Shield className="h-6 w-6 text-vendortal-navy dark:text-trust-blue" />
+              <div className="w-12 h-12 bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 rounded-full flex items-center justify-center mb-3">
+                <Shield className="h-6 w-6 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
               </div>
               <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">NIST Aligned</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
@@ -444,8 +444,8 @@ const SupplyChainAssessment = () => {
             </div>
 
             <div className="bg-gray-50 dark:bg-gray-800/50 p-5 rounded-lg flex flex-col items-center text-center">
-              <div className="w-12 h-12 bg-vendortal-navy/10 dark:bg-vendortal-navy/30 rounded-full flex items-center justify-center mb-3">
-                <Clipboard className="h-6 w-6 text-vendortal-navy dark:text-trust-blue" />
+              <div className="w-12 h-12 bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 rounded-full flex items-center justify-center mb-3">
+                <Clipboard className="h-6 w-6 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
               </div>
               <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">Comprehensive</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
@@ -454,8 +454,8 @@ const SupplyChainAssessment = () => {
             </div>
 
             <div className="bg-gray-50 dark:bg-gray-800/50 p-5 rounded-lg flex flex-col items-center text-center">
-              <div className="w-12 h-12 bg-vendortal-navy/10 dark:bg-vendortal-navy/30 rounded-full flex items-center justify-center mb-3">
-                <FileText className="h-6 w-6 text-vendortal-navy dark:text-trust-blue" />
+              <div className="w-12 h-12 bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 rounded-full flex items-center justify-center mb-3">
+                <FileText className="h-6 w-6 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
               </div>
               <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">Actionable</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">

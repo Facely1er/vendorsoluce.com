@@ -145,7 +145,7 @@ const ThreatIntelligenceFeed: React.FC<ThreatIntelligenceFeedProps> = ({ vendorI
       <CardHeader>
         <div className="flex justify-between items-center">
           <CardTitle className="flex items-center">
-            <Shield className="h-5 w-5 mr-2 text-supply-chain-teal" />
+            <Shield className="h-5 w-5 mr-2 text-vendorsoluce-teal" />
             Threat Intelligence Feed
           </CardTitle>
           <div className="flex space-x-2">
@@ -184,7 +184,7 @@ const ThreatIntelligenceFeed: React.FC<ThreatIntelligenceFeedProps> = ({ vendorI
             filteredThreats.map((threat) => (
               <div
                 key={threat.id}
-                className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:border-supply-chain-teal dark:hover:border-supply-chain-teal transition-colors"
+                className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:border-vendorsoluce-teal dark:hover:border-vendorsoluce-teal transition-colors"
               >
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex items-center space-x-2">

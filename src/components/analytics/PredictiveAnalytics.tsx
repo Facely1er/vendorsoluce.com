@@ -170,8 +170,8 @@ const PredictiveAnalytics: React.FC = () => {
             <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
           </div>
           <div className="flex items-center justify-center mt-6">
-            <Brain className="h-8 w-8 text-trust-blue animate-pulse" />
-            <span className="ml-2 text-trust-blue">Analyzing patterns...</span>
+            <Brain className="h-8 w-8 text-vendorsoluce-blue animate-pulse" />
+            <span className="ml-2 text-vendorsoluce-blue">Analyzing patterns...</span>
           </div>
         </CardContent>
       </Card>
@@ -182,7 +182,7 @@ const PredictiveAnalytics: React.FC = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
-          <Brain className="h-6 w-6 mr-2 text-trust-blue" />
+          <Brain className="h-6 w-6 mr-2 text-vendorsoluce-blue" />
           Predictive Analytics
         </h2>
         <div className="flex space-x-2">

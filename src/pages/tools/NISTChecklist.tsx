@@ -127,7 +127,7 @@ const NISTChecklist: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-6">
-        <Link to="/" className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue transition-colors mb-4">
+        <Link to="/" className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue transition-colors mb-4">
           <ArrowLeft className="mr-2 h-4 w-4" />
           {t('navigation.home')}
         </Link>
@@ -162,7 +162,7 @@ const NISTChecklist: React.FC = () => {
                           id={item.id}
                           checked={item.checked}
                           onChange={() => toggleCheck(item.id)}
-                          className="h-5 w-5 rounded border-gray-300 text-vendortal-navy focus:ring-vendortal-navy mr-3 mt-0.5"
+                          className="h-5 w-5 rounded border-gray-300 text-vendorsoluce-navy focus:ring-vendorsoluce-navy mr-3 mt-0.5"
                         />
                       </div>
                       <div className="flex-1">
@@ -222,7 +222,7 @@ const NISTChecklist: React.FC = () => {
                     </div>
                     <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
                       <div 
-                        className="bg-vendortal-navy h-2.5 rounded-full" 
+                        className="bg-vendorsoluce-navy h-2.5 rounded-full" 
                         style={{ width: `${compliancePercentage}%` }}
                       ></div>
                     </div>

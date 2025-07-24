@@ -38,15 +38,15 @@ const HeroSection: React.FC = () => {
               <h3 className="text-xl font-semibold mb-4">{t('home.benefits.title')}</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
-                  <ShieldCheck className="h-6 w-6 text-trust-blue mr-3 flex-shrink-0 mt-0.5" />
+                  <ShieldCheck className="h-6 w-6 text-vendorsoluce-blue mr-3 flex-shrink-0 mt-0.5" />
                   <span>{t('home.benefits.item1')}</span>
                 </li>
                 <li className="flex items-start">
-                  <FileJson className="h-6 w-6 text-trust-blue mr-3 flex-shrink-0 mt-0.5" />
+                  <FileJson className="h-6 w-6 text-vendorsoluce-blue mr-3 flex-shrink-0 mt-0.5" />
                   <span>{t('home.benefits.item2')}</span>
                 </li>
                 <li className="flex items-start">
-                  <TrendingUp className="h-6 w-6 text-trust-blue mr-3 flex-shrink-0 mt-0.5" />
+                  <TrendingUp className="h-6 w-6 text-vendorsoluce-blue mr-3 flex-shrink-0 mt-0.5" />
                   <span>{t('home.benefits.item3')}</span>
                 </li>
               </ul>

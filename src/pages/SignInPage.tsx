@@ -78,7 +78,7 @@ const SignInPage: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-12">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-4 w-12 h-12 bg-vendorsoluce-green rounded-full flex items-center justify-center">
+          <div className="mx-auto mb-4 w-12 h-12 bg-vendorsoluce-navy rounded-full flex items-center justify-center">
             <Shield className="h-6 w-6 text-white" />
           </div>
           <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -113,7 +113,7 @@ const SignInPage: React.FC = () => {
                     type="text"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-vendorsoluce-green"
+                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-vendorsoluce-navy"
                     placeholder="John Doe"
                     required={isRegister}
                   />
@@ -147,7 +147,7 @@ const SignInPage: React.FC = () => {
                   Password
                 </label>
                 {!isRegister && (
-                  <a href="#" className="text-sm text-vendorsoluce-green hover:underline">
+                  <a href="#" className="text-sm text-vendorsoluce-navy dark:text-vendorsoluce-blue hover:underline">
                     Forgot password?
                   </a>
                 )}
@@ -182,7 +182,7 @@ const SignInPage: React.FC = () => {
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-vendorsoluce-green"
+                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-vendorsoluce-navy"
                     placeholder="********"
                     required
                   />
@@ -212,7 +212,7 @@ const SignInPage: React.FC = () => {
               {isRegister ? 'Already have an account?' : "Don't have an account?"}{' '}
               <button
                 onClick={toggleAuthMode}
-                className="text-vendorsoluce-green hover:underline font-medium"
+                className="text-vendorsoluce-navy dark:text-vendorsoluce-blue hover:underline font-medium"
               >
                 {isRegister ? 'Sign in' : 'Sign up'}
               </button>

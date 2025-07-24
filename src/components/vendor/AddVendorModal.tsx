@@ -74,7 +74,7 @@ const AddVendorModal: React.FC<AddVendorModalProps> = ({ onClose, onSuccess }) =
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendortal-navy focus:border-transparent"
+                className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendorsoluce-navy focus:border-transparent"
                 required
               />
             </div>
@@ -88,7 +88,7 @@ const AddVendorModal: React.FC<AddVendorModalProps> = ({ onClose, onSuccess }) =
                 name="industry"
                 value={formData.industry}
                 onChange={handleChange}
-                className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendortal-navy focus:border-transparent"
+                className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendorsoluce-navy focus:border-transparent"
               >
                 <option value="">Select Industry</option>
                 <option value="Technology">Technology</option>
@@ -113,7 +113,7 @@ const AddVendorModal: React.FC<AddVendorModalProps> = ({ onClose, onSuccess }) =
                 value={formData.website}
                 onChange={handleChange}
                 placeholder="https://example.com"
-                className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendortal-navy focus:border-transparent"
+                className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendorsoluce-navy focus:border-transparent"
               />
             </div>
 
@@ -128,7 +128,7 @@ const AddVendorModal: React.FC<AddVendorModalProps> = ({ onClose, onSuccess }) =
                 value={formData.contact_email}
                 onChange={handleChange}
                 placeholder="contact@vendor.com"
-                className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendortal-navy focus:border-transparent"
+                className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendorsoluce-navy focus:border-transparent"
               />
             </div>
 
@@ -143,7 +143,7 @@ const AddVendorModal: React.FC<AddVendorModalProps> = ({ onClose, onSuccess }) =
                 onChange={handleChange}
                 rows={3}
                 placeholder="Additional notes about this vendor..."
-                className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendortal-navy focus:border-transparent"
+                className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendorsoluce-navy focus:border-transparent"
               />
             </div>
           </div>

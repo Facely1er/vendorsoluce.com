@@ -200,7 +200,7 @@ const WorkflowAutomation: React.FC = () => {
               onClick={() => setActiveTab(id as any)}
               className={`flex items-center py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === id
-                  ? 'border-supply-chain-teal text-supply-chain-teal'
+                  ? 'border-vendorsoluce-teal text-vendorsoluce-teal'
                   : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300'
               }`}
             >
