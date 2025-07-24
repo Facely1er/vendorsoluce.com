@@ -63,11 +63,11 @@ const AssessmentSection: React.FC = () => {
 
   const getCardVariant = (id: string): 'assessment' | 'sbom' | 'vendor' => {
     switch (id) {
-      case 'supply-chain-risk':
+      case 'supply-chain-assessment':
         return 'assessment';
       case 'sbom-analyzer':
         return 'sbom';
-      case 'vendor-risk':
+      case 'vendor-risk-dashboard':
         return 'vendor';
       default:
         return 'assessment';
@@ -87,7 +87,8 @@ const AssessmentSection: React.FC = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {assessments.map((assessment) => (
-          <Card key={assessment.id} variant={getCardVariant(assessment.id)} className="flex flex-col">
+          <Link key={assessment.id} to={`/${assessment.id}`} className="block h-full">
+            <Card variant={getCardVariant(assessment.id)} className="flex flex-col h-full hover:shadow-lg transition-shadow cursor-pointer">
             <div className="p-6 flex-1">
               <div className="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center mb-4">
                 {getIcon(assessment.icon)}
@@ -116,17 +117,16 @@ const AssessmentSection: React.FC = () => {
             </div>
             
             <div className="p-6 border-t border-gray-100 dark:border-gray-700">
-              <Link to={`/${assessment.id}`}>
                 <Button 
-                  variant={assessment.id === 'supply-chain-risk' ? 'primary' : 
+                  variant={assessment.id === 'supply-chain-assessment' ? 'primary' : 
                            assessment.id === 'sbom-analyzer' ? 'secondary' : 'outline'}
                   className="w-full"
                 >
                   {t('home.assessments.startAssessment')}
                 </Button>
-              </Link>
             </div>
-          </Card>
+            </Card>
+          </Link>
         ))}
       </div>
     </section>
