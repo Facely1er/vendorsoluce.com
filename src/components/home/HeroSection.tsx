@@ -22,11 +22,11 @@ const HeroSection: React.FC = () => {
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-100 mb-8 max-w-4xl mx-auto">
-            {t('home.hero.subtitle')}
+            Turn Supply Chain Risks Into Competitive Advantages
           </p>
           
           <p className="text-lg text-gray-100 mb-10 max-w-3xl mx-auto">
-            {t('home.hero.description')}
+            Stop worrying about vendor vulnerabilities and start leveraging supply chain transparency as a strategic asset. VendorSoluce transforms complex compliance requirements into streamlined workflows that protect your organization while accelerating business growth.
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
@@ -58,14 +58,14 @@ const HeroSection: React.FC = () => {
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
               <h3 className="text-xl font-semibold mb-4">NIST Aligned</h3>
               <p className="text-gray-100 text-sm">
-                Built specifically for NIST SP 800-161 compliance with pre-configured assessment templates and automated reporting.
+                Built specifically for NIST SP 800-161 compliance with pre-configured assessment templates and automated reporting capabilities.
               </p>
             </div>
             
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
               <h3 className="text-xl font-semibold mb-4">Federal Ready</h3>
               <p className="text-gray-100 text-sm">
-                FedRAMP authorized platform trusted by federal agencies and contractors for supply chain security management.
+                FedRAMP authorized platform trusted by federal agencies and contractors for comprehensive supply chain security management and compliance.
               </p>
             </div>
           </div>
