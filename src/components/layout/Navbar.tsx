@@ -12,20 +12,17 @@ import {
   Mail, 
   BookOpen, 
   Code, 
-  Globe, 
-  Sun, 
-  Moon,
   ChevronDown 
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { useI18n } from '../../context/I18nContext';
+import { useTranslation } from 'react-i18next';
 import ThemeToggle from './ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
 import UserMenu from './UserMenu';
 
 const Navbar: React.FC = () => {
   const { isAuthenticated } = useAuth();
-  const { t } = useI18n();
+  const { t } = useTranslation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
@@ -43,35 +40,35 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navItems = [
-    { name: t('nav.home'), path: '/', icon: Home },
+    { name: 'Home', path: '/', icon: Home },
     { 
-      name: t('nav.solutions'), 
+      name: 'Solutions', 
       path: '/how-it-works', 
       icon: BookOpen, 
       dropdown: [
-        { name: t('navigation.assessment'), path: '/supply-chain-assessment' },
-        { name: t('navigation.sbom'), path: '/sbom-analyzer' },
-        { name: t('navigation.vendorRisk'), path: '/vendor-risk-dashboard' },
-        { name: t('navigation.vendorAssessments'), path: '/vendor-assessments' },
+        { name: 'Supply Chain Assessment', path: '/supply-chain-assessment' },
+        { name: 'SBOM Analysis', path: '/sbom-analyzer' },
+        { name: 'Vendor Risk', path: '/vendor-risk-dashboard' },
+        { name: 'Vendor Assessments', path: '/vendor-assessments' },
       ]
     },
-    { name: t('nav.pricing'), path: '/pricing', icon: DollarSign },
+    { name: 'Pricing', path: '/pricing', icon: DollarSign },
     { 
-      name: t('nav.resources'), 
+      name: 'Resources', 
       path: '/templates', 
       icon: FileText, 
       dropdown: [
-        { name: t('navigation.templates'), path: '/templates' },
-        { name: t('navigation.apiDocs'), path: '/api-docs' },
-        { name: t('navigation.integration'), path: '/integration-guides' },
+        { name: 'Templates', path: '/templates' },
+        { name: 'API Docs', path: '/api-docs' },
+        { name: 'Integration', path: '/integration-guides' },
       ]
     },
-    { name: t('nav.about'), path: '/about', icon: Info },
-    { name: t('nav.contact'), path: '/contact', icon: Mail },
+    { name: 'About', path: '/about', icon: Info },
+    { name: 'Contact', path: '/contact', icon: Mail },
   ];
 
   return (
-    <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40">
+    <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40" data-tour="main-nav">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo and Branding */}
@@ -127,16 +124,20 @@ const Navbar: React.FC = () => {
                 className="text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue px-3 py-2 rounded-md text-sm font-medium flex items-center"
               >
                 <LayoutDashboard className="h-4 w-4 mr-1" />
-                {t('nav.dashboard')}
+                Dashboard
               </Link>
             )}
           </nav>
 
           {/* Right Section (Theme, Language, User Menu) */}
           <div className="hidden md:flex items-center space-x-4">
-            <ThemeToggle />
+            <div data-tour="theme-toggle">
+              <ThemeToggle />
+            </div>
             <LanguageSwitcher />
-            <UserMenu />
+            <div data-tour="user-menu">
+              <UserMenu />
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -199,7 +200,7 @@ const Navbar: React.FC = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <LayoutDashboard className="h-5 w-5 mr-2 inline-block" />
-                {t('nav.dashboard')}
+                Dashboard
               </Link>
             )}
             <div className="flex items-center justify-between px-3 py-2">
