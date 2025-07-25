@@ -1,421 +1,314 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
+import { Button } from '../ui/Button';
 import { 
   Shield, 
-  Menu, 
-  X, 
-  ChevronDown,
-  FileCheck,
-  BarChart3,
-  FileJson,
-  Users,
-  FileText,
-  Code,
+  Building2,
+  Users, 
+  ArrowRight,
+  Lock, 
+  ChevronRight,
   Target,
-  Calculator,
-  CheckSquare,
-  Crown
+  CheckCircle,
+  AlertTriangle
 } from 'lucide-react';
-import { Button } from '../ui/Button';
-import ThemeToggle from './ThemeToggle';
-import LanguageSwitcher from './LanguageSwitcher';
-import UserMenu from './UserMenu';
-import { useAuth } from '../../context/AuthContext';
-import AppTour from '../onboarding/AppTour';
+import { Link } from 'react-router-dom';
 
-const Navbar: React.FC = () => {
+interface Stakeholder {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  challenges: string[];
+  solutions: {
+    title: string;
+    description: string;
+    benefits: string[];
+    cta: string;
+    link: string;
+  }[];
+}
+
+const ValuePropositionSection: React.FC = () => {
   const { t } = useTranslation();
-  const location = useLocation();
-  const { isAuthenticated, profile, markTourComplete, isTourRunning } = useAuth();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [activeStakeholder, setActiveStakeholder] = useState<string>('security');
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setOpenDropdown(null);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  const primaryNav = [
-    { 
-      label: t('navigation.home'), 
-      href: '/',
-      icon: Shield
-    },
-    { 
-      label: t('navigation.howItWorks'), 
-      href: '/how-it-works'
-    },
+  const stakeholders: Stakeholder[] = [
     {
-      label: t('navigation.solutions'),
-      dropdown: [
+      id: 'security',
+      title: t('home.stakeholders.security.title'),
+      description: t('home.stakeholders.security.description'),
+      icon: <Shield className="h-8 w-8 text-vendorsoluce-green" />,
+      challenges: [
+        t('home.stakeholders.security.challenges.visibility'),
+        t('home.stakeholders.security.challenges.manual'),
+        t('home.stakeholders.security.challenges.tracking'),
+        t('home.stakeholders.security.challenges.compliance')
+      ],
+      solutions: [
         {
-          label: t('navigation.solutions.supplyChainAssessment'),
-          href: '/supply-chain-assessment',
-          icon: FileCheck,
-          description: t('navigation.solutions.supplyChainAssessmentDesc')
+          title: t('home.stakeholders.security.solutions.sbom.title'),
+          description: t('home.stakeholders.security.solutions.sbom.description'),
+          benefits: [
+            t('home.stakeholders.security.solutions.sbom.benefits.vulnerabilities'),
+            t('home.stakeholders.security.solutions.sbom.benefits.licenses'),
+            t('home.stakeholders.security.solutions.sbom.benefits.reports'),
+            t('home.stakeholders.security.solutions.sbom.benefits.monitoring')
+          ],
+          cta: t('home.stakeholders.security.solutions.sbom.cta'),
+          link: '/sbom-analyzer'
         },
         {
-          label: t('navigation.solutions.sbomAnalyzer'),
-          href: '/sbom-analyzer',
-          icon: FileJson,
-          description: t('navigation.solutions.sbomAnalyzerDesc')
-        },
-        {
-          label: t('navigation.solutions.vendorRiskDashboard'),
-          href: '/vendor-risk-dashboard',
-          icon: BarChart3,
-          description: t('navigation.solutions.vendorRiskDashboardDesc')
-        },
-        {
-          label: t('navigation.solutions.vendorAssessments'),
-          href: '/vendor-assessments',
-          icon: Users,
-          description: t('navigation.solutions.vendorAssessmentsDesc'),
-          badge: 'Premium'
+          title: t('home.stakeholders.security.solutions.assessments.title'),
+          description: t('home.stakeholders.security.solutions.assessments.description'),
+          benefits: [
+            t('home.stakeholders.security.solutions.assessments.benefits.cmmc'),
+            t('home.stakeholders.security.solutions.assessments.benefits.nist'),
+            t('home.stakeholders.security.solutions.assessments.benefits.scoring'),
+            t('home.stakeholders.security.solutions.assessments.benefits.portal'),
+            t('home.stakeholders.security.solutions.assessments.benefits.tracking')
+          ],
+          cta: t('home.stakeholders.security.solutions.assessments.cta'),
+          link: '/vendor-assessments'
         }
       ]
     },
-    { 
-      label: t('navigation.pricing'), 
-      href: '/pricing'
+    {
+      id: 'procurement',
+      title: t('home.stakeholders.procurement.title'),
+      description: t('home.stakeholders.procurement.description'),
+      icon: <Building2 className="h-8 w-8 text-vendorsoluce-navy" />,
+      challenges: [
+        t('home.stakeholders.procurement.challenges.balancing'),
+        t('home.stakeholders.procurement.challenges.lifecycle'),
+        t('home.stakeholders.procurement.challenges.contracts'),
+        t('home.stakeholders.procurement.challenges.diligence')
+      ],
+      solutions: [
+        {
+          title: t('home.stakeholders.procurement.solutions.calculator.title'),
+          description: t('home.stakeholders.procurement.solutions.calculator.description'),
+          benefits: [
+            t('home.stakeholders.procurement.solutions.calculator.benefits.criteria'),
+            t('home.stakeholders.procurement.solutions.calculator.benefits.scoring'),
+            t('home.stakeholders.procurement.solutions.calculator.benefits.comparison'),
+            t('home.stakeholders.procurement.solutions.calculator.benefits.integration')
+          ],
+          cta: t('home.stakeholders.procurement.solutions.calculator.cta'),
+          link: '/tools/vendor-risk-calculator'
+        },
+        {
+          title: t('home.stakeholders.procurement.solutions.dashboard.title'),
+          description: t('home.stakeholders.procurement.solutions.dashboard.description'),
+          benefits: [
+            t('home.stakeholders.procurement.solutions.dashboard.benefits.monitoring'),
+            t('home.stakeholders.procurement.solutions.dashboard.benefits.tracking'),
+            t('home.stakeholders.procurement.solutions.dashboard.benefits.alerts'),
+            t('home.stakeholders.procurement.solutions.dashboard.benefits.reporting')
+          ],
+          cta: t('home.stakeholders.procurement.solutions.dashboard.cta'),
+          link: '/vendor-risk-dashboard'
+        }
+      ]
     },
     {
-      label: t('navigation.resources'),
-      dropdown: [
+      id: 'compliance',
+      title: t('home.stakeholders.compliance.title'),
+      description: t('home.stakeholders.compliance.description'),
+      icon: <Lock className="h-8 w-8 text-vendorsoluce-teal" />,
+      challenges: [
+        t('home.stakeholders.compliance.challenges.evolving'),
+        t('home.stakeholders.compliance.challenges.documenting'),
+        t('home.stakeholders.compliance.challenges.obligations'),
+        t('home.stakeholders.compliance.challenges.frameworks')
+      ],
+      solutions: [
         {
-          label: t('navigation.resources.templates'),
-          href: '/templates',
-          icon: FileText,
-          description: t('navigation.resources.templatesDesc')
+          title: t('home.stakeholders.compliance.solutions.nist.title'),
+          description: t('home.stakeholders.compliance.solutions.nist.description'),
+          benefits: [
+            t('home.stakeholders.compliance.solutions.nist.benefits.templates'),
+            t('home.stakeholders.compliance.solutions.nist.benefits.scoring'),
+            t('home.stakeholders.compliance.solutions.nist.benefits.documentation'),
+            t('home.stakeholders.compliance.solutions.nist.benefits.analysis')
+          ],
+          cta: t('home.stakeholders.compliance.solutions.nist.cta'),
+          link: '/supply-chain-assessment'
         },
         {
-          label: t('navigation.resources.apiDocs'),
-          href: '/api-docs',
-          icon: Code,
-          description: t('navigation.resources.apiDocsDesc')
+          title: t('home.stakeholders.compliance.solutions.templates.title'),
+          description: t('home.stakeholders.compliance.solutions.templates.description'),
+          benefits: [
+            t('home.stakeholders.compliance.solutions.templates.benefits.federal'),
+            t('home.stakeholders.compliance.solutions.templates.benefits.industry'),
+            t('home.stakeholders.compliance.solutions.templates.benefits.matrices'),
+            t('home.stakeholders.compliance.solutions.templates.benefits.executive')
+          ],
+          cta: t('home.stakeholders.compliance.solutions.templates.cta'),
+          link: '/templates'
+        }
+      ]
+    },
+    {
+      id: 'executives',
+      title: t('home.stakeholders.executives.title'),
+      description: t('home.stakeholders.executives.description'),
+      icon: <Users className="h-8 w-8 text-vendorsoluce-blue" />,
+      challenges: [
+        t('home.stakeholders.executives.challenges.understanding'),
+        t('home.stakeholders.executives.challenges.investment'),
+        t('home.stakeholders.executives.challenges.demonstrating'),
+        t('home.stakeholders.executives.challenges.balancing')
+      ],
+      solutions: [
+        {
+          title: t('home.stakeholders.executives.solutions.dashboards.title'),
+          description: t('home.stakeholders.executives.solutions.dashboards.description'),
+          benefits: [
+            t('home.stakeholders.executives.solutions.dashboards.benefits.metrics'),
+            t('home.stakeholders.executives.solutions.dashboards.benefits.portfolio'),
+            t('home.stakeholders.executives.solutions.dashboards.benefits.compliance'),
+            t('home.stakeholders.executives.solutions.dashboards.benefits.recommendations')
+          ],
+          cta: t('home.stakeholders.executives.solutions.dashboards.cta'),
+          link: '/dashboard'
         },
         {
-          label: t('navigation.resources.integrationGuides'),
-          href: '/integration-guides',
-          icon: Code,
-          description: t('navigation.resources.integrationGuidesDesc')
-        },
-        {
-          label: t('navigation.resources.quickTools'),
-          href: '#',
-          icon: Target,
-          description: t('navigation.resources.quickToolsDesc'),
-          submenu: [
-            {
-              label: t('navigation.resources.quickTools.riskCalculator'),
-              href: '/tools/vendor-risk-calculator',
-              icon: Calculator
-            },
-            {
-              label: t('navigation.resources.quickTools.sbomScan'),
-              href: '/tools/sbom-quick-scan',
-              icon: FileJson
-            },
-            {
-              label: t('navigation.resources.quickTools.nistChecklist'),
-              href: '/tools/nist-checklist',
-              icon: CheckSquare
-            }
-          ]
+          title: t('home.stakeholders.executives.solutions.reporting.title'),
+          description: t('home.stakeholders.executives.solutions.reporting.description'),
+          benefits: [
+            t('home.stakeholders.executives.solutions.reporting.benefits.automated'),
+            t('home.stakeholders.executives.solutions.reporting.benefits.customizable'),
+            t('home.stakeholders.executives.solutions.reporting.benefits.analysis'),
+            t('home.stakeholders.executives.solutions.reporting.benefits.presentations')
+          ],
+          cta: t('home.stakeholders.executives.solutions.reporting.cta'),
+          link: '/vendor-risk-dashboard'
         }
       ]
     }
   ];
 
-  const isCurrentPath = (href: string) => {
-    if (href === '/') {
-      return location.pathname === '/';
-    }
-    return location.pathname.startsWith(href);
-  };
-
-  const toggleDropdown = (label: string) => {
-    setOpenDropdown(openDropdown === label ? null : label);
-  };
-
-  const handleTourComplete = () => {
-    markTourComplete();
-  };
-
-  const handleTourSkip = () => {
-    markTourComplete();
-  };
+  const activeStakeholderData = stakeholders.find(s => s.id === activeStakeholder) || stakeholders[0];
 
   return (
-    <>
-      <nav className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-800 sticky top-0 z-40" data-tour="main-nav">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo */}
-            <Link to="/" className="flex items-center space-x-2">
-              <Shield className="h-8 w-8 text-vendorsoluce-green" />
-              <span className="text-xl font-bold text-gray-900 dark:text-white">
-                VendorSoluce
-              </span>
-            </Link>
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            {t('home.stakeholders.title')}
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            {t('home.stakeholders.description')}
+          </p>
+        </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-1" ref={dropdownRef}>
-              {primaryNav.map((item) => (
-                <div key={item.label} className="relative">
-                  {item.dropdown ? (
-                    <div>
-                      <button
-                        onClick={() => toggleDropdown(item.label)}
-                        className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                          isCurrentPath(item.href || '#')
-                            ? 'text-vendorsoluce-green bg-vendorsoluce-pale-green'
-                            : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green hover:bg-gray-100 dark:hover:bg-gray-800'
-                        }`}
-                      >
-                        {item.label}
-                        <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${
-                          openDropdown === item.label ? 'rotate-180' : ''
-                        }`} />
-                      </button>
+        {/* Stakeholder Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {stakeholders.map((stakeholder) => (
+            <button
+              key={stakeholder.id}
+              onClick={() => setActiveStakeholder(stakeholder.id)}
+              className={`flex items-center px-4 py-2 rounded-lg font-medium transition-all ${
+                activeStakeholder === stakeholder.id
+                  ? 'bg-vendorsoluce-green text-white shadow-md'
+                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
+              }`}
+            >
+              {stakeholder.icon}
+              <span className="ml-2">{stakeholder.title}</span>
+            </button>
+          ))}
+        </div>
 
-                      {openDropdown === item.label && (
-                        <div className="absolute top-full left-0 mt-1 w-80 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
-                          {item.dropdown.map((dropdownItem) => (
-                            <div key={dropdownItem.label}>
-                              {dropdownItem.submenu ? (
-                                <div className="px-4 py-2">
-                                  <div className="flex items-center text-sm font-medium text-gray-900 dark:text-white mb-2">
-                                    <dropdownItem.icon className="h-4 w-4 mr-2 text-vendorsoluce-green" />
-                                    {dropdownItem.label}
-                                  </div>
-                                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
-                                    {dropdownItem.description}
-                                  </p>
-                                  <div className="space-y-1">
-                                    {dropdownItem.submenu.map((subItem) => (
-                                      <Link
-                                        key={subItem.label}
-                                        to={subItem.href}
-                                        className="flex items-center px-2 py-1 text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
-                                        onClick={() => setOpenDropdown(null)}
-                                      >
-                                        <subItem.icon className="h-3 w-3 mr-2" />
-                                        {subItem.label}
-                                      </Link>
-                                    ))}
-                                  </div>
-                                </div>
-                              ) : (
-                                <Link
-                                  to={dropdownItem.href}
-                                  className="flex items-start px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
-                                  onClick={() => setOpenDropdown(null)}
-                                >
-                                  <dropdownItem.icon className="h-5 w-5 mr-3 mt-0.5 text-vendorsoluce-green flex-shrink-0" />
-                                  <div className="flex-1">
-                                    <div className="flex items-center">
-                                      <span className="text-sm font-medium text-gray-900 dark:text-white">
-                                        {dropdownItem.label}
-                                      </span>
-                                      {dropdownItem.badge && (
-                                        <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-yellow-400 to-orange-500 text-white">
-                                          <Crown className="h-3 w-3 mr-1" />
-                                          {dropdownItem.badge}
-                                        </span>
-                                      )}
-                                    </div>
-                                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                                      {dropdownItem.description}
-                                    </p>
-                                  </div>
-                                </Link>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <Link
-                      to={item.href!}
-                      className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                        isCurrentPath(item.href!)
-                          ? 'text-vendorsoluce-green bg-vendorsoluce-pale-green'
-                          : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green hover:bg-gray-100 dark:hover:bg-gray-800'
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Right Side Items */}
-            <div className="hidden lg:flex items-center space-x-3">
-              <LanguageSwitcher variant="icon" />
-              <div data-tour="theme-toggle">
-                <ThemeToggle />
-              </div>
-              <div data-tour="user-menu">
-                {isAuthenticated ? (
-                  <UserMenu />
-                ) : (
-                  <Link to="/signin">
-                    <Button variant="primary" size="sm">
-                      {t('auth.signIn')}
-                    </Button>
-                  </Link>
-                )}
-              </div>
-            </div>
-
-            {/* Mobile menu button */}
-            <div className="lg:hidden">
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-vendorsoluce-green"
-                aria-expanded="false"
-              >
-                <span className="sr-only">Open main menu</span>
-                {isMobileMenuOpen ? (
-                  <X className="block h-6 w-6" aria-hidden="true" />
-                ) : (
-                  <Menu className="block h-6 w-6" aria-hidden="true" />
-                )}
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile menu */}
-          {isMobileMenuOpen && (
-            <div className="lg:hidden">
-              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
-                {primaryNav.map((item) => (
-                  <div key={item.label}>
-                    {item.dropdown ? (
-                      <div>
-                        <button
-                          onClick={() => toggleDropdown(item.label)}
-                          className="flex items-center justify-between w-full px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md"
-                        >
-                          {item.label}
-                          <ChevronDown className={`h-4 w-4 transition-transform ${
-                            openDropdown === item.label ? 'rotate-180' : ''
-                          }`} />
-                        </button>
-                        
-                        {openDropdown === item.label && (
-                          <div className="pl-4 mt-2 space-y-1">
-                            {item.dropdown.map((dropdownItem) => (
-                              <div key={dropdownItem.label}>
-                                {dropdownItem.submenu ? (
-                                  <div>
-                                    <div className="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                      {dropdownItem.label}
-                                    </div>
-                                    <div className="pl-4 space-y-1">
-                                      {dropdownItem.submenu.map((subItem) => (
-                                        <Link
-                                          key={subItem.label}
-                                          to={subItem.href}
-                                          className="block px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md"
-                                          onClick={() => {
-                                            setIsMobileMenuOpen(false);
-                                            setOpenDropdown(null);
-                                          }}
-                                        >
-                                          {subItem.label}
-                                        </Link>
-                                      ))}
-                                    </div>
-                                  </div>
-                                ) : (
-                                  <Link
-                                    to={dropdownItem.href}
-                                    className="flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md"
-                                    onClick={() => {
-                                      setIsMobileMenuOpen(false);
-                                      setOpenDropdown(null);
-                                    }}
-                                  >
-                                    <dropdownItem.icon className="h-4 w-4 mr-2" />
-                                    {dropdownItem.label}
-                                    {dropdownItem.badge && (
-                                      <span className="ml-auto inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gradient-to-r from-yellow-400 to-orange-500 text-white">
-                                        <Crown className="h-3 w-3 mr-1" />
-                                        {dropdownItem.badge}
-                                      </span>
-                                    )}
-                                  </Link>
-                                )}
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <Link
-                        to={item.href!}
-                        className={`block px-3 py-2 text-base font-medium rounded-md transition-colors ${
-                          isCurrentPath(item.href!)
-                            ? 'text-vendorsoluce-green bg-vendorsoluce-pale-green'
-                            : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green hover:bg-gray-100 dark:hover:bg-gray-800'
-                        }`}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        {item.label}
-                      </Link>
-                    )}
-                  </div>
+        {/* Active Stakeholder Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Challenges */}
+          <Card className="lg:col-span-1">
+            <CardHeader>
+              <h3 className="flex items-center text-xl font-bold text-gray-900 dark:text-white mb-2">
+                <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
+                {t('home.stakeholders.common.challenges')}
+              </h3>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">{activeStakeholderData.description}</p>
+              <ul className="space-y-3">
+                {activeStakeholderData.challenges.map((challenge, index) => (
+                  <li key={index} className="flex items-start">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <span className="text-gray-700 dark:text-gray-300 text-sm">{challenge}</span>
+                  </li>
                 ))}
-                
-                <div className="border-t border-gray-200 dark:border-gray-800 pt-3 mt-3">
-                  <div className="flex items-center justify-between px-3 py-2">
-                    <LanguageSwitcher variant="buttons" />
-                    <ThemeToggle />
-                  </div>
-                  
-                  <div className="px-3 py-2">
-                    {isAuthenticated ? (
-                      <UserMenu />
-                    ) : (
-                      <Link to="/signin" onClick={() => setIsMobileMenuOpen(false)}>
-                        <Button variant="primary" size="sm" className="w-full">
-                          {t('auth.signIn')}
+              </ul>
+            </CardContent>
+          </Card>
+
+          {/* Solutions */}
+          <div className="lg:col-span-2 space-y-6">
+            {activeStakeholderData.solutions.map((solution, index) => (
+              <Card key={index} className="border-l-4 border-l-vendorsoluce-green">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                        {solution.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4">
+                        {solution.description}
+                      </p>
+                    </div>
+                    <div className="ml-4">
+                      <Link to={solution.link}>
+                        <Button variant="primary" size="sm">
+                          {solution.cta}
+                          <ArrowRight className="h-4 w-4 ml-1" />
                         </Button>
                       </Link>
-                    )}
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          )}
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {solution.benefits.map((benefit, benefitIndex) => (
+                      <div key={benefitIndex} className="flex items-start">
+                        <CheckCircle className="h-4 w-4 text-vendorsoluce-green mr-2 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-gray-700 dark:text-gray-300">{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
-      </nav>
 
-      {/* App Tour */}
-      {isAuthenticated && profile && !profile.tour_completed && (
-        <AppTour
-          isRunning={isTourRunning}
-          onComplete={handleTourComplete}
-          onSkip={handleTourSkip}
-        />
-      )}
-    </>
+        {/* Call to Action */}
+        <div className="mt-12 text-center">
+          <div className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green rounded-lg p-8 text-white">
+            <h3 className="text-2xl font-bold mb-4">{t('home.stakeholders.cta.title')}</h3>
+            <p className="text-xl text-gray-100 mb-6">
+              {t('home.stakeholders.cta.description')}
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link to="/supply-chain-assessment">
+                <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100">
+                  <Target className="h-5 w-5 mr-2" />
+                  {t('home.stakeholders.cta.startAssessment')}
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20">
+                  <Users className="h-5 w-5 mr-2" />
+                  {t('home.stakeholders.cta.scheduleDemo')}
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
-export default Navbar;
+export default ValuePropositionSection;
