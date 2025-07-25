@@ -132,7 +132,7 @@ const Navbar: React.FC = () => {
                           >
                             <div className="flex items-center justify-between">
                               <span>{solution.title}</span>
-                              {solution.title === 'Vendor Assessments' && (
+                              {solution.path === '/vendor-assessments' && (
                                 <span className="ml-2 px-2 py-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-medium rounded-full">
                                   Premium
                                 </span>
@@ -282,7 +282,7 @@ const Navbar: React.FC = () => {
                           >
                             <div className="flex items-center justify-between">
                               <span>{solution.title}</span>
-                              {solution.title === 'Vendor Assessments' && (
+                              {solution.path === '/vendor-assessments' && (
                                 <span className="ml-2 px-2 py-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-medium rounded-full">
                                   Premium
                                 </span>

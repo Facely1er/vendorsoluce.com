@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link to="/vendor-assessments" className="text-gray-400 hover:text-white transition flex items-center">
                   <Shield className="h-4 w-4 mr-2" />
-                  Vendor Assessments
+                  {t('navigation.vendorAssessments')}
                   <span className="ml-2 px-2 py-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-medium rounded-full">
                     Premium
                   </span>
