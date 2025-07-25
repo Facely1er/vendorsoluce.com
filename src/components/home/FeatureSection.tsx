@@ -1,5 +1,5 @@
  import React from 'react';
-import { Shield, FileJson, BarChart3, Zap } from 'lucide-react';
+import { Shield, ShieldCheck,FileJson, BarChart3, Zap } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const FeatureSection: React.FC = () => {
