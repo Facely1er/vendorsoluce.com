@@ -15,8 +15,8 @@
   },
   "home": {
     "hero": {
-      "title": "Sécurisez votre chaîne d'approvisionnement. Accélérez votre entreprise.",
-      "subtitle": "Transformez le risque fournisseur en avantage concurrentiel",
+      "title": "Transformez le risque fournisseur en avantage concurrentiel",
+      "subtitle": "Sécurisez votre chaîne d'approvisionnement. Accélérez votre entreprise.",
       "description": "Arrêtez de vous inquiéter des vulnérabilités fournisseurs et commencez à exploiter l'intelligence de la chaîne d'approvisionnement. VendorSoluce transforme la gestion des risques fournisseurs d'un goulot d'étranglement en accélérateur d'entreprise avec des évaluations automatisées et une visibilité complète de la chaîne d'approvisionnement.",
       "cta1": "Commencer l'évaluation gratuite",
       "cta2": "Planifier une démo en direct",
@@ -260,6 +260,209 @@
     "cta": {
       "title": "Prêt à sécuriser votre chaîne d'approvisionnement ?",
       "description": "Rejoignez des milliers d'organisations utilisant notre plateforme pour gérer la conformité et réduire les risques"
+    }
+  },
+  "vendorPortal": {
+  },
+  "vendorAssessments": {
+    "title": "Évaluations de sécurité des fournisseurs",
+    "description": "Envoyez des évaluations CMMC et NIST Privacy Framework à vos fournisseurs via un portail sécurisé. Suivez les progrès, collectez des preuves et automatisez la notation de conformité.",
+    "premiumFeature": "Fonctionnalité Premium",
+    
+    "buttons": {
+      "newAssessment": "Créer une évaluation",
+      "createFirstAssessment": "Créer la première évaluation",
+      "sendAssessment": "Envoyer l'évaluation",
+      "view": "Voir",
+      "copyLink": "Copier le lien",
+      "signUpFreeTrial": "S'inscrire pour l'essai gratuit",
+      "viewPricing": "Voir la tarification"
+    },
+    
+    "features": {
+      "cmmcAssessments": {
+        "title": "Évaluations CMMC",
+        "description": "Modèles d'évaluation CMMC niveau 1 et 2 pré-construits avec notation automatisée et collecte de preuves.",
+        "feature1": "Ensembles de questions alignés DoD",
+        "feature2": "Notation de conformité automatisée",
+        "feature3": "Portail de collecte de preuves"
+      },
+      "vendorPortal": {
+        "title": "Portail Fournisseur",
+        "description": "Portail d'évaluation sécurisé pour que les fournisseurs complètent les questionnaires et téléchargent des preuves.",
+        "feature1": "Accès sécurisé avec liens uniques",
+        "feature2": "Sauvegarde et reprise des progrès",
+        "feature3": "Notifications automatisées"
+      },
+      "analytics": {
+        "title": "Analytics et Rapports",
+        "description": "Analytics avancés et rapports exécutifs pour le statut de conformité des fournisseurs.",
+        "feature1": "Analyse de tendances de conformité",
+        "feature2": "Tableaux de bord exécutifs",
+        "feature3": "Génération automatisée de rapports"
+      }
+    },
+    
+    "frameworks": {
+      "cmmcLevel1": {
+        "name": "CMMC Niveau 1",
+        "description": "Pratiques d'hygiène cybersécuritaire de base pour protéger les informations contractuelles fédérales (FCI)"
+      },
+      "cmmcLevel2": {
+        "name": "CMMC Niveau 2",
+        "description": "Pratiques intermédiaires pour protéger les informations non classifiées contrôlées (CUI)"
+      },
+      "nistPrivacy": {
+        "name": "NIST Privacy Framework",
+        "description": "Évaluation complète de gestion des risques de confidentialité"
+      },
+      "nist80053": {
+        "name": "Contrôles NIST SP 800-53",
+        "description": "Contrôles de sécurité et de confidentialité pour les systèmes d'information"
+      }
+    },
+    
+    "estimatedTime": {
+      "short": "1-2 heures",
+      "medium": "2-3 heures",
+      "long": "4-6 heures"
+    },
+    
+    "status": {
+      "pending": "En attente",
+      "sent": "Envoyé",
+      "inProgress": "En cours",
+      "completed": "Terminé",
+      "reviewed": "Examiné"
+    },
+    
+    "search": {
+      "placeholder": "Rechercher des évaluations..."
+    },
+    
+    "filters": {
+      "allStatuses": "Tous les statuts"
+    },
+    
+    "actions": {
+      "exportReport": "Exporter le rapport"
+    },
+    
+    "table": {
+      "title": "Évaluations Fournisseurs",
+      "count": "{{count}} évaluations",
+      "headers": {
+        "vendor": "Fournisseur",
+        "framework": "Cadre",
+        "status": "Statut",
+        "progress": "Progrès", 
+        "dueDate": "Date d'échéance",
+        "score": "Score",
+        "actions": "Actions"
+      }
+    },
+    
+    "emptyState": {
+      "title": "Aucune évaluation trouvée",
+      "noMatches": "Aucune évaluation ne correspond à vos filtres actuels.",
+      "noAssessments": "Commencez en créant votre première évaluation de sécurité fournisseur."
+    },
+    
+    "overview": {
+      "premiumBenefits": {
+        "title": "Fonctionnalités d'évaluation Premium",
+        "cmmcAligned": {
+          "title": "Aligné CMMC et Confidentialité",
+          "description": "Modèles d'évaluation pré-construits alignés avec les niveaux CMMC et le NIST Privacy Framework"
+        },
+        "securePortal": {
+          "title": "Portail Fournisseur Sécurisé",
+          "description": "Portail dédié pour que les fournisseurs complètent les évaluations et téléchargent des preuves en sécurité"
+        },
+        "evidenceCollection": {
+          "title": "Collecte de Preuves",
+          "description": "Collecte automatisée de preuves, validation et gestion de piste d'audit"
+        }
+      },
+      "statistics": {
+        "totalAssessments": "Évaluations Totales",
+        "inProgress": "En Cours", 
+        "completed": "Terminées",
+        "highCompliance": "Conformité Élevée"
+      },
+      "gettingStarted": {
+        "title": "Commencer",
+        "step1": {
+          "title": "Ajouter Fournisseurs",
+          "description": "Importez ou ajoutez des fournisseurs à votre portefeuille avant d'envoyer des évaluations"
+        },
+        "step2": {
+          "title": "Choisir le Cadre", 
+          "description": "Sélectionnez CMMC, NIST Privacy Framework ou modèle d'évaluation personnalisé"
+        },
+        "step3": {
+          "title": "Envoyer l'Évaluation",
+          "description": "Envoyez des liens d'évaluation sécurisés avec suivi automatisé et rappels"
+        }
+      },
+      "capabilities": {
+        "title": "Capacités d'Évaluation",
+        "evidenceCollection": "Collecte automatisée de preuves",
+        "progressTracking": "Suivi des progrès en temps réel",
+        "secureSharing": "Partage sécurisé de documents",
+        "automatedScoring": "Notation de conformité automatisée",
+        "auditTrail": "Piste d'audit et rapports",
+        "multiFramework": "Support multi-cadres"
+      }
+    },
+    
+    "assessments": {
+      "title": "Évaluations Actives",
+      "fields": {
+        "framework": "Cadre",
+        "sentDate": "Date d'Envoi",
+        "dueDate": "Date d'Échéance", 
+        "progress": "Progrès",
+        "notSent": "Non envoyé",
+        "notSet": "Non défini"
+      }
+    },
+    
+    "templates": {
+      "title": "Modèles de Cadres d'Évaluation",
+      "fields": {
+        "questions": "Questions",
+        "estimatedTime": "Temps Estimé"
+      }
+    },
+    
+    "portal": {
+      "title": "Portail d'Évaluation Fournisseur",
+      "features": {
+        "title": "Fonctionnalités du Portail Fournisseur Sécurisé",
+        "capabilities": {
+          "title": "Capacités du Portail",
+          "secureLinks": "Liens d'évaluation uniques sécurisés",
+          "progressSaving": "Sauvegarde des progrès et capacité de reprise", 
+          "encryptedUploads": "Téléchargements chiffrés de fichiers de preuves",
+          "realTimeCollaboration": "Fonctionnalités de collaboration en temps réel",
+          "mobileResponsive": "Design responsive mobile"
+        },
+        "security": {
+          "title": "Fonctionnalités de Sécurité",
+          "endToEndEncryption": "Chiffrement de bout en bout",
+          "multiFactorAuth": "Authentification multi-facteurs", 
+          "auditLogging": "Journalisation de piste d'audit",
+          "timeLimitedTokens": "Jetons d'accès à durée limitée",
+          "ipAllowlist": "Support de liste blanche IP"
+        },
+        "exampleUrl": "URL du Portail d'Exemple :"
+      }
+    },
+    
+    "upgrade": {
+      "title": "Débloquer les Fonctionnalités d'Évaluation Premium",
+      "description": "Créez un compte pour envoyer des évaluations CMMC et NIST Privacy Framework à vos fournisseurs"
     }
   },
   "buttons": {
@@ -515,142 +718,6 @@
         "title": "Fournisseurs à risque critique",
         "description": "Considérer la résiliation ou exiger des améliorations de sécurité immédiates"
       }
-    }
-  },
-  "vendorAssessments": {
-    "title": "Évaluations de sécurité des fournisseurs",
-    "description": "Envoyez des évaluations de sécurité complètes aux fournisseurs avec alignement CMMC et NIST Privacy Framework. Collectez des preuves et suivez la conformité via un portail fournisseur sécurisé.",
-    "premiumFeature": "Fonctionnalité Premium",
-    "tabs": {
-      "overview": "Aperçu",
-      "assessments": "Évaluations actives",
-      "templates": "Modèles de cadres",
-      "portal": "Portail fournisseur"
-    },
-    "buttons": {
-      "newAssessment": "Nouvelle évaluation",
-      "createFirstAssessment": "Créer la première évaluation",
-      "sendAssessment": "Envoyer évaluation",
-      "view": "Voir",
-      "copyLink": "Copier le lien",
-      "signUpFreeTrial": "S'inscrire pour l'essai gratuit",
-      "viewPricing": "Voir la tarification"
-    },
-    "overview": {
-      "premiumBenefits": {
-        "title": "Fonctionnalités d'évaluation Premium",
-        "cmmcAligned": {
-          "title": "Aligné CMMC et Confidentialité",
-          "description": "Modèles d'évaluation pré-construits alignés avec les niveaux CMMC et le NIST Privacy Framework"
-        },
-        "securePortal": {
-          "title": "Portail fournisseur sécurisé",
-          "description": "Portail dédié pour les fournisseurs pour compléter les évaluations et télécharger des preuves en sécurité"
-        },
-        "evidenceCollection": {
-          "title": "Collecte de preuves",
-          "description": "Collecte automatisée de preuves, validation et gestion de piste d'audit"
-        }
-      },
-      "statistics": {
-        "totalAssessments": "Évaluations totales",
-        "inProgress": "En cours",
-        "completed": "Terminées",
-        "highCompliance": "Conformité élevée"
-      },
-      "gettingStarted": {
-        "title": "Commencer",
-        "step1": {
-          "title": "Ajouter fournisseurs",
-          "description": "Importez ou ajoutez des fournisseurs à votre portefeuille avant d'envoyer des évaluations"
-        },
-        "step2": {
-          "title": "Choisir le cadre",
-          "description": "Sélectionnez CMMC, NIST Privacy Framework ou modèle d'évaluation personnalisé"
-        },
-        "step3": {
-          "title": "Envoyer évaluation",
-          "description": "Envoyez des liens d'évaluation sécurisés avec suivi automatisé et rappels"
-        }
-      },
-      "capabilities": {
-        "title": "Capacités d'évaluation",
-        "evidenceCollection": "Collecte automatisée de preuves",
-        "progressTracking": "Suivi des progrès en temps réel",
-        "secureSharing": "Partage sécurisé de documents",
-        "automatedScoring": "Notation de conformité automatisée",
-        "auditTrail": "Piste d'audit et rapports",
-        "multiFramework": "Support multi-cadres"
-      }
-    },
-    "assessments": {
-      "title": "Évaluations actives",
-      "status": {
-        "completed": "TERMINÉ",
-        "inProgress": "EN COURS",
-        "pending": "EN ATTENTE",
-        "overdue": "EN RETARD"
-      },
-      "fields": {
-        "framework": "Cadre",
-        "sentDate": "Date d'envoi",
-        "dueDate": "Date d'échéance",
-        "progress": "Progrès",
-        "notSent": "Non envoyé",
-        "notSet": "Non défini"
-      }
-    },
-    "templates": {
-      "title": "Modèles de cadres d'évaluation",
-      "frameworks": {
-        "cmmcLevel1": {
-          "name": "CMMC Niveau 1",
-          "description": "Pratiques d'hygiène cybersécuritaire de base"
-        },
-        "cmmcLevel2": {
-          "name": "CMMC Niveau 2",
-          "description": "Pratiques cybersécuritaires intermédiaires pour la protection CUI"
-        },
-        "nistPrivacy": {
-          "name": "NIST Privacy Framework",
-          "description": "Pratiques de gestion des risques de confidentialité"
-        },
-        "nist80053": {
-          "name": "Contrôles NIST SP 800-53",
-          "description": "Contrôles de sécurité et de confidentialité pour les systèmes d'information"
-        }
-      },
-      "fields": {
-        "questions": "Questions",
-        "estimatedTime": "Temps estimé"
-      }
-    },
-    "portal": {
-      "title": "Portail d'évaluation fournisseur",
-      "features": {
-        "title": "Fonctionnalités du portail fournisseur sécurisé",
-        "capabilities": {
-          "title": "Capacités du portail",
-          "secureLinks": "Liens d'évaluation uniques sécurisés",
-          "progressSaving": "Sauvegarde des progrès et capacité de reprise",
-          "encryptedUploads": "Téléchargements chiffrés de fichiers de preuves",
-          "realTimeCollaboration": "Fonctionnalités de collaboration en temps réel",
-          "mobileResponsive": "Design responsive mobile"
-        },
-        "security": {
-          "title": "Fonctionnalités de sécurité",
-          "endToEndEncryption": "Chiffrement de bout en bout",
-          "multiFactorAuth": "Authentification multi-facteurs",
-          "auditLogging": "Journalisation de piste d'audit",
-          "timeLimitedTokens": "Jetons d'accès à durée limitée",
-          "ipAllowlist": "Support de liste blanche IP"
-        },
-        "exampleUrl": "URL du portail d'exemple :"
-      }
-    },
-    "upgrade": {
-      "title": "Débloquer les fonctionnalités d'évaluation Premium",
-      "description": "Créez un compte pour envoyer des évaluations CMMC et NIST Privacy Framework à vos fournisseurs"
     }
   },
   "quickTools": {
@@ -1198,7 +1265,7 @@
     "home": "Accueil",
     "solutions": "Solutions",
     "pricing": "Tarification",
-    "howItWorks": "Comment ça marche",
+    "howItWorks": "Comment ça fonctionne",
     "assessment": "Évaluation",
     "sbom": "Analyse SBOM",
     "vendorRisk": "Risque Fournisseur",
