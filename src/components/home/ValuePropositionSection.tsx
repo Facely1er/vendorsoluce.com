@@ -227,10 +227,10 @@ const ValuePropositionSection: React.FC = () => {
           {/* Challenges */}
           <Card className="lg:col-span-1">
             <CardHeader>
-              <CardTitle className="flex items-center text-xl font-bold text-gray-900 dark:text-white">
+              <h3 className="flex items-center text-xl font-bold text-gray-900 dark:text-white mb-2">
                 <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
                 {t('home.stakeholders.common.challenges')}
-              </CardTitle>
+              </h3>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 dark:text-gray-300 mb-4">{activeStakeholderData.description}</p>
