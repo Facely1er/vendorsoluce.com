@@ -13,8 +13,8 @@ const HomePage: React.FC = () => {
   return (
     <main className="min-h-screen">
       <HeroSection />
-      <ValuePropositionSection />
       <AssessmentSection />
+      <ValuePropositionSection />
       <FeatureSection />
       <QuickToolsSection />
       <CTASection />
