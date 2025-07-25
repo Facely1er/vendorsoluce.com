@@ -1,628 +1,325 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card';
-import { Button } from '../components/ui/Button';
+import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
+import { Button } from '../ui/Button';
 import { 
   Shield, 
-  Send, 
-  Clock, 
-  CheckCircle, 
-  AlertTriangle,
-  Plus,
-  Eye,
-  FileText,
-  Users,
-  Star,
-  Crown,
-  ExternalLink,
-  Copy,
-  Download,
-  Settings
+  Building, 
+  Building2,
+  ShieldCheck,
+  Users, 
+  ArrowRight,
+  Lock, 
+  FileCheck, 
+  BarChart3, 
+  FileJson,
+  ChevronRight,
+  Target,
+  TrendingUp,
+  CheckCircle,
+  AlertTriangle
 } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import { useVendors } from '../hooks/useVendors';
-import CreateAssessmentModal from '../components/vendor-assessments/CreateAssessmentModal';
-import AssessmentProgressTracker from '../components/vendor-assessments/AssessmentProgressTracker';
-import DataImportExport from '../components/data/DataImportExport';
+import { Link } from 'react-router-dom';
 
-const VendorSecurityAssessments: React.FC = () => {
-  const { isAuthenticated } = useAuth();
-  const { vendors } = useVendors();
-  const [showCreateModal, setShowCreateModal] = useState(false);
-  const [activeTab, setActiveTab] = useState<'overview' | 'assessments' | 'templates' | 'portal'>('overview');
+interface Stakeholder {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  challenges: string[];
+  solutions: {
+    title: string;
+    description: string;
+    benefits: string[];
+    cta: string;
+    link: string;
+  }[];
+}
 
-  // Mock data for assessments - in real app this would come from useVendorAssessments hook
-  const assessments = [
+const ValuePropositionSection: React.FC = () => {
+  const [activeStakeholder, setActiveStakeholder] = useState<string>('security');
+
+  const stakeholders: Stakeholder[] = [
     {
-      id: 'assessment-001',
-      vendorName: 'TechCorp Solutions',
-      frameworkName: 'CMMC Level 2',
-      status: 'in_progress',
-      sentDate: '2025-01-15',
-      dueDate: '2025-02-15',
-      completedDate: null,
-      overallScore: null,
-      progress: 60
+      id: 'security',
+      title: 'Security Teams',
+      description: 'Comprehensive tools for identifying, assessing, and mitigating supply chain security risks.',
+      icon: <Shield className="h-8 w-8 text-vendorsoluce-green" />,
+      challenges: [
+        'Limited visibility into supplier security practices',
+        'Time-consuming manual assessment processes',
+        'Difficulty tracking vulnerabilities across software components',
+        'Complex compliance requirements like NIST SP 800-161'
+      ],
+      solutions: [
+        {
+          title: 'Automated SBOM Analysis',
+          description: 'Instantly analyze software components for vulnerabilities and license compliance.',
+          benefits: [
+            'Identify critical vulnerabilities in minutes',
+            'Track open source licenses automatically',
+            'Generate compliance reports for audits',
+            'Monitor component health continuously'
+          ],
+          cta: 'Analyze SBOM Now',
+          link: '/sbom-analyzer'
+        },
+        {
+          title: 'Vendor Security Assessments',
+          description: 'Send CMMC and NIST Privacy Framework assessments through secure vendor portal.',
+          benefits: [
+            'CMMC Level 1 & 2 assessment templates',
+            'CMMC Level 1 & 2 assessment templates',
+            'CMMC Level 1 & 2 assessment templates',
+            'CMMC Level 1 & 2 assessment templates',
+            'NIST Privacy Framework questionnaires',
+            'Automated scoring and risk rating',
+            'Secure evidence collection portal',
+            'Real-time progress tracking and notifications'
+          ],
+      icon: <ShieldCheck className="h-8 w-8 text-vendorsoluce-green" />,
+          link: '/vendor-assessments'
+        }
+      ]
     },
     {
-      id: 'assessment-002',
-      vendorName: 'CloudSecure Inc',
-      frameworkName: 'NIST Privacy Framework',
-      status: 'completed',
-      sentDate: '2025-01-10',
-      dueDate: '2025-02-10',
-      completedDate: '2025-01-28',
-      overallScore: 85,
-      progress: 100
+      id: 'procurement',
+      title: 'Procurement Teams',
+      description: 'Streamline vendor selection and management with risk-based decision making tools.',
+      icon: <Building2 className="h-8 w-8 text-vendorsoluce-navy" />,
+      challenges: [
+        'Balancing cost, quality, and security in vendor selection',
+        'Managing vendor relationships throughout their lifecycle',
+        'Ensuring contract terms include appropriate security clauses',
+        'Demonstrating due diligence for audit purposes'
+      ],
+      solutions: [
+        {
+          title: 'Vendor Risk Calculator',
+          description: 'Calculate preliminary risk scores to inform vendor selection decisions.',
+          benefits: [
+            'Standardized risk assessment criteria',
+            'Immediate risk scoring for new vendors',
+            'Data-driven vendor comparison',
+            'Integration with procurement workflows'
+          ],
+          cta: 'Calculate Risk',
+          link: '/tools/vendor-risk-calculator'
+        },
+        {
+          title: 'Vendor Risk Dashboard',
+          description: 'Monitor and manage your vendor portfolio with centralized risk visibility.',
+          benefits: [
+            'Real-time risk monitoring',
+            'Automated compliance tracking',
+            'Contract renewal alerts',
+            'Executive reporting dashboards'
+          ],
+          cta: 'View Dashboard',
+          link: '/vendor-risk-dashboard'
+        }
+      ]
     },
     {
-      id: 'assessment-003',
-      vendorName: 'DevTools Pro',
-      frameworkName: 'CMMC Level 1',
-      status: 'pending',
-      sentDate: null,
-      dueDate: null,
-      completedDate: null,
-      overallScore: null,
-      progress: 0
+      id: 'compliance',
+      title: 'Compliance Officers',
+      description: 'Ensure adherence to regulatory requirements with built-in compliance frameworks.',
+      icon: <Lock className="h-8 w-8 text-vendorsoluce-teal" />,
+      challenges: [
+        'Keeping up with evolving regulatory requirements',
+        'Documenting compliance efforts for audits',
+        'Ensuring vendors meet contractual obligations',
+        'Managing compliance across multiple frameworks'
+      ],
+      solutions: [
+        {
+          title: 'NIST SP 800-161 Assessment',
+          description: 'Comprehensive supply chain risk assessment aligned with federal standards.',
+          benefits: [
+            'Pre-built NIST control templates',
+            'Automated compliance scoring',
+            'Audit-ready documentation',
+            'Gap analysis and recommendations'
+          ],
+          cta: 'Start Assessment',
+          link: '/supply-chain-assessment'
+        },
+        {
+          title: 'Compliance Templates',
+          description: 'Access pre-built templates for common compliance scenarios.',
+          benefits: [
+            'Federal compliance templates',
+            'Industry-specific questionnaires',
+            'Risk assessment matrices',
+            'Executive summary templates'
+          ],
+          cta: 'Download Templates',
+          link: '/templates'
+        }
+      ]
+    },
+    {
+      id: 'executives',
+      title: 'Executive Leadership',
+      description: 'Strategic insights and reporting to make informed decisions about supply chain risks.',
+      icon: <Users className="h-8 w-8 text-vendorsoluce-blue" />,
+      challenges: [
+        'Understanding supply chain risk exposure',
+        'Making informed investment decisions',
+        'Demonstrating risk management to stakeholders',
+        'Balancing operational efficiency with security'
+      ],
+      solutions: [
+        {
+          title: 'Executive Dashboards',
+          description: 'High-level insights into your organization\'s supply chain risk posture.',
+          benefits: [
+            'Key risk metrics and trends',
+            'Vendor portfolio health overview',
+            'Compliance status summaries',
+            'Strategic risk recommendations'
+          ],
+          cta: 'View Dashboard',
+          link: '/dashboard'
+        },
+        {
+          title: 'Risk Reporting',
+          description: 'Generate executive-level reports for board meetings and stakeholder updates.',
+          benefits: [
+            'Automated report generation',
+            'Customizable metrics and KPIs',
+            'Trend analysis and forecasting',
+            'Stakeholder-ready presentations'
+          ],
+          cta: 'Generate Report',
+          link: '/vendor-risk-dashboard'
+        }
+      ]
     }
   ];
 
-  const frameworks = [
-    {
-      id: 'cmmc-level-1',
-      name: 'CMMC Level 1',
-      description: 'Basic cybersecurity hygiene practices',
-      questionCount: 17,
-      estimatedTime: '30-45 minutes',
-      icon: <Shield className="h-6 w-6 text-blue-600" />
-    },
-    {
-      id: 'cmmc-level-2',
-      name: 'CMMC Level 2',
-      description: 'Intermediate cybersecurity practices for CUI protection',
-      questionCount: 110,
-      estimatedTime: '2-3 hours',
-      icon: <Shield className="h-6 w-6 text-orange-600" />
-    },
-    {
-      id: 'nist-privacy',
-      name: 'NIST Privacy Framework',
-      description: 'Privacy risk management practices',
-      questionCount: 95,
-      estimatedTime: '1.5-2 hours',
-      icon: <Shield className="h-6 w-6 text-purple-600" />
-    },
-    {
-      id: 'nist-800-53',
-      name: 'NIST SP 800-53 Controls',
-      description: 'Security and privacy controls for information systems',
-      questionCount: 200,
-      estimatedTime: '4-6 hours',
-      icon: <Shield className="h-6 w-6 text-green-600" />
-    }
-  ];
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'completed': return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20';
-      case 'in_progress': return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20';
-      case 'overdue': return 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20';
-      default: return 'text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-900/20';
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'completed': return <CheckCircle className="h-4 w-4" />;
-      case 'in_progress': return <Clock className="h-4 w-4" />;
-      case 'overdue': return <AlertTriangle className="h-4 w-4" />;
-      default: return <Clock className="h-4 w-4" />;
-    }
-  };
+  const activeStakeholderData = stakeholders.find(s => s.id === activeStakeholder) || stakeholders[0];
 
   return (
-    <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* Premium Feature Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between">
-          <div>
-            <div className="flex items-center mb-2">
-              <Crown className="h-6 w-6 text-yellow-500 mr-2" />
-              <span className="px-3 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-sm font-medium rounded-full">
-                Premium Feature
-              </span>
-            </div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-              Vendor Security Assessments
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl">
-              Send comprehensive security assessments to vendors with CMMC and NIST Privacy Framework alignment. 
-              Collect evidence and track compliance through a secure vendor portal.
-            </p>
-          </div>
-          
-          {isAuthenticated && (
-            <div className="flex items-center space-x-2">
-              <DataImportExport
-                dataType="assessments"
-                data={assessments}
-                onImportComplete={() => {}}
-                onRefresh={() => {}}
-              />
-              <Button variant="primary" onClick={() => setShowCreateModal(true)}>
-                <Plus className="h-4 w-4 mr-2" />
-                New Assessment
-              </Button>
-            </div>
-          )}
-        </div>
-      </div>
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            Designed for Every Supply Chain Stakeholder
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            VendorSoluce addresses the unique challenges faced by different teams in your organization, 
+            providing tailored solutions that deliver measurable value to each stakeholder.
+            'Secure evidence collection portal',
+            'Real-time progress tracking and notifications'
 
-      {/* Feature Tabs */}
-      <div className="mb-6">
-        <nav className="flex space-x-8">
-          {[
-            { id: 'overview', label: 'Overview', icon: '📊' },
-            { id: 'assessments', label: 'Active Assessments', icon: '📋' },
-            { id: 'templates', label: 'Framework Templates', icon: '📄' },
-            { id: 'portal', label: 'Vendor Portal', icon: '🔗' }
-          ].map(({ id, label, icon }) => (
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+            { id: 'overview', label: 'Overview', icon: <BarChart3 className="h-4 w-4" /> },
+            { id: 'assessments', label: 'Active Assessments', icon: <ClipboardList className="h-4 w-4" /> },
+            { id: 'templates', label: 'Framework Templates', icon: <Files className="h-4 w-4" /> },
+            { id: 'portal', label: 'Vendor Portal', icon: <Globe className="h-4 w-4" /> }
+          {stakeholders.map((stakeholder) => (
             <button
-              key={id}
-              onClick={() => setActiveTab(id as any)}
-              className={`flex items-center px-3 py-2 rounded-md text-sm font-medium ${
-                activeTab === id
-                  ? 'bg-vendorsoluce-navy text-white'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+              key={stakeholder.id}
+              onClick={() => setActiveStakeholder(stakeholder.id)}
+              className={`flex items-center px-4 py-2 rounded-lg font-medium transition-all ${
+                activeStakeholder === stakeholder.id
+                  ? 'bg-vendorsoluce-green text-white shadow-md'
+                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
               }`}
             >
               <span className="mr-2">{icon}</span>
-              {label}
+              <span className="ml-2">{stakeholder.title}</span>
             </button>
           ))}
-        </nav>
-      </div>
+        </div>
 
-      {/* Overview Tab */}
-      {activeTab === 'overview' && (
-        <div className="space-y-6">
-          {/* Premium Feature Benefits */}
-          <Card className="border-l-4 border-l-yellow-500">
+        {/* Active Stakeholder Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Challenges */}
+          <Card className="lg:col-span-1">
             <CardHeader>
-              <CardTitle className="flex items-center">
-                <Star className="h-5 w-5 text-yellow-500 mr-2" />
-                Premium Assessment Features
+              <CardTitle className="flex items-center  text-gray-900 dark:text-white">
+                <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
+                Common Challenges
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center p-4">
-                  <Shield className="h-12 w-12 text-vendorsoluce-navy mx-auto mb-3" />
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">CMMC & Privacy Aligned</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Pre-built assessment templates aligned with CMMC levels and NIST Privacy Framework
-                  </p>
-                </div>
-                <div className="text-center p-4">
-                  <ExternalLink className="h-12 w-12 text-vendorsoluce-teal mx-auto mb-3" />
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">Secure Vendor Portal</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Dedicated portal for vendors to complete assessments and upload evidence securely
-                  </p>
-                </div>
-                <div className="text-center p-4">
-                  <FileText className="h-12 w-12 text-vendorsoluce-green mx-auto mb-3" />
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">Evidence Collection</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Automated evidence collection, validation, and audit trail management
-                  </p>
-                </div>
-              </div>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">{activeStakeholderData.description}</p>
+              <ul className="space-y-3">
+                {activeStakeholderData.challenges.map((challenge, index) => (
+                  <li key={index} className="flex items-start">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <span className="text-gray-700 dark:text-gray-300 text-sm">{challenge}</span>
+                  </li>
+                ))}
+              </ul>
             </CardContent>
           </Card>
 
-          {/* Assessment Statistics */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                    <Send className="h-6 w-6 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                      {assessments.length}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Total Assessments</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <div className="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
-                    <Clock className="h-6 w-6 text-orange-600 dark:text-orange-400" />
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                      {assessments.filter(a => a.status === 'in_progress').length}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">In Progress</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
-                    <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                      {assessments.filter(a => a.status === 'completed').length}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Completed</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
-                    <Star className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-2xl font-bold text-gray-900 dark:text-white">
-                      {assessments.filter(a => a.overallScore && a.overallScore >= 80).length}
-                    </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">High Compliance</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Getting Started</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <div className="w-8 h-8 bg-vendorsoluce-green/10 rounded-full flex items-center justify-center mr-3 mt-1">
-                      <span className="text-vendorsoluce-green font-bold">1</span>
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white">Add Vendors</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Import or add vendors to your portfolio before sending assessments
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="w-8 h-8 bg-vendorsoluce-green/10 rounded-full flex items-center justify-center mr-3 mt-1">
-                      <span className="text-vendorsoluce-green font-bold">2</span>
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white">Choose Framework</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Select CMMC, NIST Privacy Framework, or custom assessment template
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="w-8 h-8 bg-vendorsoluce-green/10 rounded-full flex items-center justify-center mr-3 mt-1">
-                      <span className="text-vendorsoluce-green font-bold">3</span>
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white">Send Assessment</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Send secure assessment links with automated tracking and reminders
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="mt-6">
-                  <Button variant="primary" className="w-full" onClick={() => setShowCreateModal(true)}>
-                    <Plus className="h-4 w-4 mr-2" />
-                    Create First Assessment
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Assessment Capabilities</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex items-center text-sm">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    <span className="text-gray-700 dark:text-gray-300">Automated evidence collection</span>
-                  </div>
-                  <div className="flex items-center text-sm">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    <span className="text-gray-700 dark:text-gray-300">Real-time progress tracking</span>
-                  </div>
-                  <div className="flex items-center text-sm">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    <span className="text-gray-700 dark:text-gray-300">Secure document sharing</span>
-                  </div>
-                  <div className="flex items-center text-sm">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    <span className="text-gray-700 dark:text-gray-300">Automated compliance scoring</span>
-                  </div>
-                  <div className="flex items-center text-sm">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    <span className="text-gray-700 dark:text-gray-300">Audit trail and reporting</span>
-                  </div>
-                  <div className="flex items-center text-sm">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                    <span className="text-gray-700 dark:text-gray-300">Multi-framework support</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      )}
-
-      {/* Active Assessments Tab */}
-      {activeTab === 'assessments' && (
-        <div className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Active Assessments</h2>
-            <Button variant="primary" onClick={() => setShowCreateModal(true)}>
-              <Plus className="h-4 w-4 mr-2" />
-              New Assessment
-            </Button>
-          </div>
-
-          <AssessmentProgressTracker assessments={assessments} />
-
-          <div className="space-y-4">
-            {assessments.map((assessment) => (
-              <Card key={assessment.id} className="border border-gray-200 dark:border-gray-700">
+          {/* Solutions */}
+          <div className="lg:col-span-2 space-y-6">
+            {activeStakeholderData.solutions.map((solution, index) => (
+              <Card key={index} className="border-l-4 border-l-vendorsoluce-green">
                 <CardContent className="p-6">
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
-                      <div className="flex items-center space-x-3 mb-2">
-                        <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                          {assessment.vendorName}
-                        </h3>
-                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(assessment.status)}`}>
-                          {getStatusIcon(assessment.status)}
-                          <span className="ml-1">{assessment.status.replace('_', ' ').toUpperCase()}</span>
-                        </span>
-                      </div>
-                      
-                      <p className="text-gray-600 dark:text-gray-300 mb-3">
-                        Framework: <span className="font-medium">{assessment.frameworkName}</span>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                        {solution.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4">
+                        {solution.description}
                       </p>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                        <div>
-                          <span className="text-gray-500 dark:text-gray-400">Sent Date:</span>
-                          <span className="ml-1 text-gray-900 dark:text-white">
-                            {assessment.sentDate || 'Not sent'}
-                          </span>
-                        </div>
-                        <div>
-                          <span className="text-gray-500 dark:text-gray-400">Due Date:</span>
-                          <span className="ml-1 text-gray-900 dark:text-white">
-                            {assessment.dueDate || 'Not set'}
-                          </span>
-                        </div>
-                        <div>
-                          <span className="text-gray-500 dark:text-gray-400">Progress:</span>
-                          <span className="ml-1 text-gray-900 dark:text-white">
-                            {assessment.progress}%
-                          </span>
-                        </div>
+                    </div>
+                    <div className="ml-4">
+                      <Link to={solution.link}>
+                        <Button variant="primary" size="sm">
+                          {solution.cta}
+                          <ArrowRight className="h-4 w-4 ml-1" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {solution.benefits.map((benefit, benefitIndex) => (
+                      <div key={benefitIndex} className="flex items-start">
+                        <CheckCircle className="h-4 w-4 text-vendorsoluce-green mr-2 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-gray-700 dark:text-gray-300">{benefit}</span>
                       </div>
-                      
-                      {assessment.progress > 0 && (
-                        <div className="mt-3">
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                            <div 
-                              className="bg-vendorsoluce-green h-2 rounded-full transition-all duration-300"
-                              style={{ width: `${assessment.progress}%` }}
-                            />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    
-                    <div className="flex space-x-2 ml-4">
-                      <Button variant="outline" size="sm">
-                        <Eye className="h-4 w-4 mr-1" />
-                        View
-                      </Button>
-                      <Button variant="ghost" size="sm">
-                        <Copy className="h-4 w-4 mr-1" />
-                        Copy Link
-                      </Button>
-                    </div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
-      )}
 
-      {/* Framework Templates Tab */}
-      {activeTab === 'templates' && (
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Assessment Framework Templates</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {frameworks.map((framework) => (
-              <Card key={framework.id} className="border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    {framework.icon}
-                    <span className="ml-3">{framework.name}</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">{framework.description}</p>
-                  
-                  <div className="space-y-2 mb-4">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-500 dark:text-gray-400">Questions:</span>
-                      <span className="font-medium text-gray-900 dark:text-white">{framework.questionCount}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-500 dark:text-gray-400">Est. Time:</span>
-                      <span className="font-medium text-gray-900 dark:text-white">{framework.estimatedTime}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex space-x-2">
-                    <Button variant="primary" className="flex-1" onClick={() => setShowCreateModal(true)}>
-                      <Send className="h-4 w-4 mr-2" />
-                      Send Assessment
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      <Eye className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Vendor Portal Tab */}
-      {activeTab === 'portal' && (
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Vendor Assessment Portal</h2>
-          
-          <Card className="border-l-4 border-l-vendorsoluce-teal">
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <ExternalLink className="h-5 w-5 text-vendorsoluce-teal mr-2" />
-                Secure Vendor Portal Features
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-3">Portal Capabilities</h3>
-                  <ul className="space-y-2">
-                    <li className="flex items-center text-sm">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">Secure unique assessment links</span>
-                    </li>
-                    <li className="flex items-center text-sm">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">Progress saving and resume capability</span>
-                    </li>
-                    <li className="flex items-center text-sm">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">Encrypted evidence file uploads</span>
-                    </li>
-                    <li className="flex items-center text-sm">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">Real-time collaboration features</span>
-                    </li>
-                    <li className="flex items-center text-sm">
-                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">Mobile-responsive design</span>
-                    </li>
-                  </ul>
-                </div>
-                
-                <div>
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-3">Security Features</h3>
-                  <ul className="space-y-2">
-                    <li className="flex items-center text-sm">
-                      <Shield className="h-4 w-4 text-blue-500 mr-2 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">End-to-end encryption</span>
-                    </li>
-                    <li className="flex items-center text-sm">
-                      <Shield className="h-4 w-4 text-blue-500 mr-2 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">Multi-factor authentication</span>
-                    </li>
-                    <li className="flex items-center text-sm">
-                      <Shield className="h-4 w-4 text-blue-500 mr-2 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">Audit trail logging</span>
-                    </li>
-                    <li className="flex items-center text-sm">
-                      <Shield className="h-4 w-4 text-blue-500 mr-2 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">Time-limited access tokens</span>
-                    </li>
-                    <li className="flex items-center text-sm">
-                      <Shield className="h-4 w-4 text-blue-500 mr-2 flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">IP allowlist support</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              
-              <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <h4 className="font-medium text-gray-900 dark:text-white mb-2">Example Portal URL:</h4>
-                <div className="flex items-center space-x-2">
-                  <code className="flex-1 bg-white dark:bg-gray-700 p-2 rounded text-sm text-gray-800 dark:text-gray-300">
-                    https://portal.vendorsoluce.com/assessment/abc123def456
-                  </code>
-                  <Button variant="outline" size="sm">
-                    <Copy className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-
-      {/* Create Assessment Modal */}
-      {showCreateModal && (
-        <CreateAssessmentModal
-          vendors={vendors}
-          frameworks={frameworks}
-          onClose={() => setShowCreateModal(false)}
-          onSuccess={() => {
-            setShowCreateModal(false);
-            // Refresh assessments list
-          }}
-        />
-      )}
-
-      {/* Upgrade CTA for non-authenticated users */}
-      {!isAuthenticated && (
-        <Card className="mt-8 bg-gradient-to-r from-vendorsoluce-navy to-vendorsoluce-teal text-white">
-          <CardContent className="p-8 text-center">
-            <Crown className="h-16 w-16 mx-auto mb-4 text-yellow-400" />
-            <h2 className="text-2xl font-bold mb-4">Unlock Premium Assessment Features</h2>
+        {/* Call to Action */}
+        <div className="mt-12 text-center">
+          <div className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green rounded-lg p-8 text-white">
+            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Supply Chain Security?</h3>
             <p className="text-xl text-gray-100 mb-6">
-              Create an account to send CMMC and NIST Privacy Framework assessments to your vendors
+              Join organizations worldwide who trust VendorSoluce to secure their supply chains and meet compliance requirements.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-navy hover:bg-gray-100">
-                Sign Up for Free Trial
-              </Button>
-              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20">
-                View Pricing
-              </Button>
+              <Link to="/supply-chain-assessment">
+                <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100">
+                  <Target className="h-5 w-5 mr-2" />
+                  Start Free Assessment
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20">
+                  <Users className="h-5 w-5 mr-2" />
+                  Schedule Demo
+                </Button>
+              </Link>
             </div>
-          </CardContent>
-        </Card>
-      )}
-    </main>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
-export default VendorSecurityAssessments;
+export default ValuePropositionSection;
