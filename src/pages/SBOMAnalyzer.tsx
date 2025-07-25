@@ -1,489 +1,314 @@
 import React, { useState } from 'react';
-import { Upload, FileText, AlertCircle, Shield, Package, ChevronDown, ChevronUp } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card';
-import RiskBadge from '../components/ui/RiskBadge';
-import SBOMUploader from '../components/sbom/SBOMUploader';
 import { useTranslation } from 'react-i18next';
-import { useSBOMAnalyses } from '../hooks/useSBOMAnalyses';
-import { useAuth } from '../context/AuthContext';
-import { XMLParser } from 'fast-xml-parser';
-import EnhancedSBOMAnalysis from '../components/sbom/EnhancedSBOMAnalysis';
-import DataImportExport from '../components/data/DataImportExport';
+import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
+import { Button } from '../ui/Button';
+import { 
+  Shield, 
+  Building2,
+  Users, 
+  ArrowRight,
+  Lock, 
+  ChevronRight,
+  Target,
+  CheckCircle,
+  AlertTriangle
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const SBOMAnalyzer = () => {
+interface Stakeholder {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  challenges: string[];
+  solutions: {
+    title: string;
+    description: string;
+    benefits: string[];
+    cta: string;
+    link: string;
+  }[];
+}
+
+const ValuePropositionSection: React.FC = () => {
   const { t } = useTranslation();
-  const { isAuthenticated } = useAuth();
-  const { createAnalysis } = useSBOMAnalyses();
-  const { analyses, refetch } = useSBOMAnalyses();
-  const [isLoading, setIsLoading] = useState(false);
-  const [results, setResults] = useState(null);
-  const [error, setError] = useState(null);
-  const [expandedComponents, setExpandedComponents] = useState(new Set());
-  const [showEnhancedAnalysis, setShowEnhancedAnalysis] = useState(false);
+  const [activeStakeholder, setActiveStakeholder] = useState<string>('security');
 
-  const handleSBOMUpload = async (file) => {
-    setIsLoading(true);
-    setError(null);
-    setResults(null);
-    
-    try {
-      const fileContent = await readFileAsText(file);
-      const components = parseSBOMFile(fileContent, file.name, file.type);
-      
-      const totalVulnerabilities = components.reduce((sum, comp) => sum + comp.vulnerabilityCount, 0);
-      const avgRiskScore = Math.round(
-        components.reduce((sum, comp) => sum + comp.riskScore, 0) / components.length
-      );
-      
-      // Save analysis to database if user is authenticated
-      if (isAuthenticated) {
-        await createAnalysis({
-          filename: file.name,
-          file_type: file.type,
-          total_components: components.length,
-          total_vulnerabilities: totalVulnerabilities,
-          risk_score: avgRiskScore,
-          analysis_data: { components, totalVulnerabilities, avgRiskScore }
-        });
-      }
-      
-      setResults({
-        filename: file.name,
-        components,
-        totalComponents: components.length,
-        totalVulnerabilities,
-        avgRiskScore,
-        timestamp: new Date().toISOString()
-      });
-    } catch (err) {
-      console.error('Error analyzing SBOM:', err);
-      setError(err instanceof Error ? err.message : 'Failed to analyze SBOM file');
-    } finally {
-      setIsLoading(false);
+  const stakeholders: Stakeholder[] = [
+    {
+      id: 'security',
+      title: t('home.stakeholders.security.title'),
+      description: t('home.stakeholders.security.description'),
+      icon: <Shield className="h-8 w-8 text-vendorsoluce-green" />,
+      challenges: [
+        t('home.stakeholders.security.challenges.visibility'),
+        t('home.stakeholders.security.challenges.manual'),
+        t('home.stakeholders.security.challenges.tracking'),
+        t('home.stakeholders.security.challenges.compliance')
+      ],
+      solutions: [
+        {
+          title: t('home.stakeholders.security.solutions.sbom.title'),
+          description: t('home.stakeholders.security.solutions.sbom.description'),
+          benefits: [
+            t('home.stakeholders.security.solutions.sbom.benefits.vulnerabilities'),
+            t('home.stakeholders.security.solutions.sbom.benefits.licenses'),
+            t('home.stakeholders.security.solutions.sbom.benefits.reports'),
+            t('home.stakeholders.security.solutions.sbom.benefits.monitoring')
+          ],
+          cta: t('home.stakeholders.security.solutions.sbom.cta'),
+          link: '/sbom-analyzer'
+        },
+        {
+          title: t('home.stakeholders.security.solutions.assessments.title'),
+          description: t('home.stakeholders.security.solutions.assessments.description'),
+          benefits: [
+            t('home.stakeholders.security.solutions.assessments.benefits.cmmc'),
+            t('home.stakeholders.security.solutions.assessments.benefits.nist'),
+            t('home.stakeholders.security.solutions.assessments.benefits.scoring'),
+            t('home.stakeholders.security.solutions.assessments.benefits.portal'),
+            t('home.stakeholders.security.solutions.assessments.benefits.tracking')
+          ],
+          cta: t('home.stakeholders.security.solutions.assessments.cta'),
+          link: '/vendor-assessments'
+        }
+      ]
+    },
+    {
+      id: 'procurement',
+      title: t('home.stakeholders.procurement.title'),
+      description: t('home.stakeholders.procurement.description'),
+      icon: <Building2 className="h-8 w-8 text-vendorsoluce-navy" />,
+      challenges: [
+        t('home.stakeholders.procurement.challenges.balancing'),
+        t('home.stakeholders.procurement.challenges.lifecycle'),
+        t('home.stakeholders.procurement.challenges.contracts'),
+        t('home.stakeholders.procurement.challenges.diligence')
+      ],
+      solutions: [
+        {
+          title: t('home.stakeholders.procurement.solutions.calculator.title'),
+          description: t('home.stakeholders.procurement.solutions.calculator.description'),
+          benefits: [
+            t('home.stakeholders.procurement.solutions.calculator.benefits.criteria'),
+            t('home.stakeholders.procurement.solutions.calculator.benefits.scoring'),
+            t('home.stakeholders.procurement.solutions.calculator.benefits.comparison'),
+            t('home.stakeholders.procurement.solutions.calculator.benefits.integration')
+          ],
+          cta: t('home.stakeholders.procurement.solutions.calculator.cta'),
+          link: '/tools/vendor-risk-calculator'
+        },
+        {
+          title: t('home.stakeholders.procurement.solutions.dashboard.title'),
+          description: t('home.stakeholders.procurement.solutions.dashboard.description'),
+          benefits: [
+            t('home.stakeholders.procurement.solutions.dashboard.benefits.monitoring'),
+            t('home.stakeholders.procurement.solutions.dashboard.benefits.tracking'),
+            t('home.stakeholders.procurement.solutions.dashboard.benefits.alerts'),
+            t('home.stakeholders.procurement.solutions.dashboard.benefits.reporting')
+          ],
+          cta: t('home.stakeholders.procurement.solutions.dashboard.cta'),
+          link: '/vendor-risk-dashboard'
+        }
+      ]
+    },
+    {
+      id: 'compliance',
+      title: t('home.stakeholders.compliance.title'),
+      description: t('home.stakeholders.compliance.description'),
+      icon: <Lock className="h-8 w-8 text-vendorsoluce-teal" />,
+      challenges: [
+        t('home.stakeholders.compliance.challenges.evolving'),
+        t('home.stakeholders.compliance.challenges.documenting'),
+        t('home.stakeholders.compliance.challenges.obligations'),
+        t('home.stakeholders.compliance.challenges.frameworks')
+      ],
+      solutions: [
+        {
+          title: t('home.stakeholders.compliance.solutions.nist.title'),
+          description: t('home.stakeholders.compliance.solutions.nist.description'),
+          benefits: [
+            t('home.stakeholders.compliance.solutions.nist.benefits.templates'),
+            t('home.stakeholders.compliance.solutions.nist.benefits.scoring'),
+            t('home.stakeholders.compliance.solutions.nist.benefits.documentation'),
+            t('home.stakeholders.compliance.solutions.nist.benefits.analysis')
+          ],
+          cta: t('home.stakeholders.compliance.solutions.nist.cta'),
+          link: '/supply-chain-assessment'
+        },
+        {
+          title: t('home.stakeholders.compliance.solutions.templates.title'),
+          description: t('home.stakeholders.compliance.solutions.templates.description'),
+          benefits: [
+            t('home.stakeholders.compliance.solutions.templates.benefits.federal'),
+            t('home.stakeholders.compliance.solutions.templates.benefits.industry'),
+            t('home.stakeholders.compliance.solutions.templates.benefits.matrices'),
+            t('home.stakeholders.compliance.solutions.templates.benefits.executive')
+          ],
+          cta: t('home.stakeholders.compliance.solutions.templates.cta'),
+          link: '/templates'
+        }
+      ]
+    },
+    {
+      id: 'executives',
+      title: t('home.stakeholders.executives.title'),
+      description: t('home.stakeholders.executives.description'),
+      icon: <Users className="h-8 w-8 text-vendorsoluce-blue" />,
+      challenges: [
+        t('home.stakeholders.executives.challenges.understanding'),
+        t('home.stakeholders.executives.challenges.investment'),
+        t('home.stakeholders.executives.challenges.demonstrating'),
+        t('home.stakeholders.executives.challenges.balancing')
+      ],
+      solutions: [
+        {
+          title: t('home.stakeholders.executives.solutions.dashboards.title'),
+          description: t('home.stakeholders.executives.solutions.dashboards.description'),
+          benefits: [
+            t('home.stakeholders.executives.solutions.dashboards.benefits.metrics'),
+            t('home.stakeholders.executives.solutions.dashboards.benefits.portfolio'),
+            t('home.stakeholders.executives.solutions.dashboards.benefits.compliance'),
+            t('home.stakeholders.executives.solutions.dashboards.benefits.recommendations')
+          ],
+          cta: t('home.stakeholders.executives.solutions.dashboards.cta'),
+          link: '/dashboard'
+        },
+        {
+          title: t('home.stakeholders.executives.solutions.reporting.title'),
+          description: t('home.stakeholders.executives.solutions.reporting.description'),
+          benefits: [
+            t('home.stakeholders.executives.solutions.reporting.benefits.automated'),
+            t('home.stakeholders.executives.solutions.reporting.benefits.customizable'),
+            t('home.stakeholders.executives.solutions.reporting.benefits.analysis'),
+            t('home.stakeholders.executives.solutions.reporting.benefits.presentations')
+          ],
+          cta: t('home.stakeholders.executives.solutions.reporting.cta'),
+          link: '/vendor-risk-dashboard'
+        }
+      ]
     }
-  };
+  ];
 
-  const readFileAsText = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = () => reject(new Error('Failed to read file'));
-      reader.readAsText(file);
-    });
-  };
-
-  const parseSBOMFile = (content, filename, mimeType) => {
-    try {
-      const data = JSON.parse(content);
-      if (data.bomFormat === 'CycloneDX' || data.components) return parseCycloneDX(data);
-      if (data.spdxVersion || data.packages) return parseSPDX(data);
-      throw new Error('Unsupported JSON SBOM format');
-    } catch (_) {
-      // Simple XML parsing fallback
-      if (content.includes('<bom>') || content.includes('CycloneDX')) {
-        return parseXMLCycloneDX(content);
-      }
-      if (content.includes('SPDX')) {
-        return parseXMLSPDX(content);
-      }
-      throw new Error('Unsupported SBOM format. Please provide a valid CycloneDX or SPDX file.');
-    }
-  };
-
-  const parseCycloneDX = (data) => {
-    if (!data.components || !Array.isArray(data.components)) {
-      throw new Error('Invalid CycloneDX format: missing components array');
-    }
-
-    return data.components.map((comp, index) => {
-      const vulnCount = simulateVulnerabilityCount(comp.name, comp.version);
-      const riskScore = calculateRiskScore(comp, vulnCount);
-      
-      return {
-        id: comp['bom-ref'] || `component-${index}`,
-        name: comp.name || 'Unknown',
-        version: comp.version || 'Unknown',
-        type: comp.type || 'library',
-        license: extractLicense(comp),
-        vulnerabilityCount: vulnCount,
-        riskScore,
-        purl: comp.purl || null,
-        description: comp.description || null
-      };
-    });
-  };
-
-  const parseSPDX = (data) => {
-    const packages = data.packages || [];
-    if (!Array.isArray(packages)) {
-      throw new Error('Invalid SPDX format: packages must be an array');
-    }
-
-    return packages.map((pkg, index) => {
-      const vulnCount = simulateVulnerabilityCount(pkg.name, pkg.versionInfo);
-      const riskScore = calculateRiskScore(pkg, vulnCount);
-      
-      return {
-        id: pkg.SPDXID || `package-${index}`,
-        name: pkg.name || 'Unknown',
-        version: pkg.versionInfo || 'Unknown',
-        type: 'package',
-        license: pkg.licenseConcluded || pkg.licenseDeclared || 'Unknown',
-        vulnerabilityCount: vulnCount,
-        riskScore,
-        purl: null,
-        description: pkg.description || null
-      };
-    });
-  };
-
-  const parseXMLCycloneDX = (content) => {
-    const parser = new XMLParser();
-    const xmlDoc = parser.parse(content);
-    
-    const components = [];
-    const bomData = xmlDoc.bom || xmlDoc;
-    const componentList = bomData.components?.component || bomData.component || [];
-    const componentArray = Array.isArray(componentList) ? componentList : [componentList];
-    
-    componentArray.forEach((comp, index) => {
-      if (!comp) return;
-      
-      const name = comp.name || 'Unknown';
-      const version = comp.version || 'Unknown';
-      const type = comp['@_type'] || comp.type || 'library';
-      
-      const vulnCount = simulateVulnerabilityCount(name, version);
-      const riskScore = calculateRiskScore({ name, version }, vulnCount);
-      
-      components.push({
-        id: `component-${index}`,
-        name,
-        version,
-        type,
-        license: 'Unknown',
-        vulnerabilityCount: vulnCount,
-        riskScore,
-        purl: null,
-        description: null
-      });
-    });
-    
-    if (components.length === 0) {
-      throw new Error('No components found in CycloneDX XML');
-    }
-    
-    return components;
-  };
-
-  const parseXMLSPDX = (content) => {
-    const parser = new XMLParser();
-    const xmlDoc = parser.parse(content);
-    
-    const packages = [];
-    const spdxData = xmlDoc.Document || xmlDoc;
-    const packageList = spdxData.Package || spdxData.packages || [];
-    const packageArray = Array.isArray(packageList) ? packageList : [packageList];
-    
-    packageArray.forEach((pkg, index) => {
-      if (!pkg) return;
-      
-      const name = pkg.name || 'Unknown';
-      const version = pkg.versionInfo || 'Unknown';
-      
-      const vulnCount = simulateVulnerabilityCount(name, version);
-      const riskScore = calculateRiskScore({ name, version }, vulnCount);
-      
-      packages.push({
-        id: `package-${index}`,
-        name,
-        version,
-        type: 'package',
-        license: 'Unknown',
-        vulnerabilityCount: vulnCount,
-        riskScore,
-        purl: null,
-        description: null
-      });
-    });
-    
-    if (packages.length === 0) {
-      throw new Error('No packages found in SPDX XML');
-    }
-    
-    return packages;
-  };
-
-  const extractLicense = (component) => {
-    if (!component.licenses) return 'Unknown';
-    if (Array.isArray(component.licenses)) {
-      return component.licenses
-        .map((l) => l.license?.id || l.license?.name || 'Unknown')
-        .join(', ');
-    }
-    if (typeof component.licenses === 'string') return component.licenses;
-    return 'Unknown';
-  };
-
-  const simulateVulnerabilityCount = (name, version) => {
-    let count = 0;
-    
-    if (version && version.includes('0.')) count += 2;
-    if (version && /alpha|beta|rc/i.test(version)) count += 1;
-    if (name && /jquery|angular\.js|bootstrap/i.test(name) && version && version.match(/^[1-2]\./)) count += 3;
-    if (name && /log4j/i.test(name) && version && version.match(/^2\.1[0-6]\./)) count += 5;
-    
-    count += Math.floor(Math.random() * 2);
-    
-    return count;
-  };
-
-  const calculateRiskScore = (component, vulnCount) => {
-    let score = 100;
-    
-    score -= vulnCount * 15;
-    
-    if (component.version && /alpha/i.test(component.version)) score -= 15;
-    if (component.version && /beta/i.test(component.version)) score -= 10;
-    if (component.version && /rc/i.test(component.version)) score -= 5;
-    
-    if (component.version && /^0\./i.test(component.version)) score -= 10;
-    
-    if (!component.license || component.license === 'Unknown') score -= 5;
-    
-    return Math.max(0, Math.min(100, score));
-  };
-
-  const getRiskLevel = (score) => {
-    if (score >= 80) return 'Low';
-    if (score >= 60) return 'Medium';
-    if (score >= 40) return 'High';
-    return 'Critical';
-  };
-
-  const toggleComponent = (componentId) => {
-    const newExpanded = new Set(expandedComponents);
-    if (newExpanded.has(componentId)) {
-      newExpanded.delete(componentId);
-    } else {
-      newExpanded.add(componentId);
-    }
-    setExpandedComponents(newExpanded);
-  };
+  const activeStakeholderData = stakeholders.find(s => s.id === activeStakeholder) || stakeholders[0];
 
   return (
-    <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('sbom.title')}</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl">
-          {t('sbom.description')}
-        </p>
-        
-        {isAuthenticated && analyses.length > 0 && (
-          <div className="mt-6 flex justify-end">
-            <DataImportExport
-              dataType="sbom_analyses"
-              data={analyses}
-              onImportComplete={(result) => {
-                if (result.success) {
-                  refetch();
-                }
-              }}
-              onRefresh={refetch}
-            />
-          </div>
-        )}
-      </div>
-
-      {!results && (
-        <Card className="max-w-2xl mx-auto">
-          <CardHeader>
-            <CardTitle>{t('sbom.upload.title')}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <SBOMUploader onUpload={handleSBOMUpload} isLoading={isLoading} />
-          </CardContent>
-        </Card>
-      )}
-
-      {error && (
-        <Card className="max-w-2xl mx-auto mt-4 border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20">
-          <CardContent className="pt-6">
-            <div className="flex items-start">
-              <AlertCircle className="h-5 w-5 text-red-400 dark:text-red-400 mt-0.5 mr-2" />
-              <div>
-                <h3 className="text-sm font-medium text-red-800 dark:text-red-300">Error analyzing file</h3>
-                <p className="text-sm text-red-700 dark:text-red-400 mt-1">{error}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {results && (
-        <div className="space-y-6">
-          {/* Summary Card */}
-          <Card>
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">
-                  {t('sbom.results.title')}
-                </CardTitle>
-                <div className="flex items-center space-x-4">
-                  <button
-                    onClick={() => {
-                      setResults(null);
-                      setError(null);
-                    }}
-                    className="text-sm text-vendortal-navy dark:text-trust-blue hover:text-vendortal-navy/80 dark:hover:text-trust-blue/80"
-                  >
-                    Analyze Another File
-                  </button>
-                  <button
-                    onClick={() => setShowEnhancedAnalysis(!showEnhancedAnalysis)}
-                    className="text-sm text-supply-chain-teal hover:text-supply-chain-teal/80"
-                  >
-                    {showEnhancedAnalysis ? 'Basic View' : 'Enhanced Analysis'}
-                  </button>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
-                  <div className="flex items-center">
-                    <FileText className="h-8 w-8 text-gray-400 dark:text-gray-500 mr-3" />
-                    <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">File</p>
-                      <p className="font-medium text-gray-900 dark:text-white">{results.filename}</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
-                  <div className="flex items-center">
-                    <Package className="h-8 w-8 text-supply-chain-teal mr-3" />
-                    <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('sbom.results.components')}</p>
-                      <p className="text-2xl font-bold text-gray-900 dark:text-white">{results.totalComponents}</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
-                  <div className="flex items-center">
-                    <AlertCircle className="h-8 w-8 text-orange-400 mr-3" />
-                    <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('sbom.results.vulnerabilities')}</p>
-                      <p className="text-2xl font-bold text-gray-900 dark:text-white">{results.totalVulnerabilities}</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
-                  <div className="flex items-center">
-                    <Shield className="h-8 w-8 text-green-400 mr-3" />
-                    <div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Risk Score</p>
-                      <div className="flex items-center">
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white mr-2">{results.avgRiskScore}</p>
-                        <RiskBadge level={getRiskLevel(results.avgRiskScore)} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Enhanced Analysis View */}
-          {showEnhancedAnalysis && (
-            <EnhancedSBOMAnalysis 
-              components={results.components}
-              onPolicyUpdate={(policies) => {
-                console.log('Policies updated:', policies);
-              }}
-            />
-          )}
-
-          {/* Components List */}
-          {!showEnhancedAnalysis && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white">
-                Components Analysis
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                {results.components.map((component) => (
-                  <div
-                    key={component.id}
-                    className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
-                  >
-                    <div
-                      className="flex items-center justify-between cursor-pointer"
-                      onClick={() => toggleComponent(component.id)}
-                    >
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-4">
-                          <h3 className="font-medium text-gray-900 dark:text-white">
-                            {component.name} <span className="text-gray-500 dark:text-gray-400">v{component.version}</span>
-                          </h3>
-                          <RiskBadge level={getRiskLevel(component.riskScore)} />
-                          {component.vulnerabilityCount > 0 && (
-                            <span className="text-sm text-red-600 dark:text-red-400">
-                              {component.vulnerabilityCount} vulnerabilities
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-sm text-gray-500 dark:text-gray-400">Score: {component.riskScore}</span>
-                        {expandedComponents.has(component.id) ? (
-                          <ChevronUp className="h-5 w-5 text-gray-400 dark:text-gray-500" />
-                        ) : (
-                          <ChevronDown className="h-5 w-5 text-gray-400 dark:text-gray-500" />
-                        )}
-                      </div>
-                    </div>
-                    
-                    {expandedComponents.has(component.id) && (
-                      <div className="mt-4 pl-4 border-l-2 border-gray-200 dark:border-gray-700">
-                        <dl className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                          <div>
-                            <dt className="text-gray-600 dark:text-gray-400">Type:</dt>
-                            <dd className="font-medium text-gray-900 dark:text-white">{component.type}</dd>
-                          </div>
-                          <div>
-                            <dt className="text-gray-600 dark:text-gray-400">{t('sbom.results.license')}:</dt>
-                            <dd className="font-medium text-gray-900 dark:text-white">{component.license}</dd>
-                          </div>
-                          {component.purl && (
-                            <div className="md:col-span-2">
-                              <dt className="text-gray-600 dark:text-gray-400">Package URL:</dt>
-                              <dd className="font-mono text-xs break-all text-gray-900 dark:text-white">{component.purl}</dd>
-                            </div>
-                          )}
-                          {component.description && (
-                            <div className="md:col-span-2">
-                              <dt className="text-gray-600 dark:text-gray-400">Description:</dt>
-                              <dd className="text-gray-900 dark:text-white">{component.description}</dd>
-                            </div>
-                          )}
-                        </dl>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-          )}
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            {t('home.stakeholders.title')}
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            {t('home.stakeholders.description')}
+          </p>
         </div>
-      )}
-    </main>
+
+        {/* Stakeholder Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {stakeholders.map((stakeholder) => (
+            <button
+              key={stakeholder.id}
+              onClick={() => setActiveStakeholder(stakeholder.id)}
+              className={`flex items-center px-4 py-2 rounded-lg font-medium transition-all ${
+                activeStakeholder === stakeholder.id
+                  ? 'bg-vendorsoluce-green text-white shadow-md'
+                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
+              }`}
+            >
+              {stakeholder.icon}
+              <span className="ml-2">{stakeholder.title}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Active Stakeholder Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Challenges */}
+          <Card className="lg:col-span-1">
+            <CardHeader>
+              <h3 className="flex items-center text-xl font-bold text-gray-900 dark:text-white mb-2">
+                <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
+                {t('home.stakeholders.common.challenges')}
+              </h3>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">{activeStakeholderData.description}</p>
+              <ul className="space-y-3">
+                {activeStakeholderData.challenges.map((challenge, index) => (
+                  <li key={index} className="flex items-start">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <span className="text-gray-700 dark:text-gray-300 text-sm">{challenge}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+
+          {/* Solutions */}
+          <div className="lg:col-span-2 space-y-6">
+            {activeStakeholderData.solutions.map((solution, index) => (
+              <Card key={index} className="border-l-4 border-l-vendorsoluce-green">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                        {solution.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4">
+                        {solution.description}
+                      </p>
+                    </div>
+                    <div className="ml-4">
+                      <Link to={solution.link}>
+                        <Button variant="primary" size="sm">
+                          {solution.cta}
+                          <ArrowRight className="h-4 w-4 ml-1" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {solution.benefits.map((benefit, benefitIndex) => (
+                      <div key={benefitIndex} className="flex items-start">
+                        <CheckCircle className="h-4 w-4 text-vendorsoluce-green mr-2 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-gray-700 dark:text-gray-300">{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="mt-12 text-center">
+          <div className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green rounded-lg p-8 text-white">
+            <h3 className="text-2xl font-bold mb-4">{t('home.stakeholders.cta.title')}</h3>
+            <p className="text-xl text-gray-100 mb-6">
+              {t('home.stakeholders.cta.description')}
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link to="/supply-chain-assessment">
+                <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100">
+                  <Target className="h-5 w-5 mr-2" />
+                  {t('home.stakeholders.cta.startAssessment')}
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20">
+                  <Users className="h-5 w-5 mr-2" />
+                  {t('home.stakeholders.cta.scheduleDemo')}
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
-export default SBOMAnalyzer;
+export default ValuePropositionSection;
