@@ -112,7 +112,32 @@
     "backToHome": "Back to Home",
     "previousSection": "Previous Section",
     "nextSection": "Next Section",
-    "viewResults": "View Results"
+    "viewResults": "View Results",
+    "sections": "Sections",
+    "supplyChain": {
+      "title": "Supply Chain Risk Assessment",
+      "description": "Comprehensive assessment based on NIST SP 800-161 framework to evaluate supplier security posture and supply chain risks.",
+      "feature1": "Supplier security evaluation",
+      "feature2": "NIST SCRM control mapping",
+      "feature3": "Risk scoring and prioritization",
+      "feature4": "Vendor onboarding requirements"
+    },
+    "sbom": {
+      "title": "SBOM Analyzer",
+      "description": "Software Bill of Materials analysis tool for NIST SP 800-161 3.4.1 compliance evaluation and vulnerability scanning.",
+      "feature1": "Vulnerability scanning",
+      "feature2": "License compliance check",
+      "feature3": "Component risk analysis",
+      "feature4": "Federal compliance reporting"
+    },
+    "vendor": {
+      "title": "Vendor Risk Dashboard",
+      "description": "Comprehensive dashboard to monitor, track, and manage risks across your entire vendor ecosystem.",
+      "feature1": "Risk scoring methodology",
+      "feature2": "Vendor portfolio management",
+      "feature3": "Trend analysis and alerts",
+      "feature4": "Compliance status tracking"
+    }
   },
   "supplyChain": {
     "sections": {
