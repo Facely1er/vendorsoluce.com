@@ -7,6 +7,7 @@ import {
   Building2,
   ShieldCheck,
   Users, 
+  ArrowRight,
   Lock, 
   FileCheck, 
   BarChart3, 
