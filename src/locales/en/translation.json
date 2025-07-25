@@ -1178,3 +1178,36 @@
     }
   }
 }
+{
+  "home": {
+    "assessments": {
+      "title": "Available Assessments",
+      "description": "Choose from our comprehensive assessment tools to evaluate your supply chain security posture and compliance readiness.",
+      "cta": "Start Assessment",
+      "supplyChain": {
+        "title": "Supply Chain Risk Assessment",
+        "description": "Comprehensive assessment aligned with NIST SP 800-161 for federal compliance and enterprise risk management.",
+        "feature1": "NIST SP 800-161 framework compliance",
+        "feature2": "Automated risk scoring and reporting",
+        "feature3": "Gap analysis with actionable recommendations",
+        "feature4": "Executive summary for stakeholder communication"
+      },
+      "sbom": {
+        "title": "SBOM Analysis",
+        "description": "Upload and analyze Software Bill of Materials (SBOM) files to identify vulnerabilities and compliance issues.",
+        "feature1": "SPDX and CycloneDX format support",
+        "feature2": "Vulnerability analysis and risk assessment",
+        "feature3": "License compliance verification",
+        "feature4": "Detailed component analysis reports"
+      },
+      "vendor": {
+        "title": "Vendor Security Assessments",
+        "description": "Send comprehensive security questionnaires to vendors with automated tracking and scoring.",
+        "feature1": "CMMC Level 1 & 2 assessment templates",
+        "feature2": "NIST Privacy Framework questionnaires",
+        "feature3": "Automated scoring and risk rating",
+        "feature4": "Secure evidence collection portal"
+      }
+    }
+  }
+}
