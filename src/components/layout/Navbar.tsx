@@ -93,7 +93,7 @@ const Navbar: React.FC = () => {
             {navItems.map((item) => (
               item.dropdown ? (
                 <div key={item.name} className="relative group">
-                  <button className={`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
+                  <button className={\`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
                     isActivePath(item.path, item.dropdown.map(d => d.path))
                       ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
                       : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
@@ -108,7 +108,7 @@ const Navbar: React.FC = () => {
                         <Link
                           key={subItem.name}
                           to={subItem.path}
-                          className={`block px-4 py-2 text-sm transition-colors ${
+                          className={\`block px-4 py-2 text-sm transition-colors ${
                             location.pathname === subItem.path
                               ? 'bg-vendorsoluce-pale-green text-vendorsoluce-navy dark:bg-vendorsoluce-navy/20 dark:text-vendorsoluce-blue font-medium'
                               : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
@@ -125,7 +125,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
+                  className={\`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
                     isActivePath(item.path)
                       ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
                       : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
@@ -139,7 +139,7 @@ const Navbar: React.FC = () => {
             {isAuthenticated && (
               <Link
                 to="/dashboard"
-                className={`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
+                className={\`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
                   location.pathname === '/dashboard'
                     ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
                     : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
@@ -186,7 +186,7 @@ const Navbar: React.FC = () => {
             {navItems.map((item) => (
               item.dropdown ? (
                 <div key={item.name}>
-                  <button className={`block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors ${
+                  <button className={\`block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors ${
                     isActivePath(item.path, item.dropdown.map(d => d.path))
                       ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
                       : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
@@ -199,7 +199,7 @@ const Navbar: React.FC = () => {
                       <Link
                         key={subItem.name}
                         to={subItem.path}
-                        className={`block px-3 py-2 text-sm transition-colors rounded-md ${
+                        className={\`block px-3 py-2 text-sm transition-colors rounded-md ${
                           location.pathname === subItem.path
                             ? 'bg-vendorsoluce-pale-green text-vendorsoluce-navy dark:bg-vendorsoluce-navy/20 dark:text-vendorsoluce-blue font-medium'
                             : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
@@ -215,7 +215,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                  className={\`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     isActivePath(item.path)
                       ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
                       : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
@@ -230,7 +230,7 @@ const Navbar: React.FC = () => {
             {isAuthenticated && (
               <Link
                 to="/dashboard"
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                className={\`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                   location.pathname === '/dashboard'
                     ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
                     : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
