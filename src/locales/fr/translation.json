@@ -1,4 +1,4 @@
- {
+{
   "nav": {
     "home": "Accueil",
     "solutions": "Solutions",
@@ -109,7 +109,32 @@
     "backToHome": "Retour à l'accueil",
     "previousSection": "Section précédente",
     "nextSection": "Section suivante",
-    "viewResults": "Voir les résultats"
+    "viewResults": "Voir les résultats",
+    "sections": "Sections",
+    "supplyChain": {
+      "title": "Évaluation des risques de la chaîne d'approvisionnement",
+      "description": "Évaluation complète basée sur le framework NIST SP 800-161 pour évaluer la posture de sécurité des fournisseurs et les risques de la chaîne d'approvisionnement.",
+      "feature1": "Évaluation de la sécurité des fournisseurs",
+      "feature2": "Cartographie des contrôles NIST SCRM",
+      "feature3": "Notation et priorisation des risques",
+      "feature4": "Exigences d'intégration des fournisseurs"
+    },
+    "sbom": {
+      "title": "Analyseur SBOM",
+      "description": "Outil d'analyse de nomenclature logicielle pour l'évaluation de conformité NIST SP 800-161 3.4.1 et l'analyse des vulnérabilités.",
+      "feature1": "Analyse des vulnérabilités",
+      "feature2": "Vérification de conformité des licences",
+      "feature3": "Analyse des risques des composants",
+      "feature4": "Rapports de conformité fédérale"
+    },
+    "vendor": {
+      "title": "Tableau de bord des risques fournisseurs",
+      "description": "Tableau de bord complet pour surveiller, suivre et gérer les risques dans l'ensemble de votre écosystème fournisseur.",
+      "feature1": "Méthodologie de notation des risques",
+      "feature2": "Gestion du portefeuille fournisseur",
+      "feature3": "Analyse des tendances et alertes",
+      "feature4": "Suivi du statut de conformité"
+    }
   },
   "supplyChain": {
     "sections": {
