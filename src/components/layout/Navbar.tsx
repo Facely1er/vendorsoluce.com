@@ -6,7 +6,6 @@ import { useI18n } from '../../context/I18nContext';
 import ThemeToggle from './ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
 import UserMenu from './UserMenu';
-import Button from '../components/ui/Button';
 
 const Navbar: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -23,7 +22,7 @@ const Navbar: React.FC = () => {
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClick.outside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
