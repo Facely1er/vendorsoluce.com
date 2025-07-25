@@ -18,30 +18,28 @@ const HeroSection: React.FC = () => {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Turn Vendor Risk into Competitive Advantage
+            {t('home.hero.title')}
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-100 mb-8 max-w-4xl mx-auto">
-            Secure Your Supply Chain. Accelerate Your Business.
+            {t('home.hero.subtitle')}
           </p>
           
           <p className="text-lg text-gray-100 mb-10 max-w-3xl mx-auto">
-            Stop worrying about vendor vulnerabilities and start leveraging supply chain intelligence. 
-            VendorSoluce transforms vendor risk management from a bottleneck into a business accelerator 
-            with automated assessments and complete supply chain visibility.
+            {t('home.hero.description')}
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
             <Link to="/supply-chain-assessment">
               <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100">
                 <Target className="h-5 w-5 mr-2" />
-                Start Free Assessment
+                {t('home.hero.cta1')}
               </Button>
             </Link>
             <Link to="/contact">
               <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20">
                 <Users className="h-5 w-5 mr-2" />
-                Schedule Live Demo
+                {t('home.hero.cta2')}
               </Button>
             </Link>
           </div>
@@ -52,19 +50,19 @@ const HeroSection: React.FC = () => {
               <div className="flex items-center justify-center mb-4">
                 <Zap className="h-8 w-8 text-yellow-300" />
               </div>
-              <h3 className="text-xl font-semibold mb-4">70% Faster Onboarding</h3>
+              <h3 className="text-xl font-semibold mb-4">{t('home.hero.benefits.section1.title')}</h3>
               <div className="text-gray-100 text-sm space-y-2">
                 <div className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                  Automate vendor security assessments
+                  {t('home.hero.benefits.section1.benefit1')}
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                  Self-service vendor portal
+                  {t('home.hero.benefits.section1.benefit2')}
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                  Streamlined compliance workflows
+                  {t('home.hero.benefits.section1.benefit3')}
                 </div>
               </div>
             </div>
@@ -73,19 +71,19 @@ const HeroSection: React.FC = () => {
               <div className="flex items-center justify-center mb-4">
                 <Eye className="h-8 w-8 text-blue-300" />
               </div>
-              <h3 className="text-xl font-semibold mb-4">Complete Supply Chain Visibility</h3>
+              <h3 className="text-xl font-semibold mb-4">{t('home.hero.benefits.section2.title')}</h3>
               <div className="text-gray-100 text-sm space-y-2">
                 <div className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                  See all vendor risks in one place
+                  {t('home.hero.benefits.section2.benefit1')}
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                  nth-party risk mapping
+                  {t('home.hero.benefits.section2.benefit2')}
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                  Real-time monitoring & alerts
+                  {t('home.hero.benefits.section2.benefit3')}
                 </div>
               </div>
             </div>
@@ -94,19 +92,19 @@ const HeroSection: React.FC = () => {
               <div className="flex items-center justify-center mb-4">
                 <Shield className="h-8 w-8 text-green-300" />
               </div>
-              <h3 className="text-xl font-semibold mb-4">Always Audit-Ready</h3>
+              <h3 className="text-xl font-semibold mb-4">{t('home.hero.benefits.section3.title')}</h3>
               <div className="text-gray-100 text-sm space-y-2">
                 <div className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                  NIST SP 800-161 compliance
+                  {t('home.hero.benefits.section3.benefit1')}
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                  Automated documentation
+                  {t('home.hero.benefits.section3.benefit2')}
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                  Continuous compliance tracking
+                  {t('home.hero.benefits.section3.benefit3')}
                 </div>
               </div>
             </div>
@@ -117,15 +115,15 @@ const HeroSection: React.FC = () => {
             <div className="flex flex-col md:flex-row justify-center items-center gap-8 text-sm text-gray-200">
               <div className="flex items-center">
                 <CheckCircle className="h-5 w-5 mr-2 text-green-300" />
-                <span>500+ Enterprise Customers</span>
+                <span>{t('home.hero.trustIndicators.customers')}</span>
               </div>
               <div className="flex items-center">
                 <CheckCircle className="h-5 w-5 mr-2 text-green-300" />
-                <span>10,000+ Vendors Assessed</span>
+                <span>{t('home.hero.trustIndicators.assessments')}</span>
               </div>
               <div className="flex items-center">
                 <CheckCircle className="h-5 w-5 mr-2 text-green-300" />
-                <span>99.7% Compliance Success Rate</span>
+                <span>{t('home.hero.trustIndicators.success')}</span>
               </div>
             </div>
           </div>
