@@ -16,7 +16,14 @@
   "home": {
     "hero": {
       "title": "Secure Your Supply Chain",
-      "subtitle": "Comprehensive risk assessment and compliance tools for modern organizations"
+      "subtitle": "Comprehensive risk assessment and compliance tools for modern organizations",
+      "description": "Comprehensive risk assessment and compliance management platform for modern organizations",
+      "cta1": "Start Free Assessment",
+      "cta2": "Schedule Demo",
+      "whyChoose": "Why Choose Our Platform",
+      "benefit1": "Reduce compliance costs by up to 60%",
+      "benefit2": "Automate repetitive assessment tasks",
+      "benefit3": "Get executive-ready reports in minutes"
     },
     "assessments": {
       "title": "Available Assessments",
@@ -47,11 +54,155 @@
         "feature4": "Secure evidence collection portal"
       }
     },
-    "hero": {
-      "title": "Secure Your Supply Chain",
-      "description": "Comprehensive risk assessment and compliance management platform for modern organizations",
-      "cta1": "Start Free Assessment",
-      "cta2": "Schedule Demo"
+    "stakeholders": {
+      "title": "Solutions for Every Stakeholder",
+      "description": "Our platform addresses the unique challenges faced by security teams, procurement professionals, compliance officers, and executives in managing supply chain risk.",
+      "common": {
+        "challenges": "Key Challenges"
+      },
+      "security": {
+        "title": "Security Teams",
+        "description": "Security professionals need comprehensive visibility into third-party risks and vulnerabilities across their supply chain.",
+        "challenges": {
+          "visibility": "Limited visibility into third-party software components and dependencies",
+          "manual": "Manual processes for vendor security assessments and reviews",
+          "tracking": "Difficulty tracking and managing vulnerabilities across the supply chain",
+          "compliance": "Complex compliance requirements for federal and industry standards"
+        },
+        "solutions": {
+          "sbom": {
+            "title": "SBOM Analysis & Vulnerability Management",
+            "description": "Comprehensive software bill of materials analysis with automated vulnerability scanning and license compliance checking.",
+            "benefits": {
+              "vulnerabilities": "Identify critical vulnerabilities in third-party components",
+              "licenses": "Ensure license compliance across software dependencies",
+              "reports": "Generate detailed security reports for compliance",
+              "monitoring": "Continuous monitoring of component security status"
+            },
+            "cta": "Analyze SBOM"
+          },
+          "assessments": {
+            "title": "Vendor Security Assessments",
+            "description": "Streamlined vendor assessment process with CMMC and NIST Privacy Framework alignment.",
+            "benefits": {
+              "cmmc": "CMMC Level 1 & 2 assessment templates",
+              "nist": "NIST Privacy Framework questionnaires",
+              "scoring": "Automated compliance scoring and risk rating",
+              "portal": "Secure vendor portal for evidence collection",
+              "tracking": "Real-time progress tracking and notifications"
+            },
+            "cta": "Send Assessment"
+          }
+        }
+      },
+      "procurement": {
+        "title": "Procurement Teams",
+        "description": "Procurement professionals must balance cost, quality, and risk when selecting and managing vendors throughout the relationship lifecycle.",
+        "challenges": {
+          "balancing": "Balancing cost considerations with security and compliance requirements",
+          "lifecycle": "Managing vendor relationships across the entire procurement lifecycle",
+          "contracts": "Incorporating appropriate security terms into vendor contracts",
+          "diligence": "Conducting thorough due diligence on potential vendors"
+        },
+        "solutions": {
+          "calculator": {
+            "title": "Vendor Risk Calculator",
+            "description": "Quick risk assessment tool to evaluate potential vendors based on multiple security and business factors.",
+            "benefits": {
+              "criteria": "Standardized risk assessment criteria",
+              "scoring": "Objective vendor risk scoring methodology",
+              "comparison": "Side-by-side vendor risk comparisons",
+              "integration": "Integration with procurement workflows"
+            },
+            "cta": "Calculate Risk"
+          },
+          "dashboard": {
+            "title": "Vendor Risk Dashboard",
+            "description": "Centralized dashboard for monitoring and managing all vendor relationships and associated risks.",
+            "benefits": {
+              "monitoring": "Real-time vendor risk monitoring",
+              "tracking": "Compliance status tracking across vendors",
+              "alerts": "Automated risk threshold alerts",
+              "reporting": "Executive reporting and analytics"
+            },
+            "cta": "View Dashboard"
+          }
+        }
+      },
+      "compliance": {
+        "title": "Compliance Officers",
+        "description": "Compliance teams need to ensure adherence to evolving regulatory requirements while maintaining comprehensive documentation and audit trails.",
+        "challenges": {
+          "evolving": "Keeping up with evolving regulatory requirements and frameworks",
+          "documenting": "Documenting compliance efforts for audits and assessments",
+          "obligations": "Managing complex third-party compliance obligations",
+          "frameworks": "Mapping requirements across multiple compliance frameworks"
+        },
+        "solutions": {
+          "nist": {
+            "title": "NIST SP 800-161 Compliance Assessment",
+            "description": "Comprehensive assessment aligned with NIST SP 800-161 supply chain risk management practices.",
+            "benefits": {
+              "templates": "Pre-built NIST-aligned assessment templates",
+              "scoring": "Automated compliance scoring and gap analysis",
+              "documentation": "Comprehensive audit trail and documentation",
+              "analysis": "Risk analysis and remediation recommendations"
+            },
+            "cta": "Start Assessment"
+          },
+          "templates": {
+            "title": "Compliance Templates & Resources",
+            "description": "Ready-to-use templates, checklists, and documentation for various compliance frameworks.",
+            "benefits": {
+              "federal": "Federal compliance templates and guides",
+              "industry": "Industry-specific assessment frameworks",
+              "matrices": "Risk scoring matrices and methodologies",
+              "executive": "Executive summary and reporting templates"
+            },
+            "cta": "Browse Templates"
+          }
+        }
+      },
+      "executives": {
+        "title": "Executive Leadership",
+        "description": "Executives need clear visibility into supply chain risks and their potential business impact to make informed strategic decisions.",
+        "challenges": {
+          "understanding": "Understanding the business impact of supply chain security risks",
+          "investment": "Justifying security investments and resource allocation",
+          "demonstrating": "Demonstrating compliance posture to stakeholders and customers",
+          "balancing": "Balancing operational efficiency with security requirements"
+        },
+        "solutions": {
+          "dashboards": {
+            "title": "Executive Risk Dashboards",
+            "description": "High-level dashboards providing strategic insights into supply chain risk posture and trends.",
+            "benefits": {
+              "metrics": "Key risk metrics and performance indicators",
+              "portfolio": "Portfolio-wide risk visibility and trends",
+              "compliance": "Compliance status across frameworks",
+              "recommendations": "Strategic recommendations and priorities"
+            },
+            "cta": "View Dashboard"
+          },
+          "reporting": {
+            "title": "Executive Reporting & Analytics",
+            "description": "Automated reporting capabilities for board presentations and stakeholder communications.",
+            "benefits": {
+              "automated": "Automated report generation and scheduling",
+              "customizable": "Customizable reporting templates",
+              "analysis": "Trend analysis and risk forecasting",
+              "presentations": "Board-ready presentations and summaries"
+            },
+            "cta": "Generate Report"
+          }
+        }
+      },
+      "cta": {
+        "title": "Ready to Transform Your Supply Chain Security?",
+        "description": "Start with a comprehensive assessment or schedule a personalized demo to see how we can address your organization's unique challenges.",
+        "startAssessment": "Start Free Assessment",
+        "scheduleDemo": "Schedule Demo"
+      }
     },
     "features": {
       "title": "Key Features",
@@ -1049,10 +1200,47 @@
     "partial": "Partial"
   },
   "footer": {
+    "company": {
+      "name": "VendorSoluce",
+      "description": "Comprehensive supply chain risk management platform for modern organizations. Secure your supply chain with NIST-aligned assessments and automated compliance tools.",
+      "contact": {
+        "email": "contact@vendorsoluce.com",
+        "phone": "+1 (555) 123-4567",
+        "address": "San Francisco, CA"
+      }
+    },
+    "sections": {
+      "solutions": "Solutions",
+      "resources": "Resources", 
+      "company": "Company"
+    },
+    "links": {
+      "solutions": {
+        "supplyChainAssessment": "Supply Chain Assessment",
+        "sbomAnalysis": "SBOM Analysis",
+        "vendorRiskDashboard": "Vendor Risk Dashboard",
+        "vendorAssessments": "Vendor Security Assessments"
+      },
+      "resources": {
+        "templates": "Templates & Downloads",
+        "apiDocs": "API Documentation",
+        "integrationGuides": "Integration Guides",
+        "howItWorks": "How It Works"
+      },
+      "company": {
+        "about": "About Us",
+        "contact": "Contact",
+        "pricing": "Pricing",
+        "privacy": "Privacy Policy"
+      }
+    },
+    "cta": {
+      "text": "Start Free Assessment"
+    },
+    "copyright": "© 2025 VendorSoluce. All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
-    "security": "Security",
-    "copyright": "© 2024 Supply Chain Security Platform. All rights reserved."
+    "security": "Security"
   },
   "misc": {
     "json": "JSON",
