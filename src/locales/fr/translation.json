@@ -16,7 +16,10 @@
   "home": {
     "hero": {
       "title": "Sécurisez votre chaîne d'approvisionnement",
-      "subtitle": "Outils complets d'évaluation des risques et de conformité pour les organisations modernes"
+      "subtitle": "Outils complets d'évaluation des risques et de conformité pour les organisations modernes",
+      "description": "Protégez votre organisation avec des évaluations de risques avancées, une analyse SBOM automatisée et des outils de conformité complets.",
+      "cta1": "Commencer l'évaluation",
+      "cta2": "Planifier une démonstration"
     },
     "assessments": {
       "title": "Évaluations disponibles",
@@ -65,6 +68,40 @@
           "Suivi des progrès"
         ]
       }
+    },
+    "benefits": {
+      "title": "Pourquoi choisir notre plateforme",
+      "item1": "Conformité automatisée aux standards industriels",
+      "item2": "Tableau de bord unifié pour tous vos risques",
+      "item3": "Rapports exécutifs prêts à présenter"
+    },
+    "features": {
+      "title": "Fonctionnalités principales",
+      "description": "Notre plateforme offre tous les outils nécessaires pour sécuriser votre chaîne d'approvisionnement",
+      "feature1": {
+        "title": "Évaluations automatisées",
+        "description": "Évaluations de conformité automatisées basées sur les frameworks NIST et ISO"
+      },
+      "feature2": {
+        "title": "Analyse en temps réel",
+        "description": "Surveillance continue des vulnérabilités et des risques de sécurité"
+      },
+      "feature3": {
+        "title": "Rapports détaillés",
+        "description": "Rapports complets avec recommandations d'amélioration"
+      },
+      "feature4": {
+        "title": "Intégration API",
+        "description": "Intégration facile avec vos outils existants via notre API REST"
+      }
+    },
+    "quickTools": {
+      "title": "Outils rapides",
+      "description": "Testez nos fonctionnalités avec ces outils gratuits"
+    },
+    "cta": {
+      "title": "Prêt à sécuriser votre chaîne d'approvisionnement ?",
+      "description": "Commencez dès aujourd'hui avec un essai gratuit de 14 jours"
     }
   },
   "buttons": {
@@ -73,517 +110,813 @@
     "learnMore": "En savoir plus",
     "getStarted": "Commencer"
   },
-  "resources.templates.categories.vendorQuestionnaires.items.nistComplete": "resources.templates.categories.vendorQuestionnaires.items.nistComplete",
-  "quickTools.sbomScan.noVulnerabilities": "quickTools.sbomScan.noVulnerabilities",
-  "resources.templates.implementationGuides.title": "resources.templates.implementationGuides.title",
-  "resources.apiDocs.webhooks.events.vendorUpdated": "resources.apiDocs.webhooks.events.vendorUpdated",
-  "sbom.upload.browseFiles": "sbom.upload.browseFiles",
-  "pricing.faq.questions.supportIncluded.answer": "pricing.faq.questions.supportIncluded.answer",
-  "howItWorks.benefits.description": "howItWorks.benefits.description",
-  "resources.templates.categories.sbomTemplates.items.spdx": "resources.templates.categories.sbomTemplates.items.spdx",
-  "assessment.view": "assessment.view",
-  "sbom.upload.uploadPrompt": "sbom.upload.uploadPrompt",
-  "howItWorks.steps.sbom.features.formats": "howItWorks.steps.sbom.features.formats",
-  "supplyChain.sections.vulnerability.questions.vm3.question": "supplyChain.sections.vulnerability.questions.vm3.question",
-  "howItWorks.steps.monitor.features.trends": "howItWorks.steps.monitor.features.trends",
-  "supplyChain.sections.threat.description": "supplyChain.sections.threat.description",
-  "pricing.tiers.starter.features.standardTemplates": "pricing.tiers.starter.features.standardTemplates",
-  "howItWorks.steps.vendors.features.assessment": "howItWorks.steps.vendors.features.assessment",
-  "home.hero.cta1": "home.hero.cta1",
-  "quickTools.nistChecklist.compliantMessage": "quickTools.nistChecklist.compliantMessage",
-  "howItWorks.benefits.compliance.title": "howItWorks.benefits.compliance.title",
-  "vendorRisk.actions.title": "vendorRisk.actions.title",
-  "supplyChain.sections.lifecycle.questions.sl4.guidance": "supplyChain.sections.lifecycle.questions.sl4.guidance",
-  "howItWorks.process.description": "howItWorks.process.description",
-  "pricing.faq.questions.dataSecure.answer": "pricing.faq.questions.dataSecure.answer",
-  "supplyChain.sections.lifecycle.questions.sl3.question": "supplyChain.sections.lifecycle.questions.sl3.question",
-  "resources.apiDocs.rateLimits.description": "resources.apiDocs.rateLimits.description",
+  "resources": {
+    "templates": {
+      "title": "Modèles et ressources",
+      "description": "Téléchargez des modèles prêts à l'emploi pour vos évaluations de sécurité",
+      "download": "Télécharger",
+      "categories": {
+        "vendorQuestionnaires": {
+          "title": "Questionnaires fournisseurs",
+          "description": "Modèles de questionnaires pour évaluer vos fournisseurs",
+          "items": {
+            "nistComplete": "Questionnaire NIST complet",
+            "vendorQuick": "Évaluation rapide des fournisseurs",
+            "cloudProvider": "Questionnaire pour fournisseurs cloud",
+            "softwareProvider": "Questionnaire pour éditeurs de logiciels"
+          }
+        },
+        "sbomTemplates": {
+          "title": "Modèles SBOM",
+          "description": "Modèles pour la création et l'analyse de nomenclatures logicielles",
+          "items": {
+            "spdx": "Modèle SPDX",
+            "cyclonedx": "Modèle CycloneDX",
+            "generator": "Générateur de SBOM",
+            "report": "Modèle de rapport SBOM"
+          }
+        },
+        "riskAssessment": {
+          "title": "Évaluation des risques",
+          "description": "Modèles pour l'évaluation et la gestion des risques",
+          "items": {
+            "scoringMatrix": "Matrice de notation des risques",
+            "riskRegister": "Registre des risques",
+            "managementPlan": "Plan de gestion des risques",
+            "execSummary": "Résumé exécutif"
+          }
+        }
+      },
+      "implementationGuides": {
+        "title": "Guides d'implémentation",
+        "items": {
+          "maturityModel": {
+            "title": "Modèle de maturité de sécurité",
+            "description": "Guide pour évaluer et améliorer la maturité de sécurité"
+          },
+          "sbomGuide": {
+            "title": "Guide d'implémentation SBOM",
+            "description": "Guide complet pour implémenter les nomenclatures logicielles"
+          },
+          "federalCompliance": {
+            "title": "Conformité fédérale",
+            "description": "Guide pour se conformer aux exigences fédérales de sécurité"
+          }
+        }
+      },
+      "nistResources": {
+        "title": "Ressources NIST",
+        "keyDocuments": {
+          "title": "Documents clés",
+          "items": {
+            "nistRev1": {
+              "title": "NIST SP 800-161 Rev. 1",
+              "description": "Pratiques de gestion des risques de la chaîne d'approvisionnement"
+            },
+            "quickStart": {
+              "title": "Guide de démarrage rapide",
+              "description": "Introduction aux pratiques NIST essentielles"
+            },
+            "controlMapping": {
+              "title": "Cartographie des contrôles",
+              "description": "Mapping des contrôles NIST vers d'autres frameworks"
+            }
+          }
+        }
+      },
+      "customization": {
+        "title": "Personnalisation",
+        "description": "Besoin de modèles personnalisés ? Contactez notre équipe",
+        "contactButton": "Nous contacter"
+      }
+    },
+    "apiDocs": {
+      "title": "Documentation API",
+      "description": "Documentation complète de notre API REST",
+      "overview": "Vue d'ensemble",
+      "sections": {
+        "authentication": "Authentification",
+        "rateLimits": "Limites de taux",
+        "sbomApi": "API SBOM",
+        "vendorRiskApi": "API Risque Fournisseur",
+        "nistControlsApi": "API Contrôles NIST",
+        "webhooks": "Webhooks"
+      },
+      "authentication": {
+        "description": "Authentification via clé API",
+        "security": "Sécurité",
+        "securityTips": {
+          "clientSide": "Ne jamais exposer les clés API côté client",
+          "rotation": "Effectuer une rotation régulière des clés",
+          "envVars": "Stocker les clés dans des variables d'environnement",
+          "ipRestrictions": "Utiliser les restrictions d'IP quand c'est possible"
+        }
+      },
+      "rateLimits": {
+        "description": "Limites de taux pour les appels API",
+        "plan": "Plan",
+        "rateLimit": "Limite de taux",
+        "burstLimit": "Limite de rafale",
+        "plans": {
+          "free": "Gratuit",
+          "standard": "Standard",
+          "enterprise": "Entreprise"
+        },
+        "limits": {
+          "free": {
+            "rate": "100 requêtes/heure",
+            "burst": "10 requêtes/minute"
+          },
+          "standard": {
+            "rate": "1000 requêtes/heure",
+            "burst": "50 requêtes/minute"
+          },
+          "enterprise": {
+            "rate": "10000 requêtes/heure",
+            "burst": "200 requêtes/minute"
+          }
+        }
+      },
+      "sbomApi": {
+        "description": "API pour l'analyse des nomenclatures logicielles",
+        "endpoints": "Points de terminaison",
+        "supportedFormats": "Formats supportés",
+        "formats": {
+          "spdx": "SPDX",
+          "cyclonedx": "CycloneDX",
+          "plainText": "Texte simple"
+        },
+        "endpointDescriptions": {
+          "analyzeSbom": "Analyser une nomenclature logicielle",
+          "getVulnerabilities": "Obtenir les vulnérabilités",
+          "getAnalysis": "Obtenir l'analyse complète"
+        }
+      },
+      "vendorRiskApi": {
+        "description": "API pour la gestion des risques fournisseurs",
+        "endpoints": "Points de terminaison",
+        "endpointDescriptions": {
+          "createVendor": "Créer un nouveau fournisseur",
+          "getVendor": "Obtenir les détails d'un fournisseur",
+          "updateVendor": "Mettre à jour un fournisseur",
+          "listVendors": "Lister tous les fournisseurs",
+          "getRiskScore": "Obtenir le score de risque",
+          "createAssessment": "Créer une évaluation"
+        }
+      },
+      "nistControlsApi": {
+        "description": "API pour les contrôles NIST",
+        "endpoints": "Points de terminaison",
+        "endpointDescriptions": {
+          "listControls": "Lister tous les contrôles",
+          "getControl": "Obtenir un contrôle spécifique",
+          "getQuestions": "Obtenir les questions d'évaluation"
+        }
+      },
+      "webhooks": {
+        "description": "Configuration des webhooks pour les notifications en temps réel",
+        "availableEvents": "Événements disponibles",
+        "payloadExample": "Exemple de payload",
+        "events": {
+          "vendorCreated": "Fournisseur créé",
+          "vendorUpdated": "Fournisseur mis à jour",
+          "riskScoreChanged": "Score de risque modifié",
+          "vulnerabilityFound": "Vulnérabilité trouvée",
+          "sbomAnalyzed": "SBOM analysé",
+          "assessmentCompleted": "Évaluation terminée"
+        }
+      },
+      "common": {
+        "endpoint": "Point de terminaison",
+        "method": "Méthode",
+        "description": "Description",
+        "exampleRequest": "Exemple de requête",
+        "exampleResponse": "Exemple de réponse"
+      }
+    }
+  },
+  "quickTools": {
+    "sbomScan": {
+      "title": "Analyseur SBOM",
+      "description": "Analysez vos nomenclatures logicielles pour détecter les vulnérabilités",
+      "action": "Analyser SBOM",
+      "formatInfo": "Formats supportés : SPDX, CycloneDX, SWID",
+      "scanComplete": "Analyse terminée",
+      "noVulnerabilities": "Aucune vulnérabilité critique détectée",
+      "fullAnalysis": "Voir l'analyse complète"
+    },
+    "nistChecklist": {
+      "title": "Liste de contrôle NIST",
+      "description": "Évaluez rapidement votre conformité NIST SP 800-161",
+      "keyAreas": "Domaines clés",
+      "checklistTitle": "Liste de contrôle de conformité",
+      "aboutTitle": "À propos de cette évaluation",
+      "aboutText1": "Cette évaluation rapide vérifie votre conformité aux contrôles essentiels du NIST SP 800-161.",
+      "aboutText2": "Pour une évaluation complète, utilisez notre outil d'évaluation détaillé.",
+      "instructions": "Cochez chaque élément que votre organisation a implémenté",
+      "checkCompliance": "Vérifier la conformité",
+      "complianceResults": "Résultats de conformité",
+      "downloadReport": "Télécharger le rapport",
+      "fullAssessment": "Évaluation complète",
+      "action": "Commencer l'évaluation",
+      "implemented": "Implémenté",
+      "improvementNeeded": "Amélioration nécessaire",
+      "compliantMessage": "Excellente conformité ! Continuez ainsi.",
+      "nonCompliantMessage": "Des améliorations sont nécessaires dans plusieurs domaines.",
+      "goodCompliance": "Bonne conformité avec quelques améliorations possibles",
+      "areas": {
+        "governance": "Gouvernance",
+        "supplierManagement": "Gestion des fournisseurs",
+        "informationSharing": "Partage d'informations",
+        "productSecurity": "Sécurité des produits",
+        "incidentResponse": "Réponse aux incidents"
+      },
+      "items": {
+        "scrm1": "Politique SCRM documentée",
+        "scrm2": "Processus d'évaluation des fournisseurs",
+        "scrm3": "Inventaire des composants tiers",
+        "scrm4": "Surveillance continue des fournisseurs",
+        "scrm5": "Plan de réponse aux incidents SCRM",
+        "scrm6": "Formation du personnel sur les risques SCRM",
+        "scrm7": "Évaluation régulière des risques",
+        "scrm8": "Contrats avec clauses de sécurité",
+        "scrm9": "Processus de gestion des vulnérabilités",
+        "scrm10": "Rapports de conformité réguliers"
+      }
+    },
+    "riskCalculator": {
+      "title": "Calculateur de risque",
+      "description": "Calculez rapidement le score de risque d'un fournisseur",
+      "howToUse": "Comment utiliser",
+      "vendorName": "Nom du fournisseur",
+      "vendorNamePlaceholder": "Entrez le nom du fournisseur",
+      "inputTitle": "Informations sur le fournisseur",
+      "riskFactors": "Facteurs de risque",
+      "step1": "Étape 1 : Informations de base",
+      "step2": "Étape 2 : Évaluation des risques",
+      "step3": "Étape 3 : Résultats",
+      "calculate": "Calculer le risque",
+      "resultsTitle": "Score de risque calculé",
+      "vendorRiskScore": "Score de risque du fournisseur",
+      "recommendation": "Recommandation",
+      "viewDashboard": "Voir le tableau de bord",
+      "action": "Calculer le risque",
+      "disclaimer": "Ce calculateur fournit une estimation basique. Utilisez notre évaluation complète pour une analyse détaillée.",
+      "lowRisk": "Risque faible",
+      "highRisk": "Risque élevé",
+      "factors": {
+        "criticality": {
+          "name": "Criticité",
+          "description": "Importance du fournisseur pour vos opérations"
+        },
+        "dataAccess": {
+          "name": "Accès aux données",
+          "description": "Niveau d'accès aux données sensibles"
+        },
+        "compliance": {
+          "name": "Conformité",
+          "description": "Niveau de conformité aux standards de sécurité"
+        },
+        "securityControls": {
+          "name": "Contrôles de sécurité",
+          "description": "Qualité des contrôles de sécurité implémentés"
+        },
+        "systemExposure": {
+          "name": "Exposition système",
+          "description": "Niveau d'exposition aux systèmes critiques"
+        }
+      },
+      "results": {
+        "low": "Risque faible - Surveillance standard recommandée",
+        "medium": "Risque moyen - Surveillance renforcée recommandée",
+        "high": "Risque élevé - Évaluation approfondie requise",
+        "critical": "Risque critique - Action immédiate requise"
+      }
+    }
+  },
+  "pricing": {
+    "title": "Tarifs",
+    "subtitle": "Choisissez le plan qui convient à votre organisation",
+    "tiers": {
+      "starter": {
+        "name": "Débutant",
+        "description": "Parfait pour les petites équipes qui commencent",
+        "maxUsers": "Jusqu'à 5 utilisateurs",
+        "maxVendors": "Jusqu'à 25 fournisseurs",
+        "cta": "Commencer gratuitement",
+        "features": {
+          "nistBasic": "Évaluations NIST de base",
+          "sbomAnalyzer": "Analyseur SBOM",
+          "vendorDashboard": "Tableau de bord fournisseurs",
+          "standardTemplates": "Modèles standard",
+          "basicReporting": "Rapports de base",
+          "emailSupport": "Support par email"
+        }
+      },
+      "professional": {
+        "name": "Professionnel",
+        "description": "Pour les équipes qui ont besoin de fonctionnalités avancées",
+        "popular": "Le plus populaire",
+        "maxUsers": "Jusqu'à 25 utilisateurs",
+        "maxVendors": "Jusqu'à 100 fournisseurs",
+        "cta": "Essai gratuit",
+        "features": {
+          "everythingStarter": "Tout du plan Débutant",
+          "advancedNist": "Évaluations NIST avancées",
+          "unlimitedSbom": "Analyses SBOM illimitées",
+          "customTemplates": "Modèles personnalisés",
+          "advancedReporting": "Rapports avancés",
+          "workflowAutomation": "Automatisation des workflows",
+          "threatIntelligence": "Intelligence des menaces",
+          "apiAccess": "Accès API",
+          "prioritySupport": "Support prioritaire"
+        }
+      },
+      "enterprise": {
+        "name": "Entreprise",
+        "description": "Pour les grandes organisations avec des besoins complexes",
+        "maxUsers": "Utilisateurs illimités",
+        "maxVendors": "Fournisseurs illimités",
+        "cta": "Nous contacter",
+        "features": {
+          "everythingProfessional": "Tout du plan Professionnel",
+          "customIntegrations": "Intégrations personnalisées",
+          "advancedAnalytics": "Analyses avancées",
+          "customBranding": "Marque personnalisée",
+          "multiTenant": "Architecture multi-tenant",
+          "ssoSecurity": "SSO et sécurité avancée",
+          "dedicatedManager": "Gestionnaire dédié",
+          "professionalServices": "Services professionnels",
+          "slaGuarantees": "Garanties SLA"
+        }
+      },
+      "federal": {
+        "name": "Fédéral",
+        "description": "Spécialement conçu pour les agences gouvernementales",
+        "maxUsers": "Utilisateurs illimités",
+        "maxVendors": "Fournisseurs illimités",
+        "cta": "Demander un devis",
+        "features": {
+          "fullNistCompliance": "Conformité NIST complète",
+          "fismaCompliance": "Conformité FISMA",
+          "atoSupport": "Support ATO",
+          "govCloudDeployment": "Déploiement GovCloud",
+          "cacPivAuth": "Authentification CAC/PIV",
+          "fedrampAuth": "Autorisation FedRAMP",
+          "enhancedSecurity": "Sécurité renforcée",
+          "federalReporting": "Rapports fédéraux",
+          "federalSupportTeam": "Équipe de support fédérale"
+        }
+      }
+    },
+    "enterpriseFeatures": {
+      "title": "Fonctionnalités entreprise",
+      "features": {
+        "supplyChainMapping": "Cartographie de la chaîne d'approvisionnement",
+        "predictiveAnalytics": "Analyses prédictives",
+        "thirdPartyScoring": "Notation de tiers",
+        "advancedVulnerability": "Gestion avancée des vulnérabilités",
+        "regulatoryAutomation": "Automatisation réglementaire",
+        "incidentAutomation": "Automatisation des incidents"
+      }
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "questions": {
+        "freeTrial": {
+          "question": "Y a-t-il un essai gratuit ?",
+          "answer": "Oui, nous offrons un essai gratuit de 14 jours pour tous nos plans payants."
+        },
+        "changePlans": {
+          "question": "Puis-je changer de plan à tout moment ?",
+          "answer": "Oui, vous pouvez passer à un plan supérieur ou inférieur à tout moment."
+        },
+        "dataSecure": {
+          "question": "Mes données sont-elles sécurisées ?",
+          "answer": "Oui, nous utilisons un chiffrement de niveau entreprise et respectons les normes de sécurité les plus strictes."
+        },
+        "supportIncluded": {
+          "question": "Le support est-il inclus ?",
+          "answer": "Oui, tous les plans incluent le support. Les plans supérieurs offrent un support prioritaire."
+        },
+        "paymentMethods": {
+          "question": "Quels modes de paiement acceptez-vous ?",
+          "answer": "Nous acceptons les cartes de crédit principales, les virements bancaires et les achats gouvernementaux."
+        },
+        "customIntegrations": {
+          "question": "Proposez-vous des intégrations personnalisées ?",
+          "answer": "Oui, nos plans Entreprise et Fédéral incluent des intégrations personnalisées."
+        }
+      }
+    },
+    "cta": {
+      "title": "Prêt à commencer ?",
+      "subtitle": "Rejoignez des milliers d'organisations qui font confiance à notre plateforme",
+      "startTrial": "Commencer l'essai gratuit",
+      "scheduleDemo": "Planifier une démonstration"
+    }
+  },
+  "howItWorks": {
+    "title": "Comment ça marche",
+    "subtitle": "Sécurisez votre chaîne d'approvisionnement en quelques étapes simples",
+    "hero": {
+      "tryNow": "Essayer maintenant",
+      "scheduleDemo": "Planifier une démonstration"
+    },
+    "process": {
+      "title": "Notre processus",
+      "description": "Un processus simple et efficace pour sécuriser votre chaîne d'approvisionnement",
+      "stepTitle": "Étape"
+    },
+    "steps": {
+      "assess": {
+        "title": "Évaluer",
+        "description": "Commencez par une évaluation complète de vos risques actuels",
+        "cta": "Commencer l'évaluation",
+        "features": {
+          "nist": "Frameworks NIST",
+          "questions": "Questions guidées",
+          "scoring": "Notation automatique",
+          "recommendations": "Recommandations"
+        }
+      },
+      "sbom": {
+        "title": "Analyser SBOM",
+        "description": "Téléchargez et analysez vos nomenclatures logicielles",
+        "cta": "Analyser SBOM",
+        "features": {
+          "formats": "Multiples formats",
+          "vulnerability": "Détection de vulnérabilités",
+          "license": "Conformité des licences",
+          "compliance": "Vérification de conformité"
+        }
+      },
+      "vendors": {
+        "title": "Gérer les fournisseurs",
+        "description": "Surveillez et évaluez tous vos fournisseurs en continu",
+        "cta": "Gérer les fournisseurs",
+        "features": {
+          "assessment": "Évaluations automatisées",
+          "scoring": "Notation des risques",
+          "monitoring": "Surveillance continue",
+          "reporting": "Rapports détaillés"
+        }
+      },
+      "monitor": {
+        "title": "Surveiller",
+        "description": "Surveillez en continu les risques et recevez des alertes",
+        "cta": "Voir le tableau de bord",
+        "features": {
+          "dashboard": "Tableau de bord en temps réel",
+          "alerts": "Alertes automatiques",
+          "trends": "Analyse des tendances",
+          "reports": "Rapports programmés"
+        }
+      }
+    },
+    "benefits": {
+      "title": "Avantages",
+      "description": "Découvrez comment notre plateforme transforme votre gestion des risques",
+      "compliance": {
+        "title": "Conformité simplifiée",
+        "description": "Automatisez votre conformité aux standards NIST, ISO et autres frameworks"
+      },
+      "automation": {
+        "title": "Automatisation avancée",
+        "description": "Réduisez les tâches manuelles avec notre automatisation intelligente"
+      },
+      "efficiency": {
+        "title": "Efficacité améliorée",
+        "description": "Gagnez du temps avec des processus optimisés et des workflows automatisés"
+      },
+      "insights": {
+        "title": "Insights actionables",
+        "description": "Obtenez des insights précieux pour prendre des décisions éclairées"
+      }
+    },
+    "quickTools": {
+      "title": "Outils rapides",
+      "description": "Testez nos capacités avec ces outils gratuits",
+      "sbomScan": {
+        "title": "Analyse SBOM rapide",
+        "description": "Analysez instantanément vos nomenclatures logicielles",
+        "cta": "Essayer l'analyseur"
+      },
+      "nistChecklist": {
+        "title": "Liste de contrôle NIST",
+        "description": "Évaluez rapidement votre conformité NIST",
+        "cta": "Commencer l'évaluation"
+      },
+      "riskCalculator": {
+        "title": "Calculateur de risque",
+        "description": "Calculez le score de risque de vos fournisseurs",
+        "cta": "Calculer le risque"
+      }
+    },
+    "integration": {
+      "title": "Intégration",
+      "description": "Intégrez facilement notre plateforme dans votre environnement existant",
+      "cta": "Voir la documentation",
+      "features": {
+        "api": "API REST",
+        "templates": "Modèles prêts",
+        "alerts": "Alertes en temps réel",
+        "export": "Export de données",
+        "apiDesc": "API REST complète pour toutes les fonctionnalités",
+        "templatesDesc": "Modèles prêts à l'emploi pour tous vos besoins",
+        "alertsDesc": "Notifications en temps réel via webhooks",
+        "exportDesc": "Exportez vos données dans tous les formats standard"
+      }
+    },
+    "getStarted": {
+      "title": "Commencer",
+      "description": "Suivez ces étapes simples pour démarrer avec notre plateforme",
+      "steps": {
+        "step1": {
+          "title": "Créer un compte",
+          "description": "Inscrivez-vous gratuitement en quelques minutes"
+        },
+        "step2": {
+          "title": "Configurer votre organisation",
+          "description": "Ajoutez vos équipes et configurez vos préférences"
+        },
+        "step3": {
+          "title": "Commencer les évaluations",
+          "description": "Lancez votre première évaluation de risques"
+        }
+      },
+      "cta": {
+        "signup": "Créer un compte",
+        "resources": "Voir les ressources"
+      }
+    }
+  },
+  "navigation": {
+    "home": "Accueil",
+    "solutions": "Solutions",
+    "pricing": "Tarifs",
+    "howItWorks": "Comment ça marche",
+    "resources": "Ressources",
+    "templates": "Modèles",
+    "apiDocs": "Documentation API",
+    "about": "À propos",
+    "contact": "Contact",
+    "privacy": "Confidentialité",
+    "assessment": "Évaluation",
+    "sbom": "SBOM",
+    "vendorRisk": "Risque fournisseur",
+    "vendorAssessments": "Évaluations fournisseurs",
+    "integration": "Intégration"
+  },
+  "assessment": {
+    "title": "Évaluation des risques",
+    "subtitle": "Évaluation complète de la sécurité de votre chaîne d'approvisionnement",
+    "view": "Voir l'évaluation",
+    "current": "Évaluation en cours",
+    "complete": "Terminée",
+    "incomplete": "Incomplète",
+    "score": "Score",
+    "overallScore": "Score global",
+    "backToHome": "Retour à l'accueil",
+    "viewResults": "Voir les résultats",
+    "nextSection": "Section suivante",
+    "previousSection": "Section précédente"
+  },
+  "supplyChain": {
+    "sections": {
+      "supplier": {
+        "title": "Gestion des fournisseurs",
+        "description": "Évaluez vos processus de gestion des fournisseurs",
+        "questions": {
+          "sr1": {
+            "question": "Avez-vous un processus documenté pour l'évaluation des nouveaux fournisseurs ?",
+            "guidance": "Un processus documenté garantit une évaluation cohérente de tous les nouveaux fournisseurs."
+          },
+          "sr2": {
+            "question": "Effectuez-vous des évaluations de sécurité régulières de vos fournisseurs critiques ?",
+            "guidance": "Les évaluations régulières permettent d'identifier les nouveaux risques et changements."
+          },
+          "sr3": {
+            "question": "Vos contrats incluent-ils des clauses de sécurité spécifiques ?",
+            "guidance": "Les clauses contractuelles formalisent les exigences de sécurité."
+          },
+          "sr4": {
+            "question": "Surveillez-vous en continu la sécurité de vos fournisseurs ?",
+            "guidance": "La surveillance continue permet de détecter rapidement les changements de risque."
+          }
+        }
+      },
+      "information": {
+        "title": "Gestion de l'information",
+        "description": "Évaluez vos pratiques de gestion de l'information",
+        "questions": {
+          "is1": {
+            "question": "Avez-vous une classification des informations sensibles ?",
+            "guidance": "La classification aide à appliquer les contrôles appropriés selon la sensibilité."
+          },
+          "is2": {
+            "question": "Contrôlez-vous l'accès aux informations selon le principe du moindre privilège ?",
+            "guidance": "Le principe du moindre privilège limite l'exposition aux risques."
+          },
+          "is3": {
+            "question": "Chiffrez-vous les données sensibles en transit et au repos ?",
+            "guidance": "Le chiffrement protège contre l'interception et l'accès non autorisé."
+          },
+          "is4": {
+            "question": "Avez-vous des accords de partage d'informations avec vos fournisseurs ?",
+            "guidance": "Les accords formalisent les responsabilités de protection des données."
+          }
+        }
+      },
+      "threat": {
+        "title": "Gestion des menaces",
+        "description": "Évaluez vos capacités de détection et de réponse aux menaces",
+        "questions": {
+          "tm1": {
+            "question": "Effectuez-vous une veille sur les menaces liées à votre secteur ?",
+            "guidance": "La veille permet d'anticiper les menaces émergentes."
+          },
+          "tm2": {
+            "question": "Avez-vous des indicateurs de compromission définis ?",
+            "guidance": "Les IoC permettent une détection proactive des incidents."
+          },
+          "tm3": {
+            "question": "Partagez-vous les informations de menaces avec vos partenaires ?",
+            "guidance": "Le partage d'informations renforce la défense collective."
+          },
+          "tm4": {
+            "question": "Testez-vous régulièrement votre capacité de détection ?",
+            "guidance": "Les tests valident l'efficacité de vos contrôles de détection."
+          }
+        }
+      },
+      "vulnerability": {
+        "title": "Gestion des vulnérabilités",
+        "description": "Évaluez vos processus de gestion des vulnérabilités",
+        "questions": {
+          "vm1": {
+            "question": "Avez-vous un inventaire complet de vos actifs ?",
+            "guidance": "L'inventaire est essentiel pour une gestion efficace des vulnérabilités."
+          },
+          "vm2": {
+            "question": "Effectuez-vous des analyses de vulnérabilités régulières ?",
+            "guidance": "Les analyses régulières permettent d'identifier les nouvelles vulnérabilités."
+          },
+          "vm3": {
+            "question": "Avez-vous un processus de priorisation des correctifs ?",
+            "guidance": "La priorisation permet de traiter d'abord les risques les plus critiques."
+          },
+          "vm4": {
+            "question": "Surveillez-vous les vulnérabilités dans les composants tiers ?",
+            "guidance": "Les composants tiers peuvent introduire des vulnérabilités dans votre système."
+          }
+        }
+      },
+      "lifecycle": {
+        "title": "Gestion du cycle de vie",
+        "description": "Évaluez la gestion du cycle de vie de vos systèmes",
+        "questions": {
+          "sl1": {
+            "question": "Intégrez-vous la sécurité dès la conception de vos systèmes ?",
+            "guidance": "L'intégration précoce de la sécurité réduit les coûts et améliore l'efficacité."
+          },
+          "sl2": {
+            "question": "Effectuez-vous des revues de sécurité à chaque phase du cycle de vie ?",
+            "guidance": "Les revues régulières garantissent le maintien des standards de sécurité."
+          },
+          "sl3": {
+            "question": "Avez-vous un processus de décommissionnement sécurisé ?",
+            "guidance": "Le décommissionnement sécurisé évite l'exposition de données résiduelles."
+          },
+          "sl4": {
+            "question": "Documentez-vous les changements de configuration de sécurité ?",
+            "guidance": "La documentation facilite l'audit et la maintenance de la sécurité."
+          }
+        }
+      },
+      "incident": {
+        "title": "Gestion des incidents",
+        "description": "Évaluez vos capacités de réponse aux incidents",
+        "questions": {
+          "ir1": {
+            "question": "Avez-vous un plan de réponse aux incidents documenté ?",
+            "guidance": "Un plan documenté garantit une réponse coordonnée et efficace."
+          },
+          "ir2": {
+            "question": "Votre équipe de réponse aux incidents est-elle formée ?",
+            "guidance": "La formation assure une réponse compétente et rapide."
+          },
+          "ir3": {
+            "question": "Testez-vous régulièrement votre plan de réponse aux incidents ?",
+            "guidance": "Les tests révèlent les lacunes et améliorent l'efficacité du plan."
+          },
+          "ir4": {
+            "question": "Avez-vous des procédures de communication d'incidents ?",
+            "guidance": "La communication appropriée limite l'impact et facilite la résolution."
+          }
+        }
+      }
+    }
+  },
+  "sbom": {
+    "title": "Analyse SBOM",
+    "description": "Analysez vos nomenclatures logicielles pour identifier les vulnérabilités et vérifier la conformité des licences",
+    "upload": {
+      "title": "Télécharger SBOM",
+      "uploadPrompt": "Glissez-déposez votre fichier SBOM ici",
+      "dropHere": "Déposez le fichier ici",
+      "browseFiles": "Parcourir les fichiers",
+      "supportedFormats": "Formats supportés : SPDX, CycloneDX, SWID",
+      "analyzing": "Analyse en cours...",
+      "noSbom": "Aucun SBOM fourni"
+    },
+    "results": {
+      "title": "Résultats de l'analyse",
+      "components": "Composants",
+      "vulnerabilities": "Vulnérabilités",
+      "license": "Licence",
+      "licenses": "Licences",
+      "supportedFormats": "Formats supportés"
+    }
+  },
+  "vendorRisk": {
+    "title": "Gestion des risques fournisseurs",
+    "description": "Surveillez et gérez les risques de tous vos fournisseurs",
+    "vendorOverview": "Vue d'ensemble des fournisseurs",
+    "riskOverview": "Vue d'ensemble des risques",
+    "totalVendors": "Total des fournisseurs",
+    "monitoredVendors": "Fournisseurs surveillés",
+    "highRisk": "Risque élevé",
+    "mediumRisk": "Risque moyen",
+    "addNewVendor": "Ajouter un nouveau fournisseur",
+    "complianceStatus": "Statut de conformité",
+    "compliant": "Conforme",
+    "nonCompliant": "Non conforme",
+    "partial": "Partiel",
+    "table": {
+      "vendor": "Fournisseur",
+      "riskScore": "Score de risque",
+      "riskLevel": "Niveau de risque",
+      "complianceStatus": "Statut de conformité",
+      "lastAssessment": "Dernière évaluation"
+    },
+    "riskScoring": {
+      "title": "Notation des risques",
+      "description": "Notre système de notation évalue automatiquement le risque de chaque fournisseur",
+      "lowRisk": "Risque faible (0-30)",
+      "mediumRisk": "Risque moyen (31-60)",
+      "highRisk": "Risque élevé (61-80)",
+      "criticalRisk": "Risque critique (81-100)",
+      "excellent": "Excellent",
+      "acceptable": "Acceptable",
+      "concerning": "Préoccupant",
+      "unacceptable": "Inacceptable"
+    },
+    "actions": {
+      "title": "Actions recommandées",
+      "lowRisk": {
+        "title": "Risque faible",
+        "description": "Surveillance standard et revues annuelles"
+      },
+      "mediumRisk": {
+        "title": "Risque moyen",
+        "description": "Surveillance renforcée et revues semestrielles"
+      },
+      "highRisk": {
+        "title": "Risque élevé",
+        "description": "Évaluation approfondie et plan d'amélioration"
+      },
+      "criticalRisk": {
+        "title": "Risque critique",
+        "description": "Action immédiate requise, considérer la suspension"
+      }
+    }
+  },
+  "auth": {
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "profile": "Profil",
+    "account": "Compte"
+  },
+  "components": {
+    "yes": "Oui",
+    "no": "Non",
+    "partial": "Partiel"
+  },
+  "footer": {
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
+    "security": "Sécurité",
+    "copyright": "© 2024 SecureChain. Tous droits réservés."
+  },
+  "app": {
+    "name": "SecureChain"
+  },
   "json": "json",
-  "resources.apiDocs.rateLimits.plan": "resources.apiDocs.rateLimits.plan",
-  "vendorRisk.highRisk": "vendorRisk.highRisk",
-  "howItWorks.steps.monitor.features.dashboard": "howItWorks.steps.monitor.features.dashboard",
-  "quickTools.riskCalculator.vendorName": "quickTools.riskCalculator.vendorName",
-  "pricing.faq.questions.freeTrial.question": "pricing.faq.questions.freeTrial.question",
-  "navigation.solutions": "navigation.solutions",
-  "quickTools.riskCalculator.factors.dataAccess.name": "quickTools.riskCalculator.factors.dataAccess.name",
-  "resources.templates.categories.riskAssessment.items.scoringMatrix": "resources.templates.categories.riskAssessment.items.scoringMatrix",
-  "supplyChain.sections.information.questions.is4.guidance": "supplyChain.sections.information.questions.is4.guidance",
-  "sbom.results.license": "sbom.results.license",
-  "quickTools.riskCalculator.inputTitle": "quickTools.riskCalculator.inputTitle",
-  "pricing.tiers.starter.features.nistBasic": "pricing.tiers.starter.features.nistBasic",
-  "quickTools.nistChecklist.items.scrm7": "quickTools.nistChecklist.items.scrm7",
-  "pricing.tiers.enterprise.features.slaGuarantees": "pricing.tiers.enterprise.features.slaGuarantees",
-  "pricing.faq.questions.dataSecure.question": "pricing.faq.questions.dataSecure.question",
-  "supplyChain.sections.vulnerability.questions.vm2.question": "supplyChain.sections.vulnerability.questions.vm2.question",
-  "resources.templates.implementationGuides.items.maturityModel.description": "resources.templates.implementationGuides.items.maturityModel.description",
-  "resources.apiDocs.rateLimits.limits.enterprise.rate": "resources.apiDocs.rateLimits.limits.enterprise.rate",
-  "home.benefits.item2": "home.benefits.item2",
-  "home.benefits.title": "home.benefits.title",
   "csv": "csv",
-  "pricing.tiers.starter.features.basicReporting": "pricing.tiers.starter.features.basicReporting",
-  "pricing.tiers.enterprise.cta": "pricing.tiers.enterprise.cta",
-  "supplyChain.sections.threat.questions.tm3.question": "supplyChain.sections.threat.questions.tm3.question",
-  "quickTools.riskCalculator.riskFactors": "quickTools.riskCalculator.riskFactors",
-  "pricing.tiers.professional.features.everythingStarter": "pricing.tiers.professional.features.everythingStarter",
-  "pricing.enterpriseFeatures.features.advancedVulnerability": "pricing.enterpriseFeatures.features.advancedVulnerability",
-  "auth.login": "auth.login",
-  "supplyChain.sections.information.questions.is4.question": "supplyChain.sections.information.questions.is4.question",
-  "sbom.title": "sbom.title",
-  "quickTools.nistChecklist.improvementNeeded": "quickTools.nistChecklist.improvementNeeded",
-  "sbom.results.licenses": "sbom.results.licenses",
-  "pricing.tiers.federal.features.atoSupport": "pricing.tiers.federal.features.atoSupport",
-  "pricing.tiers.federal.features.fismaCompliance": "pricing.tiers.federal.features.fismaCompliance",
-  "resources.templates.categories.riskAssessment.items.riskRegister": "resources.templates.categories.riskAssessment.items.riskRegister",
-  "supplyChain.sections.supplier.title": "supplyChain.sections.supplier.title",
-  "howItWorks.getStarted.cta.signup": "howItWorks.getStarted.cta.signup",
-  "resources.apiDocs.common.endpoint": "resources.apiDocs.common.endpoint",
-  "howItWorks.steps.vendors.features.reporting": "howItWorks.steps.vendors.features.reporting",
-  "supplyChain.sections.information.questions.is2.guidance": "supplyChain.sections.information.questions.is2.guidance",
-  "vendorRisk.title": "vendorRisk.title",
-  "resources.templates.categories.vendorQuestionnaires.items.vendorQuick": "resources.templates.categories.vendorQuestionnaires.items.vendorQuick",
-  "supplyChain.sections.incident.questions.ir4.question": "supplyChain.sections.incident.questions.ir4.question",
-  "resources.apiDocs.rateLimits.limits.enterprise.burst": "resources.apiDocs.rateLimits.limits.enterprise.burst",
-  "vendorRisk.table.riskScore": "vendorRisk.table.riskScore",
-  "assessment.current": "assessment.current",
-  "pricing.tiers.enterprise.features.advancedAnalytics": "pricing.tiers.enterprise.features.advancedAnalytics",
-  "quickTools.riskCalculator.factors.criticality.description": "quickTools.riskCalculator.factors.criticality.description",
-  "resources.templates.nistResources.keyDocuments.items.nistRev1.description": "resources.templates.nistResources.keyDocuments.items.nistRev1.description",
-  "footer.privacy": "footer.privacy",
-  "navigation.home": "navigation.home",
-  "supplyChain.sections.supplier.questions.sr1.guidance": "supplyChain.sections.supplier.questions.sr1.guidance",
-  "pricing.enterpriseFeatures.features.regulatoryAutomation": "pricing.enterpriseFeatures.features.regulatoryAutomation",
-  "pricing.tiers.enterprise.features.ssoSecurity": "pricing.tiers.enterprise.features.ssoSecurity",
-  "resources.apiDocs.authentication.securityTips.clientSide": "resources.apiDocs.authentication.securityTips.clientSide",
-  "pricing.tiers.professional.features.apiAccess": "pricing.tiers.professional.features.apiAccess",
-  "vendorRisk.vendorOverview": "vendorRisk.vendorOverview",
-  "components.partial": "components.partial",
-  "pricing.tiers.professional.maxUsers": "pricing.tiers.professional.maxUsers",
-  "pricing.tiers.federal.cta": "pricing.tiers.federal.cta",
-  "quickTools.nistChecklist.description": "quickTools.nistChecklist.description",
-  "quickTools.nistChecklist.keyAreas": "quickTools.nistChecklist.keyAreas",
-  "resources.apiDocs.rateLimits.rateLimit": "resources.apiDocs.rateLimits.rateLimit",
-  "quickTools.nistChecklist.areas.informationSharing": "quickTools.nistChecklist.areas.informationSharing",
-  "pricing.tiers.federal.features.federalReporting": "pricing.tiers.federal.features.federalReporting",
-  "resources.apiDocs.overview": "resources.apiDocs.overview",
-  "howItWorks.steps.vendors.title": "howItWorks.steps.vendors.title",
-  "resources.apiDocs.rateLimits.limits.free.burst": "resources.apiDocs.rateLimits.limits.free.burst",
-  "quickTools.riskCalculator.disclaimer": "quickTools.riskCalculator.disclaimer",
-  "quickTools.nistChecklist.items.scrm8": "quickTools.nistChecklist.items.scrm8",
-  "howItWorks.steps.sbom.features.license": "howItWorks.steps.sbom.features.license",
-  "app.name": "app.name",
-  "vendorRisk.description": "vendorRisk.description",
-  "howItWorks.quickTools.sbomScan.cta": "howItWorks.quickTools.sbomScan.cta",
-  "pricing.faq.questions.changePlans.question": "pricing.faq.questions.changePlans.question",
-  "supplyChain.sections.lifecycle.title": "supplyChain.sections.lifecycle.title",
-  "howItWorks.steps.vendors.features.scoring": "howItWorks.steps.vendors.features.scoring",
-  "supplyChain.sections.vulnerability.title": "supplyChain.sections.vulnerability.title",
-  "content-type": "content-type",
-  "quickTools.riskCalculator.title": "quickTools.riskCalculator.title",
-  "pricing.tiers.federal.description": "pricing.tiers.federal.description",
-  "quickTools.riskCalculator.howToUse": "quickTools.riskCalculator.howToUse",
-  "vendorRisk.riskScoring.title": "vendorRisk.riskScoring.title",
-  "quickTools.riskCalculator.calculate": "quickTools.riskCalculator.calculate",
-  "resources.templates.customization.title": "resources.templates.customization.title",
-  "auth.logout": "auth.logout",
-  "home.features.feature1.description": "home.features.feature1.description",
-  "resources.templates.categories.sbomTemplates.items.generator": "resources.templates.categories.sbomTemplates.items.generator",
-  "pricing.tiers.federal.features.fullNistCompliance": "pricing.tiers.federal.features.fullNistCompliance",
-  "quickTools.nistChecklist.aboutTitle": "quickTools.nistChecklist.aboutTitle",
-  "supplyChain.sections.supplier.questions.sr3.guidance": "supplyChain.sections.supplier.questions.sr3.guidance",
-  "resources.apiDocs.webhooks.events.riskScoreChanged": "resources.apiDocs.webhooks.events.riskScoreChanged",
-  "quickTools.nistChecklist.areas.governance": "quickTools.nistChecklist.areas.governance",
-  "auth.profile": "auth.profile",
-  "pricing.cta.title": "pricing.cta.title",
-  "en-US": "en-US",
-  "quickTools.nistChecklist.aboutText1": "quickTools.nistChecklist.aboutText1",
-  "supplyChain.sections.information.questions.is1.guidance": "supplyChain.sections.information.questions.is1.guidance",
-  "supplyChain.sections.incident.questions.ir1.question": "supplyChain.sections.incident.questions.ir1.question",
-  "vendorRisk.riskOverview": "vendorRisk.riskOverview",
-  "quickTools.riskCalculator.factors.dataAccess.description": "quickTools.riskCalculator.factors.dataAccess.description",
-  "howItWorks.integration.features.exportDesc": "howItWorks.integration.features.exportDesc",
-  "resources.apiDocs.webhooks.availableEvents": "resources.apiDocs.webhooks.availableEvents",
-  "supplyChain.sections.threat.questions.tm4.guidance": "supplyChain.sections.threat.questions.tm4.guidance",
-  "vendorRisk.actions.criticalRisk.description": "vendorRisk.actions.criticalRisk.description",
-  "vendorRisk.table.complianceStatus": "vendorRisk.table.complianceStatus",
-  "howItWorks.getStarted.steps.step2.title": "howItWorks.getStarted.steps.step2.title",
-  "supplyChain.sections.information.questions.is1.question": "supplyChain.sections.information.questions.is1.question",
-  "sbom.upload.dropHere": "sbom.upload.dropHere",
-  "quickTools.riskCalculator.vendorRiskScore": "quickTools.riskCalculator.vendorRiskScore",
-  "resources.apiDocs.webhooks.events.vulnerabilityFound": "resources.apiDocs.webhooks.events.vulnerabilityFound",
-  "home.cta.description": "home.cta.description",
-  "resources.apiDocs.webhooks.description": "resources.apiDocs.webhooks.description",
-  "resources.templates.implementationGuides.items.sbomGuide.title": "resources.templates.implementationGuides.items.sbomGuide.title",
-  "supplyChain.sections.supplier.description": "supplyChain.sections.supplier.description",
-  "resources.apiDocs.authentication.description": "resources.apiDocs.authentication.description",
-  "howItWorks.quickTools.nistChecklist.description": "howItWorks.quickTools.nistChecklist.description",
-  "resources.apiDocs.rateLimits.limits.standard.burst": "resources.apiDocs.rateLimits.limits.standard.burst",
-  "vendorRisk.addNewVendor": "vendorRisk.addNewVendor",
-  "howItWorks.integration.features.alerts": "howItWorks.integration.features.alerts",
-  "resources.templates.implementationGuides.items.maturityModel.title": "resources.templates.implementationGuides.items.maturityModel.title",
-  "pricing.title": "pricing.title",
-  "quickTools.riskCalculator.highRisk": "quickTools.riskCalculator.highRisk",
-  "supplyChain.sections.supplier.questions.sr4.guidance": "supplyChain.sections.supplier.questions.sr4.guidance",
-  "howItWorks.integration.features.alertsDesc": "howItWorks.integration.features.alertsDesc",
-  "assessment.overallScore": "assessment.overallScore",
-  "footer.copyright": "footer.copyright",
-  "howItWorks.quickTools.title": "howItWorks.quickTools.title",
-  "quickTools.nistChecklist.items.scrm6": "quickTools.nistChecklist.items.scrm6",
-  "resources.templates.implementationGuides.items.federalCompliance.title": "resources.templates.implementationGuides.items.federalCompliance.title",
-  "vendorRisk.compliant": "vendorRisk.compliant",
-  "quickTools.riskCalculator.results.low": "quickTools.riskCalculator.results.low",
-  "howItWorks.getStarted.title": "howItWorks.getStarted.title",
-  "resources.apiDocs.sections.rateLimits": "resources.apiDocs.sections.rateLimits",
-  "howItWorks.process.title": "howItWorks.process.title",
-  "resources.apiDocs.nistControlsApi.endpointDescriptions.getControl": "resources.apiDocs.nistControlsApi.endpointDescriptions.getControl",
-  "howItWorks.steps.sbom.cta": "howItWorks.steps.sbom.cta",
-  "pricing.tiers.professional.features.prioritySupport": "pricing.tiers.professional.features.prioritySupport",
-  "quickTools.riskCalculator.viewDashboard": "quickTools.riskCalculator.viewDashboard",
-  "quickTools.riskCalculator.factors.compliance.name": "quickTools.riskCalculator.factors.compliance.name",
-  "howItWorks.steps.vendors.features.monitoring": "howItWorks.steps.vendors.features.monitoring",
-  "home.features.title": "home.features.title",
-  "resources.apiDocs.rateLimits.plans.standard": "resources.apiDocs.rateLimits.plans.standard",
-  "quickTools.nistChecklist.implemented": "quickTools.nistChecklist.implemented",
-  "pricing.cta.subtitle": "pricing.cta.subtitle",
-  "quickTools.riskCalculator.factors.compliance.description": "quickTools.riskCalculator.factors.compliance.description",
-  "howItWorks.benefits.title": "howItWorks.benefits.title",
-  "sbom.results.title": "sbom.results.title",
-  "quickTools.riskCalculator.results.high": "quickTools.riskCalculator.results.high",
-  "howItWorks.hero.scheduleDemo": "howItWorks.hero.scheduleDemo",
-  "supplyChain.sections.lifecycle.questions.sl1.guidance": "supplyChain.sections.lifecycle.questions.sl1.guidance",
-  "supplyChain.sections.incident.questions.ir2.question": "supplyChain.sections.incident.questions.ir2.question",
-  "resources.apiDocs.sbomApi.endpoints": "resources.apiDocs.sbomApi.endpoints",
-  "navigation.pricing": "navigation.pricing",
-  "supplyChain.sections.incident.description": "supplyChain.sections.incident.description",
-  "howItWorks.quickTools.sbomScan.title": "howItWorks.quickTools.sbomScan.title",
-  "assessment.complete": "assessment.complete",
-  "pricing.tiers.professional.popular": "pricing.tiers.professional.popular",
-  "resources.apiDocs.vendorRiskApi.description": "resources.apiDocs.vendorRiskApi.description",
-  "supplyChain.sections.supplier.questions.sr1.question": "supplyChain.sections.supplier.questions.sr1.question",
-  "pricing.cta.scheduleDemo": "pricing.cta.scheduleDemo",
-  "quickTools.riskCalculator.step3": "quickTools.riskCalculator.step3",
-  "supplyChain.sections.information.questions.is3.guidance": "supplyChain.sections.information.questions.is3.guidance",
-  "supplyChain.sections.vulnerability.questions.vm2.guidance": "supplyChain.sections.vulnerability.questions.vm2.guidance",
-  "quickTools.riskCalculator.results.critical": "quickTools.riskCalculator.results.critical",
-  "pricing.tiers.enterprise.description": "pricing.tiers.enterprise.description",
-  "pricing.tiers.starter.maxUsers": "pricing.tiers.starter.maxUsers",
-  "resources.apiDocs.webhooks.events.assessmentCompleted": "resources.apiDocs.webhooks.events.assessmentCompleted",
-  "pricing.faq.questions.supportIncluded.question": "pricing.faq.questions.supportIncluded.question",
-  "quickTools.riskCalculator.factors.systemExposure.description": "quickTools.riskCalculator.factors.systemExposure.description",
-  "quickTools.riskCalculator.recommendation": "quickTools.riskCalculator.recommendation",
-  "Report generation would start here": "Report generation would start here",
-  "pricing.tiers.enterprise.features.professionalServices": "pricing.tiers.enterprise.features.professionalServices",
-  "howItWorks.benefits.automation.description": "howItWorks.benefits.automation.description",
-  "howItWorks.process.stepTitle": "howItWorks.process.stepTitle",
-  "resources.apiDocs.authentication.security": "resources.apiDocs.authentication.security",
-  "howItWorks.steps.assess.title": "howItWorks.steps.assess.title",
-  "resources.templates.categories.sbomTemplates.items.report": "resources.templates.categories.sbomTemplates.items.report",
-  "quickTools.sbomScan.scanComplete": "quickTools.sbomScan.scanComplete",
-  "howItWorks.benefits.efficiency.description": "howItWorks.benefits.efficiency.description",
-  "quickTools.nistChecklist.downloadReport": "quickTools.nistChecklist.downloadReport",
-  "sbom.description": "sbom.description",
-  "vendorRisk.riskScoring.excellent": "vendorRisk.riskScoring.excellent",
-  "resources.apiDocs.sbomApi.formats.plainText": "resources.apiDocs.sbomApi.formats.plainText",
-  "assessment.score": "assessment.score",
-  "quickTools.riskCalculator.factors.securityControls.name": "quickTools.riskCalculator.factors.securityControls.name",
-  "vendorRisk.nonCompliant": "vendorRisk.nonCompliant",
-  "supplyChain.sections.lifecycle.questions.sl2.guidance": "supplyChain.sections.lifecycle.questions.sl2.guidance",
-  "resources.templates.categories.riskAssessment.items.managementPlan": "resources.templates.categories.riskAssessment.items.managementPlan",
-  "howItWorks.quickTools.nistChecklist.cta": "howItWorks.quickTools.nistChecklist.cta",
-  "supplyChain.sections.threat.questions.tm2.guidance": "supplyChain.sections.threat.questions.tm2.guidance",
-  "home.hero.title": "home.hero.title",
-  "home.cta.title": "home.cta.title",
-  "howItWorks.steps.assess.features.questions": "howItWorks.steps.assess.features.questions",
-  "assessment.backToHome": "assessment.backToHome",
-  "supplyChain.sections.threat.questions.tm1.guidance": "supplyChain.sections.threat.questions.tm1.guidance",
-  "resources.apiDocs.webhooks.events.sbomAnalyzed": "resources.apiDocs.webhooks.events.sbomAnalyzed",
-  "pricing.enterpriseFeatures.title": "pricing.enterpriseFeatures.title",
-  "quickTools.nistChecklist.action": "quickTools.nistChecklist.action",
-  "howItWorks.steps.assess.features.recommendations": "howItWorks.steps.assess.features.recommendations",
-  "pricing.enterpriseFeatures.features.supplyChainMapping": "pricing.enterpriseFeatures.features.supplyChainMapping",
-  "resources.apiDocs.common.description": "resources.apiDocs.common.description",
-  "pricing.enterpriseFeatures.features.predictiveAnalytics": "pricing.enterpriseFeatures.features.predictiveAnalytics",
-  "howItWorks.benefits.insights.description": "howItWorks.benefits.insights.description",
-  "home.features.feature3.title": "home.features.feature3.title",
-  "resources.apiDocs.nistControlsApi.endpointDescriptions.getQuestions": "resources.apiDocs.nistControlsApi.endpointDescriptions.getQuestions",
-  "quickTools.sbomScan.fullAnalysis": "quickTools.sbomScan.fullAnalysis",
-  "resources.templates.nistResources.keyDocuments.items.nistRev1.title": "resources.templates.nistResources.keyDocuments.items.nistRev1.title",
-  "supplyChain.sections.supplier.questions.sr3.question": "supplyChain.sections.supplier.questions.sr3.question",
-  "resources.apiDocs.rateLimits.limits.standard.rate": "resources.apiDocs.rateLimits.limits.standard.rate",
-  "resources.templates.implementationGuides.items.federalCompliance.description": "resources.templates.implementationGuides.items.federalCompliance.description",
-  "quickTools.sbomScan.title": "quickTools.sbomScan.title",
-  "howItWorks.steps.sbom.description": "howItWorks.steps.sbom.description",
-  "resources.templates.nistResources.keyDocuments.title": "resources.templates.nistResources.keyDocuments.title",
-  "sbom.results.supportedFormats": "sbom.results.supportedFormats",
-  "navigation.apiDocs": "navigation.apiDocs",
-  "components.yes": "components.yes",
-  "pricing.tiers.professional.description": "pricing.tiers.professional.description",
-  "resources.apiDocs.sections.nistControlsApi": "resources.apiDocs.sections.nistControlsApi",
-  "resources.apiDocs.rateLimits.limits.free.rate": "resources.apiDocs.rateLimits.limits.free.rate",
-  "home.hero.description": "home.hero.description",
-  "resources.apiDocs.title": "resources.apiDocs.title",
-  "assessment.title": "assessment.title",
-  "supplyChain.sections.incident.questions.ir4.guidance": "supplyChain.sections.incident.questions.ir4.guidance",
-  "pricing.tiers.professional.features.threatIntelligence": "pricing.tiers.professional.features.threatIntelligence",
-  "pricing.tiers.federal.maxUsers": "pricing.tiers.federal.maxUsers",
-  "quickTools.nistChecklist.checklistTitle": "quickTools.nistChecklist.checklistTitle",
-  "pricing.tiers.federal.features.cacPivAuth": "pricing.tiers.federal.features.cacPivAuth",
-  "pricing.faq.title": "pricing.faq.title",
-  "navigation.integration": "navigation.integration",
-  "sbom.upload.title": "sbom.upload.title",
-  "supplyChain.sections.lifecycle.questions.sl3.guidance": "supplyChain.sections.lifecycle.questions.sl3.guidance",
-  "vendorRisk.riskScoring.criticalRisk": "vendorRisk.riskScoring.criticalRisk",
-  "quickTools.nistChecklist.items.scrm2": "quickTools.nistChecklist.items.scrm2",
-  "quickTools.nistChecklist.goodCompliance": "quickTools.nistChecklist.goodCompliance",
-  "vendorRisk.riskScoring.unacceptable": "vendorRisk.riskScoring.unacceptable",
-  "Please log in to import data": "Please log in to import data",
-  "howItWorks.steps.monitor.features.alerts": "howItWorks.steps.monitor.features.alerts",
-  "navigation.assessment": "navigation.assessment",
-  "pricing.tiers.enterprise.features.dedicatedManager": "pricing.tiers.enterprise.features.dedicatedManager",
-  "resources.templates.nistResources.keyDocuments.items.quickStart.description": "resources.templates.nistResources.keyDocuments.items.quickStart.description",
-  "navigation.howItWorks": "navigation.howItWorks",
-  "pricing.tiers.enterprise.name": "pricing.tiers.enterprise.name",
-  "vendorRisk.riskScoring.description": "vendorRisk.riskScoring.description",
-  "howItWorks.steps.sbom.title": "howItWorks.steps.sbom.title",
-  "sbom.results.components": "sbom.results.components",
-  "quickTools.riskCalculator.step2": "quickTools.riskCalculator.step2",
-  "howItWorks.getStarted.cta.resources": "howItWorks.getStarted.cta.resources",
-  "home.hero.cta2": "home.hero.cta2",
-  "pricing.enterpriseFeatures.features.thirdPartyScoring": "pricing.enterpriseFeatures.features.thirdPartyScoring",
-  "resources.templates.customization.contactButton": "resources.templates.customization.contactButton",
-  "resources.apiDocs.sbomApi.formats.spdx": "resources.apiDocs.sbomApi.formats.spdx",
-  "resources.apiDocs.webhooks.events.vendorCreated": "resources.apiDocs.webhooks.events.vendorCreated",
-  "howItWorks.quickTools.nistChecklist.title": "howItWorks.quickTools.nistChecklist.title",
-  "pricing.tiers.enterprise.features.multiTenant": "pricing.tiers.enterprise.features.multiTenant",
-  "vendorRisk.actions.highRisk.title": "vendorRisk.actions.highRisk.title",
-  "quickTools.riskCalculator.description": "quickTools.riskCalculator.description",
-  "vendorRisk.table.lastAssessment": "vendorRisk.table.lastAssessment",
-  "supplyChain.sections.incident.questions.ir3.question": "supplyChain.sections.incident.questions.ir3.question",
-  "pricing.tiers.professional.maxVendors": "pricing.tiers.professional.maxVendors",
-  "quickTools.nistChecklist.nonCompliantMessage": "quickTools.nistChecklist.nonCompliantMessage",
-  "quickTools.riskCalculator.results.medium": "quickTools.riskCalculator.results.medium",
-  "howItWorks.steps.assess.features.scoring": "howItWorks.steps.assess.features.scoring",
-  "resources.apiDocs.sections.authentication": "resources.apiDocs.sections.authentication",
-  "supplyChain.sections.supplier.questions.sr2.guidance": "supplyChain.sections.supplier.questions.sr2.guidance",
-  "vendorRisk.complianceStatus": "vendorRisk.complianceStatus",
-  "footer.terms": "footer.terms",
-  "pricing.tiers.starter.cta": "pricing.tiers.starter.cta",
-  "home.benefits.item1": "home.benefits.item1",
-  "pricing.tiers.starter.name": "pricing.tiers.starter.name",
-  "resources.apiDocs.common.exampleResponse": "resources.apiDocs.common.exampleResponse",
-  "resources.templates.nistResources.keyDocuments.items.controlMapping.description": "resources.templates.nistResources.keyDocuments.items.controlMapping.description",
-  "pricing.tiers.professional.features.advancedReporting": "pricing.tiers.professional.features.advancedReporting",
-  "resources.apiDocs.rateLimits.plans.enterprise": "resources.apiDocs.rateLimits.plans.enterprise",
   "div": "div",
-  "supplyChain.sections.lifecycle.questions.sl2.question": "supplyChain.sections.lifecycle.questions.sl2.question",
-  "supplyChain.sections.threat.questions.tm2.question": "supplyChain.sections.threat.questions.tm2.question",
-  "supplyChain.sections.information.description": "supplyChain.sections.information.description",
-  "supplyChain.sections.incident.title": "supplyChain.sections.incident.title",
-  "howItWorks.getStarted.steps.step2.description": "howItWorks.getStarted.steps.step2.description",
-  "resources.apiDocs.sbomApi.formats.cyclonedx": "resources.apiDocs.sbomApi.formats.cyclonedx",
-  "resources.apiDocs.nistControlsApi.endpointDescriptions.listControls": "resources.apiDocs.nistControlsApi.endpointDescriptions.listControls",
-  "resources.apiDocs.webhooks.payloadExample": "resources.apiDocs.webhooks.payloadExample",
-  "resources.templates.nistResources.keyDocuments.items.quickStart.title": "resources.templates.nistResources.keyDocuments.items.quickStart.title",
-  "sbom.upload.supportedFormats": "sbom.upload.supportedFormats",
-  "vendorRisk.totalVendors": "vendorRisk.totalVendors",
-  "vendorRisk.mediumRisk": "vendorRisk.mediumRisk",
-  "supplyChain.sections.vulnerability.description": "supplyChain.sections.vulnerability.description",
-  "resources.apiDocs.vendorRiskApi.endpointDescriptions.getRiskScore": "resources.apiDocs.vendorRiskApi.endpointDescriptions.getRiskScore",
-  "home.features.feature3.description": "home.features.feature3.description",
-  "howItWorks.getStarted.description": "howItWorks.getStarted.description",
-  "resources.apiDocs.common.method": "resources.apiDocs.common.method",
-  "resources.apiDocs.sbomApi.endpointDescriptions.analyzeSbom": "resources.apiDocs.sbomApi.endpointDescriptions.analyzeSbom",
-  "supplyChain.sections.incident.questions.ir1.guidance": "supplyChain.sections.incident.questions.ir1.guidance",
-  "howItWorks.integration.features.apiDesc": "howItWorks.integration.features.apiDesc",
-  "pricing.tiers.starter.features.vendorDashboard": "pricing.tiers.starter.features.vendorDashboard",
-  "vendorRisk.riskScoring.acceptable": "vendorRisk.riskScoring.acceptable",
-  "components.no": "components.no",
-  "auth.account": "auth.account",
-  "quickTools.nistChecklist.title": "quickTools.nistChecklist.title",
-  "pricing.tiers.federal.features.fedrampAuth": "pricing.tiers.federal.features.fedrampAuth",
-  "quickTools.riskCalculator.action": "quickTools.riskCalculator.action",
-  "sbom.upload.noSbom": "sbom.upload.noSbom",
-  "supplyChain.sections.lifecycle.questions.sl1.question": "supplyChain.sections.lifecycle.questions.sl1.question",
-  "pricing.tiers.federal.name": "pricing.tiers.federal.name",
-  "vendorRisk.riskScoring.mediumRisk": "vendorRisk.riskScoring.mediumRisk",
-  "navigation.resources": "navigation.resources",
-  "resources.templates.categories.sbomTemplates.description": "resources.templates.categories.sbomTemplates.description",
-  "howItWorks.benefits.automation.title": "howItWorks.benefits.automation.title",
-  "howItWorks.integration.features.templatesDesc": "howItWorks.integration.features.templatesDesc",
-  "quickTools.nistChecklist.items.scrm10": "quickTools.nistChecklist.items.scrm10",
-  "vendorRisk.actions.highRisk.description": "vendorRisk.actions.highRisk.description",
-  "supplyChain.sections.lifecycle.questions.sl4.question": "supplyChain.sections.lifecycle.questions.sl4.question",
-  "howItWorks.benefits.compliance.description": "howItWorks.benefits.compliance.description",
-  "resources.apiDocs.authentication.securityTips.rotation": "resources.apiDocs.authentication.securityTips.rotation",
-  "navigation.templates": "navigation.templates",
-  "pricing.faq.questions.paymentMethods.question": "pricing.faq.questions.paymentMethods.question",
-  "quickTools.riskCalculator.lowRisk": "quickTools.riskCalculator.lowRisk",
-  "home.quickTools.description": "home.quickTools.description",
-  "howItWorks.steps.monitor.description": "howItWorks.steps.monitor.description",
-  "resources.apiDocs.vendorRiskApi.endpoints": "resources.apiDocs.vendorRiskApi.endpoints",
-  "navigation.vendorRisk": "navigation.vendorRisk",
-  "supplyChain.sections.supplier.questions.sr2.question": "supplyChain.sections.supplier.questions.sr2.question",
-  "vendorRisk.actions.lowRisk.description": "vendorRisk.actions.lowRisk.description",
-  "assessment.previousSection": "assessment.previousSection",
-  "howItWorks.integration.title": "howItWorks.integration.title",
-  "resources.apiDocs.vendorRiskApi.endpointDescriptions.createVendor": "resources.apiDocs.vendorRiskApi.endpointDescriptions.createVendor",
-  "resources.templates.download": "resources.templates.download",
-  "sbom.upload.analyzing": "sbom.upload.analyzing",
-  "assessment.subtitle": "assessment.subtitle",
-  "quickTools.riskCalculator.step1": "quickTools.riskCalculator.step1",
-  "resources.apiDocs.nistControlsApi.endpoints": "resources.apiDocs.nistControlsApi.endpoints",
-  "pricing.tiers.enterprise.features.customBranding": "pricing.tiers.enterprise.features.customBranding",
-  "resources.apiDocs.sections.sbomApi": "resources.apiDocs.sections.sbomApi",
-  "resources.apiDocs.vendorRiskApi.endpointDescriptions.getVendor": "resources.apiDocs.vendorRiskApi.endpointDescriptions.getVendor",
-  "quickTools.nistChecklist.items.scrm3": "quickTools.nistChecklist.items.scrm3",
-  "navigation.about": "navigation.about",
-  "resources.templates.description": "resources.templates.description",
-  "howItWorks.getStarted.steps.step1.description": "howItWorks.getStarted.steps.step1.description",
-  "home.benefits.item3": "home.benefits.item3",
-  "quickTools.riskCalculator.factors.securityControls.description": "quickTools.riskCalculator.factors.securityControls.description",
-  "pricing.cta.startTrial": "pricing.cta.startTrial",
-  "navigation.contact": "navigation.contact",
-  "resources.templates.categories.riskAssessment.items.execSummary": "resources.templates.categories.riskAssessment.items.execSummary",
-  "resources.apiDocs.vendorRiskApi.endpointDescriptions.updateVendor": "resources.apiDocs.vendorRiskApi.endpointDescriptions.updateVendor",
-  "howItWorks.quickTools.riskCalculator.cta": "howItWorks.quickTools.riskCalculator.cta",
-  "supplyChain.sections.threat.questions.tm3.guidance": "supplyChain.sections.threat.questions.tm3.guidance",
-  "supplyChain.sections.incident.questions.ir3.guidance": "supplyChain.sections.incident.questions.ir3.guidance",
-  "assessment.viewResults": "assessment.viewResults",
-  "assessment.nextSection": "assessment.nextSection",
-  "resources.templates.customization.description": "resources.templates.customization.description",
-  "howItWorks.steps.assess.cta": "howItWorks.steps.assess.cta",
-  "howItWorks.benefits.insights.title": "howItWorks.benefits.insights.title",
-  "pricing.faq.questions.customIntegrations.answer": "pricing.faq.questions.customIntegrations.answer",
-  "quickTools.riskCalculator.resultsTitle": "quickTools.riskCalculator.resultsTitle",
-  "howItWorks.steps.sbom.features.compliance": "howItWorks.steps.sbom.features.compliance",
-  "howItWorks.steps.assess.description": "howItWorks.steps.assess.description",
-  "pricing.tiers.professional.features.advancedNist": "pricing.tiers.professional.features.advancedNist",
-  "howItWorks.steps.monitor.title": "howItWorks.steps.monitor.title",
-  "supplyChain.sections.information.questions.is3.question": "supplyChain.sections.information.questions.is3.question",
-  "supplyChain.sections.information.title": "supplyChain.sections.information.title",
-  "pricing.tiers.professional.features.workflowAutomation": "pricing.tiers.professional.features.workflowAutomation",
-  "supplyChain.sections.threat.title": "supplyChain.sections.threat.title",
-  "pricing.subtitle": "pricing.subtitle",
-  "quickTools.nistChecklist.complianceResults": "quickTools.nistChecklist.complianceResults",
-  "resources.templates.categories.sbomTemplates.title": "resources.templates.categories.sbomTemplates.title",
-  "quickTools.nistChecklist.areas.supplierManagement": "quickTools.nistChecklist.areas.supplierManagement",
-  "quickTools.nistChecklist.checkCompliance": "quickTools.nistChecklist.checkCompliance",
-  "vendorRisk.monitoredVendors": "vendorRisk.monitoredVendors",
-  "resources.apiDocs.nistControlsApi.description": "resources.apiDocs.nistControlsApi.description",
-  "howItWorks.title": "howItWorks.title",
-  "howItWorks.hero.tryNow": "howItWorks.hero.tryNow",
-  "vendorRisk.riskScoring.lowRisk": "vendorRisk.riskScoring.lowRisk",
-  "howItWorks.integration.features.templates": "howItWorks.integration.features.templates",
-  "resources.apiDocs.rateLimits.burstLimit": "resources.apiDocs.rateLimits.burstLimit",
-  "resources.apiDocs.sbomApi.endpointDescriptions.getVulnerabilities": "resources.apiDocs.sbomApi.endpointDescriptions.getVulnerabilities",
-  "howItWorks.getStarted.steps.step1.title": "howItWorks.getStarted.steps.step1.title",
-  "quickTools.sbomScan.formatInfo": "quickTools.sbomScan.formatInfo",
-  "navigation.vendorAssessments": "navigation.vendorAssessments",
-  "pricing.tiers.enterprise.maxUsers": "pricing.tiers.enterprise.maxUsers",
-  "resources.templates.categories.sbomTemplates.items.cyclonedx": "resources.templates.categories.sbomTemplates.items.cyclonedx",
-  "resources.apiDocs.common.exampleRequest": "resources.apiDocs.common.exampleRequest",
-  "home.features.description": "home.features.description",
-  "quickTools.nistChecklist.aboutText2": "quickTools.nistChecklist.aboutText2",
-  "vendorRisk.actions.mediumRisk.title": "vendorRisk.actions.mediumRisk.title",
-  "pricing.faq.questions.customIntegrations.question": "pricing.faq.questions.customIntegrations.question",
-  "quickTools.sbomScan.action": "quickTools.sbomScan.action",
-  "resources.apiDocs.sections.webhooks": "resources.apiDocs.sections.webhooks",
-  "quickTools.nistChecklist.instructions": "quickTools.nistChecklist.instructions",
-  "pricing.tiers.enterprise.features.everythingProfessional": "pricing.tiers.enterprise.features.everythingProfessional",
-  "howItWorks.quickTools.riskCalculator.description": "howItWorks.quickTools.riskCalculator.description",
-  "howItWorks.steps.vendors.cta": "howItWorks.steps.vendors.cta",
-  "quickTools.nistChecklist.items.scrm1": "quickTools.nistChecklist.items.scrm1",
-  "supplyChain.sections.threat.questions.tm1.question": "supplyChain.sections.threat.questions.tm1.question",
-  "resources.templates.categories.vendorQuestionnaires.items.cloudProvider": "resources.templates.categories.vendorQuestionnaires.items.cloudProvider",
-  "home.quickTools.title": "home.quickTools.title",
-  "home.features.feature4.description": "home.features.feature4.description",
-  "howItWorks.steps.monitor.features.reports": "howItWorks.steps.monitor.features.reports",
-  "quickTools.nistChecklist.items.scrm9": "quickTools.nistChecklist.items.scrm9",
-  "howItWorks.steps.vendors.description": "howItWorks.steps.vendors.description",
-  "howItWorks.integration.features.api": "howItWorks.integration.features.api",
-  "resources.apiDocs.rateLimits.plans.free": "resources.apiDocs.rateLimits.plans.free",
-  "resources.templates.categories.vendorQuestionnaires.title": "resources.templates.categories.vendorQuestionnaires.title",
-  "howItWorks.subtitle": "howItWorks.subtitle",
-  "pricing.faq.questions.freeTrial.answer": "pricing.faq.questions.freeTrial.answer",
-  "resources.apiDocs.description": "resources.apiDocs.description",
-  "pricing.tiers.professional.features.unlimitedSbom": "pricing.tiers.professional.features.unlimitedSbom",
-  "home.features.feature4.title": "home.features.feature4.title",
-  "assessment.incomplete": "assessment.incomplete",
-  "supplyChain.sections.information.questions.is2.question": "supplyChain.sections.information.questions.is2.question",
-  "pricing.tiers.starter.maxVendors": "pricing.tiers.starter.maxVendors",
-  "resources.templates.title": "resources.templates.title",
-  "quickTools.nistChecklist.fullAssessment": "quickTools.nistChecklist.fullAssessment",
-  "quickTools.sbomScan.description": "quickTools.sbomScan.description",
-  "pricing.tiers.enterprise.maxVendors": "pricing.tiers.enterprise.maxVendors",
-  "howItWorks.getStarted.steps.step3.description": "howItWorks.getStarted.steps.step3.description",
-  "quickTools.nistChecklist.items.scrm4": "quickTools.nistChecklist.items.scrm4",
-  "howItWorks.steps.monitor.cta": "howItWorks.steps.monitor.cta",
-  "resources.apiDocs.authentication.securityTips.envVars": "resources.apiDocs.authentication.securityTips.envVars",
-  "howItWorks.steps.assess.features.nist": "howItWorks.steps.assess.features.nist",
-  "home.features.feature2.title": "home.features.feature2.title",
-  "resources.apiDocs.vendorRiskApi.endpointDescriptions.listVendors": "resources.apiDocs.vendorRiskApi.endpointDescriptions.listVendors",
-  "home.features.feature2.description": "home.features.feature2.description",
-  "howItWorks.steps.sbom.features.vulnerability": "howItWorks.steps.sbom.features.vulnerability",
-  "pricing.faq.questions.paymentMethods.answer": "pricing.faq.questions.paymentMethods.answer",
-  "pricing.tiers.professional.name": "pricing.tiers.professional.name",
-  "supplyChain.sections.supplier.questions.sr4.question": "supplyChain.sections.supplier.questions.sr4.question",
-  "resources.apiDocs.sbomApi.supportedFormats": "resources.apiDocs.sbomApi.supportedFormats",
-  "resources.templates.nistResources.title": "resources.templates.nistResources.title",
-  "sbom.results.vulnerabilities": "sbom.results.vulnerabilities",
-  "howItWorks.quickTools.sbomScan.description": "howItWorks.quickTools.sbomScan.description",
-  "supplyChain.sections.vulnerability.questions.vm1.question": "supplyChain.sections.vulnerability.questions.vm1.question",
-  "vendorRisk.table.vendor": "vendorRisk.table.vendor",
-  "resources.templates.categories.vendorQuestionnaires.items.softwareProvider": "resources.templates.categories.vendorQuestionnaires.items.softwareProvider",
-  "pricing.tiers.federal.features.federalSupportTeam": "pricing.tiers.federal.features.federalSupportTeam",
-  "supplyChain.sections.lifecycle.description": "supplyChain.sections.lifecycle.description",
-  "resources.templates.implementationGuides.items.sbomGuide.description": "resources.templates.implementationGuides.items.sbomGuide.description",
-  "resources.templates.nistResources.keyDocuments.items.controlMapping.title": "resources.templates.nistResources.keyDocuments.items.controlMapping.title",
-  "supplyChain.sections.vulnerability.questions.vm4.guidance": "supplyChain.sections.vulnerability.questions.vm4.guidance",
-  "pricing.tiers.federal.features.govCloudDeployment": "pricing.tiers.federal.features.govCloudDeployment",
-  "pricing.tiers.professional.features.customTemplates": "pricing.tiers.professional.features.customTemplates",
-  "supplyChain.sections.threat.questions.tm4.question": "supplyChain.sections.threat.questions.tm4.question",
-  "supplyChain.sections.vulnerability.questions.vm4.question": "supplyChain.sections.vulnerability.questions.vm4.question",
-  "vendorRisk.actions.criticalRisk.title": "vendorRisk.actions.criticalRisk.title",
-  "supplyChain.sections.vulnerability.questions.vm3.guidance": "supplyChain.sections.vulnerability.questions.vm3.guidance",
-  "resources.templates.categories.vendorQuestionnaires.description": "resources.templates.categories.vendorQuestionnaires.description",
-  "quickTools.riskCalculator.factors.criticality.name": "quickTools.riskCalculator.factors.criticality.name",
-  "howItWorks.getStarted.steps.step3.title": "howItWorks.getStarted.steps.step3.title",
-  "pricing.tiers.professional.cta": "pricing.tiers.professional.cta",
-  "quickTools.riskCalculator.vendorNamePlaceholder": "quickTools.riskCalculator.vendorNamePlaceholder",
-  "navigation.sbom": "navigation.sbom",
-  "pricing.tiers.federal.features.enhancedSecurity": "pricing.tiers.federal.features.enhancedSecurity",
-  "resources.apiDocs.sbomApi.description": "resources.apiDocs.sbomApi.description",
-  "vendorRisk.riskScoring.concerning": "vendorRisk.riskScoring.concerning",
-  "resources.apiDocs.sbomApi.endpointDescriptions.getAnalysis": "resources.apiDocs.sbomApi.endpointDescriptions.getAnalysis",
-  "resources.apiDocs.authentication.securityTips.ipRestrictions": "resources.apiDocs.authentication.securityTips.ipRestrictions",
-  "vendorRisk.riskScoring.highRisk": "vendorRisk.riskScoring.highRisk",
-  "pricing.tiers.enterprise.features.customIntegrations": "pricing.tiers.enterprise.features.customIntegrations",
-  "resources.apiDocs.sections.vendorRiskApi": "resources.apiDocs.sections.vendorRiskApi",
-  "pricing.tiers.starter.features.sbomAnalyzer": "pricing.tiers.starter.features.sbomAnalyzer",
-  "quickTools.nistChecklist.areas.productSecurity": "quickTools.nistChecklist.areas.productSecurity",
-  "pricing.tiers.federal.maxVendors": "pricing.tiers.federal.maxVendors",
-  "quickTools.riskCalculator.factors.systemExposure.name": "quickTools.riskCalculator.factors.systemExposure.name",
-  "vendorRisk.table.riskLevel": "vendorRisk.table.riskLevel",
-  "howItWorks.integration.features.export": "howItWorks.integration.features.export",
-  "vendorRisk.actions.lowRisk.title": "vendorRisk.actions.lowRisk.title",
-  "pricing.faq.questions.changePlans.answer": "pricing.faq.questions.changePlans.answer",
-  "supplyChain.sections.incident.questions.ir2.guidance": "supplyChain.sections.incident.questions.ir2.guidance",
-  "resources.templates.categories.riskAssessment.description": "resources.templates.categories.riskAssessment.description",
-  "howItWorks.quickTools.riskCalculator.title": "howItWorks.quickTools.riskCalculator.title",
-  "howItWorks.integration.description": "howItWorks.integration.description",
-  "pricing.enterpriseFeatures.features.incidentAutomation": "pricing.enterpriseFeatures.features.incidentAutomation",
-  "howItWorks.quickTools.description": "howItWorks.quickTools.description",
-  "vendorRisk.partial": "vendorRisk.partial",
-  "howItWorks.benefits.efficiency.title": "howItWorks.benefits.efficiency.title",
-  "quickTools.nistChecklist.items.scrm5": "quickTools.nistChecklist.items.scrm5",
-  "resources.templates.categories.riskAssessment.title": "resources.templates.categories.riskAssessment.title",
-  "pricing.tiers.starter.features.emailSupport": "pricing.tiers.starter.features.emailSupport",
-  "resources.apiDocs.vendorRiskApi.endpointDescriptions.createAssessment": "resources.apiDocs.vendorRiskApi.endpointDescriptions.createAssessment",
-  "home.features.feature1.title": "home.features.feature1.title",
-  "quickTools.nistChecklist.areas.incidentResponse": "quickTools.nistChecklist.areas.incidentResponse",
-  "pricing.tiers.starter.description": "pricing.tiers.starter.description",
-  "supplyChain.sections.vulnerability.questions.vm1.guidance": "supplyChain.sections.vulnerability.questions.vm1.guidance",
-  "navigation.privacy": "navigation.privacy",
-  "vendorRisk.actions.mediumRisk.description": "vendorRisk.actions.mediumRisk.description",
-  "footer.security": "footer.security",
-  "howItWorks.integration.cta": "howItWorks.integration.cta"
+  "content-type": "content-type",
+  "en-US": "fr-FR",
+  "Report generation would start here": "La génération de rapport commencerait ici",
+  "Please log in to import data": "Veuillez vous connecter pour importer des données"
 }
