@@ -76,7 +76,7 @@ const ValuePropositionSection: React.FC = () => {
             'Secure evidence collection portal',
             'Real-time progress tracking and notifications'
           ],
-      icon: <ShieldCheck className="h-8 w-8 text-vendorsoluce-green" />,
+          cta: 'Start Assessment',
           link: '/vendor-assessments'
         }
       ]
@@ -162,35 +162,35 @@ const ValuePropositionSection: React.FC = () => {
       title: 'Executive Leadership',
       description: 'Strategic insights and reporting to make informed decisions about supply chain risks.',
       icon: <Users className="h-8 w-8 text-vendorsoluce-blue" />,
-            'Secure evidence collection portal',
-            'Real-time progress tracking and notifications'
+      challenges: [
+        'Understanding the business impact of supply chain risks',
         'Making informed investment decisions',
         'Balancing operational efficiency with security'
       ],
       solutions: [
         {
           title: 'Executive Dashboards',
-      title: t('home.assessments.sbomAnalysis.title'),
-      description: t('home.assessments.sbomAnalysis.description'),
+          description: 'High-level visibility into supply chain risk posture and trends.',
+          benefits: [
             'Key risk metrics and trends',
             'Vendor portfolio health overview',
-        t('home.assessments.sbomAnalysis.features.0'),
-        t('home.assessments.sbomAnalysis.features.1'),
-        t('home.assessments.sbomAnalysis.features.2'),
-        t('home.assessments.sbomAnalysis.features.3')
+            'ROI tracking for security investments',
+            'Board-ready reporting'
+          ],
+          cta: 'View Dashboard',
           link: '/dashboard'
         },
         {
           title: 'Risk Reporting',
           description: 'Generate executive-level reports for board meetings and stakeholder updates.',
-      title: t('home.assessments.vendorAssessments.title'),
-      description: t('home.assessments.vendorAssessments.description'),
+          benefits: [
+            'Automated report generation',
             'Customizable metrics and KPIs',
             'Trend analysis and forecasting',
-        t('home.assessments.vendorAssessments.features.0'),
-        t('home.assessments.vendorAssessments.features.1'),
-        t('home.assessments.vendorAssessments.features.2'),
-        t('home.assessments.vendorAssessments.features.3')
+            'Stakeholder communication tools'
+          ],
+          cta: 'Generate Report',
+          link: '/reports'
         }
       ]
     }
