@@ -43,38 +43,38 @@ const ValuePropositionSection: React.FC = () => {
       id: 'security',
       title: 'Security Teams',
       description: 'Comprehensive tools for identifying, assessing, and mitigating supply chain security risks.',
-      icon: <Shield className="h-8 w-8 text-vendorsoluce-green" />,
-      challenges: [
+            'Secure evidence collection portal',
+            'Real-time progress tracking and notifications'
         'Limited visibility into supplier security practices',
-        'Time-consuming manual assessment processes',
-        'Difficulty tracking vulnerabilities across software components',
-        'Complex compliance requirements like NIST SP 800-161'
-      ],
+        t('home.stakeholders.security.challenges.visibility'),
+        t('home.stakeholders.security.challenges.manual'),
+        t('home.stakeholders.security.challenges.tracking'),
+        t('home.stakeholders.security.challenges.compliance')
       solutions: [
         {
           title: 'Automated SBOM Analysis',
-          description: 'Instantly analyze software components for vulnerabilities and license compliance.',
-          benefits: [
+          title: t('home.stakeholders.security.solutions.sbom.title'),
+          description: t('home.stakeholders.security.solutions.sbom.description'),
             'Identify critical vulnerabilities in minutes',
-            'Track open source licenses automatically',
-            'Generate compliance reports for audits',
-            'Monitor component health continuously'
-          ],
+            t('home.stakeholders.security.solutions.sbom.benefits.vulnerabilities'),
+            t('home.stakeholders.security.solutions.sbom.benefits.licenses'),
+            t('home.stakeholders.security.solutions.sbom.benefits.reports'),
+            t('home.stakeholders.security.solutions.sbom.benefits.monitoring')
           cta: 'Analyze SBOM Now',
-          link: '/sbom-analyzer'
+          cta: t('home.stakeholders.security.solutions.sbom.cta'),
         },
         {
           title: 'Vendor Security Assessments',
-          description: 'Send CMMC and NIST Privacy Framework assessments through secure vendor portal.',
-          benefits: [
+          title: t('home.stakeholders.security.solutions.assessments.title'),
+          description: t('home.stakeholders.security.solutions.assessments.description'),
             'CMMC Level 1 & 2 assessment templates',
-            'CMMC Level 1 & 2 assessment templates',
-            'CMMC Level 1 & 2 assessment templates',
-            'NIST Privacy Framework questionnaires',
-            'Automated scoring and risk rating',
-            'Secure evidence collection portal',
-            'Real-time progress tracking and notifications'
+            t('home.stakeholders.security.solutions.assessments.benefits.cmmc'),
+            t('home.stakeholders.security.solutions.assessments.benefits.nist'),
+            t('home.stakeholders.security.solutions.assessments.benefits.scoring'),
+            t('home.stakeholders.security.solutions.assessments.benefits.portal'),
+            t('home.stakeholders.security.solutions.assessments.benefits.tracking')
           ],
+          cta: t('home.stakeholders.security.solutions.assessments.cta'),
       icon: <ShieldCheck className="h-8 w-8 text-vendorsoluce-green" />,
           link: '/vendor-assessments'
         }
@@ -82,114 +82,114 @@ const ValuePropositionSection: React.FC = () => {
     },
     {
       id: 'procurement',
-      title: 'Procurement Teams',
-      description: 'Streamline vendor selection and management with risk-based decision making tools.',
+      title: t('home.stakeholders.procurement.title'),
+      description: t('home.stakeholders.procurement.description'),
       icon: <Building2 className="h-8 w-8 text-vendorsoluce-navy" />,
       challenges: [
-        'Balancing cost, quality, and security in vendor selection',
-        'Managing vendor relationships throughout their lifecycle',
-        'Ensuring contract terms include appropriate security clauses',
-        'Demonstrating due diligence for audit purposes'
+        t('home.stakeholders.procurement.challenges.balancing'),
+        t('home.stakeholders.procurement.challenges.lifecycle'),
+        t('home.stakeholders.procurement.challenges.contracts'),
+        t('home.stakeholders.procurement.challenges.diligence')
       ],
       solutions: [
         {
-          title: 'Vendor Risk Calculator',
-          description: 'Calculate preliminary risk scores to inform vendor selection decisions.',
+          title: t('home.stakeholders.procurement.solutions.calculator.title'),
+          description: t('home.stakeholders.procurement.solutions.calculator.description'),
           benefits: [
-            'Standardized risk assessment criteria',
-            'Immediate risk scoring for new vendors',
-            'Data-driven vendor comparison',
-            'Integration with procurement workflows'
+            t('home.stakeholders.procurement.solutions.calculator.benefits.criteria'),
+            t('home.stakeholders.procurement.solutions.calculator.benefits.scoring'),
+            t('home.stakeholders.procurement.solutions.calculator.benefits.comparison'),
+            t('home.stakeholders.procurement.solutions.calculator.benefits.integration')
           ],
-          cta: 'Calculate Risk',
+          cta: t('home.stakeholders.procurement.solutions.calculator.cta'),
           link: '/tools/vendor-risk-calculator'
         },
         {
-          title: 'Vendor Risk Dashboard',
-          description: 'Monitor and manage your vendor portfolio with centralized risk visibility.',
+          title: t('home.stakeholders.procurement.solutions.dashboard.title'),
+          description: t('home.stakeholders.procurement.solutions.dashboard.description'),
           benefits: [
-            'Real-time risk monitoring',
-            'Automated compliance tracking',
-            'Contract renewal alerts',
-            'Executive reporting dashboards'
+            t('home.stakeholders.procurement.solutions.dashboard.benefits.monitoring'),
+            t('home.stakeholders.procurement.solutions.dashboard.benefits.tracking'),
+            t('home.stakeholders.procurement.solutions.dashboard.benefits.alerts'),
+            t('home.stakeholders.procurement.solutions.dashboard.benefits.reporting')
           ],
-          cta: 'View Dashboard',
+          cta: t('home.stakeholders.procurement.solutions.dashboard.cta'),
           link: '/vendor-risk-dashboard'
         }
       ]
     },
     {
       id: 'compliance',
-      title: 'Compliance Officers',
-      description: 'Ensure adherence to regulatory requirements with built-in compliance frameworks.',
+      title: t('home.stakeholders.compliance.title'),
+      description: t('home.stakeholders.compliance.description'),
       icon: <Lock className="h-8 w-8 text-vendorsoluce-teal" />,
       challenges: [
-        'Keeping up with evolving regulatory requirements',
-        'Documenting compliance efforts for audits',
-        'Ensuring vendors meet contractual obligations',
-        'Managing compliance across multiple frameworks'
+        t('home.stakeholders.compliance.challenges.evolving'),
+        t('home.stakeholders.compliance.challenges.documenting'),
+        t('home.stakeholders.compliance.challenges.obligations'),
+        t('home.stakeholders.compliance.challenges.frameworks')
       ],
       solutions: [
         {
-          title: 'NIST SP 800-161 Assessment',
-          description: 'Comprehensive supply chain risk assessment aligned with federal standards.',
+          title: t('home.stakeholders.compliance.solutions.nist.title'),
+          description: t('home.stakeholders.compliance.solutions.nist.description'),
           benefits: [
-            'Pre-built NIST control templates',
-            'Automated compliance scoring',
-            'Audit-ready documentation',
-            'Gap analysis and recommendations'
+            t('home.stakeholders.compliance.solutions.nist.benefits.templates'),
+            t('home.stakeholders.compliance.solutions.nist.benefits.scoring'),
+            t('home.stakeholders.compliance.solutions.nist.benefits.documentation'),
+            t('home.stakeholders.compliance.solutions.nist.benefits.analysis')
           ],
-          cta: 'Start Assessment',
+          cta: t('home.stakeholders.compliance.solutions.nist.cta'),
           link: '/supply-chain-assessment'
         },
         {
-          title: 'Compliance Templates',
-          description: 'Access pre-built templates for common compliance scenarios.',
+          title: t('home.stakeholders.compliance.solutions.templates.title'),
+          description: t('home.stakeholders.compliance.solutions.templates.description'),
           benefits: [
-            'Federal compliance templates',
-            'Industry-specific questionnaires',
-            'Risk assessment matrices',
-            'Executive summary templates'
+            t('home.stakeholders.compliance.solutions.templates.benefits.federal'),
+            t('home.stakeholders.compliance.solutions.templates.benefits.industry'),
+            t('home.stakeholders.compliance.solutions.templates.benefits.matrices'),
+            t('home.stakeholders.compliance.solutions.templates.benefits.executive')
           ],
-          cta: 'Download Templates',
+          cta: t('home.stakeholders.compliance.solutions.templates.cta'),
           link: '/templates'
         }
       ]
     },
     {
       id: 'executives',
-      title: 'Executive Leadership',
-      description: 'Strategic insights and reporting to make informed decisions about supply chain risks.',
+      title: t('home.stakeholders.executives.title'),
+      description: t('home.stakeholders.executives.description'),
       icon: <Users className="h-8 w-8 text-vendorsoluce-blue" />,
       challenges: [
-        'Understanding supply chain risk exposure',
-        'Making informed investment decisions',
-        'Demonstrating risk management to stakeholders',
-        'Balancing operational efficiency with security'
+        t('home.stakeholders.executives.challenges.understanding'),
+        t('home.stakeholders.executives.challenges.investment'),
+        t('home.stakeholders.executives.challenges.demonstrating'),
+        t('home.stakeholders.executives.challenges.balancing')
       ],
       solutions: [
         {
-          title: 'Executive Dashboards',
-          description: 'High-level insights into your organization\'s supply chain risk posture.',
+          title: t('home.stakeholders.executives.solutions.dashboards.title'),
+          description: t('home.stakeholders.executives.solutions.dashboards.description'),
           benefits: [
-            'Key risk metrics and trends',
-            'Vendor portfolio health overview',
-            'Compliance status summaries',
-            'Strategic risk recommendations'
+            t('home.stakeholders.executives.solutions.dashboards.benefits.metrics'),
+            t('home.stakeholders.executives.solutions.dashboards.benefits.portfolio'),
+            t('home.stakeholders.executives.solutions.dashboards.benefits.compliance'),
+            t('home.stakeholders.executives.solutions.dashboards.benefits.recommendations')
           ],
-          cta: 'View Dashboard',
+          cta: t('home.stakeholders.executives.solutions.dashboards.cta'),
           link: '/dashboard'
         },
         {
-          title: 'Risk Reporting',
-          description: 'Generate executive-level reports for board meetings and stakeholder updates.',
+          title: t('home.stakeholders.executives.solutions.reporting.title'),
+          description: t('home.stakeholders.executives.solutions.reporting.description'),
           benefits: [
-            'Automated report generation',
-            'Customizable metrics and KPIs',
-            'Trend analysis and forecasting',
-            'Stakeholder-ready presentations'
+            t('home.stakeholders.executives.solutions.reporting.benefits.automated'),
+            t('home.stakeholders.executives.solutions.reporting.benefits.customizable'),
+            t('home.stakeholders.executives.solutions.reporting.benefits.analysis'),
+            t('home.stakeholders.executives.solutions.reporting.benefits.presentations')
           ],
-          cta: 'Generate Report',
+          cta: t('home.stakeholders.executives.solutions.reporting.cta'),
           link: '/vendor-risk-dashboard'
         }
       ]
@@ -203,11 +203,10 @@ const ValuePropositionSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Designed for Every Supply Chain Stakeholder
+            {t('home.stakeholders.title')}
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            VendorSoluce addresses the unique challenges faced by different teams in your organization, 
-            providing tailored solutions that deliver measurable value to each stakeholder.
+            {t('home.stakeholders.description')}
           </p>
         </div>
 
@@ -236,7 +235,7 @@ const ValuePropositionSection: React.FC = () => {
             <CardHeader>
               <CardTitle className="flex items-center  text-gray-900 dark:text-white">
                 <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
-                Common Challenges
+                {t('home.stakeholders.common.challenges')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -293,21 +292,21 @@ const ValuePropositionSection: React.FC = () => {
         {/* Call to Action */}
         <div className="mt-12 text-center">
           <div className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green rounded-lg p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Supply Chain Security?</h3>
+            <h3 className="text-2xl font-bold mb-4">{t('home.stakeholders.cta.title')}</h3>
             <p className="text-xl text-gray-100 mb-6">
-              Join organizations worldwide who trust VendorSoluce to secure their supply chains and meet compliance requirements.
+              {t('home.stakeholders.cta.description')}
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link to="/supply-chain-assessment">
                 <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100">
                   <Target className="h-5 w-5 mr-2" />
-                  Start Free Assessment
+                  {t('home.stakeholders.cta.startAssessment')}
                 </Button>
               </Link>
               <Link to="/contact">
                 <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20">
                   <Users className="h-5 w-5 mr-2" />
-                  Schedule Demo
+                  {t('home.stakeholders.cta.scheduleDemo')}
                 </Button>
               </Link>
             </div>
