@@ -76,7 +76,7 @@ const ValuePropositionSection: React.FC = () => {
             'Secure evidence collection portal',
             'Real-time progress tracking and notifications'
           ],
-      icon: <ShieldCheck className="h-8 w-8 text-vendorsoluce-green" />,
+          cta: 'Start Assessment',
           link: '/vendor-assessments'
         }
       ]
@@ -209,14 +209,10 @@ const ValuePropositionSection: React.FC = () => {
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             VendorSoluce addresses the unique challenges faced by different teams in your organization, 
             providing tailored solutions that deliver measurable value to each stakeholder.
-            'Secure evidence collection portal',
-            'Real-time progress tracking and notifications'
+          </p>
+        </div>
 
         <div className="flex flex-wrap justify-center gap-2 mb-8">
-            { id: 'overview', label: 'Overview', icon: <BarChart3 className="h-4 w-4" /> },
-            { id: 'assessments', label: 'Active Assessments', icon: <ClipboardList className="h-4 w-4" /> },
-            { id: 'templates', label: 'Framework Templates', icon: <Files className="h-4 w-4" /> },
-            { id: 'portal', label: 'Vendor Portal', icon: <Globe className="h-4 w-4" /> }
           {stakeholders.map((stakeholder) => (
             <button
               key={stakeholder.id}
@@ -227,7 +223,7 @@ const ValuePropositionSection: React.FC = () => {
                   : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
               }`}
             >
-              <span className="mr-2">{icon}</span>
+              <span className="mr-2">{stakeholder.icon}</span>
               <span className="ml-2">{stakeholder.title}</span>
             </button>
           ))}
