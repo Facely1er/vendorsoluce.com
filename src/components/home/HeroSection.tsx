@@ -1,6 +1,6 @@
  import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Target, Users, CheckCircle, Zap, Eye } from 'lucide-react';
+import { Target, Users, CheckCircle, Zap, Eye } from 'lucide-react';
 import Button from '../ui/Button';
 import { useTranslation } from 'react-i18next';
 
@@ -13,7 +13,7 @@ const HeroSection: React.FC = () => {
         <div className="text-center">
           <div className="flex justify-center mb-6">
             <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-              <Shield className="h-10 w-10 text-white" />
+           
             </div>
           </div>
           
