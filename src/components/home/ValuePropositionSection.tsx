@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { 
   Shield, 
-  Building, 
   Building2,
   ShieldCheck,
   Users, 
@@ -36,38 +36,38 @@ interface Stakeholder {
 }
 
 const ValuePropositionSection: React.FC = () => {
+  const { t } = useTranslation();
   const [activeStakeholder, setActiveStakeholder] = useState<string>('security');
 
   const stakeholders: Stakeholder[] = [
     {
       id: 'security',
-      title: 'Security Teams',
-      description: 'Comprehensive tools for identifying, assessing, and mitigating supply chain security risks.',
-            'Secure evidence collection portal',
-            'Real-time progress tracking and notifications'
-        'Limited visibility into supplier security practices',
+      title: t('home.stakeholders.security.title'),
+      description: t('home.stakeholders.security.description'),
+      icon: <Shield className="h-8 w-8 text-vendorsoluce-green" />,
+      challenges: [
         t('home.stakeholders.security.challenges.visibility'),
         t('home.stakeholders.security.challenges.manual'),
         t('home.stakeholders.security.challenges.tracking'),
         t('home.stakeholders.security.challenges.compliance')
+      ],
       solutions: [
         {
-          title: 'Automated SBOM Analysis',
           title: t('home.stakeholders.security.solutions.sbom.title'),
           description: t('home.stakeholders.security.solutions.sbom.description'),
-            'Identify critical vulnerabilities in minutes',
+          benefits: [
             t('home.stakeholders.security.solutions.sbom.benefits.vulnerabilities'),
             t('home.stakeholders.security.solutions.sbom.benefits.licenses'),
             t('home.stakeholders.security.solutions.sbom.benefits.reports'),
             t('home.stakeholders.security.solutions.sbom.benefits.monitoring')
-          cta: 'Analyze SBOM Now',
+          ],
           cta: t('home.stakeholders.security.solutions.sbom.cta'),
+          link: '/sbom-analyzer'
         },
         {
-          title: 'Vendor Security Assessments',
           title: t('home.stakeholders.security.solutions.assessments.title'),
           description: t('home.stakeholders.security.solutions.assessments.description'),
-            'CMMC Level 1 & 2 assessment templates',
+          benefits: [
             t('home.stakeholders.security.solutions.assessments.benefits.cmmc'),
             t('home.stakeholders.security.solutions.assessments.benefits.nist'),
             t('home.stakeholders.security.solutions.assessments.benefits.scoring'),
@@ -75,7 +75,6 @@ const ValuePropositionSection: React.FC = () => {
             t('home.stakeholders.security.solutions.assessments.benefits.tracking')
           ],
           cta: t('home.stakeholders.security.solutions.assessments.cta'),
-      icon: <ShieldCheck className="h-8 w-8 text-vendorsoluce-green" />,
           link: '/vendor-assessments'
         }
       ]
@@ -233,7 +232,7 @@ const ValuePropositionSection: React.FC = () => {
           {/* Challenges */}
           <Card className="lg:col-span-1">
             <CardHeader>
-              <CardTitle className="flex items-center  text-gray-900 dark:text-white">
+              <CardTitle className="flex items-center text-gray-900 dark:text-white">
                 <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
                 {t('home.stakeholders.common.challenges')}
               </CardTitle>
