@@ -18,6 +18,7 @@ const HomePage: React.FC = () => {
       <FeatureSection />
       <QuickToolsSection />
       <CTASection />
+      
        {/* Getting Started CTA */}
       <section className="text-center bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
