@@ -1,4 +1,4 @@
- import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, Target, Users } from 'lucide-react';
 import Button from '../ui/Button';
@@ -48,20 +48,11 @@ const HeroSection: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
               <h3 className="text-xl font-semibold mb-4">{t('home.hero.whyChoose')}</h3>
-              <ul className="space-y-2 text-gray-100 text-sm">
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <span>{t('home.hero.benefit1')}</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <span>{t('home.hero.benefit2')}</span>
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-white rounded-full mr-3"></span>
-                  <span>{t('home.hero.benefit3')}</span>
-                </li>
-              </ul>
+              <div className="text-gray-100 text-sm space-y-1">
+                <div>• {t('home.hero.benefit1')}</div>
+                <div>• {t('home.hero.benefit2')}</div>
+                <div>• {t('home.hero.benefit3')}</div>
+              </div>
             </div>
             
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
