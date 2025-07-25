@@ -1,6 +1,5 @@
-```typescript
-import React, { useState, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+ import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Menu, 
   X, 
@@ -9,20 +8,24 @@ import {
   Users, 
   FileText, 
   DollarSign, 
+  Info, 
+  Mail, 
   BookOpen, 
   Code, 
+  Globe, 
+  Sun, 
+  Moon,
   ChevronDown 
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { useTranslation } from 'react-i18next';
+import { useI18n } from '../../context/I18nContext';
 import ThemeToggle from './ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
 import UserMenu from './UserMenu';
 
 const Navbar: React.FC = () => {
   const { isAuthenticated } = useAuth();
-  const { t } = useTranslation();
-  const location = useLocation();
+  const { t } = useI18n();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
@@ -40,41 +43,35 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navItems = [
-    { name: 'Home', path: '/', icon: Home },
+    { name: t('nav.home'), path: '/', icon: Home },
     { 
-      name: 'Solutions', 
+      name: t('nav.solutions'), 
       path: '/how-it-works', 
       icon: BookOpen, 
       dropdown: [
-        { name: 'Supply Chain Assessment', path: '/supply-chain-assessment' },
-        { name: 'SBOM Analysis', path: '/sbom-analyzer' },
-        { name: 'Vendor Risk', path: '/vendor-risk-dashboard' },
-        { name: 'Vendor Assessments', path: '/vendor-assessments' },
+        { name: t('navigation.assessment'), path: '/supply-chain-assessment' },
+        { name: t('navigation.sbom'), path: '/sbom-analyzer' },
+        { name: t('navigation.vendorRisk'), path: '/vendor-risk-dashboard' },
+        { name: t('navigation.vendorAssessments'), path: '/vendor-assessments' },
       ]
     },
-    { name: 'Pricing', path: '/pricing', icon: DollarSign },
+    { name: t('nav.pricing'), path: '/pricing', icon: DollarSign },
     { 
-      name: 'Resources', 
+      name: t('nav.resources'), 
       path: '/templates', 
       icon: FileText, 
       dropdown: [
-        { name: 'Templates', path: '/templates' },
-        { name: 'API Docs', path: '/api-docs' },
-        { name: 'Integration', path: '/integration-guides' },
+        { name: t('navigation.templates'), path: '/templates' },
+        { name: t('navigation.apiDocs'), path: '/api-docs' },
+        { name: t('navigation.integration'), path: '/integration-guides' },
       ]
-    }
+    },
+    { name: t('nav.about'), path: '/about', icon: Info },
+    { name: t('nav.contact'), path: '/contact', icon: Mail },
   ];
 
-  const isActivePath = (itemPath: string, dropdownPaths?: string[]) => {
-    if (location.pathname === itemPath) return true;
-    if (dropdownPaths) {
-      return dropdownPaths.some(path => location.pathname === path);
-    }
-    return false;
-  };
-
   return (
-    <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40" data-tour="main-nav">
+    <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo and Branding */}
@@ -89,30 +86,22 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex md:space-x-4 items-center">
+          <nav className="hidden md:flex md:space-x-8 items-center">
             {navItems.map((item) => (
               item.dropdown ? (
                 <div key={item.name} className="relative group">
-                  <button className={\`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
-                    isActivePath(item.path, item.dropdown.map(d => d.path))
-                      ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
-                  }`}>
+                  <button className="text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue px-3 py-2 rounded-md text-sm font-medium flex items-center">
                     {item.icon && <item.icon className="h-4 w-4 mr-1" />}
                     {item.name}
                     <ChevronDown className="ml-1 h-4 w-4" />
                   </button>
-                  <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 hidden group-hover:block">
                     <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                       {item.dropdown.map((subItem) => (
                         <Link
                           key={subItem.name}
                           to={subItem.path}
-                          className={\`block px-4 py-2 text-sm transition-colors ${
-                            location.pathname === subItem.path
-                              ? 'bg-vendorsoluce-pale-green text-vendorsoluce-navy dark:bg-vendorsoluce-navy/20 dark:text-vendorsoluce-blue font-medium'
-                              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-                          }`}
+                          className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600"
                           role="menuitem"
                         >
                           {subItem.name}
@@ -125,11 +114,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={\`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
-                    isActivePath(item.path)
-                      ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
-                  }`}
+                  className="text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue px-3 py-2 rounded-md text-sm font-medium flex items-center"
                 >
                   {item.icon && <item.icon className="h-4 w-4 mr-1" />}
                   {item.name}
@@ -139,27 +124,19 @@ const Navbar: React.FC = () => {
             {isAuthenticated && (
               <Link
                 to="/dashboard"
-                className={\`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
-                  location.pathname === '/dashboard'
-                    ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
-                }`}
+                className="text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue px-3 py-2 rounded-md text-sm font-medium flex items-center"
               >
                 <LayoutDashboard className="h-4 w-4 mr-1" />
-                Dashboard
+                {t('nav.dashboard')}
               </Link>
             )}
           </nav>
 
           {/* Right Section (Theme, Language, User Menu) */}
           <div className="hidden md:flex items-center space-x-4">
-            <div data-tour="theme-toggle">
-              <ThemeToggle />
-            </div>
+            <ThemeToggle />
             <LanguageSwitcher />
-            <div data-tour="user-menu">
-              <UserMenu />
-            </div>
+            <UserMenu />
           </div>
 
           {/* Mobile Menu Button */}
@@ -186,11 +163,7 @@ const Navbar: React.FC = () => {
             {navItems.map((item) => (
               item.dropdown ? (
                 <div key={item.name}>
-                  <button className={\`block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors ${
-                    isActivePath(item.path, item.dropdown.map(d => d.path))
-                      ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
-                  }`}>
+                  <button className="text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue block px-3 py-2 rounded-md text-base font-medium w-full text-left">
                     {item.icon && <item.icon className="h-5 w-5 mr-2 inline-block" />}
                     {item.name}
                   </button>
@@ -199,11 +172,7 @@ const Navbar: React.FC = () => {
                       <Link
                         key={subItem.name}
                         to={subItem.path}
-                        className={\`block px-3 py-2 text-sm transition-colors rounded-md ${
-                          location.pathname === subItem.path
-                            ? 'bg-vendorsoluce-pale-green text-vendorsoluce-navy dark:bg-vendorsoluce-navy/20 dark:text-vendorsoluce-blue font-medium'
-                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                        }`}
+                        className="block px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {subItem.name}
@@ -215,11 +184,7 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={\`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                    isActivePath(item.path)
-                      ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
-                  }`}
+                  className="text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue block px-3 py-2 rounded-md text-base font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.icon && <item.icon className="h-5 w-5 mr-2 inline-block" />}
@@ -230,15 +195,11 @@ const Navbar: React.FC = () => {
             {isAuthenticated && (
               <Link
                 to="/dashboard"
-                className={\`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                  location.pathname === '/dashboard'
-                    ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
-                }`}
+                className="text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <LayoutDashboard className="h-5 w-5 mr-2 inline-block" />
-                Dashboard
+                {t('nav.dashboard')}
               </Link>
             )}
             <div className="flex items-center justify-between px-3 py-2">
@@ -256,4 +217,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-```
