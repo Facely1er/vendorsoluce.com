@@ -32,6 +32,7 @@ const Navbar: React.FC = () => {
     { title: t('navigation.assessment'), path: '/supply-chain-assessment' },
     { title: t('navigation.sbom'), path: '/sbom-analyzer' },
     { title: t('navigation.vendorRisk'), path: '/vendor-risk-dashboard' },
+    { title: t('navigation.vendorAssessments'), path: '/vendor-assessments' },
   ];
 
   const resourceItems: MenuItem[] = [
@@ -119,18 +120,26 @@ const Navbar: React.FC = () => {
                   {isSolutionsOpen && (
                     <div className="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-10 border border-gray-200 dark:border-gray-700">
                       {solutionItems.map((solution) => (
-                        <Link
-                          key={solution.title}
-                          to={solution.path}
-                          className={`block px-4 py-2 text-sm ${
-                            isActiveLink(solution.path)
-                              ? 'text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
-                              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                          }`}
-                          onClick={() => setIsSolutionsOpen(false)}
-                        >
-                          {solution.title}
-                        </Link>
+                        <div key={solution.title}>
+                          <Link
+                            to={solution.path}
+                            className={`block px-4 py-2 text-sm ${
+                              isActiveLink(solution.path)
+                                ? 'text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
+                                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                            }`}
+                            onClick={() => setIsSolutionsOpen(false)}
+                          >
+                            <div className="flex items-center justify-between">
+                              <span>{solution.title}</span>
+                              {solution.title === 'Vendor Assessments' && (
+                                <span className="ml-2 px-2 py-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-medium rounded-full">
+                                  Premium
+                                </span>
+                              )}
+                            </div>
+                          </Link>
+                        </div>
                       ))}
                     </div>
                   )}
@@ -262,17 +271,25 @@ const Navbar: React.FC = () => {
                   {isSolutionsOpen && (
                     <div className="pl-6 py-2 space-y-1">
                       {solutionItems.map((solution) => (
-                        <Link
-                          key={solution.title}
-                          to={solution.path}
-                          className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
-                          onClick={() => {
-                            setIsOpen(false);
-                            setIsSolutionsOpen(false);
-                          }}
-                        >
-                          {solution.title}
-                        </Link>
+                        <div key={solution.title}>
+                          <Link
+                            to={solution.path}
+                            className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
+                            onClick={() => {
+                              setIsOpen(false);
+                              setIsSolutionsOpen(false);
+                            }}
+                          >
+                            <div className="flex items-center justify-between">
+                              <span>{solution.title}</span>
+                              {solution.title === 'Vendor Assessments' && (
+                                <span className="ml-2 px-2 py-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-medium rounded-full">
+                                  Premium
+                                </span>
+                              )}
+                            </div>
+                          </Link>
+                        </div>
                       ))}
                     </div>
                   )}
