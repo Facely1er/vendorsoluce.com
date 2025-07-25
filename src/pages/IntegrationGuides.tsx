@@ -1,402 +1,316 @@
-import React, { useEffect } from 'react';
-import Card from '../components/ui/Card';
-import Button from '../components/ui/Button';
-import { Link, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
+import { Button } from '../ui/Button';
+import { 
+  Shield, 
+  Building, 
+  Users, 
+  Lock, 
+  FileCheck, 
+  BarChart3, 
+  FileJson,
+  ChevronRight,
+  Target,
+  TrendingUp,
+  CheckCircle,
+  AlertTriangle
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const IntegrationGuides: React.FC = () => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-
-  // Scroll to section when hash changes
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash) {
-        const element = document.getElementById(hash.substring(1));
-        if (element) {
-          // Add a slight delay to ensure smooth scrolling after page renders
-          setTimeout(() => {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }, 100);
-        }
-      }
-    };
-
-    // Handle initial hash on page load
-    handleHashChange();
-    
-    // Add event listener for hash changes
-    window.addEventListener('hashchange', handleHashChange);
-    
-    // Clean up
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-    };
-  }, []);
-
-  // Handle contact support button click
-  const handleContactSupport = () => {
-    navigate('/contact');
-  };
-
-  return (
-    <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('resources.integrationGuides.title')}</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl">
-          {t('resources.integrationGuides.description')}
-        </p>
-      </div>
-      
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-1">
-          <Card className="p-6 sticky top-8">
-            <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{t('resources.integrationGuides.availableIntegrations')}</h2>
-            <nav className="space-y-1">
-              <a href="#grc-platforms" className="block px-3 py-2 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-medium">{t('resources.integrationGuides.sections.grcPlatforms')}</a>
-              <a href="#procurement-systems" className="block px-3 py-2 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-medium">{t('resources.integrationGuides.sections.procurementSystems')}</a>
-              <a href="#api-integrations" className="block px-3 py-2 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-medium">{t('resources.integrationGuides.sections.apiIntegrations')}</a>
-              <a href="#siem-security" className="block px-3 py-2 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-medium">{t('resources.integrationGuides.sections.siemSecurity')}</a>
-              <a href="#cicd-pipelines" className="block px-3 py-2 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-medium">{t('resources.integrationGuides.sections.cicdPipelines')}</a>
-              <a href="#data-export" className="block px-3 py-2 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-medium">{t('resources.integrationGuides.sections.dataExport')}</a>
-            </nav>
-            
-            <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-              <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.needCustomIntegration')}</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                {t('resources.integrationGuides.customIntegrationDescription')}
-              </p>
-              <Button 
-                variant="primary" 
-                size="sm" 
-                className="w-full"
-                onClick={handleContactSupport}
-              >
-                {t('resources.integrationGuides.contactSupport')}
-              </Button>
-            </div>
-          </Card>
-        </div>
-        
-        <div className="lg:col-span-2">
-          <section id="grc-platforms">
-            <Card className="p-6 mb-8">
-              <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{t('resources.integrationGuides.sections.grcPlatforms')}</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {t('resources.integrationGuides.grcPlatforms.description')}
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.grcPlatforms.serviceNow.title')}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    {t('resources.integrationGuides.grcPlatforms.serviceNow.description')}
-                  </p>
-                  <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                    {t('resources.integrationGuides.viewGuide')} →
-                  </a>
-                </div>
-                
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.grcPlatforms.metricstream.title')}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    {t('resources.integrationGuides.grcPlatforms.metricstream.description')}
-                  </p>
-                  <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                    {t('resources.integrationGuides.viewGuide')} →
-                  </a>
-                </div>
-                
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.grcPlatforms.archer.title')}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    {t('resources.integrationGuides.grcPlatforms.archer.description')}
-                  </p>
-                  <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                    {t('resources.integrationGuides.viewGuide')} →
-                  </a>
-                </div>
-                
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.grcPlatforms.logicgate.title')}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    {t('resources.integrationGuides.grcPlatforms.logicgate.description')}
-                  </p>
-                  <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                    {t('resources.integrationGuides.viewGuide')} →
-                  </a>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md border border-gray-200 dark:border-gray-600">
-                <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.integrationBenefits')}</h3>
-                <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-300">
-                  <li>{t('resources.integrationGuides.grcPlatforms.benefits.centralize')}</li>
-                  <li>{t('resources.integrationGuides.grcPlatforms.benefits.eliminate')}</li>
-                  <li>{t('resources.integrationGuides.grcPlatforms.benefits.standardize')}</li>
-                  <li>{t('resources.integrationGuides.grcPlatforms.benefits.generate')}</li>
-                </ul>
-              </div>
-            </Card>
-          </section>
-          
-          <section id="procurement-systems">
-            <Card className="p-6 mb-8">
-              <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{t('resources.integrationGuides.sections.procurementSystems')}</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {t('resources.integrationGuides.procurementSystems.description')}
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.procurementSystems.sapAriba.title')}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    {t('resources.integrationGuides.procurementSystems.sapAriba.description')}
-                  </p>
-                  <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                    {t('resources.integrationGuides.viewGuide')} →
-                  </a>
-                </div>
-                
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.procurementSystems.coupa.title')}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    {t('resources.integrationGuides.procurementSystems.coupa.description')}
-                  </p>
-                  <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                    {t('resources.integrationGuides.viewGuide')} →
-                  </a>
-                </div>
-                
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.procurementSystems.jaggaer.title')}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    {t('resources.integrationGuides.procurementSystems.jaggaer.description')}
-                  </p>
-                  <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                    {t('resources.integrationGuides.viewGuide')} →
-                  </a>
-                </div>
-                
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.procurementSystems.oracle.title')}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    {t('resources.integrationGuides.procurementSystems.oracle.description')}
-                  </p>
-                  <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                    {t('resources.integrationGuides.viewGuide')} →
-                  </a>
-                </div>
-              </div>
-            </Card>
-          </section>
-          
-          <section id="api-integrations">
-            <Card className="p-6 mb-8">
-              <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{t('resources.integrationGuides.sections.apiIntegrations')}</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {t('resources.integrationGuides.apiIntegrations.description')}
-              </p>
-              
-              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md border border-gray-200 dark:border-gray-600 mb-6">
-                <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.apiIntegrations.keyScenarios')}</h3>
-                <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-300">
-                  <li>{t('resources.integrationGuides.apiIntegrations.scenarios.automate')}</li>
-                  <li>{t('resources.integrationGuides.apiIntegrations.scenarios.integrate')}</li>
-                  <li>{t('resources.integrationGuides.apiIntegrations.scenarios.embed')}</li>
-                  <li>{t('resources.integrationGuides.apiIntegrations.scenarios.build')}</li>
-                  <li>{t('resources.integrationGuides.apiIntegrations.scenarios.autoReview')}</li>
-                </ul>
-              </div>
-              
-              <h3 className="text-lg font-medium mb-3 text-gray-900 dark:text-white">{t('resources.integrationGuides.apiIntegrations.example.title')}</h3>
-              <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-md border border-gray-200 dark:border-gray-700 mb-4">
-                <pre className="text-sm text-gray-800 dark:text-gray-300 overflow-x-auto">
-                  <code>
-                    {`// Example NodeJS integration with VendorSoluce API
-const fetch = require('node-fetch');
-
-async function getVendorRiskScore(vendorId) {
-  const response = await fetch(
-    \`https://api.vendorsoluce.com/api/vendors/\${vendorId}/risk-score\`, 
-    {
-      headers: {
-        'Authorization': \`Bearer \${process.env.VENDORSOLUCE_API_KEY}\`,
-        'Content-Type': 'application/json'
-      }
-    }
-  );
-  
-  if (!response.ok) {
-    throw new Error(\`API error: \${response.status}\`);
-  }
-  
-  return await response.json();
+interface Stakeholder {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  challenges: string[];
+  solutions: {
+    title: string;
+    description: string;
+    benefits: string[];
+    cta: string;
+    link: string;
+  }[];
 }
 
-// Use in your application
-async function approveVendor(vendorId) {
-  try {
-    const riskData = await getVendorRiskScore(vendorId);
-    
-    if (riskData.riskLevel === 'Low' || riskData.riskLevel === 'Medium') {
-      // Automatically approve vendor
-      return true;
-    } else {
-      // Require additional review for high-risk vendors
-      return false;
+const ValuePropositionSection: React.FC = () => {
+  const [activeStakeholder, setActiveStakeholder] = useState<string>('security');
+
+  const stakeholders: Stakeholder[] = [
+    {
+      id: 'security',
+      title: 'Security Teams',
+      description: 'Comprehensive tools for identifying, assessing, and mitigating supply chain security risks.',
+      icon: <Shield className="h-8 w-8 text-vendorsoluce-green" />,
+      challenges: [
+        'Limited visibility into supplier security practices',
+        'Time-consuming manual assessment processes',
+        'Difficulty tracking vulnerabilities across software components',
+        'Complex compliance requirements like NIST SP 800-161'
+      ],
+      solutions: [
+        {
+          title: 'Automated SBOM Analysis',
+          description: 'Instantly analyze software components for vulnerabilities and license compliance.',
+          benefits: [
+            'Identify critical vulnerabilities in minutes',
+            'Track open source licenses automatically',
+            'Generate compliance reports for audits',
+            'Monitor component health continuously'
+          ],
+          cta: 'Analyze SBOM Now',
+          link: '/sbom-analyzer'
+        },
+        {
+          title: 'Vendor Security Assessments',
+          description: 'Send CMMC and NIST Privacy Framework assessments through secure vendor portal.',
+          benefits: [
+            'CMMC Level 1 & 2 assessment templates',
+            'NIST Privacy Framework questionnaires',
+            'Automated scoring and risk rating',
+            'Secure evidence collection portal',
+            'Real-time progress tracking and notifications'
+          ],
+          cta: 'Send Assessment',
+          link: '/vendor-assessments'
+        }
+      ]
+    },
+    {
+      id: 'procurement',
+      title: 'Procurement Teams',
+      description: 'Streamline vendor selection and management with risk-based decision making tools.',
+      icon: <Building className="h-8 w-8 text-vendorsoluce-navy" />,
+      challenges: [
+        'Balancing cost, quality, and security in vendor selection',
+        'Managing vendor relationships throughout their lifecycle',
+        'Ensuring contract terms include appropriate security clauses',
+        'Demonstrating due diligence for audit purposes'
+      ],
+      solutions: [
+        {
+          title: 'Vendor Risk Calculator',
+          description: 'Calculate preliminary risk scores to inform vendor selection decisions.',
+          benefits: [
+            'Standardized risk assessment criteria',
+            'Immediate risk scoring for new vendors',
+            'Data-driven vendor comparison',
+            'Integration with procurement workflows'
+          ],
+          cta: 'Calculate Risk',
+          link: '/tools/vendor-risk-calculator'
+        },
+        {
+          title: 'Vendor Risk Dashboard',
+          description: 'Monitor and manage your vendor portfolio with centralized risk visibility.',
+          benefits: [
+            'Real-time risk monitoring',
+            'Automated compliance tracking',
+            'Contract renewal alerts',
+            'Executive reporting dashboards'
+          ],
+          cta: 'View Dashboard',
+          link: '/vendor-risk-dashboard'
+        }
+      ]
+    },
+    {
+      id: 'compliance',
+      title: 'Compliance Officers',
+      description: 'Ensure adherence to regulatory requirements with built-in compliance frameworks.',
+      icon: <Lock className="h-8 w-8 text-vendorsoluce-teal" />,
+      challenges: [
+        'Keeping up with evolving regulatory requirements',
+        'Documenting compliance efforts for audits',
+        'Ensuring vendors meet contractual obligations',
+        'Managing compliance across multiple frameworks'
+      ],
+      solutions: [
+        {
+          title: 'NIST SP 800-161 Assessment',
+          description: 'Comprehensive supply chain risk assessment aligned with federal standards.',
+          benefits: [
+            'Pre-built NIST control templates',
+            'Automated compliance scoring',
+            'Audit-ready documentation',
+            'Gap analysis and recommendations'
+          ],
+          cta: 'Start Assessment',
+          link: '/supply-chain-assessment'
+        },
+        {
+          title: 'Compliance Templates',
+          description: 'Access pre-built templates for common compliance scenarios.',
+          benefits: [
+            'Federal compliance templates',
+            'Industry-specific questionnaires',
+            'Risk assessment matrices',
+            'Executive summary templates'
+          ],
+          cta: 'Download Templates',
+          link: '/templates'
+        }
+      ]
+    },
+    {
+      id: 'executives',
+      title: 'Executive Leadership',
+      description: 'Strategic insights and reporting to make informed decisions about supply chain risks.',
+      icon: <Users className="h-8 w-8 text-vendorsoluce-blue" />,
+      challenges: [
+        'Understanding supply chain risk exposure',
+        'Making informed investment decisions',
+        'Demonstrating risk management to stakeholders',
+        'Balancing operational efficiency with security'
+      ],
+      solutions: [
+        {
+          title: 'Executive Dashboards',
+          description: 'High-level insights into your organization\'s supply chain risk posture.',
+          benefits: [
+            'Key risk metrics and trends',
+            'Vendor portfolio health overview',
+            'Compliance status summaries',
+            'Strategic risk recommendations'
+          ],
+          cta: 'View Dashboard',
+          link: '/dashboard'
+        },
+        {
+          title: 'Risk Reporting',
+          description: 'Generate executive-level reports for board meetings and stakeholder updates.',
+          benefits: [
+            'Automated report generation',
+            'Customizable metrics and KPIs',
+            'Trend analysis and forecasting',
+            'Stakeholder-ready presentations'
+          ],
+          cta: 'Generate Report',
+          link: '/vendor-risk-dashboard'
+        }
+      ]
     }
-  } catch (error) {
-    console.error('Error fetching vendor risk data:', error);
-    return false;
-  }
-}`}
-                  </code>
-                </pre>
-              </div>
-              
-              <div className="flex items-center justify-between">
-                <Link to="/api-docs" className="text-vendortal-navy dark:text-trust-blue hover:text-vendortal-navy/80 dark:hover:text-trust-blue/80 font-medium">
-                  {t('resources.integrationGuides.apiIntegrations.viewFullDocs')} →
-                </Link>
-                <Button variant="outline" size="sm">{t('resources.integrationGuides.apiIntegrations.downloadClient')}</Button>
-              </div>
-            </Card>
-          </section>
-          
-          <section id="siem-security">
-            <Card className="p-6 mb-8">
-              <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{t('resources.integrationGuides.sections.siemSecurity')}</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {t('resources.integrationGuides.siemSecurity.description')}
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.siemSecurity.splunk.title')}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    {t('resources.integrationGuides.siemSecurity.splunk.description')}
-                  </p>
-                  <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                    {t('resources.integrationGuides.viewGuide')} →
-                  </a>
-                </div>
-                
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.siemSecurity.elastic.title')}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    {t('resources.integrationGuides.siemSecurity.elastic.description')}
-                  </p>
-                  <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                    {t('resources.integrationGuides.viewGuide')} →
-                  </a>
-                </div>
-                
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.siemSecurity.qradar.title')}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    {t('resources.integrationGuides.siemSecurity.qradar.description')}
-                  </p>
-                  <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                    {t('resources.integrationGuides.viewGuide')} →
-                  </a>
-                </div>
-                
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.siemSecurity.sentinel.title')}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                    {t('resources.integrationGuides.siemSecurity.sentinel.description')}
-                  </p>
-                  <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                    {t('resources.integrationGuides.viewGuide')} →
-                  </a>
-                </div>
-              </div>
-            </Card>
-          </section>
-          
-          <section id="cicd-pipelines">
-            <Card className="p-6 mb-8">
-              <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{t('resources.integrationGuides.sections.cicdPipelines')}</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {t('resources.integrationGuides.cicdPipelines.description')}
-              </p>
-              
-              <div className="mb-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                  <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4 text-center">
-                    <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.cicdPipelines.jenkins.title')}</h3>
-                    <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                      {t('resources.integrationGuides.viewGuide')} →
-                    </a>
+  ];
+
+  const activeStakeholderData = stakeholders.find(s => s.id === activeStakeholder) || stakeholders[0];
+
+  return (
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            Designed for Every Supply Chain Stakeholder
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            VendorSoluce addresses the unique challenges faced by different teams in your organization, 
+            providing tailored solutions that deliver measurable value to each stakeholder.
+          </p>
+        </div>
+
+        {/* Stakeholder Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {stakeholders.map((stakeholder) => (
+            <button
+              key={stakeholder.id}
+              onClick={() => setActiveStakeholder(stakeholder.id)}
+              className={`flex items-center px-4 py-2 rounded-lg font-medium transition-all ${
+                activeStakeholder === stakeholder.id
+                  ? 'bg-vendorsoluce-green text-white shadow-md'
+                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
+              }`}
+            >
+              {stakeholder.icon}
+              <span className="ml-2">{stakeholder.title}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Active Stakeholder Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Challenges */}
+          <Card className="lg:col-span-1">
+            <CardHeader>
+              <CardTitle className="flex items-center  text-gray-900 dark:text-white">
+                <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
+                Common Challenges
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">{activeStakeholderData.description}</p>
+              <ul className="space-y-3">
+                {activeStakeholderData.challenges.map((challenge, index) => (
+                  <li key={index} className="flex items-start">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <span className="text-gray-700 dark:text-gray-300 text-sm">{challenge}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+
+          {/* Solutions */}
+          <div className="lg:col-span-2 space-y-6">
+            {activeStakeholderData.solutions.map((solution, index) => (
+              <Card key={index} className="border-l-4 border-l-vendorsoluce-green">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                        {solution.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4">
+                        {solution.description}
+                      </p>
+                    </div>
+                    <div className="ml-4">
+                      <Link to={solution.link}>
+                        <Button variant="primary" size="sm">
+                          {solution.cta}
+                          <ChevronRight className="h-4 w-4 ml-1" />
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                   
-                  <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4 text-center">
-                    <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.cicdPipelines.gitlab.title')}</h3>
-                    <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                      {t('resources.integrationGuides.viewGuide')} →
-                    </a>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {solution.benefits.map((benefit, benefitIndex) => (
+                      <div key={benefitIndex} className="flex items-start">
+                        <CheckCircle className="h-4 w-4 text-vendorsoluce-green mr-2 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-gray-700 dark:text-gray-300">{benefit}</span>
+                      </div>
+                    ))}
                   </div>
-                  
-                  <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4 text-center">
-                    <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.cicdPipelines.azureDevOps.title')}</h3>
-                    <a href="#" className="text-supply-chain-teal hover:text-supply-chain-teal/80 text-sm font-medium">
-                      {t('resources.integrationGuides.viewGuide')} →
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </section>
-          
-          <section id="data-export">
-            <Card className="p-6">
-              <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{t('resources.integrationGuides.sections.dataExport')}</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {t('resources.integrationGuides.dataExport.description')}
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.dataExport.exportFormats.title')}</h3>
-                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
-                    <li>{t('resources.integrationGuides.dataExport.exportFormats.csv')}</li>
-                    <li>{t('resources.integrationGuides.dataExport.exportFormats.json')}</li>
-                    <li>{t('resources.integrationGuides.dataExport.exportFormats.pdf')}</li>
-                    <li>{t('resources.integrationGuides.dataExport.exportFormats.excel')}</li>
-                  </ul>
-                </div>
-                
-                <div className="border border-gray-200 dark:border-gray-700 rounded-md p-4">
-                  <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.dataExport.importFormats.title')}</h3>
-                  <ul className="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
-                    <li>{t('resources.integrationGuides.dataExport.importFormats.csv')}</li>
-                    <li>{t('resources.integrationGuides.dataExport.importFormats.json')}</li>
-                    <li>{t('resources.integrationGuides.dataExport.importFormats.sbom')}</li>
-                    <li>{t('resources.integrationGuides.dataExport.importFormats.xml')}</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-md border border-gray-200 dark:border-gray-700">
-                <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('resources.integrationGuides.dataExport.automatedExport')}</h3>
-                <pre className="text-sm text-gray-800 dark:text-gray-300 overflow-x-auto">
-                  <code>
-                    {`# Automated data export script (example)
-curl -X GET "https://api.vendorsoluce.com/api/export/vendors" \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Accept: application/json" \\
-  -o "vendors_export_$(date +%Y%m%d).json"`}
-                  </code>
-                </pre>
-              </div>
-            </Card>
-          </section>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="mt-12 text-center">
+          <div className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green rounded-lg p-8 text-white">
+            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Supply Chain Security?</h3>
+            <p className="text-xl text-gray-100 mb-6">
+              Join organizations worldwide who trust VendorSoluce to secure their supply chains and meet compliance requirements.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link to="/supply-chain-assessment">
+                <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100">
+                  <Target className="h-5 w-5 mr-2" />
+                  Start Free Assessment
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20">
+                  <Users className="h-5 w-5 mr-2" />
+                  Schedule Demo
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 };
 
-export default IntegrationGuides;
+export default ValuePropositionSection;
