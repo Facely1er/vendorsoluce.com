@@ -6,7 +6,7 @@ import { useI18n } from '../../context/I18nContext';
 import ThemeToggle from './ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
 import UserMenu from './UserMenu';
-import Button from '../ui/Button';
+import Button from '../components/ui/Button';
 
 const Navbar: React.FC = () => {
   const { isAuthenticated } = useAuth();
