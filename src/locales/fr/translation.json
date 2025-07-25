@@ -15,15 +15,38 @@
   },
   "home": {
     "hero": {
-      "title": "Sécurisez votre chaîne d'approvisionnement",
-      "subtitle": "VendorSoluce permet aux organisations d'évaluer, surveiller et atténuer les risques de tiers avec des outils alignés sur NIST SP 800-161",
-      "description": "Des évaluations de fournisseurs à l'analyse SBOM, nous rendons la sécurité de la chaîne d'approvisionnement accessible et exploitable pour les équipes de toutes tailles.",
+      "title": "Transformez le risque fournisseur en avantage concurrentiel",
+      "subtitle": "Sécurisez votre chaîne d'approvisionnement. Accélérez votre entreprise.",
+      "description": "Arrêtez de vous inquiéter des vulnérabilités fournisseurs et commencez à exploiter l'intelligence de la chaîne d'approvisionnement. VendorSoluce transforme la gestion des risques fournisseurs d'un goulot d'étranglement en accélérateur d'entreprise avec des évaluations automatisées et une visibilité complète de la chaîne d'approvisionnement.",
       "cta1": "Commencer l'évaluation gratuite",
-      "cta2": "Planifier une démo",
-      "whyChoose": "Pourquoi choisir notre plateforme",
-      "benefit1": "Réduire les coûts de conformité jusqu'à 60%",
-      "benefit2": "Automatiser les tâches d'évaluation répétitives",
-      "benefit3": "Obtenir des rapports prêts pour les dirigeants en minutes"
+      "cta2": "Planifier une démo en direct",
+      
+      "benefits": {
+        "section1": {
+          "title": "Intégration 70% plus rapide",
+          "benefit1": "Automatiser les évaluations de sécurité fournisseurs",
+          "benefit2": "Portail fournisseur en libre-service",
+          "benefit3": "Flux de travail de conformité rationalisés"
+        },
+        "section2": {
+          "title": "Visibilité complète de la chaîne d'approvisionnement",
+          "benefit1": "Voir tous les risques fournisseurs en un seul endroit",
+          "benefit2": "Cartographie des risques n-ième partie",
+          "benefit3": "Surveillance en temps réel et alertes"
+        },
+        "section3": {
+          "title": "Toujours prêt pour l'audit",
+          "benefit1": "Conformité NIST SP 800-161",
+          "benefit2": "Documentation automatisée",
+          "benefit3": "Suivi continu de la conformité"
+        }
+      },
+      
+      "trustIndicators": {
+        "customers": "500+ Clients Entreprise",
+        "assessments": "10 000+ Fournisseurs Évalués",
+        "success": "99,7% Taux de Réussite de Conformité"
+      }
     },
     "assessments": {
       "title": "Évaluations disponibles",
