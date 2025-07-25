@@ -1,314 +1,257 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
-import { Button } from '../ui/Button';
+import React, { useState, useRef, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { 
-  Shield, 
-  Building2,
+  Menu, 
+  X, 
+  Home, 
+  LayoutDashboard, 
   Users, 
-  ArrowRight,
-  Lock, 
-  ChevronRight,
-  Target,
-  CheckCircle,
-  AlertTriangle
+  FileText, 
+  DollarSign, 
+  BookOpen, 
+  Code, 
+  ChevronDown 
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { useTranslation } from 'react-i18next';
+import ThemeToggle from './ThemeToggle';
+import LanguageSwitcher from './LanguageSwitcher';
+import UserMenu from './UserMenu';
 
-interface Stakeholder {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  challenges: string[];
-  solutions: {
-    title: string;
-    description: string;
-    benefits: string[];
-    cta: string;
-    link: string;
-  }[];
-}
-
-const ValuePropositionSection: React.FC = () => {
+const Navbar: React.FC = () => {
+  const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
-  const [activeStakeholder, setActiveStakeholder] = useState<string>('security');
+  const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
-  const stakeholders: Stakeholder[] = [
-    {
-      id: 'security',
-      title: t('home.stakeholders.security.title'),
-      description: t('home.stakeholders.security.description'),
-      icon: <Shield className="h-8 w-8 text-vendorsoluce-green" />,
-      challenges: [
-        t('home.stakeholders.security.challenges.visibility'),
-        t('home.stakeholders.security.challenges.manual'),
-        t('home.stakeholders.security.challenges.tracking'),
-        t('home.stakeholders.security.challenges.compliance')
-      ],
-      solutions: [
-        {
-          title: t('home.stakeholders.security.solutions.sbom.title'),
-          description: t('home.stakeholders.security.solutions.sbom.description'),
-          benefits: [
-            t('home.stakeholders.security.solutions.sbom.benefits.vulnerabilities'),
-            t('home.stakeholders.security.solutions.sbom.benefits.licenses'),
-            t('home.stakeholders.security.solutions.sbom.benefits.reports'),
-            t('home.stakeholders.security.solutions.sbom.benefits.monitoring')
-          ],
-          cta: t('home.stakeholders.security.solutions.sbom.cta'),
-          link: '/sbom-analyzer'
-        },
-        {
-          title: t('home.stakeholders.security.solutions.assessments.title'),
-          description: t('home.stakeholders.security.solutions.assessments.description'),
-          benefits: [
-            t('home.stakeholders.security.solutions.assessments.benefits.cmmc'),
-            t('home.stakeholders.security.solutions.assessments.benefits.nist'),
-            t('home.stakeholders.security.solutions.assessments.benefits.scoring'),
-            t('home.stakeholders.security.solutions.assessments.benefits.portal'),
-            t('home.stakeholders.security.solutions.assessments.benefits.tracking')
-          ],
-          cta: t('home.stakeholders.security.solutions.assessments.cta'),
-          link: '/vendor-assessments'
-        }
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const navItems = [
+    { name: 'Home', path: '/', icon: Home },
+    { 
+      name: 'Solutions', 
+      path: '/how-it-works', 
+      icon: BookOpen, 
+      dropdown: [
+        { name: 'Supply Chain Assessment', path: '/supply-chain-assessment' },
+        { name: 'SBOM Analysis', path: '/sbom-analyzer' },
+        { name: 'Vendor Risk', path: '/vendor-risk-dashboard' },
+        { name: 'Vendor Assessments', path: '/vendor-assessments' },
       ]
     },
-    {
-      id: 'procurement',
-      title: t('home.stakeholders.procurement.title'),
-      description: t('home.stakeholders.procurement.description'),
-      icon: <Building2 className="h-8 w-8 text-vendorsoluce-navy" />,
-      challenges: [
-        t('home.stakeholders.procurement.challenges.balancing'),
-        t('home.stakeholders.procurement.challenges.lifecycle'),
-        t('home.stakeholders.procurement.challenges.contracts'),
-        t('home.stakeholders.procurement.challenges.diligence')
-      ],
-      solutions: [
-        {
-          title: t('home.stakeholders.procurement.solutions.calculator.title'),
-          description: t('home.stakeholders.procurement.solutions.calculator.description'),
-          benefits: [
-            t('home.stakeholders.procurement.solutions.calculator.benefits.criteria'),
-            t('home.stakeholders.procurement.solutions.calculator.benefits.scoring'),
-            t('home.stakeholders.procurement.solutions.calculator.benefits.comparison'),
-            t('home.stakeholders.procurement.solutions.calculator.benefits.integration')
-          ],
-          cta: t('home.stakeholders.procurement.solutions.calculator.cta'),
-          link: '/tools/vendor-risk-calculator'
-        },
-        {
-          title: t('home.stakeholders.procurement.solutions.dashboard.title'),
-          description: t('home.stakeholders.procurement.solutions.dashboard.description'),
-          benefits: [
-            t('home.stakeholders.procurement.solutions.dashboard.benefits.monitoring'),
-            t('home.stakeholders.procurement.solutions.dashboard.benefits.tracking'),
-            t('home.stakeholders.procurement.solutions.dashboard.benefits.alerts'),
-            t('home.stakeholders.procurement.solutions.dashboard.benefits.reporting')
-          ],
-          cta: t('home.stakeholders.procurement.solutions.dashboard.cta'),
-          link: '/vendor-risk-dashboard'
-        }
-      ]
-    },
-    {
-      id: 'compliance',
-      title: t('home.stakeholders.compliance.title'),
-      description: t('home.stakeholders.compliance.description'),
-      icon: <Lock className="h-8 w-8 text-vendorsoluce-teal" />,
-      challenges: [
-        t('home.stakeholders.compliance.challenges.evolving'),
-        t('home.stakeholders.compliance.challenges.documenting'),
-        t('home.stakeholders.compliance.challenges.obligations'),
-        t('home.stakeholders.compliance.challenges.frameworks')
-      ],
-      solutions: [
-        {
-          title: t('home.stakeholders.compliance.solutions.nist.title'),
-          description: t('home.stakeholders.compliance.solutions.nist.description'),
-          benefits: [
-            t('home.stakeholders.compliance.solutions.nist.benefits.templates'),
-            t('home.stakeholders.compliance.solutions.nist.benefits.scoring'),
-            t('home.stakeholders.compliance.solutions.nist.benefits.documentation'),
-            t('home.stakeholders.compliance.solutions.nist.benefits.analysis')
-          ],
-          cta: t('home.stakeholders.compliance.solutions.nist.cta'),
-          link: '/supply-chain-assessment'
-        },
-        {
-          title: t('home.stakeholders.compliance.solutions.templates.title'),
-          description: t('home.stakeholders.compliance.solutions.templates.description'),
-          benefits: [
-            t('home.stakeholders.compliance.solutions.templates.benefits.federal'),
-            t('home.stakeholders.compliance.solutions.templates.benefits.industry'),
-            t('home.stakeholders.compliance.solutions.templates.benefits.matrices'),
-            t('home.stakeholders.compliance.solutions.templates.benefits.executive')
-          ],
-          cta: t('home.stakeholders.compliance.solutions.templates.cta'),
-          link: '/templates'
-        }
-      ]
-    },
-    {
-      id: 'executives',
-      title: t('home.stakeholders.executives.title'),
-      description: t('home.stakeholders.executives.description'),
-      icon: <Users className="h-8 w-8 text-vendorsoluce-blue" />,
-      challenges: [
-        t('home.stakeholders.executives.challenges.understanding'),
-        t('home.stakeholders.executives.challenges.investment'),
-        t('home.stakeholders.executives.challenges.demonstrating'),
-        t('home.stakeholders.executives.challenges.balancing')
-      ],
-      solutions: [
-        {
-          title: t('home.stakeholders.executives.solutions.dashboards.title'),
-          description: t('home.stakeholders.executives.solutions.dashboards.description'),
-          benefits: [
-            t('home.stakeholders.executives.solutions.dashboards.benefits.metrics'),
-            t('home.stakeholders.executives.solutions.dashboards.benefits.portfolio'),
-            t('home.stakeholders.executives.solutions.dashboards.benefits.compliance'),
-            t('home.stakeholders.executives.solutions.dashboards.benefits.recommendations')
-          ],
-          cta: t('home.stakeholders.executives.solutions.dashboards.cta'),
-          link: '/dashboard'
-        },
-        {
-          title: t('home.stakeholders.executives.solutions.reporting.title'),
-          description: t('home.stakeholders.executives.solutions.reporting.description'),
-          benefits: [
-            t('home.stakeholders.executives.solutions.reporting.benefits.automated'),
-            t('home.stakeholders.executives.solutions.reporting.benefits.customizable'),
-            t('home.stakeholders.executives.solutions.reporting.benefits.analysis'),
-            t('home.stakeholders.executives.solutions.reporting.benefits.presentations')
-          ],
-          cta: t('home.stakeholders.executives.solutions.reporting.cta'),
-          link: '/vendor-risk-dashboard'
-        }
+    { name: 'Pricing', path: '/pricing', icon: DollarSign },
+    { 
+      name: 'Resources', 
+      path: '/templates', 
+      icon: FileText, 
+      dropdown: [
+        { name: 'Templates', path: '/templates' },
+        { name: 'API Docs', path: '/api-docs' },
+        { name: 'Integration', path: '/integration-guides' },
       ]
     }
   ];
 
-  const activeStakeholderData = stakeholders.find(s => s.id === activeStakeholder) || stakeholders[0];
+  const isActivePath = (itemPath: string, dropdownPaths?: string[]) => {
+    if (location.pathname === itemPath) return true;
+    if (dropdownPaths) {
+      return dropdownPaths.some(path => location.pathname === path);
+    }
+    return false;
+  };
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            {t('home.stakeholders.title')}
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            {t('home.stakeholders.description')}
-          </p>
-        </div>
-
-        {/* Stakeholder Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {stakeholders.map((stakeholder) => (
-            <button
-              key={stakeholder.id}
-              onClick={() => setActiveStakeholder(stakeholder.id)}
-              className={`flex items-center px-4 py-2 rounded-lg font-medium transition-all ${
-                activeStakeholder === stakeholder.id
-                  ? 'bg-vendorsoluce-green text-white shadow-md'
-                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-              }`}
-            >
-              {stakeholder.icon}
-              <span className="ml-2">{stakeholder.title}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Active Stakeholder Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Challenges */}
-          <Card className="lg:col-span-1">
-            <CardHeader>
-              <CardTitle className="flex items-center text-gray-900 dark:text-white">
-                <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
-                {t('home.stakeholders.common.challenges')}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">{activeStakeholderData.description}</p>
-              <ul className="space-y-3">
-                {activeStakeholderData.challenges.map((challenge, index) => (
-                  <li key={index} className="flex items-start">
-                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <span className="text-gray-700 dark:text-gray-300 text-sm">{challenge}</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-
-          {/* Solutions */}
-          <div className="lg:col-span-2 space-y-6">
-            {activeStakeholderData.solutions.map((solution, index) => (
-              <Card key={index} className="border-l-4 border-l-vendorsoluce-green">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                        {solution.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">
-                        {solution.description}
-                      </p>
-                    </div>
-                    <div className="ml-4">
-                      <Link to={solution.link}>
-                        <Button variant="primary" size="sm">
-                          {solution.cta}
-                          <ArrowRight className="h-4 w-4 ml-1" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {solution.benefits.map((benefit, benefitIndex) => (
-                      <div key={benefitIndex} className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-vendorsoluce-green mr-2 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-gray-700 dark:text-gray-300">{benefit}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+    <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40" data-tour="main-nav">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          {/* Logo and Branding */}
+          <div className="flex-shrink-0 flex items-center">
+            <Link to="/" className="flex items-center">
+              <img className="h-8 w-auto" src="/vendorsoluce.png" alt="VendorSoluce Logo" />
+              <div className="hidden md:block ml-2">
+                <span className="block text-lg font-bold text-gray-900 dark:text-white">VendorSoluce™</span>
+                <span className="block text-xs text-gray-600 dark:text-gray-400">by ERMITS</span>
+              </div>
+            </Link>
           </div>
-        </div>
 
-        {/* Call to Action */}
-        <div className="mt-12 text-center">
-          <div className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green rounded-lg p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">{t('home.stakeholders.cta.title')}</h3>
-            <p className="text-xl text-gray-100 mb-6">
-              {t('home.stakeholders.cta.description')}
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/supply-chain-assessment">
-                <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100">
-                  <Target className="h-5 w-5 mr-2" />
-                  {t('home.stakeholders.cta.startAssessment')}
-                </Button>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex md:space-x-4 items-center">
+            {navItems.map((item) => (
+              item.dropdown ? (
+                <div key={item.name} className="relative group">
+                  <button className={`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
+                    isActivePath(item.path, item.dropdown.map(d => d.path))
+                      ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
+                  }`}>
+                    {item.icon && <item.icon className="h-4 w-4 mr-1" />}
+                    {item.name}
+                    <ChevronDown className="ml-1 h-4 w-4" />
+                  </button>
+                  <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                    <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                      {item.dropdown.map((subItem) => (
+                        <Link
+                          key={subItem.name}
+                          to={subItem.path}
+                          className={`block px-4 py-2 text-sm transition-colors ${
+                            location.pathname === subItem.path
+                              ? 'bg-vendorsoluce-pale-green text-vendorsoluce-navy dark:bg-vendorsoluce-navy/20 dark:text-vendorsoluce-blue font-medium'
+                              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
+                          }`}
+                          role="menuitem"
+                        >
+                          {subItem.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className={`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
+                    isActivePath(item.path)
+                      ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
+                  }`}
+                >
+                  {item.icon && <item.icon className="h-4 w-4 mr-1" />}
+                  {item.name}
+                </Link>
+              )
+            ))}
+            {isAuthenticated && (
+              <Link
+                to="/dashboard"
+                className={`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
+                  location.pathname === '/dashboard'
+                    ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
+                }`}
+              >
+                <LayoutDashboard className="h-4 w-4 mr-1" />
+                Dashboard
               </Link>
-              <Link to="/contact">
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20">
-                  <Users className="h-5 w-5 mr-2" />
-                  {t('home.stakeholders.cta.scheduleDemo')}
-                </Button>
-              </Link>
+            )}
+          </nav>
+
+          {/* Right Section (Theme, Language, User Menu) */}
+          <div className="hidden md:flex items-center space-x-4">
+            <div data-tour="theme-toggle">
+              <ThemeToggle />
             </div>
+            <LanguageSwitcher />
+            <div data-tour="user-menu">
+              <UserMenu />
+            </div>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="-mr-2 flex items-center md:hidden">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-vendorsoluce-navy"
+            >
+              <span className="sr-only">Open main menu</span>
+              {isMobileMenuOpen ? (
+                <X className="block h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="block h-6 w-6" aria-hidden="true" />
+              )}
+            </button>
           </div>
         </div>
       </div>
-    </section>
+
+      {/* Mobile Menu Panel */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden" ref={mobileMenuRef}>
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navItems.map((item) => (
+              item.dropdown ? (
+                <div key={item.name}>
+                  <button className={`block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors ${
+                    isActivePath(item.path, item.dropdown.map(d => d.path))
+                      ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
+                  }`}>
+                    {item.icon && <item.icon className="h-5 w-5 mr-2 inline-block" />}
+                    {item.name}
+                  </button>
+                  <div className="pl-6 mt-1 space-y-1">
+                    {item.dropdown.map((subItem) => (
+                      <Link
+                        key={subItem.name}
+                        to={subItem.path}
+                        className={`block px-3 py-2 text-sm transition-colors rounded-md ${
+                          location.pathname === subItem.path
+                            ? 'bg-vendorsoluce-pale-green text-vendorsoluce-navy dark:bg-vendorsoluce-navy/20 dark:text-vendorsoluce-blue font-medium'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        }`}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {subItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                    isActivePath(item.path)
+                      ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.icon && <item.icon className="h-5 w-5 mr-2 inline-block" />}
+                  {item.name}
+                </Link>
+              )
+            ))}
+            {isAuthenticated && (
+              <Link
+                to="/dashboard"
+                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                  location.pathname === '/dashboard'
+                    ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <LayoutDashboard className="h-5 w-5 mr-2 inline-block" />
+                Dashboard
+              </Link>
+            )}
+            <div className="flex items-center justify-between px-3 py-2">
+              <ThemeToggle />
+              <LanguageSwitcher variant="buttons" />
+            </div>
+            <div className="px-3 py-2">
+              <UserMenu />
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 
-export default ValuePropositionSection;
+export default Navbar;
