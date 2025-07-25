@@ -85,9 +85,10 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center" data-tour="main-nav">
-            <Link to="/" className="flex-shrink-0 flex items-center">
+        <div className="flex items-center justify-between h-16">
+          {/* Left: Logo */}
+          <div className="flex items-center flex-shrink-0" data-tour="main-nav">
+            <Link to="/" className="flex items-center">
               <img 
                 src="/vendorsoluce.png" 
                 alt="VendorSoluce Logo" 
@@ -100,8 +101,8 @@ const Navbar: React.FC = () => {
             </Link>
           </div>
           
-          {/* Desktop Navigation */}
-          <div className="hidden md:ml-6 md:flex md:items-center md:space-x-2">
+          {/* Center: Desktop Navigation */}
+          <div className="hidden md:flex md:items-center md:space-x-2">
             {primaryNav.map((item) => 
               item.title === t('navigation.solutions') ? (
                 <div key={item.title} className="relative">
@@ -182,15 +183,16 @@ const Navbar: React.FC = () => {
                 </Link>
               )
             )}
+          </div>
 
-            <div className="ml-2 flex items-center space-x-2">
-              <LanguageSwitcher variant="icon" />
-              <div data-tour="theme-toggle">
-                <ThemeToggle />
-              </div>
-              <div data-tour="user-menu">
-                <UserMenu />
-              </div>
+          {/* Right: Utilities */}
+          <div className="hidden md:flex items-center space-x-2 flex-shrink-0">
+            <LanguageSwitcher variant="icon" />
+            <div data-tour="theme-toggle">
+              <ThemeToggle />
+            </div>
+            <div data-tour="user-menu">
+              <UserMenu />
             </div>
           </div>
           
