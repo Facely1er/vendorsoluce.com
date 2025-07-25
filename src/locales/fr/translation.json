@@ -1,319 +1,1047 @@
-import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
-import { Button } from '../ui/Button';
-import { 
-  Shield, 
-  Building, 
-  Building2,
-  ShieldCheck,
-  Users, 
-  ArrowRight,
-  Lock, 
-  FileCheck, 
-  BarChart3, 
-  FileJson,
-  ChevronRight,
-  Target,
-  TrendingUp,
-  CheckCircle,
-  AlertTriangle
-} from 'lucide-react';
-import { Link } from 'react-router-dom';
-
-interface Stakeholder {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  challenges: string[];
-  solutions: {
-    title: string;
-    description: string;
-    benefits: string[];
-    cta: string;
-    link: string;
-  }[];
-}
-
-const ValuePropositionSection: React.FC = () => {
-  const [activeStakeholder, setActiveStakeholder] = useState<string>('security');
-
-  const stakeholders: Stakeholder[] = [
-    {
-      id: 'security',
-      title: 'Security Teams',
-      description: 'Comprehensive tools for identifying, assessing, and mitigating supply chain security risks.',
-      icon: <Shield className="h-8 w-8 text-vendorsoluce-green" />,
-      challenges: [
-        'Limited visibility into supplier security practices',
-        'Time-consuming manual assessment processes',
-        'Difficulty tracking vulnerabilities across software components',
-        'Complex compliance requirements like NIST SP 800-161'
-      ],
-      solutions: [
-        {
-          title: 'Automated SBOM Analysis',
-          description: 'Instantly analyze software components for vulnerabilities and license compliance.',
-          benefits: [
-            'Identify critical vulnerabilities in minutes',
-            'Track open source licenses automatically',
-            'Generate compliance reports for audits',
-            'Monitor component health continuously'
-          ],
-          cta: 'Analyze SBOM Now',
-          link: '/sbom-analyzer'
-        },
-        {
-          title: 'Vendor Security Assessments',
-          description: 'Send CMMC and NIST Privacy Framework assessments through secure vendor portal.',
-          benefits: [
-            'CMMC Level 1 & 2 assessment templates',
-            'NIST Privacy Framework questionnaires',
-            'Automated scoring and risk rating',
-            'Secure evidence collection portal',
-            'Real-time progress tracking and notifications'
-          ],
-          cta: 'Start Assessment',
-          link: '/vendor-assessments'
-        }
-      ]
+ {
+  "nav": {
+    "home": "Accueil",
+    "solutions": "Solutions",
+    "vendors": "Fournisseurs",
+    "dashboard": "Tableau de bord",
+    "tools": "Outils",
+    "templates": "Modèles",
+    "about": "À propos",
+    "contact": "Contact",
+    "pricing": "Tarifs",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "premium": "Premium"
+  },
+  "home": {
+    "hero": {
+      "title": "Sécurisez votre chaîne d'approvisionnement",
+      "subtitle": "Outils complets d'évaluation des risques et de conformité pour les organisations modernes",
+      "description": "Plateforme complète d'évaluation des risques et de gestion de la conformité pour les organisations modernes",
+      "cta1": "Commencer l'évaluation gratuite",
+      "cta2": "Planifier une démonstration"
     },
-    {
-      id: 'procurement',
-      title: 'Procurement Teams',
-      description: 'Streamline vendor selection and management with risk-based decision making tools.',
-      icon: <Building2 className="h-8 w-8 text-vendorsoluce-navy" />,
-      challenges: [
-        'Balancing cost, quality, and security in vendor selection',
-        'Managing vendor relationships throughout their lifecycle',
-        'Ensuring contract terms include appropriate security clauses',
-        'Demonstrating due diligence for audit purposes'
-      ],
-      solutions: [
-        {
-          title: 'Vendor Risk Calculator',
-          description: 'Calculate preliminary risk scores to inform vendor selection decisions.',
-          benefits: [
-            'Standardized risk assessment criteria',
-            'Immediate risk scoring for new vendors',
-            'Data-driven vendor comparison',
-            'Integration with procurement workflows'
-          ],
-          cta: 'Calculate Risk',
-          link: '/tools/vendor-risk-calculator'
-        },
-        {
-          title: 'Vendor Risk Dashboard',
-          description: 'Monitor and manage your vendor portfolio with centralized risk visibility.',
-          benefits: [
-            'Real-time risk monitoring',
-            'Automated compliance tracking',
-            'Contract renewal alerts',
-            'Executive reporting dashboards'
-          ],
-          cta: 'View Dashboard',
-          link: '/vendor-risk-dashboard'
-        }
-      ]
+    "assessments": {
+      "title": "Évaluations disponibles",
+      "description": "Choisissez parmi nos outils d'évaluation complets pour évaluer votre posture de sécurité de la chaîne d'approvisionnement et votre état de préparation à la conformité.",
+      "startAssessment": "Commencer l'évaluation",
+      "supplyChain": {
+        "title": "Évaluation des risques de la chaîne d'approvisionnement",
+        "description": "Évaluation complète alignée sur NIST SP 800-161 pour la conformité fédérale et la gestion des risques d'entreprise.",
+        "features": [
+          "Conformité au framework NIST SP 800-161",
+          "Notation et rapports de risques automatisés",
+          "Analyse des écarts avec recommandations actionnables",
+          "Résumé exécutif pour la communication aux parties prenantes"
+        ]
+      },
+      "sbomAnalysis": {
+        "title": "Analyse SBOM",
+        "description": "Téléchargez et analysez les fichiers de nomenclature logicielle (SBOM) pour identifier les vulnérabilités et les problèmes de conformité.",
+        "features": [
+          "Support des formats SPDX et CycloneDX",
+          "Analyse des vulnérabilités et évaluation des risques",
+          "Vérification de la conformité des licences",
+          "Rapports d'analyse détaillés des composants"
+        ]
+      },
+      "vendorAssessments": {
+        "title": "Évaluations de sécurité des fournisseurs",
+        "description": "Envoyez des questionnaires de sécurité complets aux fournisseurs avec suivi et notation automatisés.",
+        "features": [
+          "Modèles d'évaluation CMMC Niveau 1 et 2",
+          "Questionnaires du Cadre de confidentialité NIST",
+          "Notation automatisée et évaluation des risques",
+          "Portail de collecte de preuves sécurisé"
+        ]
+      }
     },
-    {
-      id: 'compliance',
-      title: 'Compliance Officers',
-      description: 'Ensure adherence to regulatory requirements with built-in compliance frameworks.',
-      icon: <Lock className="h-8 w-8 text-vendorsoluce-teal" />,
-      challenges: [
-        'Keeping up with evolving regulatory requirements',
-        'Documenting compliance efforts for audits',
-        'Ensuring vendors meet contractual obligations',
-        'Managing compliance across multiple frameworks'
-      ],
-      solutions: [
-        {
-          title: 'NIST SP 800-161 Assessment',
-          description: 'Comprehensive supply chain risk assessment aligned with federal standards.',
-          benefits: [
-            'Pre-built NIST control templates',
-            'Automated compliance scoring',
-            'Audit-ready documentation',
-            'Gap analysis and recommendations'
-          ],
-          cta: 'Start Assessment',
-          link: '/supply-chain-assessment'
-        },
-        {
-          title: 'Compliance Templates',
-          description: 'Access pre-built templates for common compliance scenarios.',
-          benefits: [
-            'Federal compliance templates',
-            'Industry-specific questionnaires',
-            'Risk assessment matrices',
-            'Executive summary templates'
-          ],
-          cta: 'Download Templates',
-          link: '/templates'
-        }
-      ]
+    "features": {
+      "title": "Fonctionnalités clés",
+      "description": "Tout ce dont vous avez besoin pour gérer les risques et la conformité de la chaîne d'approvisionnement",
+      "feature1": {
+        "title": "Évaluation des risques",
+        "description": "Évaluations de risques complètes alignées NIST avec notation automatique et analyse des écarts"
+      },
+      "feature2": {
+        "title": "Analyse SBOM",
+        "description": "Analyse automatisée des nomenclatures logicielles pour les vulnérabilités et la conformité des licences"
+      },
+      "feature3": {
+        "title": "Gestion des fournisseurs",
+        "description": "Évaluations rationalisées des fournisseurs avec portails sécurisés et suivi des progrès"
+      },
+      "feature4": {
+        "title": "Rapports de conformité",
+        "description": "Rapports prêts pour les dirigeants pour les frameworks de conformité NIST, CMMC et ISO"
+      }
     },
-    {
-      id: 'executives',
-      title: 'Executive Leadership',
-      description: 'Strategic insights and reporting to make informed decisions about supply chain risks.',
-      icon: <Users className="h-8 w-8 text-vendorsoluce-blue" />,
-      challenges: [
-        'Understanding supply chain risk exposure',
-        'Making informed investment decisions',
-        'Demonstrating risk management to stakeholders',
-        'Balancing operational efficiency with security'
-      ],
-      solutions: [
-        {
-          title: 'Executive Dashboards',
-          description: 'High-level insights into your organization\'s supply chain risk posture.',
-          benefits: [
-            'Key risk metrics and trends',
-            'Vendor portfolio health overview',
-            'Compliance status summaries',
-            'Strategic risk recommendations'
-          ],
-          cta: 'View Dashboard',
-          link: '/dashboard'
-        },
-        {
-          title: 'Risk Reporting',
-          description: 'Generate executive-level reports for board meetings and stakeholder updates.',
-          benefits: [
-            'Automated report generation',
-            'Customizable metrics and KPIs',
-            'Trend analysis and forecasting',
-            'Stakeholder-ready presentations'
-          ],
-          cta: 'Generate Report',
-          link: '/vendor-risk-dashboard'
-        }
-      ]
+    "benefits": {
+      "title": "Pourquoi choisir notre plateforme",
+      "item1": "Réduisez les coûts de conformité jusqu'à 60%",
+      "item2": "Automatisez les tâches d'évaluation répétitives",
+      "item3": "Obtenez des rapports prêts pour les dirigeants en quelques minutes"
+    },
+    "quickTools": {
+      "title": "Outils rapides",
+      "description": "Commencez immédiatement avec nos outils d'évaluation gratuits"
+    },
+    "cta": {
+      "title": "Prêt à sécuriser votre chaîne d'approvisionnement ?",
+      "description": "Rejoignez des milliers d'organisations utilisant notre plateforme pour gérer la conformité et réduire les risques"
     }
-  ];
-
-  const activeStakeholderData = stakeholders.find(s => s.id === activeStakeholder) || stakeholders[0];
-
-  return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Designed for Every Supply Chain Stakeholder
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            VendorSoluce addresses the unique challenges faced by different teams in your organization, 
-            providing tailored solutions that deliver measurable value to each stakeholder.
-          </p>
-        </div>
-
-        {/* Stakeholder Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {stakeholders.map((stakeholder) => (
-            <button
-              key={stakeholder.id}
-              onClick={() => setActiveStakeholder(stakeholder.id)}
-              className={`flex items-center px-4 py-2 rounded-lg font-medium transition-all ${
-                activeStakeholder === stakeholder.id
-                  ? 'bg-vendorsoluce-green text-white shadow-md'
-                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-              }`}
-            >
-              {stakeholder.icon}
-              <span className="ml-2">{stakeholder.title}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Active Stakeholder Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Challenges */}
-          <Card className="lg:col-span-1">
-            <CardHeader>
-              <CardTitle className="flex items-center  text-gray-900 dark:text-white">
-                <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
-                Common Challenges
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">{activeStakeholderData.description}</p>
-              <ul className="space-y-3">
-                {activeStakeholderData.challenges.map((challenge, index) => (
-                  <li key={index} className="flex items-start">
-                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <span className="text-gray-700 dark:text-gray-300 text-sm">{challenge}</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-
-          {/* Solutions */}
-          <div className="lg:col-span-2 space-y-6">
-            {activeStakeholderData.solutions.map((solution, index) => (
-              <Card key={index} className="border-l-4 border-l-vendorsoluce-green">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                        {solution.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">
-                        {solution.description}
-                      </p>
-                    </div>
-                    <div className="ml-4">
-                      <Link to={solution.link}>
-                        <Button variant="primary" size="sm">
-                          {solution.cta}
-                          <ArrowRight className="h-4 w-4 ml-1" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {solution.benefits.map((benefit, benefitIndex) => (
-                      <div key={benefitIndex} className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-vendorsoluce-green mr-2 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-gray-700 dark:text-gray-300">{benefit}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="mt-12 text-center">
-          <div className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green rounded-lg p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Supply Chain Security?</h3>
-            <p className="text-xl text-gray-100 mb-6">
-              Join organizations worldwide who trust VendorSoluce to secure their supply chains and meet compliance requirements.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/supply-chain-assessment">
-                <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100">
-                  <Target className="h-5 w-5 mr-2" />
-                  Start Free Assessment
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20">
-                  <Users className="h-5 w-5 mr-2" />
-                  Schedule Demo
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default ValuePropositionSection;
+  },
+  "buttons": {
+    "startAssessment": "Commencer l'évaluation",
+    "analyzeNow": "Analyser maintenant",
+    "learnMore": "En savoir plus",
+    "getStarted": "Commencer"
+  },
+  "assessment": {
+    "title": "Évaluation des risques de la chaîne d'approvisionnement",
+    "subtitle": "Évaluation complète alignée sur NIST SP 800-161",
+    "view": "Voir l'évaluation",
+    "current": "Évaluation en cours",
+    "complete": "Terminée",
+    "incomplete": "Incomplète",
+    "overallScore": "Score global",
+    "score": "Score",
+    "backToHome": "Retour à l'accueil",
+    "previousSection": "Section précédente",
+    "nextSection": "Section suivante",
+    "viewResults": "Voir les résultats"
+  },
+  "supplyChain": {
+    "sections": {
+      "information": {
+        "title": "Sécurité de l'information",
+        "description": "Évaluez les contrôles et pratiques de sécurité de l'information dans votre chaîne d'approvisionnement",
+        "questions": {
+          "is1": {
+            "question": "Avez-vous des politiques de sécurité de l'information documentées ?",
+            "guidance": "Les organisations doivent maintenir des politiques de sécurité de l'information actuelles et documentées qui traitent des risques de la chaîne d'approvisionnement"
+          },
+          "is2": {
+            "question": "Les exigences de sécurité sont-elles incluses dans les contrats fournisseurs ?",
+            "guidance": "Tous les accords fournisseurs doivent inclure des exigences de sécurité spécifiques et des obligations de conformité"
+          },
+          "is3": {
+            "question": "Effectuez-vous des évaluations de sécurité régulières des fournisseurs ?",
+            "guidance": "Les évaluations de sécurité régulières aident à identifier et atténuer les risques évolutifs dans votre chaîne d'approvisionnement"
+          },
+          "is4": {
+            "question": "La classification et la gestion des données sensibles sont-elles documentées ?",
+            "guidance": "Des procédures claires de classification et de gestion des données garantissent une protection appropriée tout au long de la chaîne d'approvisionnement"
+          }
+        }
+      },
+      "supplier": {
+        "title": "Gestion des fournisseurs",
+        "description": "Évaluez les processus d'intégration, de surveillance et de gestion des fournisseurs",
+        "questions": {
+          "sr1": {
+            "question": "Avez-vous un processus formel d'intégration des fournisseurs ?",
+            "guidance": "Un processus d'intégration structuré garantit que tous les fournisseurs répondent aux exigences minimales de sécurité avant l'engagement"
+          },
+          "sr2": {
+            "question": "Les capacités de sécurité des fournisseurs sont-elles régulièrement examinées ?",
+            "guidance": "Les examens réguliers aident à s'assurer que les fournisseurs maintiennent une posture de sécurité adéquate tout au long de la relation"
+          },
+          "sr3": {
+            "question": "Maintenez-vous une liste de fournisseurs approuvés ?",
+            "guidance": "Une liste de fournisseurs approuvés aide à contrôler quels vendeurs peuvent accéder à vos systèmes et données"
+          },
+          "sr4": {
+            "question": "Les procédures de résiliation des fournisseurs sont-elles documentées ?",
+            "guidance": "Des procédures de résiliation claires garantissent un départ sécurisé et la protection des actifs organisationnels"
+          }
+        }
+      },
+      "vulnerability": {
+        "title": "Gestion des vulnérabilités",
+        "description": "Évaluez les processus d'identification, de suivi et de remédiation des vulnérabilités",
+        "questions": {
+          "vm1": {
+            "question": "Avez-vous un programme de gestion des vulnérabilités ?",
+            "guidance": "Un programme complet de gestion des vulnérabilités est essentiel pour maintenir la sécurité dans la chaîne d'approvisionnement"
+          },
+          "vm2": {
+            "question": "Les vulnérabilités sont-elles suivies et priorisées ?",
+            "guidance": "Le suivi et la priorisation systématiques garantissent que les vulnérabilités critiques sont traitées rapidement"
+          },
+          "vm3": {
+            "question": "Exigez-vous la divulgation des vulnérabilités par les fournisseurs ?",
+            "guidance": "Les fournisseurs doivent être tenus de divulguer les vulnérabilités connues dans leurs produits et services"
+          },
+          "vm4": {
+            "question": "Les processus de gestion des correctifs sont-ils documentés ?",
+            "guidance": "Des processus clairs de gestion des correctifs aident à garantir une remédiation rapide des vulnérabilités identifiées"
+          }
+        }
+      },
+      "incident": {
+        "title": "Réponse aux incidents",
+        "description": "Évaluez les capacités de réponse aux incidents et la coordination de la chaîne d'approvisionnement",
+        "questions": {
+          "ir1": {
+            "question": "Avez-vous un plan de réponse aux incidents ?",
+            "guidance": "Un plan complet de réponse aux incidents doit traiter des incidents de sécurité liés à la chaîne d'approvisionnement"
+          },
+          "ir2": {
+            "question": "Les fournisseurs sont-ils tenus de signaler les incidents de sécurité ?",
+            "guidance": "Les fournisseurs doivent être contractuellement obligés de signaler les incidents de sécurité qui peuvent affecter votre organisation"
+          },
+          "ir3": {
+            "question": "Effectuez-vous des exercices de réponse aux incidents ?",
+            "guidance": "Les exercices réguliers aident à s'assurer que votre équipe est préparée à répondre efficacement aux incidents de la chaîne d'approvisionnement"
+          },
+          "ir4": {
+            "question": "Les leçons apprises sont-elles documentées et partagées ?",
+            "guidance": "Documenter et partager les leçons apprises aide à améliorer les futures capacités de réponse aux incidents"
+          }
+        }
+      },
+      "threat": {
+        "title": "Gestion des menaces",
+        "description": "Évaluez l'intelligence des menaces et les capacités de sensibilisation aux menaces de la chaîne d'approvisionnement",
+        "questions": {
+          "tm1": {
+            "question": "Avez-vous accès à l'intelligence des menaces ?",
+            "guidance": "L'intelligence actuelle des menaces aide les organisations à comprendre et se préparer aux menaces de la chaîne d'approvisionnement"
+          },
+          "tm2": {
+            "question": "Les menaces de la chaîne d'approvisionnement sont-elles régulièrement évaluées ?",
+            "guidance": "Les évaluations régulières des menaces aident à identifier les risques émergents dans votre chaîne d'approvisionnement"
+          },
+          "tm3": {
+            "question": "Partagez-vous les informations sur les menaces avec les fournisseurs ?",
+            "guidance": "Partager les informations pertinentes sur les menaces aide les fournisseurs à mieux protéger votre organisation"
+          },
+          "tm4": {
+            "question": "Des activités de chasse aux menaces sont-elles menées ?",
+            "guidance": "La chasse proactive aux menaces aide à identifier les menaces avancées qui peuvent avoir contourné les défenses traditionnelles"
+          }
+        }
+      },
+      "lifecycle": {
+        "title": "Gestion du cycle de vie",
+        "description": "Évaluez la gestion de la sécurité du cycle de vie des produits et services",
+        "questions": {
+          "sl1": {
+            "question": "Les exigences de sécurité sont-elles définies pour l'ensemble du cycle de vie ?",
+            "guidance": "La sécurité doit être considérée tout au long du cycle de vie complet du produit ou service"
+          },
+          "sl2": {
+            "question": "Effectuez-vous des examens de sécurité aux jalons du cycle de vie ?",
+            "guidance": "Les examens de sécurité réguliers aux jalons clés aident à garantir le maintien de la posture de sécurité"
+          },
+          "sl3": {
+            "question": "Les procédures de fin de vie sont-elles documentées ?",
+            "guidance": "Des procédures claires de fin de vie garantissent l'élimination ou le déclassement sécurisé des produits et services"
+          },
+          "sl4": {
+            "question": "Suivez-vous les dépendances des produits et services ?",
+            "guidance": "Comprendre les dépendances aide à identifier les points de défaillance uniques potentiels dans votre chaîne d'approvisionnement"
+          }
+        }
+      }
+    }
+  },
+  "sbom": {
+    "title": "Analyse SBOM",
+    "description": "Téléchargez et analysez votre nomenclature logicielle pour les vulnérabilités et la conformité",
+    "upload": {
+      "title": "Télécharger SBOM",
+      "uploadPrompt": "Téléchargez votre fichier SBOM",
+      "browseFiles": "Parcourir les fichiers",
+      "dropHere": "Déposez les fichiers ici",
+      "supportedFormats": "Formats supportés : SPDX, CycloneDX, SWID",
+      "analyzing": "Analyse du SBOM en cours...",
+      "noSbom": "Aucun fichier SBOM sélectionné"
+    },
+    "results": {
+      "title": "Résultats de l'analyse",
+      "components": "Composants",
+      "vulnerabilities": "Vulnérabilités",
+      "licenses": "Licences",
+      "license": "Licence",
+      "supportedFormats": "Formats supportés"
+    }
+  },
+  "vendorRisk": {
+    "title": "Gestion des risques fournisseurs",
+    "description": "Plateforme complète d'évaluation et de surveillance des risques fournisseurs",
+    "riskOverview": "Vue d'ensemble des risques",
+    "vendorOverview": "Vue d'ensemble des fournisseurs",
+    "complianceStatus": "Statut de conformité",
+    "addNewVendor": "Ajouter un nouveau fournisseur",
+    "totalVendors": "Total des fournisseurs",
+    "monitoredVendors": "Fournisseurs surveillés",
+    "highRisk": "Risque élevé",
+    "mediumRisk": "Risque moyen",
+    "compliant": "Conforme",
+    "nonCompliant": "Non conforme",
+    "partial": "Partiel",
+    "table": {
+      "vendor": "Fournisseur",
+      "riskScore": "Score de risque",
+      "riskLevel": "Niveau de risque",
+      "complianceStatus": "Statut de conformité",
+      "lastAssessment": "Dernière évaluation"
+    },
+    "riskScoring": {
+      "title": "Notation des risques",
+      "description": "Notation automatique des risques basée sur plusieurs facteurs",
+      "lowRisk": "Risque faible",
+      "mediumRisk": "Risque moyen",
+      "highRisk": "Risque élevé",
+      "criticalRisk": "Risque critique",
+      "excellent": "Excellent",
+      "acceptable": "Acceptable",
+      "concerning": "Préoccupant",
+      "unacceptable": "Inacceptable"
+    },
+    "actions": {
+      "title": "Actions recommandées",
+      "lowRisk": {
+        "title": "Fournisseurs à risque faible",
+        "description": "Continuer la surveillance régulière et les évaluations annuelles"
+      },
+      "mediumRisk": {
+        "title": "Fournisseurs à risque moyen",
+        "description": "Augmenter la fréquence de surveillance et exiger des contrôles de sécurité supplémentaires"
+      },
+      "highRisk": {
+        "title": "Fournisseurs à risque élevé",
+        "description": "Mettre en place un plan de remédiation immédiat et une surveillance renforcée"
+      },
+      "criticalRisk": {
+        "title": "Fournisseurs à risque critique",
+        "description": "Considérer la résiliation ou exiger des améliorations de sécurité immédiates"
+      }
+    }
+  },
+  "vendorAssessments": {
+    "title": "Évaluations de sécurité des fournisseurs",
+    "description": "Envoyez des évaluations de sécurité complètes aux fournisseurs avec alignement CMMC et NIST Privacy Framework. Collectez des preuves et suivez la conformité via un portail fournisseur sécurisé.",
+    "premiumFeature": "Fonctionnalité Premium",
+    "tabs": {
+      "overview": "Vue d'ensemble",
+      "assessments": "Évaluations actives",
+      "templates": "Modèles de framework",
+      "portal": "Portail fournisseur"
+    },
+    "buttons": {
+      "newAssessment": "Nouvelle évaluation",
+      "createFirstAssessment": "Créer la première évaluation",
+      "sendAssessment": "Envoyer l'évaluation",
+      "view": "Voir",
+      "copyLink": "Copier le lien",
+      "signUpFreeTrial": "S'inscrire pour l'essai gratuit",
+      "viewPricing": "Voir les tarifs"
+    },
+    "overview": {
+      "premiumBenefits": {
+        "title": "Fonctionnalités d'évaluation Premium",
+        "cmmcAligned": {
+          "title": "Aligné CMMC et Confidentialité",
+          "description": "Modèles d'évaluation pré-construits alignés avec les niveaux CMMC et le NIST Privacy Framework"
+        },
+        "securePortal": {
+          "title": "Portail fournisseur sécurisé",
+          "description": "Portail dédié pour que les fournisseurs complètent les évaluations et téléchargent des preuves en toute sécurité"
+        },
+        "evidenceCollection": {
+          "title": "Collecte de preuves",
+          "description": "Collecte automatisée de preuves, validation et gestion de piste d'audit"
+        }
+      },
+      "statistics": {
+        "totalAssessments": "Total des évaluations",
+        "inProgress": "En cours",
+        "completed": "Terminées",
+        "highCompliance": "Haute conformité"
+      },
+      "gettingStarted": {
+        "title": "Démarrage",
+        "step1": {
+          "title": "Ajouter des fournisseurs",
+          "description": "Importez ou ajoutez des fournisseurs à votre portefeuille avant d'envoyer des évaluations"
+        },
+        "step2": {
+          "title": "Choisir le framework",
+          "description": "Sélectionnez CMMC, NIST Privacy Framework ou un modèle d'évaluation personnalisé"
+        },
+        "step3": {
+          "title": "Envoyer l'évaluation",
+          "description": "Envoyez des liens d'évaluation sécurisés avec suivi automatisé et rappels"
+        }
+      },
+      "capabilities": {
+        "title": "Capacités d'évaluation",
+        "evidenceCollection": "Collecte automatisée de preuves",
+        "progressTracking": "Suivi des progrès en temps réel",
+        "secureSharing": "Partage sécurisé de documents",
+        "automatedScoring": "Notation de conformité automatisée",
+        "auditTrail": "Piste d'audit et rapports",
+        "multiFramework": "Support multi-framework"
+      }
+    },
+    "assessments": {
+      "title": "Évaluations actives",
+      "status": {
+        "completed": "TERMINÉ",
+        "inProgress": "EN COURS",
+        "pending": "EN ATTENTE",
+        "overdue": "EN RETARD"
+      },
+      "fields": {
+        "framework": "Framework",
+        "sentDate": "Date d'envoi",
+        "dueDate": "Date d'échéance",
+        "progress": "Progrès",
+        "notSent": "Non envoyé",
+        "notSet": "Non défini"
+      }
+    },
+    "templates": {
+      "title": "Modèles de framework d'évaluation",
+      "frameworks": {
+        "cmmcLevel1": {
+          "name": "CMMC Niveau 1",
+          "description": "Pratiques d'hygiène cybersécuritaire de base"
+        },
+        "cmmcLevel2": {
+          "name": "CMMC Niveau 2",
+          "description": "Pratiques de cybersécurité intermédiaires pour la protection CUI"
+        },
+        "nistPrivacy": {
+          "name": "NIST Privacy Framework",
+          "description": "Pratiques de gestion des risques de confidentialité"
+        },
+        "nist80053": {
+          "name": "Contrôles NIST SP 800-53",
+          "description": "Contrôles de sécurité et de confidentialité pour les systèmes d'information"
+        }
+      },
+      "fields": {
+        "questions": "Questions",
+        "estimatedTime": "Temps estimé"
+      }
+    },
+    "portal": {
+      "title": "Portail d'évaluation des fournisseurs",
+      "features": {
+        "title": "Fonctionnalités du portail fournisseur sécurisé",
+        "capabilities": {
+          "title": "Capacités du portail",
+          "secureLinks": "Liens d'évaluation uniques sécurisés",
+          "progressSaving": "Sauvegarde des progrès et capacité de reprise",
+          "encryptedUploads": "Téléchargements de fichiers de preuves chiffrés",
+          "realTimeCollaboration": "Fonctionnalités de collaboration en temps réel",
+          "mobileResponsive": "Design adaptatif mobile"
+        },
+        "security": {
+          "title": "Fonctionnalités de sécurité",
+          "endToEndEncryption": "Chiffrement de bout en bout",
+          "multiFactorAuth": "Authentification multi-facteurs",
+          "auditLogging": "Journalisation de piste d'audit",
+          "timeLimitedTokens": "Jetons d'accès à durée limitée",
+          "ipAllowlist": "Support de liste d'autorisation IP"
+        },
+        "exampleUrl": "URL du portail exemple :"
+      }
+    },
+    "upgrade": {
+      "title": "Débloquez les fonctionnalités d'évaluation Premium",
+      "description": "Créez un compte pour envoyer des évaluations CMMC et NIST Privacy Framework à vos fournisseurs"
+    }
+  },
+  "quickTools": {
+    "nistChecklist": {
+      "title": "Liste de contrôle de conformité NIST",
+      "description": "Évaluation rapide de votre posture de conformité NIST SP 800-161",
+      "aboutTitle": "À propos de cette liste de contrôle",
+      "aboutText1": "Cette liste de contrôle fournit une évaluation de haut niveau de la conformité de votre organisation aux directives de gestion des risques de la chaîne d'approvisionnement NIST SP 800-161.",
+      "aboutText2": "Complétez tous les éléments pour obtenir un score de conformité global et des recommandations d'amélioration.",
+      "keyAreas": "Domaines clés",
+      "checklistTitle": "Liste de contrôle de conformité",
+      "instructions": "Cochez chaque élément que votre organisation a mis en place",
+      "complianceResults": "Résultats de conformité",
+      "checkCompliance": "Vérifier la conformité",
+      "downloadReport": "Télécharger le rapport",
+      "fullAssessment": "Commencer l'évaluation complète",
+      "action": "Action requise",
+      "implemented": "Implémenté",
+      "improvementNeeded": "Amélioration nécessaire",
+      "goodCompliance": "Bonne conformité",
+      "compliantMessage": "Votre organisation montre une bonne conformité aux directives NIST",
+      "nonCompliantMessage": "Plusieurs domaines nécessitent une attention pour améliorer la posture de conformité",
+      "areas": {
+        "governance": "Gouvernance et stratégie",
+        "supplierManagement": "Gestion des fournisseurs",
+        "informationSharing": "Partage d'informations",
+        "productSecurity": "Sécurité des produits",
+        "incidentResponse": "Réponse aux incidents"
+      },
+      "items": {
+        "scrm1": "Politique de gestion des risques de la chaîne d'approvisionnement établie",
+        "scrm2": "Exigences de sécurité des fournisseurs définies",
+        "scrm3": "Processus d'intégration des fournisseurs implémenté",
+        "scrm4": "Évaluations régulières des fournisseurs effectuées",
+        "scrm5": "Plan de réponse aux incidents inclut la chaîne d'approvisionnement",
+        "scrm6": "Programme de gestion des vulnérabilités actif",
+        "scrm7": "Surveillance des risques tiers en place",
+        "scrm8": "Exigences de sécurité dans les contrats",
+        "scrm9": "Audits de conformité réguliers effectués",
+        "scrm10": "Formation du personnel sur les risques de la chaîne d'approvisionnement"
+      }
+    },
+    "riskCalculator": {
+      "title": "Calculateur de risque fournisseur",
+      "description": "Calculez les scores de risque des fournisseurs basés sur plusieurs facteurs",
+      "howToUse": "Comment utiliser",
+      "inputTitle": "Informations sur le fournisseur",
+      "vendorName": "Nom du fournisseur",
+      "vendorNamePlaceholder": "Entrez le nom du fournisseur",
+      "riskFactors": "Facteurs de risque",
+      "step1": "Entrez les détails du fournisseur",
+      "step2": "Évaluez les facteurs de risque",
+      "step3": "Examinez le risque calculé",
+      "calculate": "Calculer le risque",
+      "resultsTitle": "Résultats de l'évaluation des risques",
+      "vendorRiskScore": "Score de risque du fournisseur",
+      "recommendation": "Recommandation",
+      "viewDashboard": "Voir le tableau de bord complet",
+      "disclaimer": "Ceci est une évaluation préliminaire. Effectuez une évaluation complète pour les fournisseurs critiques.",
+      "action": "Action recommandée",
+      "lowRisk": "Risque faible",
+      "highRisk": "Risque élevé",
+      "factors": {
+        "criticality": {
+          "name": "Criticité métier",
+          "description": "Quelle est l'importance de ce fournisseur pour vos opérations commerciales ?"
+        },
+        "dataAccess": {
+          "name": "Niveau d'accès aux données",
+          "description": "Quel niveau de données sensibles ce fournisseur accède-t-il ?"
+        },
+        "systemExposure": {
+          "name": "Exposition système",
+          "description": "Combien d'accès ce fournisseur a-t-il à vos systèmes ?"
+        },
+        "compliance": {
+          "name": "Statut de conformité",
+          "description": "Quelle est la posture de conformité du fournisseur ?"
+        },
+        "securityControls": {
+          "name": "Contrôles de sécurité",
+          "description": "Quelle est la robustesse des contrôles de sécurité du fournisseur ?"
+        }
+      },
+      "results": {
+        "low": "Continuer avec les procédures de surveillance standard",
+        "medium": "Mettre en place une surveillance renforcée et des contrôles supplémentaires",
+        "high": "Exiger une remédiation immédiate et une surveillance renforcée",
+        "critical": "Considérer la résiliation du contrat ou des mesures de sécurité d'urgence"
+      }
+    },
+    "sbomScan": {
+      "title": "Analyseur SBOM",
+      "description": "Analyse rapide de votre nomenclature logicielle",
+      "action": "Analyser SBOM",
+      "scanComplete": "Analyse terminée",
+      "noVulnerabilities": "Aucune vulnérabilité critique trouvée",
+      "fullAnalysis": "Exécuter l'analyse complète",
+      "formatInfo": "Supporte les formats SPDX, CycloneDX et SWID"
+    }
+  },
+  "howItWorks": {
+    "title": "Comment ça marche",
+    "subtitle": "Gestion complète et simple des risques de la chaîne d'approvisionnement en quatre étapes",
+    "hero": {
+      "scheduleDemo": "Planifier une démonstration",
+      "tryNow": "Essayer maintenant"
+    },
+    "process": {
+      "title": "Notre processus",
+      "description": "De l'évaluation à la surveillance continue, nous vous guidons à chaque étape",
+      "stepTitle": "Étape"
+    },
+    "steps": {
+      "assess": {
+        "title": "Évaluer les risques",
+        "description": "Évaluation complète des risques utilisant les frameworks NIST",
+        "cta": "Commencer l'évaluation",
+        "features": {
+          "nist": "Aligné NIST SP 800-161",
+          "questions": "Questionnaires guidés",
+          "scoring": "Notation automatique des risques",
+          "recommendations": "Recommandations actionnables"
+        }
+      },
+      "sbom": {
+        "title": "Analyser les composants",
+        "description": "Analyse de la nomenclature logicielle pour les vulnérabilités",
+        "cta": "Analyser SBOM",
+        "features": {
+          "formats": "Support de multiples formats",
+          "vulnerability": "Analyse des vulnérabilités",
+          "license": "Conformité des licences",
+          "compliance": "Conformité réglementaire"
+        }
+      },
+      "vendors": {
+        "title": "Gérer les fournisseurs",
+        "description": "Évaluation et surveillance rationalisées des fournisseurs",
+        "cta": "Ajouter des fournisseurs",
+        "features": {
+          "assessment": "Évaluations de sécurité",
+          "scoring": "Notation des risques",
+          "monitoring": "Surveillance continue",
+          "reporting": "Rapports de conformité"
+        }
+      },
+      "monitor": {
+        "title": "Surveiller en continu",
+        "description": "Surveillance et rapports continus pour la conformité",
+        "cta": "Voir le tableau de bord",
+        "features": {
+          "dashboard": "Tableau de bord en temps réel",
+          "alerts": "Alertes de risques",
+          "trends": "Analyse des tendances",
+          "reports": "Rapports exécutifs"
+        }
+      }
+    },
+    "benefits": {
+      "title": "Avantages clés",
+      "description": "Pourquoi les organisations choisissent notre plateforme pour la sécurité de la chaîne d'approvisionnement",
+      "compliance": {
+        "title": "Automatisation de la conformité",
+        "description": "Automatisez les rapports de conformité NIST, CMMC et ISO"
+      },
+      "efficiency": {
+        "title": "Efficacité améliorée",
+        "description": "Réduisez le travail d'évaluation manuelle jusqu'à 80%"
+      },
+      "insights": {
+        "title": "Insights actionnables",
+        "description": "Obtenez des recommandations claires pour la remédiation des risques"
+      },
+      "automation": {
+        "title": "Automatisation des processus",
+        "description": "Rationalisez l'intégration et la surveillance des fournisseurs"
+      }
+    },
+    "quickTools": {
+      "title": "Outils rapides",
+      "description": "Commencez immédiatement avec nos outils gratuits",
+      "nistChecklist": {
+        "title": "Liste de contrôle NIST",
+        "description": "Évaluation rapide de conformité",
+        "cta": "Vérifier la conformité"
+      },
+      "riskCalculator": {
+        "title": "Calculateur de risque",
+        "description": "Calculez les scores de risque des fournisseurs",
+        "cta": "Calculer le risque"
+      },
+      "sbomScan": {
+        "title": "Analyseur SBOM",
+        "description": "Analyser les vulnérabilités",
+        "cta": "Analyser maintenant"
+      }
+    },
+    "integration": {
+      "title": "Intégration et export",
+      "description": "Intégrez facilement avec vos outils et workflows existants",
+      "cta": "Voir les intégrations",
+      "features": {
+        "api": "Accès API",
+        "apiDesc": "API RESTful pour intégrations personnalisées",
+        "export": "Export de données",
+        "exportDesc": "Exportez les rapports en plusieurs formats",
+        "alerts": "Alertes automatisées",
+        "alertsDesc": "Notifications et alertes en temps réel",
+        "templates": "Modèles personnalisés",
+        "templatesDesc": "Personnalisez les évaluations selon vos besoins"
+      }
+    },
+    "getStarted": {
+      "title": "Commencez dès aujourd'hui",
+      "description": "Rejoignez des milliers d'organisations sécurisant leurs chaînes d'approvisionnement",
+      "steps": {
+        "step1": {
+          "title": "S'inscrire",
+          "description": "Créez votre compte gratuit en quelques minutes"
+        },
+        "step2": {
+          "title": "Configurer",
+          "description": "Configurez vos modèles d'évaluation et fournisseurs"
+        },
+        "step3": {
+          "title": "Évaluer",
+          "description": "Commencez votre première évaluation des risques de la chaîne d'approvisionnement"
+        }
+      },
+      "cta": {
+        "signup": "S'inscrire gratuitement",
+        "resources": "Parcourir les ressources"
+      }
+    }
+  },
+  "pricing": {
+    "title": "Tarifs simples et transparents",
+    "subtitle": "Choisissez le plan qui correspond aux besoins de votre organisation",
+    "cta": {
+      "title": "Prêt à commencer ?",
+      "subtitle": "Rejoignez des milliers d'organisations gérant les risques de la chaîne d'approvisionnement",
+      "startTrial": "Commencer l'essai gratuit",
+      "scheduleDemo": "Planifier une démonstration"
+    },
+    "faq": {
+      "title": "Questions fréquemment posées",
+      "questions": {
+        "freeTrial": {
+          "question": "Offrez-vous un essai gratuit ?",
+          "answer": "Oui, nous offrons un essai gratuit de 14 jours avec accès complet à toutes les fonctionnalités de démarrage."
+        },
+        "dataSecure": {
+          "question": "Mes données sont-elles sécurisées ?",
+          "answer": "Nous utilisons une sécurité de niveau entreprise avec chiffrement au repos et en transit, conformité SOC 2 et audits de sécurité réguliers."
+        },
+        "supportIncluded": {
+          "question": "Quel support est inclus ?",
+          "answer": "Tous les plans incluent le support par email. Les plans Professionnel et Entreprise incluent le support prioritaire et le succès client dédié."
+        },
+        "changePlans": {
+          "question": "Puis-je changer de plan à tout moment ?",
+          "answer": "Oui, vous pouvez passer à un plan supérieur ou inférieur à tout moment. Les changements prennent effet à votre prochain cycle de facturation."
+        },
+        "customIntegrations": {
+          "question": "Supportez-vous les intégrations personnalisées ?",
+          "answer": "Les plans Entreprise incluent les intégrations personnalisées. Les plans Professionnels ont un accès API pour les intégrations en libre-service."
+        },
+        "paymentMethods": {
+          "question": "Quelles méthodes de paiement acceptez-vous ?",
+          "answer": "Nous acceptons toutes les cartes de crédit principales, les virements ACH et pouvons accommoder les bons de commande pour les clients Entreprise."
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "name": "Débutant",
+        "description": "Parfait pour les petites équipes qui commencent avec la gestion des risques de la chaîne d'approvisionnement",
+        "cta": "Commencer l'essai gratuit",
+        "maxUsers": "Jusqu'à 5 utilisateurs",
+        "maxVendors": "Jusqu'à 25 fournisseurs",
+        "features": {
+          "nistBasic": "Évaluations NIST de base",
+          "sbomAnalyzer": "Analyseur SBOM",
+          "vendorDashboard": "Tableau de bord fournisseurs",
+          "basicReporting": "Rapports de base",
+          "standardTemplates": "Modèles standard",
+          "emailSupport": "Support par email"
+        }
+      },
+      "professional": {
+        "name": "Professionnel",
+        "description": "Fonctionnalités avancées pour les organisations en croissance avec des chaînes d'approvisionnement complexes",
+        "cta": "Commencer l'essai gratuit",
+        "popular": "Le plus populaire",
+        "maxUsers": "Jusqu'à 25 utilisateurs",
+        "maxVendors": "Jusqu'à 100 fournisseurs",
+        "features": {
+          "everythingStarter": "Tout du plan Débutant",
+          "advancedNist": "Conformité NIST avancée",
+          "unlimitedSbom": "Analyse SBOM illimitée",
+          "customTemplates": "Modèles personnalisés",
+          "advancedReporting": "Rapports avancés",
+          "workflowAutomation": "Automatisation des workflows",
+          "apiAccess": "Accès API",
+          "threatIntelligence": "Intelligence des menaces",
+          "prioritySupport": "Support prioritaire"
+        }
+      },
+      "enterprise": {
+        "name": "Entreprise",
+        "description": "Solution complète pour les grandes organisations avec des exigences de niveau entreprise",
+        "cta": "Contacter les ventes",
+        "maxUsers": "Utilisateurs illimités",
+        "maxVendors": "Fournisseurs illimités",
+        "features": {
+          "everythingProfessional": "Tout du plan Professionnel",
+          "ssoSecurity": "SSO et sécurité avancée",
+          "customBranding": "Marque personnalisée",
+          "advancedAnalytics": "Analyses avancées",
+          "customIntegrations": "Intégrations personnalisées",
+          "dedicatedManager": "Succès client dédié",
+          "professionalServices": "Services professionnels",
+          "slaGuarantees": "Garanties SLA",
+          "multiTenant": "Architecture multi-tenant"
+        }
+      },
+      "federal": {
+        "name": "Fédéral",
+        "description": "Solution spécialisée pour les agences fédérales et entrepreneurs avec exigences FedRAMP",
+        "cta": "Contacter les ventes",
+        "maxUsers": "Utilisateurs illimités",
+        "maxVendors": "Fournisseurs illimités",
+        "features": {
+          "fullNistCompliance": "Suite de conformité NIST complète",
+          "fedrampAuth": "Infrastructure autorisée FedRAMP",
+          "govCloudDeployment": "Déploiement GovCloud",
+          "cacPivAuth": "Authentification CAC/PIV",
+          "enhancedSecurity": "Contrôles de sécurité renforcés",
+          "federalReporting": "Rapports spécifiques fédéraux",
+          "fismaCompliance": "Outils de conformité FISMA",
+          "atoSupport": "Services de support ATO",
+          "federalSupportTeam": "Équipe de support fédérale dédiée"
+        }
+      }
+    },
+    "enterpriseFeatures": {
+      "title": "Fonctionnalités Entreprise",
+      "features": {
+        "supplyChainMapping": "Cartographie et visualisation de la chaîne d'approvisionnement",
+        "advancedVulnerability": "Gestion avancée des vulnérabilités",
+        "predictiveAnalytics": "Analyses prédictives des risques",
+        "thirdPartyScoring": "Notation des risques tiers",
+        "regulatoryAutomation": "Automatisation de la conformité réglementaire",
+        "incidentAutomation": "Automatisation de la réponse aux incidents"
+      }
+    }
+  },
+  "resources": {
+    "templates": {
+      "title": "Modèles et ressources",
+      "description": "Téléchargez des modèles et ressources pour accélérer votre programme de gestion des risques de la chaîne d'approvisionnement",
+      "download": "Télécharger le modèle",
+      "customization": {
+        "title": "Besoin de modèles personnalisés ?",
+        "description": "Notre équipe peut aider à créer des modèles d'évaluation personnalisés adaptés à votre industrie et exigences spécifiques.",
+        "contactButton": "Nous contacter"
+      },
+      "categories": {
+        "vendorQuestionnaires": {
+          "title": "Questionnaires fournisseurs",
+          "description": "Questionnaires prêts à l'emploi pour les évaluations de sécurité des fournisseurs",
+          "items": {
+            "nistComplete": "Questionnaire NIST SP 800-161 complet",
+            "vendorQuick": "Évaluation rapide de sécurité des fournisseurs",
+            "cloudProvider": "Questionnaire de sécurité pour fournisseur cloud",
+            "softwareProvider": "Modèle d'évaluation pour fournisseur de logiciels"
+          }
+        },
+        "riskAssessment": {
+          "title": "Modèles d'évaluation des risques",
+          "description": "Modèles pour effectuer des évaluations complètes des risques",
+          "items": {
+            "scoringMatrix": "Modèle de matrice de notation des risques",
+            "riskRegister": "Registre des risques de la chaîne d'approvisionnement",
+            "managementPlan": "Modèle de plan de gestion des risques",
+            "execSummary": "Modèle de résumé exécutif"
+          }
+        },
+        "sbomTemplates": {
+          "title": "Modèles SBOM",
+          "description": "Modèles et générateurs de nomenclatures logicielles",
+          "items": {
+            "spdx": "Modèle format SPDX",
+            "cyclonedx": "Modèle format CycloneDX",
+            "generator": "Outil générateur SBOM",
+            "report": "Modèle de rapport d'analyse SBOM"
+          }
+        }
+      },
+      "implementationGuides": {
+        "title": "Guides d'implémentation",
+        "items": {
+          "sbomGuide": {
+            "title": "Guide d'implémentation SBOM",
+            "description": "Guide complet pour implémenter les nomenclatures logicielles"
+          },
+          "maturityModel": {
+            "title": "Modèle de maturité de la chaîne d'approvisionnement",
+            "description": "Évaluez et améliorez la maturité de sécurité de votre chaîne d'approvisionnement"
+          },
+          "federalCompliance": {
+            "title": "Guide de conformité fédérale",
+            "description": "Naviguez les exigences et réglementations fédérales de la chaîne d'approvisionnement"
+          }
+        }
+      },
+      "nistResources": {
+        "title": "Ressources NIST",
+        "keyDocuments": {
+          "title": "Documents clés",
+          "items": {
+            "nistRev1": {
+              "title": "NIST SP 800-161 Rev. 1",
+              "description": "Pratiques de gestion des risques cybersécuritaires de la chaîne d'approvisionnement"
+            },
+            "quickStart": {
+              "title": "Guide de démarrage rapide",
+              "description": "Commencer avec la gestion des risques de la chaîne d'approvisionnement NIST"
+            },
+            "controlMapping": {
+              "title": "Guide de cartographie des contrôles",
+              "description": "Mappez les contrôles NIST à votre framework de sécurité existant"
+            }
+          }
+        }
+      }
+    },
+    "apiDocs": {
+      "title": "Documentation API",
+      "description": "Intégrez notre plateforme avec vos outils et workflows existants",
+      "overview": "Vue d'ensemble de l'API",
+      "sections": {
+        "authentication": "Authentification",
+        "rateLimits": "Limites de taux",
+        "nistControlsApi": "API Contrôles NIST",
+        "sbomApi": "API SBOM",
+        "vendorRiskApi": "API Risque Fournisseur",
+        "webhooks": "Webhooks"
+      },
+      "authentication": {
+        "description": "Authentification API sécurisée utilisant des clés API",
+        "security": "Meilleures pratiques de sécurité",
+        "securityTips": {
+          "clientSide": "Ne jamais exposer les clés API dans le code côté client",
+          "rotation": "Effectuer une rotation régulière des clés API",
+          "envVars": "Stocker les clés dans des variables d'environnement",
+          "ipRestrictions": "Utiliser les restrictions IP quand c'est possible"
+        }
+      },
+      "rateLimits": {
+        "description": "Limites de taux API pour assurer une utilisation équitable",
+        "rateLimit": "Limite de taux",
+        "burstLimit": "Limite de rafale",
+        "plan": "Plan",
+        "plans": {
+          "free": "Gratuit",
+          "standard": "Standard",
+          "enterprise": "Entreprise"
+        },
+        "limits": {
+          "free": {
+            "rate": "100 requêtes/heure",
+            "burst": "10 requêtes/minute"
+          },
+          "standard": {
+            "rate": "1 000 requêtes/heure",
+            "burst": "50 requêtes/minute"
+          },
+          "enterprise": {
+            "rate": "10 000 requêtes/heure",
+            "burst": "200 requêtes/minute"
+          }
+        }
+      },
+      "nistControlsApi": {
+        "description": "Accédez aux frameworks de contrôles NIST et évaluations",
+        "endpoints": "Points de terminaison disponibles",
+        "endpointDescriptions": {
+          "listControls": "Lister tous les contrôles NIST disponibles",
+          "getControl": "Obtenir des informations détaillées sur un contrôle spécifique",
+          "getQuestions": "Obtenir les questions d'évaluation pour les contrôles"
+        }
+      },
+      "sbomApi": {
+        "description": "Analysez et gérez les nomenclatures logicielles",
+        "endpoints": "Points de terminaison disponibles",
+        "supportedFormats": "Formats SBOM supportés",
+        "formats": {
+          "spdx": "SPDX (Software Package Data Exchange)",
+          "cyclonedx": "CycloneDX",
+          "plainText": "Format texte simple"
+        },
+        "endpointDescriptions": {
+          "analyzeSbom": "Soumettre SBOM pour analyse",
+          "getAnalysis": "Obtenir les résultats d'analyse",
+          "getVulnerabilities": "Obtenir les informations de vulnérabilités"
+        }
+      },
+      "vendorRiskApi": {
+        "description": "Gérez les évaluations des fournisseurs et scores de risque",
+        "endpoints": "Points de terminaison disponibles",
+        "endpointDescriptions": {
+          "listVendors": "Lister tous les fournisseurs",
+          "getVendor": "Obtenir les détails du fournisseur",
+          "createVendor": "Créer un nouveau fournisseur",
+          "updateVendor": "Mettre à jour les informations du fournisseur",
+          "getRiskScore": "Obtenir le score de risque du fournisseur",
+          "createAssessment": "Créer une évaluation de fournisseur"
+        }
+      },
+      "webhooks": {
+        "description": "Notifications en temps réel pour les événements importants",
+        "availableEvents": "Événements disponibles",
+        "payloadExample": "Exemple de payload",
+        "events": {
+          "assessmentCompleted": "Évaluation terminée",
+          "riskScoreChanged": "Score de risque modifié",
+          "vulnerabilityFound": "Nouvelle vulnérabilité trouvée",
+          "vendorCreated": "Fournisseur créé",
+          "vendorUpdated": "Fournisseur mis à jour",
+          "sbomAnalyzed": "Analyse SBOM terminée"
+        }
+      },
+      "common": {
+        "description": "Description",
+        "method": "Méthode",
+        "endpoint": "Point de terminaison",
+        "exampleRequest": "Exemple de requête",
+        "exampleResponse": "Exemple de réponse"
+      }
+    }
+  },
+  "navigation": {
+    "home": "Accueil",
+    "solutions": "Solutions",
+    "pricing": "Tarifs",
+    "howItWorks": "Comment ça marche",
+    "assessment": "Évaluation",
+    "sbom": "Analyse SBOM",
+    "vendorRisk": "Risque fournisseur",
+    "vendorAssessments": "Évaluations fournisseurs",
+    "templates": "Modèles",
+    "resources": "Ressources",
+    "apiDocs": "Documentation API",
+    "integration": "Intégration",
+    "about": "À propos",
+    "contact": "Contact",
+    "privacy": "Confidentialité"
+  },
+  "auth": {
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "account": "Compte",
+    "profile": "Profil"
+  },
+  "components": {
+    "yes": "Oui",
+    "no": "Non",
+    "partial": "Partiel"
+  },
+  "footer": {
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "security": "Sécurité",
+    "copyright": "© 2024 Plateforme de sécurité de la chaîne d'approvisionnement. Tous droits réservés."
+  },
+  "misc": {
+    "json": "JSON",
+    "csv": "CSV",
+    "div": "div",
+    "content-type": "Type de contenu",
+    "en-US": "fr-FR",
+    "Please log in to import data": "Veuillez vous connecter pour importer des données",
+    "Report generation would start here": "La génération de rapport commencerait ici"
+  },
+  "app": {
+    "name": "Plateforme de sécurité de la chaîne d'approvisionnement"
+  }
+}
