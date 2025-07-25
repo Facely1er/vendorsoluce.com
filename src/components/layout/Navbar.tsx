@@ -1,494 +1,326 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { 
-  Menu, 
-  X, 
-  ChevronDown, 
-  Globe,
-  Sun,
-  Moon,
-  User,
-  LogOut,
-  Settings,
-  UserCog,
-  Crown
-} from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-import { useTheme } from '../../context/ThemeContext';
-import { useI18n } from '../../context/I18nContext';
+import React, { useState } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
+import { 
+  Shield, 
+  Building, 
+  Building2,
+  ShieldCheck,
+  Users, 
+  ArrowRight,
+  Lock, 
+  FileCheck, 
+  BarChart3, 
+  FileJson,
+  ChevronRight,
+  Target,
+  TrendingUp,
+  CheckCircle,
+  AlertTriangle,
+  Home,
+  Layers,
+  PlayCircle,
+  DollarSign,
+  BookOpen
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const Navbar: React.FC = () => {
-  const location = useLocation();
-  const { isAuthenticated, user, signOut } = useAuth();
-  const { theme, toggleTheme } = useTheme();
-  const { changeLanguage, currentLanguage, supportedLanguages } = useI18n();
-  
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
-  const [isResourcesOpen, setIsResourcesOpen] = useState(false);
-  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  
-  const userMenuRef = useRef<HTMLDivElement>(null);
-  const solutionsRef = useRef<HTMLDivElement>(null);
-  const resourcesRef = useRef<HTMLDivElement>(null);
-  const languageRef = useRef<HTMLDivElement>(null);
+interface Stakeholder {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  challenges: string[];
+  solutions: {
+    title: string;
+    description: string;
+    benefits: string[];
+    cta: string;
+    link: string;
+  }[];
+}
 
-  // Close dropdowns when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
-        setIsUserMenuOpen(false);
-      }
-      if (solutionsRef.current && !solutionsRef.current.contains(event.target as Node)) {
-        setIsSolutionsOpen(false);
-      }
-      if (resourcesRef.current && !resourcesRef.current.contains(event.target as Node)) {
-        setIsResourcesOpen(false);
-      }
-      if (languageRef.current && !languageRef.current.contains(event.target as Node)) {
-        setIsLanguageOpen(false);
-      }
-    };
+const ValuePropositionSection: React.FC = () => {
+  const [activeStakeholder, setActiveStakeholder] = useState<string>('security');
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const isActivePath = (path: string) => {
-    if (path === '/') {
-      return location.pathname === '/';
-    }
-    return location.pathname.startsWith(path);
-  };
-
-  const solutions = [
+  const stakeholders: Stakeholder[] = [
     {
-      title: 'Supply Chain Assessment',
-      description: 'NIST SP 800-161 aligned risk assessment',
-      href: '/supply-chain-assessment',
-      icon: '🛡️'
+      id: 'security',
+      title: 'Security Teams',
+      description: 'Comprehensive tools for identifying, assessing, and mitigating supply chain security risks.',
+      icon: <Shield className="h-8 w-8 text-vendorsoluce-green" />,
+      challenges: [
+        'Limited visibility into supplier security practices',
+        'Time-consuming manual assessment processes',
+        'Difficulty tracking vulnerabilities across software components',
+        'Complex compliance requirements like NIST SP 800-161'
+      ],
+      solutions: [
+        {
+          title: 'Automated SBOM Analysis',
+          description: 'Instantly analyze software components for vulnerabilities and license compliance.',
+          benefits: [
+            'Identify critical vulnerabilities in minutes',
+            'Track open source licenses automatically',
+            'Generate compliance reports for audits',
+            'Monitor component health continuously'
+          ],
+          cta: 'Analyze SBOM Now',
+          link: '/sbom-analyzer'
+        },
+        {
+          title: 'Vendor Security Assessments',
+          description: 'Send CMMC and NIST Privacy Framework assessments through secure vendor portal.',
+          benefits: [
+            'CMMC Level 1 & 2 assessment templates',
+            'CMMC Level 1 & 2 assessment templates',
+            'CMMC Level 1 & 2 assessment templates',
+            'NIST Privacy Framework questionnaires',
+            'Automated scoring and risk rating',
+            'Secure evidence collection portal',
+            'Real-time progress tracking and notifications'
+          ],
+          cta: 'Start Assessment',
+          link: '/vendor-assessments'
+        }
+      ]
     },
     {
-      title: 'SBOM Analysis',
-      description: 'Software bill of materials scanning',
-      href: '/sbom-analyzer',
-      icon: '🔍'
+      id: 'procurement',
+      title: 'Procurement Teams',
+      description: 'Streamline vendor selection and management with risk-based decision making tools.',
+      icon: <Building2 className="h-8 w-8 text-vendorsoluce-navy" />,
+      challenges: [
+        'Balancing cost, quality, and security in vendor selection',
+        'Managing vendor relationships throughout their lifecycle',
+        'Ensuring contract terms include appropriate security clauses',
+        'Demonstrating due diligence for audit purposes'
+      ],
+      solutions: [
+        {
+          title: 'Vendor Risk Calculator',
+          description: 'Calculate preliminary risk scores to inform vendor selection decisions.',
+          benefits: [
+            'Standardized risk assessment criteria',
+            'Immediate risk scoring for new vendors',
+            'Data-driven vendor comparison',
+            'Integration with procurement workflows'
+          ],
+          cta: 'Calculate Risk',
+          link: '/tools/vendor-risk-calculator'
+        },
+        {
+          title: 'Vendor Risk Dashboard',
+          description: 'Monitor and manage your vendor portfolio with centralized risk visibility.',
+          benefits: [
+            'Real-time risk monitoring',
+            'Automated compliance tracking',
+            'Contract renewal alerts',
+            'Executive reporting dashboards'
+          ],
+          cta: 'View Dashboard',
+          link: '/vendor-risk-dashboard'
+        }
+      ]
     },
     {
-      title: 'Vendor Risk Dashboard',
-      description: 'Monitor and manage vendor risks',
-      href: '/vendor-risk-dashboard',
-      icon: '📊'
+      id: 'compliance',
+      title: 'Compliance Officers',
+      description: 'Ensure adherence to regulatory requirements with built-in compliance frameworks.',
+      icon: <Lock className="h-8 w-8 text-vendorsoluce-teal" />,
+      challenges: [
+        'Keeping up with evolving regulatory requirements',
+        'Documenting compliance efforts for audits',
+        'Ensuring vendors meet contractual obligations',
+        'Managing compliance across multiple frameworks'
+      ],
+      solutions: [
+        {
+          title: 'NIST SP 800-161 Assessment',
+          description: 'Comprehensive supply chain risk assessment aligned with federal standards.',
+          benefits: [
+            'Pre-built NIST control templates',
+            'Automated compliance scoring',
+            'Audit-ready documentation',
+            'Gap analysis and recommendations'
+          ],
+          cta: 'Start Assessment',
+          link: '/supply-chain-assessment'
+        },
+        {
+          title: 'Compliance Templates',
+          description: 'Access pre-built templates for common compliance scenarios.',
+          benefits: [
+            'Federal compliance templates',
+            'Industry-specific questionnaires',
+            'Risk assessment matrices',
+            'Executive summary templates'
+          ],
+          cta: 'Download Templates',
+          link: '/templates'
+        }
+      ]
     },
     {
-      title: 'Vendor Security Assessments',
-      description: 'CMMC & NIST Privacy Framework assessments',
-      href: '/vendor-assessments',
-      icon: '👥',
-      isPremium: true
+      id: 'executives',
+      title: 'Executive Leadership',
+      description: 'Strategic insights and reporting to make informed decisions about supply chain risks.',
+      icon: <Users className="h-8 w-8 text-vendorsoluce-blue" />,
+      challenges: [
+        'Understanding supply chain risk exposure',
+        'Making informed investment decisions',
+        'Demonstrating risk management to stakeholders',
+        'Balancing operational efficiency with security'
+      ],
+      solutions: [
+        {
+          title: 'Executive Dashboards',
+          description: 'High-level insights into your organization\'s supply chain risk posture.',
+          benefits: [
+            'Key risk metrics and trends',
+            'Vendor portfolio health overview',
+            'Compliance status summaries',
+            'Strategic risk recommendations'
+          ],
+          cta: 'View Dashboard',
+          link: '/dashboard'
+        },
+        {
+          title: 'Risk Reporting',
+          description: 'Generate executive-level reports for board meetings and stakeholder updates.',
+          benefits: [
+            'Automated report generation',
+            'Customizable metrics and KPIs',
+            'Trend analysis and forecasting',
+            'Stakeholder-ready presentations'
+          ],
+          cta: 'Generate Report',
+          link: '/vendor-risk-dashboard'
+        }
+      ]
     }
   ];
 
-  const resources = [
-    {
-      title: 'Templates & Downloads',
-      description: 'Ready-to-use compliance templates',
-      href: '/templates',
-      icon: '📄'
-    },
-    {
-      title: 'API Documentation',
-      description: 'Integration guides and API reference',
-      href: '/api-docs',
-      icon: '⚙️'
-    },
-    {
-      title: 'How It Works',
-      description: 'Learn about our process',
-      href: '/how-it-works',
-      icon: '💡'
-    }
-  ];
+  const activeStakeholderData = stakeholders.find(s => s.id === activeStakeholder) || stakeholders[0];
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700" data-tour="main-nav">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center">
-              <img 
-                src="/vendorsoluce.png" 
-                alt="VendorSoluce" 
-                className="h-8 w-auto mr-3"
-              />
-              <span className="text-xl font-bold text-gray-900 dark:text-white">
-                VendorSoluce
-              </span>
-            </Link>
-          </div>
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            Designed for Every Supply Chain Stakeholder
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            VendorSoluce addresses the unique challenges faced by different teams in your organization, 
+            providing tailored solutions that deliver measurable value to each stakeholder.
+          </p>
+        </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {/* Home */}
-            <Link
-              to="/"
-              className={`px-3 py-2 text-sm font-medium transition-colors ${
-                isActivePath('/')
-                  ? 'text-vendorsoluce-green border-b-2 border-vendorsoluce-green'
-                  : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green'
+        {/* Stakeholder Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {stakeholders.map((stakeholder) => (
+            <button
+              key={stakeholder.id}
+              onClick={() => setActiveStakeholder(stakeholder.id)}
+              className={`flex items-center px-4 py-2 rounded-lg font-medium transition-all ${
+                activeStakeholder === stakeholder.id
+                  ? 'bg-vendorsoluce-green text-white shadow-md'
+                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
               }`}
             >
-              Home
-            </Link>
+              {stakeholder.icon}
+              <span className="ml-2">{stakeholder.title}</span>
+            </button>
+          ))}
+        </div>
 
-            {/* Solutions Dropdown */}
-            <div className="relative" ref={solutionsRef}>
-              <button
-                onClick={() => setIsSolutionsOpen(!isSolutionsOpen)}
-                className={`flex items-center px-3 py-2 text-sm font-medium transition-colors ${
-                  isActivePath('/supply-chain-assessment') || isActivePath('/sbom-analyzer') || 
-                  isActivePath('/vendor-risk-dashboard') || isActivePath('/vendor-assessments')
-                    ? 'text-vendorsoluce-green'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green'
-                }`}
-              >
-                Solutions
-                <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${
-                  isSolutionsOpen ? 'rotate-180' : ''
-                }`} />
-              </button>
+        {/* Active Stakeholder Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Challenges */}
+          <Card className="lg:col-span-1">
+            <CardHeader>
+              <CardTitle className="flex items-center  text-gray-900 dark:text-white">
+                <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
+                Common Challenges
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">{activeStakeholderData.description}</p>
+              <ul className="space-y-3">
+                {activeStakeholderData.challenges.map((challenge, index) => (
+                  <li key={index} className="flex items-start">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <span className="text-gray-700 dark:text-gray-300 text-sm">{challenge}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
 
-              {isSolutionsOpen && (
-                <div className="absolute top-full left-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
-                  <div className="p-4">
-                    {solutions.map((solution) => (
-                      <Link
-                        key={solution.href}
-                        to={solution.href}
-                        onClick={() => setIsSolutionsOpen(false)}
-                        className="flex items-start p-3 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                      >
-                        <span className="text-xl mr-3">{solution.icon}</span>
-                        <div className="flex-1">
-                          <div className="flex items-center">
-                            <h3 className="text-sm font-medium text-gray-900 dark:text-white">
-                              {solution.title}
-                            </h3>
-                            {solution.isPremium && (
-                              <Crown className="h-3 w-3 text-yellow-500 ml-2" />
-                            )}
-                          </div>
-                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                            {solution.description}
-                          </p>
-                        </div>
+          {/* Solutions */}
+          <div className="lg:col-span-2 space-y-6">
+            {activeStakeholderData.solutions.map((solution, index) => (
+              <Card key={index} className="border-l-4 border-l-vendorsoluce-green">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                        {solution.title}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4">
+                        {solution.description}
+                      </p>
+                    </div>
+                    <div className="ml-4">
+                      <Link to={solution.link}>
+                        <Button variant="primary" size="sm">
+                          {solution.cta}
+                          <ArrowRight className="h-4 w-4 ml-1" />
+                        </Button>
                       </Link>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {solution.benefits.map((benefit, benefitIndex) => (
+                      <div key={benefitIndex} className="flex items-start">
+                        <CheckCircle className="h-4 w-4 text-vendorsoluce-green mr-2 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-gray-700 dark:text-gray-300">{benefit}</span>
+                      </div>
                     ))}
                   </div>
-                </div>
-              )}
-            </div>
-
-            {/* How It Works */}
-            <Link
-              to="/how-it-works"
-              className={`px-3 py-2 text-sm font-medium transition-colors ${
-                isActivePath('/how-it-works')
-                  ? 'text-vendorsoluce-green border-b-2 border-vendorsoluce-green'
-                  : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green'
-              }`}
-            >
-              How It Works
-            </Link>
-
-            {/* Pricing */}
-            <Link
-              to="/pricing"
-              className={`px-3 py-2 text-sm font-medium transition-colors ${
-                isActivePath('/pricing')
-                  ? 'text-vendorsoluce-green border-b-2 border-vendorsoluce-green'
-                  : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green'
-              }`}
-            >
-              Pricing
-            </Link>
-
-            {/* Resources Dropdown */}
-            <div className="relative" ref={resourcesRef}>
-              <button
-                onClick={() => setIsResourcesOpen(!isResourcesOpen)}
-                className={`flex items-center px-3 py-2 text-sm font-medium transition-colors ${
-                  isActivePath('/templates') || isActivePath('/api-docs')
-                    ? 'text-vendorsoluce-green'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green'
-                }`}
-              >
-                Resources
-                <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${
-                  isResourcesOpen ? 'rotate-180' : ''
-                }`} />
-              </button>
-
-              {isResourcesOpen && (
-                <div className="absolute top-full left-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50">
-                  <div className="p-4">
-                    {resources.map((resource) => (
-                      <Link
-                        key={resource.href}
-                        to={resource.href}
-                        onClick={() => setIsResourcesOpen(false)}
-                        className="flex items-start p-3 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                      >
-                        <span className="text-xl mr-3">{resource.icon}</span>
-                        <div>
-                          <h3 className="text-sm font-medium text-gray-900 dark:text-white">
-                            {resource.title}
-                          </h3>
-                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                            {resource.description}
-                          </p>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Right Side Actions */}
-          <div className="flex items-center space-x-4">
-            {/* Language Switcher */}
-            <div className="relative" ref={languageRef} data-tour="language-toggle">
-              <button
-                onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-                className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
-                aria-label="Change language"
-              >
-                <Globe className="h-5 w-5" />
-              </button>
-              
-              {isLanguageOpen && (
-                <div className="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 z-50">
-                  {supportedLanguages.map((language) => (
-                    <button
-                      key={language.code}
-                      onClick={() => {
-                        changeLanguage(language.code);
-                        setIsLanguageOpen(false);
-                      }}
-                      className={`w-full text-left px-4 py-2 text-sm ${
-                        currentLanguage === language.code
-                          ? 'bg-vendorsoluce-green text-white'
-                          : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-                      }`}
-                    >
-                      {language.name}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
-              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-              data-tour="theme-toggle"
-            >
-              {theme === 'light' ? (
-                <Moon className="h-5 w-5" />
-              ) : (
-                <Sun className="h-5 w-5" />
-              )}
-            </button>
-
-            {/* User Menu / Sign In */}
-            {isAuthenticated ? (
-              <div className="relative" ref={userMenuRef} data-tour="user-menu">
-                <button
-                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                  className="flex items-center focus:outline-none"
-                  aria-expanded={isUserMenuOpen}
-                  aria-haspopup="true"
-                >
-                  {user?.avatar ? (
-                    <img
-                      src={user.avatar}
-                      alt={user.name}
-                      className="h-8 w-8 rounded-full object-cover border border-gray-200"
-                    />
-                  ) : (
-                    <div className="h-8 w-8 rounded-full bg-vendorsoluce-green text-white flex items-center justify-center">
-                      <User className="h-4 w-4" />
-                    </div>
-                  )}
-                  <span className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300 hidden md:block">
-                    {user?.name}
-                  </span>
-                </button>
-
-                {isUserMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 z-50">
-                    <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700">
-                      <div className="font-medium text-gray-900 dark:text-white">{user?.name}</div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400 truncate">{user?.email}</div>
-                    </div>
-                    
-                    <Link
-                      to="/dashboard"
-                      className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
-                      onClick={() => setIsUserMenuOpen(false)}
-                    >
-                      <UserCog className="h-4 w-4 mr-2" />
-                      Dashboard
-                    </Link>
-                    
-                    <Link
-                      to="/profile"
-                      className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
-                      onClick={() => setIsUserMenuOpen(false)}
-                    >
-                      <Settings className="h-4 w-4 mr-2" />
-                      Settings
-                    </Link>
-                    
-                    <button
-                      onClick={() => {
-                        signOut();
-                        setIsUserMenuOpen(false);
-                      }}
-                      className="block w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
-                    >
-                      <LogOut className="h-4 w-4 mr-2" />
-                      Sign Out
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <Link to="/signin">
-                <Button variant="primary" size="sm" className="hidden sm:inline-flex">
-                  Se connecter
-                </Button>
-              </Link>
-            )}
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </button>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 dark:border-gray-700">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link
-                to="/"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`block px-3 py-2 text-base font-medium rounded-md ${
-                  isActivePath('/')
-                    ? 'text-vendorsoluce-green bg-vendorsoluce-green/10'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green hover:bg-gray-50 dark:hover:bg-gray-700'
-                }`}
-              >
-                Home
+        {/* Call to Action */}
+        <div className="mt-12 text-center">
+          <div className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green rounded-lg p-8 text-white">
+            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Supply Chain Security?</h3>
+            <p className="text-xl text-gray-100 mb-6">
+              Join organizations worldwide who trust VendorSoluce to secure their supply chains and meet compliance requirements.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link to="/supply-chain-assessment">
+                <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100">
+                  <Target className="h-5 w-5 mr-2" />
+                  Start Free Assessment
+                </Button>
               </Link>
-
-              {/* Mobile Solutions */}
-              <div className="space-y-1">
-                <div className="px-3 py-2 text-base font-medium text-gray-900 dark:text-white">
-                  Solutions
-                </div>
-                {solutions.map((solution) => (
-                  <Link
-                    key={solution.href}
-                    to={solution.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-6 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-vendorsoluce-green hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
-                  >
-                    <div className="flex items-center">
-                      <span className="mr-2">{solution.icon}</span>
-                      {solution.title}
-                      {solution.isPremium && (
-                        <Crown className="h-3 w-3 text-yellow-500 ml-2" />
-                      )}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-
-              <Link
-                to="/how-it-works"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`block px-3 py-2 text-base font-medium rounded-md ${
-                  isActivePath('/how-it-works')
-                    ? 'text-vendorsoluce-green bg-vendorsoluce-green/10'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green hover:bg-gray-50 dark:hover:bg-gray-700'
-                }`}
-              >
-                How It Works
+              <Link to="/contact">
+                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20">
+                  <Users className="h-5 w-5 mr-2" />
+                  Schedule Demo
+                </Button>
               </Link>
-
-              <Link
-                to="/pricing"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`block px-3 py-2 text-base font-medium rounded-md ${
-                  isActivePath('/pricing')
-                    ? 'text-vendorsoluce-green bg-vendorsoluce-green/10'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green hover:bg-gray-50 dark:hover:bg-gray-700'
-                }`}
-              >
-                Pricing
-              </Link>
-
-              {/* Mobile Resources */}
-              <div className="space-y-1">
-                <div className="px-3 py-2 text-base font-medium text-gray-900 dark:text-white">
-                  Resources
-                </div>
-                {resources.map((resource) => (
-                  <Link
-                    key={resource.href}
-                    to={resource.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-6 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-vendorsoluce-green hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
-                  >
-                    <span className="mr-2">{resource.icon}</span>
-                    {resource.title}
-                  </Link>
-                ))}
-              </div>
-
-              {!isAuthenticated && (
-                <Link
-                  to="/signin"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-3 py-2 text-base font-medium text-vendorsoluce-green hover:bg-vendorsoluce-green/10 rounded-md"
-                >
-                  Se connecter
-                </Link>
-              )}
             </div>
           </div>
-        )}
+        </div>
       </div>
-    </nav>
+    </section>
   );
 };
 
-export default Navbar;
+export default ValuePropositionSection;
