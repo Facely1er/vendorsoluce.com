@@ -3,6 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { 
   Shield, 
+  ShieldCheck,
   Building, 
   Users, 
   Lock, 
@@ -64,6 +65,7 @@ const ValuePropositionSection: React.FC = () => {
           title: 'Vendor Security Assessments',
           description: 'Send CMMC and NIST Privacy Framework assessments through secure vendor portal.',
           benefits: [
+            'CMMC Level 1 & 2 assessment templates',
             'CMMC Level 1 & 2 assessment templates',
             'CMMC Level 1 & 2 assessment templates',
             'NIST Privacy Framework questionnaires',
