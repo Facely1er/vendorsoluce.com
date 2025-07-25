@@ -30,6 +30,8 @@ import IntegrationGuides from './pages/IntegrationGuides';
 import NISTChecklist from './pages/tools/NISTChecklist';
 import SBOMQuickScan from './pages/tools/SBOMQuickScan';
 import VendorRiskCalculator from './pages/tools/VendorRiskCalculator';
+import VendorSecurityAssessments from './pages/VendorSecurityAssessments';
+import VendorAssessmentPortal from './pages/VendorAssessmentPortal';
 
 function App() {
   return (
@@ -66,6 +68,10 @@ function App() {
                   <Route path="/sbom-analysis/:id" element={<SBOMAnalysisPage />} />
                   <Route path="/vendor-risk-dashboard" element={<VendorRiskDashboard />} />
                   <Route path="/vendors" element={<VendorsPage />} />
+                  
+                  {/* Vendor Security Assessments - Premium Feature */}
+                  <Route path="/vendor-assessments" element={<VendorSecurityAssessments />} />
+                  <Route path="/vendor-assessments/:id" element={<VendorAssessmentPortal />} />
                   
                   {/* Protected routes */}
                   <Route path="/dashboard" element={
