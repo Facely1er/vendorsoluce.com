@@ -3,8 +3,9 @@ import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { 
   Shield, 
-  ShieldCheck,
   Building, 
+  Building2,
+  ShieldCheck,
   Users, 
   Lock, 
   FileCheck, 
