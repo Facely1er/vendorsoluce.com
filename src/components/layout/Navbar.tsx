@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Home, Layers, Shield, FileJson, BarChart3, BookOpen, Phone, Users, DollarSign } from 'lucide-react';
+import { Menu, X, ChevronDown, Home, Layers, FileJson, BarChart3, BookOpen, Phone, Users, DollarSign } from 'lucide-react';
 import { MenuItem } from '../../types';
 import ThemeToggle from './ThemeToggle';
 import UserMenu from './UserMenu';
@@ -72,7 +72,6 @@ const Navbar: React.FC = () => {
       Home: <Home size={20} />,
       Layers: <Layers size={20} />,
       DollarSign: <DollarSign size={20} />,
-      Shield: <Shield size={20} />,
       FileJson: <FileJson size={20} />,
       BarChart3: <BarChart3 size={20} />,
       BookOpen: <BookOpen size={20} />,
