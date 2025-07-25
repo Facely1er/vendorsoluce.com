@@ -24,7 +24,6 @@ const Navbar: React.FC = () => {
     { title: t('navigation.solutions'), path: '#', icon: 'Layers' },
     { title: t('navigation.pricing'), path: '/pricing', icon: 'DollarSign' },
     { title: t('navigation.resources'), path: '#', icon: 'BookOpen' },
-  
   ];
 
   const solutionItems: MenuItem[] = [
@@ -87,9 +86,8 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center h-16">
-          {/* Left: Logo */}
-          <div className="flex items-center flex-1" data-tour="main-nav">
+        <div className="flex justify-between h-16">
+          <div className="flex items-center" data-tour="main-nav">
             <Link to="/" className="flex-shrink-0 flex items-center">
               <img 
                 src="/vendorsoluce.png" 
@@ -103,8 +101,8 @@ const Navbar: React.FC = () => {
             </Link>
           </div>
           
-          {/* Center: Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:space-x-2 flex-1 justify-center">
+          {/* Desktop Navigation */}
+          <div className="hidden md:ml-6 md:flex md:items-center md:space-x-2">
             {primaryNav.map((item) => 
               item.title === t('navigation.solutions') ? (
                 <div key={item.title} className="relative">
@@ -185,11 +183,8 @@ const Navbar: React.FC = () => {
                 </Link>
               )
             )}
-          </div>
 
-          {/* Right: Controls */}
-          <div className="flex items-center flex-1 justify-end space-x-2">
-            <div className="hidden md:flex items-center space-x-2">
+            <div className="ml-2 flex items-center space-x-2">
               <LanguageSwitcher variant="icon" />
               <div data-tour="theme-toggle">
                 <ThemeToggle />
@@ -198,18 +193,18 @@ const Navbar: React.FC = () => {
                 <UserMenu />
               </div>
             </div>
-            
-            {/* Mobile menu button */}
-            <div className="flex items-center md:hidden">
-              <LanguageSwitcher variant="icon" />
-              <ThemeToggle />
-              <button
-                onClick={toggleMenu}
-                className="ml-2 inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none"
-              >
-                {isOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
+          </div>
+          
+          {/* Mobile menu button */}
+          <div className="flex items-center md:hidden">
+            <LanguageSwitcher variant="icon" />
+            <ThemeToggle />
+            <button
+              onClick={toggleMenu}
+              className="ml-2 inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
       </div>
@@ -277,7 +272,11 @@ const Navbar: React.FC = () => {
                         <div key={solution.title}>
                           <Link
                             to={solution.path}
-                            className="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700"
+                            className={`block px-3 py-2 text-base font-medium ${
+                              isActiveLink(solution.path)
+                                ? 'text-vendorsoluce-green dark:text-white bg-vendorsoluce-green/10 dark:bg-vendorsoluce-green/20'
+                                : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-green dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700'
+                            }`}
                             onClick={() => {
                               setIsOpen(false);
                               setIsSolutionsOpen(false);
@@ -314,8 +313,10 @@ const Navbar: React.FC = () => {
               )
             )}
           </div>
+          
+          {/* Mobile User Menu Section */}
           <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
-            <div className="px-4 py-2">
+            <div className="flex items-center px-3">
               <UserMenu />
             </div>
           </div>
