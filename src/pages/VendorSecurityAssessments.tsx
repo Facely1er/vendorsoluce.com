@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { 
@@ -46,6 +47,7 @@ interface Framework {
 }
 
 const VendorSecurityAssessments: React.FC = () => {
+  const { t } = useTranslation();
   const { vendors, loading } = useVendors();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -56,7 +58,7 @@ const VendorSecurityAssessments: React.FC = () => {
     {
       id: 'assess-001',
       vendorName: 'TechCorp Solutions',
-      frameworkName: 'CMMC Level 2',
+      frameworkName: t('vendorAssessments.frameworks.cmmcLevel2.name'),
       status: 'in_progress',
       sentDate: '2025-01-10',
       dueDate: '2025-01-25',
@@ -69,7 +71,7 @@ const VendorSecurityAssessments: React.FC = () => {
     {
       id: 'assess-002',
       vendorName: 'CloudSecure Inc',
-      frameworkName: 'NIST Privacy Framework',
+      frameworkName: t('vendorAssessments.frameworks.nistPrivacy.name'),
       status: 'completed',
       sentDate: '2025-01-05',
       dueDate: '2025-01-20',
@@ -82,7 +84,7 @@ const VendorSecurityAssessments: React.FC = () => {
     {
       id: 'assess-003',
       vendorName: 'DevTools Pro',
-      frameworkName: 'CMMC Level 1',
+      frameworkName: t('vendorAssessments.frameworks.cmmcLevel1.name'),
       status: 'sent',
       sentDate: '2025-01-12',
       dueDate: '2025-01-27',
@@ -98,24 +100,24 @@ const VendorSecurityAssessments: React.FC = () => {
   const frameworks: Framework[] = [
     {
       id: 'cmmc_level_1',
-      name: 'CMMC Level 1',
-      description: 'Basic cybersecurity hygiene practices for protecting Federal Contract Information (FCI)',
+      name: t('vendorAssessments.frameworks.cmmcLevel1.name'),
+      description: t('vendorAssessments.frameworks.cmmcLevel1.description'),
       questionCount: 17,
-      estimatedTime: '1-2 hours'
+      estimatedTime: t('vendorAssessments.estimatedTime.short')
     },
     {
       id: 'cmmc_level_2',
-      name: 'CMMC Level 2',
-      description: 'Intermediate practices for protecting Controlled Unclassified Information (CUI)',
+      name: t('vendorAssessments.frameworks.cmmcLevel2.name'),
+      description: t('vendorAssessments.frameworks.cmmcLevel2.description'),
       questionCount: 110,
-      estimatedTime: '4-6 hours'
+      estimatedTime: t('vendorAssessments.estimatedTime.long')
     },
     {
       id: 'nist_privacy',
-      name: 'NIST Privacy Framework',
-      description: 'Comprehensive privacy risk management assessment',
+      name: t('vendorAssessments.frameworks.nistPrivacy.name'),
+      description: t('vendorAssessments.frameworks.nistPrivacy.description'),
       questionCount: 45,
-      estimatedTime: '2-3 hours'
+      estimatedTime: t('vendorAssessments.estimatedTime.medium')
     }
   ];
 
@@ -172,15 +174,14 @@ const VendorSecurityAssessments: React.FC = () => {
             <div className="flex items-center mb-2">
               <Crown className="h-6 w-6 text-yellow-500 mr-2" />
               <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-medium px-2 py-1 rounded-full">
-                Premium Feature
+                {t('vendorAssessments.premiumFeature')}
               </span>
             </div>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Vendor Security Assessments
+              {t('vendorAssessments.title')}
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl">
-              Send CMMC and NIST Privacy Framework assessments to your vendors through a secure portal. 
-              Track progress, collect evidence, and automate compliance scoring.
+              {t('vendorAssessments.description')}
             </p>
           </div>
           <Button 
@@ -190,7 +191,7 @@ const VendorSecurityAssessments: React.FC = () => {
             className="flex items-center"
           >
             <Plus className="h-5 w-5 mr-2" />
-            Create Assessment
+            {t('vendorAssessments.buttons.newAssessment')}
           </Button>
         </div>
       </div>
@@ -201,15 +202,17 @@ const VendorSecurityAssessments: React.FC = () => {
           <CardContent className="p-6">
             <div className="flex items-center mb-4">
               <Shield className="h-8 w-8 text-yellow-500 mr-3" />
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white">CMMC Assessments</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                {t('vendorAssessments.features.cmmcAssessments.title')}
+              </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-300 mb-4">
-              Pre-built CMMC Level 1 & 2 assessment templates with automated scoring and evidence collection.
+              {t('vendorAssessments.features.cmmcAssessments.description')}
             </p>
             <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
-              <li>• DoD-aligned question sets</li>
-              <li>• Automated compliance scoring</li>
-              <li>• Evidence collection portal</li>
+              <li>• {t('vendorAssessments.features.cmmcAssessments.feature1')}</li>
+              <li>• {t('vendorAssessments.features.cmmcAssessments.feature2')}</li>
+              <li>• {t('vendorAssessments.features.cmmcAssessments.feature3')}</li>
             </ul>
           </CardContent>
         </Card>
@@ -218,15 +221,17 @@ const VendorSecurityAssessments: React.FC = () => {
           <CardContent className="p-6">
             <div className="flex items-center mb-4">
               <Users className="h-8 w-8 text-blue-500 mr-3" />
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white">Vendor Portal</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                {t('vendorAssessments.features.vendorPortal.title')}
+              </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-300 mb-4">
-              Secure assessment portal for vendors to complete questionnaires and upload evidence.
+              {t('vendorAssessments.features.vendorPortal.description')}
             </p>
             <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
-              <li>• Secure access with unique links</li>
-              <li>• Progress saving and resume</li>
-              <li>• Automated notifications</li>
+              <li>• {t('vendorAssessments.features.vendorPortal.feature1')}</li>
+              <li>• {t('vendorAssessments.features.vendorPortal.feature2')}</li>
+              <li>• {t('vendorAssessments.features.vendorPortal.feature3')}</li>
             </ul>
           </CardContent>
         </Card>
@@ -235,15 +240,17 @@ const VendorSecurityAssessments: React.FC = () => {
           <CardContent className="p-6">
             <div className="flex items-center mb-4">
               <BarChart3 className="h-8 w-8 text-green-500 mr-3" />
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white">Analytics & Reporting</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                {t('vendorAssessments.features.analytics.title')}
+              </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-300 mb-4">
-              Advanced analytics and executive reporting for vendor compliance status.
+              {t('vendorAssessments.features.analytics.description')}
             </p>
             <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
-              <li>• Compliance trend analysis</li>
-              <li>• Executive dashboards</li>
-              <li>• Automated report generation</li>
+              <li>• {t('vendorAssessments.features.analytics.feature1')}</li>
+              <li>• {t('vendorAssessments.features.analytics.feature2')}</li>
+              <li>• {t('vendorAssessments.features.analytics.feature3')}</li>
             </ul>
           </CardContent>
         </Card>
@@ -261,7 +268,7 @@ const VendorSecurityAssessments: React.FC = () => {
                 <Search className="h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Search assessments..."
+                  placeholder={t('vendorAssessments.search.placeholder')}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white w-full md:w-64"
@@ -272,17 +279,17 @@ const VendorSecurityAssessments: React.FC = () => {
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
               >
-                <option value="all">All Statuses</option>
-                <option value="pending">Pending</option>
-                <option value="sent">Sent</option>
-                <option value="in_progress">In Progress</option>
-                <option value="completed">Completed</option>
-                <option value="reviewed">Reviewed</option>
+                <option value="all">{t('vendorAssessments.filters.allStatuses')}</option>
+                <option value="pending">{t('vendorAssessments.status.pending')}</option>
+                <option value="sent">{t('vendorAssessments.status.sent')}</option>
+                <option value="in_progress">{t('vendorAssessments.status.inProgress')}</option>
+                <option value="completed">{t('vendorAssessments.status.completed')}</option>
+                <option value="reviewed">{t('vendorAssessments.status.reviewed')}</option>
               </select>
             </div>
             <Button variant="outline" size="sm">
               <Download className="h-4 w-4 mr-2" />
-              Export Report
+              {t('vendorAssessments.actions.exportReport')}
             </Button>
           </div>
         </CardContent>
@@ -292,9 +299,9 @@ const VendorSecurityAssessments: React.FC = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
-            <span>Vendor Assessments</span>
+            <span>{t('vendorAssessments.table.title')}</span>
             <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-              {filteredAssessments.length} assessments
+              {t('vendorAssessments.table.count', { count: filteredAssessments.length })}
             </span>
           </CardTitle>
         </CardHeader>
@@ -303,17 +310,17 @@ const VendorSecurityAssessments: React.FC = () => {
             <div className="text-center py-12">
               <Shield className="h-12 w-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                No assessments found
+                {t('vendorAssessments.emptyState.title')}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
                 {searchTerm || statusFilter !== 'all' 
-                  ? 'No assessments match your current filters.' 
-                  : 'Get started by creating your first vendor security assessment.'}
+                  ? t('vendorAssessments.emptyState.noMatches')
+                  : t('vendorAssessments.emptyState.noAssessments')}
               </p>
               {!searchTerm && statusFilter === 'all' && (
                 <Button variant="primary" onClick={() => setShowCreateModal(true)}>
                   <Plus className="h-4 w-4 mr-2" />
-                  Create First Assessment
+                  {t('vendorAssessments.buttons.createFirstAssessment')}
                 </Button>
               )}
             </div>
@@ -323,25 +330,25 @@ const VendorSecurityAssessments: React.FC = () => {
                 <thead className="bg-gray-50 dark:bg-gray-800">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Vendor
+                      {t('vendorAssessments.table.headers.vendor')}
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Framework
+                      {t('vendorAssessments.table.headers.framework')}
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Status
+                      {t('vendorAssessments.table.headers.status')}
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Progress
+                      {t('vendorAssessments.table.headers.progress')}
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Due Date
+                      {t('vendorAssessments.table.headers.dueDate')}
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Score
+                      {t('vendorAssessments.table.headers.score')}
                     </th>
                     <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Actions
+                      {t('vendorAssessments.table.headers.actions')}
                     </th>
                   </tr>
                 </thead>
@@ -366,7 +373,7 @@ const VendorSecurityAssessments: React.FC = () => {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(assessment.status)}`}>
                           {getStatusIcon(assessment.status)}
-                          <span className="ml-1 capitalize">{assessment.status.replace('_', ' ')}</span>
+                          <span className="ml-1">{t(`vendorAssessments.status.${assessment.status}`)}</span>
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
