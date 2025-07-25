@@ -62,12 +62,13 @@ const ValuePropositionSection: React.FC = () => {
         },
         {
           title: 'Vendor Security Assessments',
-          description: 'Send comprehensive security questionnaires aligned with industry frameworks.',
+          description: 'Send CMMC and NIST Privacy Framework assessments through secure vendor portal.',
           benefits: [
-            'NIST SP 800-171 and Privacy Framework templates',
+            'CMMC Level 1 & 2 assessment templates',
+            'NIST Privacy Framework questionnaires',
             'Automated scoring and risk rating',
-            'Evidence collection and validation',
-            'Progress tracking and notifications'
+            'Secure evidence collection portal',
+            'Real-time progress tracking and notifications'
           ],
           cta: 'Send Assessment',
           link: '/vendor-assessments'
@@ -228,7 +229,7 @@ const ValuePropositionSection: React.FC = () => {
           {/* Challenges */}
           <Card className="lg:col-span-1">
             <CardHeader>
-              <CardTitle className="flex items-center text-gray-900 dark:text-white">
+              <CardTitle className="flex items-center  text-gray-900 dark:text-white">
                 <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
                 Common Challenges
               </CardTitle>

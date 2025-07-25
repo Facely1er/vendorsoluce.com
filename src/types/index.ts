@@ -5,6 +5,7 @@ export interface Assessment {
   frameworks: string[];
   features: string[];
   icon: string;
+  isPremium?: boolean;
 }
 
 export interface QuickTool {

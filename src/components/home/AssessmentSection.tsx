@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, FileJson, BarChart3 } from 'lucide-react';
+import { Shield, FileJson, BarChart3, Users, Crown } from 'lucide-react';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
 import { Assessment } from '../../types';
@@ -22,6 +22,20 @@ const AssessmentSection: React.FC = () => {
         t('assessment.supplyChain.feature4')
       ],
       icon: 'Shield'
+    },
+    {
+      id: 'vendor-assessments',
+      title: t('assessment.vendorAssessments.title'),
+      description: t('assessment.vendorAssessments.description'),
+      frameworks: ['CMMC Level 1 & 2', 'NIST Privacy Framework', 'NIST SP 800-53'],
+      features: [
+        t('assessment.vendorAssessments.feature1'),
+        t('assessment.vendorAssessments.feature2'),
+        t('assessment.vendorAssessments.feature3'),
+        t('assessment.vendorAssessments.feature4')
+      ],
+      icon: 'Users',
+      isPremium: true
     },
     {
       id: 'sbom-analyzer',
@@ -54,6 +68,7 @@ const AssessmentSection: React.FC = () => {
   const getIcon = (iconName: string) => {
     const icons = {
       Shield: <Shield size={24} className="text-vendorsoluce-green" />,
+      Users: <Users size={24} className="text-vendorsoluce-navy" />,
       FileJson: <FileJson size={24} className="text-vendorsoluce-light-green" />,
       BarChart3: <BarChart3 size={24} className="text-vendorsoluce-green" />
     };
@@ -65,6 +80,8 @@ const AssessmentSection: React.FC = () => {
     switch (id) {
       case 'supply-chain-assessment':
         return 'assessment';
+      case 'vendor-assessments':
+        return 'vendor';
       case 'sbom-analyzer':
         return 'sbom';
       case 'vendor-risk-dashboard':
@@ -85,11 +102,20 @@ const AssessmentSection: React.FC = () => {
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {assessments.map((assessment) => (
           <Link key={assessment.id} to={`/${assessment.id}`} className="block h-full">
             <Card variant={getCardVariant(assessment.id)} className="flex flex-col h-full hover:shadow-lg transition-shadow cursor-pointer">
             <div className="p-6 flex-1">
+              {assessment.isPremium && (
+                <div className="flex items-center mb-3">
+                  <Crown className="h-4 w-4 text-yellow-500 mr-2" />
+                  <span className="px-2 py-1 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-medium rounded-full">
+                    Premium
+                  </span>
+                </div>
+              )}
+              
               <div className="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center mb-4">
                 {getIcon(assessment.icon)}
               </div>
@@ -118,11 +144,12 @@ const AssessmentSection: React.FC = () => {
             
             <div className="p-6 border-t border-gray-100 dark:border-gray-700">
                 <Button 
-                  variant={assessment.id === 'supply-chain-assessment' ? 'primary' : 
+                  variant={assessment.isPremium ? 'outline' : 
+                           assessment.id === 'supply-chain-assessment' ? 'primary' : 
                            assessment.id === 'sbom-analyzer' ? 'secondary' : 'outline'}
                   className="w-full"
                 >
-                  {t('home.assessments.startAssessment')}
+                  {assessment.isPremium ? 'Learn More' : t('home.assessments.startAssessment')}
                 </Button>
             </div>
             </Card>
