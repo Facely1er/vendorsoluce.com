@@ -1,4 +1,3 @@
-```typescript
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Home, LayoutDashboard, Users, FileText, DollarSign, Info, Mail, BookOpen, Code, Globe, Sun, Moon } from 'lucide-react';
@@ -193,4 +192,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-```
