@@ -27,6 +27,17 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           
+          {/* Company Info - Back on the left */}
+          <div className="col-span-1 md:col-span-1">
+            <div className="flex items-center mb-3">
+              <img src="/vendorsoluce.png" alt={t('footer.company.name')} className="h-6 w-auto mr-2" />
+              <span className="text-lg font-bold">{t('footer.company.name')}</span>
+            </div>
+            <p className="text-gray-300 mb-3 text-sm">
+              {t('footer.company.description')}
+            </p>
+          </div>
+
           {/* Solutions */}
           <div>
             <h3 className="text-lg font-semibold mb-3">{t('footer.sections.solutions')}</h3>
@@ -98,10 +109,10 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Company + Contact */}
           <div>
             <h3 className="text-lg font-semibold mb-3">{t('footer.sections.company')}</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 mb-4">
               <li>
                 <Link to="/about" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <Building className="h-4 w-4 mr-2" />
@@ -131,17 +142,8 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
             </ul>
-          </div>
-
-          {/* Company Info - Now on the right */}
-          <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center mb-3">
-              <img src="/vendorsoluce.png" alt={t('footer.company.name')} className="h-6 w-auto mr-2" />
-              <span className="text-lg font-bold">{t('footer.company.name')}</span>
-            </div>
-            <p className="text-gray-300 mb-3 text-sm">
-              {t('footer.company.description')}
-            </p>
+            
+            <h4 className="text-md font-semibold mb-2 text-gray-200">Contact</h4>
             <div className="space-y-1 text-sm text-gray-400">
               <div className="flex items-center">
                 <Mail className="h-4 w-4 mr-2" />
