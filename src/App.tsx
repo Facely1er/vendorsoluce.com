@@ -6,6 +6,7 @@ import { I18nProvider } from './context/I18nContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+import { Analytics } from '@vercel/analytics/react';
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -90,6 +91,7 @@ function App() {
                 </Routes>
               </main>
               <Footer />
+              <Analytics />
             </div>
           </AuthProvider>
         </Router>
