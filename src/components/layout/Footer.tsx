@@ -109,10 +109,10 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Company + Contact */}
+          {/* Company */}
           <div>
             <h3 className="text-lg font-semibold mb-3">{t('footer.sections.company')}</h3>
-            <ul className="space-y-2 mb-4">
+            <ul className="space-y-2">
               <li>
                 <Link to="/about" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <Building className="h-4 w-4 mr-2" />
@@ -142,22 +142,6 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
             </ul>
-            
-            <h4 className="text-md font-semibold mb-2 text-gray-200">Contact</h4>
-            <div className="space-y-1 text-sm text-gray-400">
-              <div className="flex items-center">
-                <Mail className="h-4 w-4 mr-2" />
-                <span>{t('footer.company.contact.email')}</span>
-              </div>
-              <div className="flex items-center">
-                <Phone className="h-4 w-4 mr-2" />
-                <span>{t('footer.company.contact.phone')}</span>
-              </div>
-              <div className="flex items-center">
-                <MapPin className="h-4 w-4 mr-2" />
-                <span>{t('footer.company.contact.address')}</span>
-              </div>
-            </div>
           </div>
         </div>
 
