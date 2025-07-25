@@ -18,7 +18,7 @@ const HeroSection: React.FC = () => {
             {t('home.hero.title')}
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-100 mb-8 max-w-4xl mx-auto">
+          <p className="text-2xl md:text-2xl text-gray-100 mb-8 max-w-4xl mx-auto">
             {t('home.hero.subtitle')}
           </p>
           
