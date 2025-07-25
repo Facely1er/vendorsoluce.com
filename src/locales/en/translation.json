@@ -262,6 +262,209 @@
       "description": "Join thousands of organizations using our platform to manage compliance and reduce risk"
     }
   },
+  "vendorPortal": {
+  },
+  "vendorAssessments": {
+    "title": "Vendor Security Assessments",
+    "description": "Send CMMC and NIST Privacy Framework assessments to your vendors through a secure portal. Track progress, collect evidence, and automate compliance scoring.",
+    "premiumFeature": "Premium Feature",
+    
+    "buttons": {
+      "newAssessment": "Create Assessment",
+      "createFirstAssessment": "Create First Assessment",
+      "sendAssessment": "Send Assessment",
+      "view": "View",
+      "copyLink": "Copy Link",
+      "signUpFreeTrial": "Sign Up for Free Trial",
+      "viewPricing": "View Pricing"
+    },
+    
+    "features": {
+      "cmmcAssessments": {
+        "title": "CMMC Assessments",
+        "description": "Pre-built CMMC Level 1 & 2 assessment templates with automated scoring and evidence collection.",
+        "feature1": "DoD-aligned question sets",
+        "feature2": "Automated compliance scoring",
+        "feature3": "Evidence collection portal"
+      },
+      "vendorPortal": {
+        "title": "Vendor Portal",
+        "description": "Secure assessment portal for vendors to complete questionnaires and upload evidence.",
+        "feature1": "Secure access with unique links",
+        "feature2": "Progress saving and resume",
+        "feature3": "Automated notifications"
+      },
+      "analytics": {
+        "title": "Analytics & Reporting",
+        "description": "Advanced analytics and executive reporting for vendor compliance status.",
+        "feature1": "Compliance trend analysis",
+        "feature2": "Executive dashboards",
+        "feature3": "Automated report generation"
+      }
+    },
+    
+    "frameworks": {
+      "cmmcLevel1": {
+        "name": "CMMC Level 1",
+        "description": "Basic cybersecurity hygiene practices for protecting Federal Contract Information (FCI)"
+      },
+      "cmmcLevel2": {
+        "name": "CMMC Level 2",
+        "description": "Intermediate practices for protecting Controlled Unclassified Information (CUI)"
+      },
+      "nistPrivacy": {
+        "name": "NIST Privacy Framework",
+        "description": "Comprehensive privacy risk management assessment"
+      },
+      "nist80053": {
+        "name": "NIST SP 800-53 Controls",
+        "description": "Security and privacy controls for information systems"
+      }
+    },
+    
+    "estimatedTime": {
+      "short": "1-2 hours",
+      "medium": "2-3 hours",
+      "long": "4-6 hours"
+    },
+    
+    "status": {
+      "pending": "Pending",
+      "sent": "Sent",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "reviewed": "Reviewed"
+    },
+    
+    "search": {
+      "placeholder": "Search assessments..."
+    },
+    
+    "filters": {
+      "allStatuses": "All Statuses"
+    },
+    
+    "actions": {
+      "exportReport": "Export Report"
+    },
+    
+    "table": {
+      "title": "Vendor Assessments",
+      "count": "{{count}} assessments",
+      "headers": {
+        "vendor": "Vendor",
+        "framework": "Framework",
+        "status": "Status",
+        "progress": "Progress", 
+        "dueDate": "Due Date",
+        "score": "Score",
+        "actions": "Actions"
+      }
+    },
+    
+    "emptyState": {
+      "title": "No assessments found",
+      "noMatches": "No assessments match your current filters.",
+      "noAssessments": "Get started by creating your first vendor security assessment."
+    },
+    
+    "overview": {
+      "premiumBenefits": {
+        "title": "Premium Assessment Features",
+        "cmmcAligned": {
+          "title": "CMMC & Privacy Aligned",
+          "description": "Pre-built assessment templates aligned with CMMC levels and NIST Privacy Framework"
+        },
+        "securePortal": {
+          "title": "Secure Vendor Portal",
+          "description": "Dedicated portal for vendors to complete assessments and upload evidence securely"
+        },
+        "evidenceCollection": {
+          "title": "Evidence Collection",
+          "description": "Automated evidence collection, validation, and audit trail management"
+        }
+      },
+      "statistics": {
+        "totalAssessments": "Total Assessments",
+        "inProgress": "In Progress", 
+        "completed": "Completed",
+        "highCompliance": "High Compliance"
+      },
+      "gettingStarted": {
+        "title": "Getting Started",
+        "step1": {
+          "title": "Add Vendors",
+          "description": "Import or add vendors to your portfolio before sending assessments"
+        },
+        "step2": {
+          "title": "Choose Framework", 
+          "description": "Select CMMC, NIST Privacy Framework, or custom assessment template"
+        },
+        "step3": {
+          "title": "Send Assessment",
+          "description": "Send secure assessment links with automated tracking and reminders"
+        }
+      },
+      "capabilities": {
+        "title": "Assessment Capabilities",
+        "evidenceCollection": "Automated evidence collection",
+        "progressTracking": "Real-time progress tracking",
+        "secureSharing": "Secure document sharing",
+        "automatedScoring": "Automated compliance scoring",
+        "auditTrail": "Audit trail and reporting",
+        "multiFramework": "Multi-framework support"
+      }
+    },
+    
+    "assessments": {
+      "title": "Active Assessments",
+      "fields": {
+        "framework": "Framework",
+        "sentDate": "Sent Date",
+        "dueDate": "Due Date", 
+        "progress": "Progress",
+        "notSent": "Not sent",
+        "notSet": "Not set"
+      }
+    },
+    
+    "templates": {
+      "title": "Assessment Framework Templates",
+      "fields": {
+        "questions": "Questions",
+        "estimatedTime": "Est. Time"
+      }
+    },
+    
+    "portal": {
+      "title": "Vendor Assessment Portal",
+      "features": {
+        "title": "Secure Vendor Portal Features",
+        "capabilities": {
+          "title": "Portal Capabilities",
+          "secureLinks": "Secure unique assessment links",
+          "progressSaving": "Progress saving and resume capability", 
+          "encryptedUploads": "Encrypted evidence file uploads",
+          "realTimeCollaboration": "Real-time collaboration features",
+          "mobileResponsive": "Mobile-responsive design"
+        },
+        "security": {
+          "title": "Security Features",
+          "endToEndEncryption": "End-to-end encryption",
+          "multiFactorAuth": "Multi-factor authentication", 
+          "auditLogging": "Audit trail logging",
+          "timeLimitedTokens": "Time-limited access tokens",
+          "ipAllowlist": "IP allowlist support"
+        },
+        "exampleUrl": "Example Portal URL:"
+      }
+    },
+    
+    "upgrade": {
+      "title": "Unlock Premium Assessment Features",
+      "description": "Create an account to send CMMC and NIST Privacy Framework assessments to your vendors"
+    }
+  },
   "buttons": {
     "startAssessment": "Start Assessment",
     "analyzeNow": "Analyze Now",
@@ -515,142 +718,6 @@
         "title": "Critical Risk Vendors",
         "description": "Consider termination or require immediate security improvements"
       }
-    }
-  },
-  "vendorAssessments": {
-    "title": "Vendor Security Assessments",
-    "description": "Send comprehensive security assessments to vendors with CMMC and NIST Privacy Framework alignment. Collect evidence and track compliance through a secure vendor portal.",
-    "premiumFeature": "Premium Feature",
-    "tabs": {
-      "overview": "Overview",
-      "assessments": "Active Assessments", 
-      "templates": "Framework Templates",
-      "portal": "Vendor Portal"
-    },
-    "buttons": {
-      "newAssessment": "New Assessment",
-      "createFirstAssessment": "Create First Assessment",
-      "sendAssessment": "Send Assessment",
-      "view": "View",
-      "copyLink": "Copy Link",
-      "signUpFreeTrial": "Sign Up for Free Trial",
-      "viewPricing": "View Pricing"
-    },
-    "overview": {
-      "premiumBenefits": {
-        "title": "Premium Assessment Features",
-        "cmmcAligned": {
-          "title": "CMMC & Privacy Aligned",
-          "description": "Pre-built assessment templates aligned with CMMC levels and NIST Privacy Framework"
-        },
-        "securePortal": {
-          "title": "Secure Vendor Portal",
-          "description": "Dedicated portal for vendors to complete assessments and upload evidence securely"
-        },
-        "evidenceCollection": {
-          "title": "Evidence Collection",
-          "description": "Automated evidence collection, validation, and audit trail management"
-        }
-      },
-      "statistics": {
-        "totalAssessments": "Total Assessments",
-        "inProgress": "In Progress", 
-        "completed": "Completed",
-        "highCompliance": "High Compliance"
-      },
-      "gettingStarted": {
-        "title": "Getting Started",
-        "step1": {
-          "title": "Add Vendors",
-          "description": "Import or add vendors to your portfolio before sending assessments"
-        },
-        "step2": {
-          "title": "Choose Framework", 
-          "description": "Select CMMC, NIST Privacy Framework, or custom assessment template"
-        },
-        "step3": {
-          "title": "Send Assessment",
-          "description": "Send secure assessment links with automated tracking and reminders"
-        }
-      },
-      "capabilities": {
-        "title": "Assessment Capabilities",
-        "evidenceCollection": "Automated evidence collection",
-        "progressTracking": "Real-time progress tracking",
-        "secureSharing": "Secure document sharing",
-        "automatedScoring": "Automated compliance scoring",
-        "auditTrail": "Audit trail and reporting",
-        "multiFramework": "Multi-framework support"
-      }
-    },
-    "assessments": {
-      "title": "Active Assessments",
-      "status": {
-        "completed": "COMPLETED",
-        "inProgress": "IN PROGRESS", 
-        "pending": "PENDING",
-        "overdue": "OVERDUE"
-      },
-      "fields": {
-        "framework": "Framework",
-        "sentDate": "Sent Date",
-        "dueDate": "Due Date", 
-        "progress": "Progress",
-        "notSent": "Not sent",
-        "notSet": "Not set"
-      }
-    },
-    "templates": {
-      "title": "Assessment Framework Templates",
-      "frameworks": {
-        "cmmcLevel1": {
-          "name": "CMMC Level 1",
-          "description": "Basic cybersecurity hygiene practices"
-        },
-        "cmmcLevel2": {
-          "name": "CMMC Level 2", 
-          "description": "Intermediate cybersecurity practices for CUI protection"
-        },
-        "nistPrivacy": {
-          "name": "NIST Privacy Framework",
-          "description": "Privacy risk management practices"
-        },
-        "nist80053": {
-          "name": "NIST SP 800-53 Controls",
-          "description": "Security and privacy controls for information systems"
-        }
-      },
-      "fields": {
-        "questions": "Questions",
-        "estimatedTime": "Est. Time"
-      }
-    },
-    "portal": {
-      "title": "Vendor Assessment Portal",
-      "features": {
-        "title": "Secure Vendor Portal Features",
-        "capabilities": {
-          "title": "Portal Capabilities",
-          "secureLinks": "Secure unique assessment links",
-          "progressSaving": "Progress saving and resume capability", 
-          "encryptedUploads": "Encrypted evidence file uploads",
-          "realTimeCollaboration": "Real-time collaboration features",
-          "mobileResponsive": "Mobile-responsive design"
-        },
-        "security": {
-          "title": "Security Features",
-          "endToEndEncryption": "End-to-end encryption",
-          "multiFactorAuth": "Multi-factor authentication", 
-          "auditLogging": "Audit trail logging",
-          "timeLimitedTokens": "Time-limited access tokens",
-          "ipAllowlist": "IP allowlist support"
-        },
-        "exampleUrl": "Example Portal URL:"
-      }
-    },
-    "upgrade": {
-      "title": "Unlock Premium Assessment Features",
-      "description": "Create an account to send CMMC and NIST Privacy Framework assessments to your vendors"
     }
   },
   "quickTools": {
