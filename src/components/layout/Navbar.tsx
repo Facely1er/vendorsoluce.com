@@ -1,316 +1,249 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
-import { Button } from '../ui/Button';
-import { 
-  Shield, 
-  Building, 
-  Users, 
-  Lock, 
-  FileCheck, 
-  BarChart3, 
-  FileJson,
-  ChevronRight,
-  Target,
-  TrendingUp,
-  CheckCircle,
-  AlertTriangle
-} from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, Shield, ChevronDown } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
+import { useTranslation } from 'react-i18next';
+import ThemeToggle from './ThemeToggle';
+import LanguageSwitcher from './LanguageSwitcher';
+import UserMenu from './UserMenu';
+import AppTour from '../onboarding/AppTour';
 
-interface Stakeholder {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  challenges: string[];
-  solutions: {
-    title: string;
-    description: string;
-    benefits: string[];
-    cta: string;
-    link: string;
-  }[];
-}
+const Navbar: React.FC = () => {
+  const { isAuthenticated, isTourRunning, markTourComplete } = useAuth();
+  const { t } = useTranslation();
+  const location = useLocation();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
-const ValuePropositionSection: React.FC = () => {
-  const [activeStakeholder, setActiveStakeholder] = useState<string>('security');
-
-  const stakeholders: Stakeholder[] = [
+  const primaryNav = [
+    { label: t('nav.home'), href: '/', current: location.pathname === '/' },
     {
-      id: 'security',
-      title: 'Security Teams',
-      description: 'Comprehensive tools for identifying, assessing, and mitigating supply chain security risks.',
-      icon: <Shield className="h-8 w-8 text-vendorsoluce-green" />,
-      challenges: [
-        'Limited visibility into supplier security practices',
-        'Time-consuming manual assessment processes',
-        'Difficulty tracking vulnerabilities across software components',
-        'Complex compliance requirements like NIST SP 800-161'
-      ],
-      solutions: [
-        {
-          title: 'Automated SBOM Analysis',
-          description: 'Instantly analyze software components for vulnerabilities and license compliance.',
-          benefits: [
-            'Identify critical vulnerabilities in minutes',
-            'Track open source licenses automatically',
-            'Generate compliance reports for audits',
-            'Monitor component health continuously'
-          ],
-          cta: 'Analyze SBOM Now',
-          link: '/sbom-analyzer'
-        },
-        {
-          title: 'Vendor Security Assessments',
-          description: 'Send CMMC and NIST Privacy Framework assessments through secure vendor portal.',
-          benefits: [
-            'CMMC Level 1 & 2 assessment templates',
-            'NIST Privacy Framework questionnaires',
-            'Automated scoring and risk rating',
-            'Secure evidence collection portal',
-            'Real-time progress tracking and notifications'
-          ],
-          cta: 'Send Assessment',
-          link: '/vendor-assessments'
-        }
-      ]
+      label: 'How It Works',
+      href: '/how-it-works',
+      current: location.pathname === '/how-it-works'
     },
     {
-      id: 'procurement',
-      title: 'Procurement Teams',
-      description: 'Streamline vendor selection and management with risk-based decision making tools.',
-      icon: <Building className="h-8 w-8 text-vendorsoluce-navy" />,
-      challenges: [
-        'Balancing cost, quality, and security in vendor selection',
-        'Managing vendor relationships throughout their lifecycle',
-        'Ensuring contract terms include appropriate security clauses',
-        'Demonstrating due diligence for audit purposes'
-      ],
-      solutions: [
-        {
-          title: 'Vendor Risk Calculator',
-          description: 'Calculate preliminary risk scores to inform vendor selection decisions.',
-          benefits: [
-            'Standardized risk assessment criteria',
-            'Immediate risk scoring for new vendors',
-            'Data-driven vendor comparison',
-            'Integration with procurement workflows'
-          ],
-          cta: 'Calculate Risk',
-          link: '/tools/vendor-risk-calculator'
-        },
-        {
-          title: 'Vendor Risk Dashboard',
-          description: 'Monitor and manage your vendor portfolio with centralized risk visibility.',
-          benefits: [
-            'Real-time risk monitoring',
-            'Automated compliance tracking',
-            'Contract renewal alerts',
-            'Executive reporting dashboards'
-          ],
-          cta: 'View Dashboard',
-          link: '/vendor-risk-dashboard'
-        }
+      label: 'Solutions',
+      href: '#',
+      current: ['/supply-chain-assessment', '/sbom-analyzer', '/vendor-risk-dashboard', '/vendor-assessments'].includes(location.pathname),
+      hasDropdown: true,
+      dropdownItems: [
+        { label: 'Supply Chain Assessment', href: '/supply-chain-assessment', icon: '📊' },
+        { label: 'SBOM Analysis', href: '/sbom-analyzer', icon: '🔍' },
+        { label: 'Vendor Risk Dashboard', href: '/vendor-risk-dashboard', icon: '📈' },
+        { label: 'Vendor Assessments', href: '/vendor-assessments', icon: '🛡️', isPremium: true }
       ]
     },
+    { label: t('nav.pricing'), href: '/pricing', current: location.pathname === '/pricing' },
     {
-      id: 'compliance',
-      title: 'Compliance Officers',
-      description: 'Ensure adherence to regulatory requirements with built-in compliance frameworks.',
-      icon: <Lock className="h-8 w-8 text-vendorsoluce-teal" />,
-      challenges: [
-        'Keeping up with evolving regulatory requirements',
-        'Documenting compliance efforts for audits',
-        'Ensuring vendors meet contractual obligations',
-        'Managing compliance across multiple frameworks'
-      ],
-      solutions: [
-        {
-          title: 'NIST SP 800-161 Assessment',
-          description: 'Comprehensive supply chain risk assessment aligned with federal standards.',
-          benefits: [
-            'Pre-built NIST control templates',
-            'Automated compliance scoring',
-            'Audit-ready documentation',
-            'Gap analysis and recommendations'
-          ],
-          cta: 'Start Assessment',
-          link: '/supply-chain-assessment'
-        },
-        {
-          title: 'Compliance Templates',
-          description: 'Access pre-built templates for common compliance scenarios.',
-          benefits: [
-            'Federal compliance templates',
-            'Industry-specific questionnaires',
-            'Risk assessment matrices',
-            'Executive summary templates'
-          ],
-          cta: 'Download Templates',
-          link: '/templates'
-        }
-      ]
-    },
-    {
-      id: 'executives',
-      title: 'Executive Leadership',
-      description: 'Strategic insights and reporting to make informed decisions about supply chain risks.',
-      icon: <Users className="h-8 w-8 text-vendorsoluce-blue" />,
-      challenges: [
-        'Understanding supply chain risk exposure',
-        'Making informed investment decisions',
-        'Demonstrating risk management to stakeholders',
-        'Balancing operational efficiency with security'
-      ],
-      solutions: [
-        {
-          title: 'Executive Dashboards',
-          description: 'High-level insights into your organization\'s supply chain risk posture.',
-          benefits: [
-            'Key risk metrics and trends',
-            'Vendor portfolio health overview',
-            'Compliance status summaries',
-            'Strategic risk recommendations'
-          ],
-          cta: 'View Dashboard',
-          link: '/dashboard'
-        },
-        {
-          title: 'Risk Reporting',
-          description: 'Generate executive-level reports for board meetings and stakeholder updates.',
-          benefits: [
-            'Automated report generation',
-            'Customizable metrics and KPIs',
-            'Trend analysis and forecasting',
-            'Stakeholder-ready presentations'
-          ],
-          cta: 'Generate Report',
-          link: '/vendor-risk-dashboard'
-        }
+      label: 'Resources',
+      href: '#',
+      current: ['/templates', '/api-docs', '/integration-guides'].includes(location.pathname),
+      hasDropdown: true,
+      dropdownItems: [
+        { label: 'Templates', href: '/templates', icon: '📄' },
+        { label: 'API Documentation', href: '/api-docs', icon: '🔧' },
+        { label: 'Integration Guides', href: '/integration-guides', icon: '🔗' }
       ]
     }
   ];
 
-  const activeStakeholderData = stakeholders.find(s => s.id === activeStakeholder) || stakeholders[0];
+  const handleDropdownToggle = (label: string) => {
+    setOpenDropdown(openDropdown === label ? null : label);
+  };
+
+  const closeDropdown = () => {
+    setOpenDropdown(null);
+  };
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Designed for Every Supply Chain Stakeholder
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            VendorSoluce addresses the unique challenges faced by different teams in your organization, 
-            providing tailored solutions that deliver measurable value to each stakeholder.
-          </p>
-        </div>
-
-        {/* Stakeholder Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {stakeholders.map((stakeholder) => (
-            <button
-              key={stakeholder.id}
-              onClick={() => setActiveStakeholder(stakeholder.id)}
-              className={`flex items-center px-4 py-2 rounded-lg font-medium transition-all ${
-                activeStakeholder === stakeholder.id
-                  ? 'bg-vendorsoluce-green text-white shadow-md'
-                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-              }`}
-            >
-              {stakeholder.icon}
-              <span className="ml-2">{stakeholder.title}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Active Stakeholder Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Challenges */}
-          <Card className="lg:col-span-1">
-            <CardHeader>
-              <CardTitle className="flex items-center  text-gray-900 dark:text-white">
-                <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
-                Common Challenges
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">{activeStakeholderData.description}</p>
-              <ul className="space-y-3">
-                {activeStakeholderData.challenges.map((challenge, index) => (
-                  <li key={index} className="flex items-start">
-                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <span className="text-gray-700 dark:text-gray-300 text-sm">{challenge}</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-
-          {/* Solutions */}
-          <div className="lg:col-span-2 space-y-6">
-            {activeStakeholderData.solutions.map((solution, index) => (
-              <Card key={index} className="border-l-4 border-l-vendorsoluce-green">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                        {solution.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">
-                        {solution.description}
-                      </p>
-                    </div>
-                    <div className="ml-4">
-                      <Link to={solution.link}>
-                        <Button variant="primary" size="sm">
-                          {solution.cta}
-                          <ChevronRight className="h-4 w-4 ml-1" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {solution.benefits.map((benefit, benefitIndex) => (
-                      <div key={benefitIndex} className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-vendorsoluce-green mr-2 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-gray-700 dark:text-gray-300">{benefit}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="mt-12 text-center">
-          <div className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green rounded-lg p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Supply Chain Security?</h3>
-            <p className="text-xl text-gray-100 mb-6">
-              Join organizations worldwide who trust VendorSoluce to secure their supply chains and meet compliance requirements.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/supply-chain-assessment">
-                <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100">
-                  <Target className="h-5 w-5 mr-2" />
-                  Start Free Assessment
-                </Button>
+    <>
+      <nav className="bg-white dark:bg-gray-800 shadow-lg border-b border-gray-200 dark:border-gray-700" data-tour="main-nav">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            {/* Logo and Brand */}
+            <div className="flex items-center">
+              <Link to="/" className="flex items-center">
+                <Shield className="h-8 w-8 text-vendorsoluce-green" />
+                <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">
+                  VendorSoluce
+                </span>
               </Link>
-              <Link to="/contact">
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20">
-                  <Users className="h-5 w-5 mr-2" />
-                  Schedule Demo
-                </Button>
-              </Link>
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex md:items-center md:space-x-1">
+              {primaryNav.map((item) => (
+                <div key={item.label} className="relative">
+                  {item.hasDropdown ? (
+                    <div className="relative">
+                      <button
+                        onClick={() => handleDropdownToggle(item.label)}
+                        className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                          item.current
+                            ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue bg-gray-100 dark:bg-gray-700'
+                            : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue hover:bg-gray-100 dark:hover:bg-gray-700'
+                        }`}
+                      >
+                        {item.label}
+                        <ChevronDown className="ml-1 h-4 w-4" />
+                      </button>
+                      
+                      {openDropdown === item.label && (
+                        <div className="absolute left-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-50 border border-gray-200 dark:border-gray-700">
+                          {item.dropdownItems?.map((dropdownItem) => (
+                            <Link
+                              key={dropdownItem.href}
+                              to={dropdownItem.href}
+                              onClick={closeDropdown}
+                              className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue"
+                            >
+                              <span className="mr-3">{dropdownItem.icon}</span>
+                              <div className="flex-1">
+                                <div className="flex items-center">
+                                  <span>{dropdownItem.label}</span>
+                                  {dropdownItem.isPremium && (
+                                    <span className="ml-2 px-2 py-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-medium rounded-full">
+                                      Premium
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                        item.current
+                          ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue bg-gray-100 dark:bg-gray-700'
+                          : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue hover:bg-gray-100 dark:hover:bg-gray-700'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Right side controls */}
+            <div className="hidden md:flex md:items-center md:ml-1 md:space-x-1">
+              <LanguageSwitcher variant="icon" />
+              <ThemeToggle />
+              <div className="ml-1" data-tour="user-menu">
+                <UserMenu />
+              </div>
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden flex items-center">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-vendorsoluce-navy"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="block h-6 w-6" />
+                ) : (
+                  <Menu className="block h-6 w-6" />
+                )}
+              </button>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+
+        {/* Mobile menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {primaryNav.map((item) => (
+                <div key={item.label}>
+                  {item.hasDropdown ? (
+                    <div>
+                      <button
+                        onClick={() => handleDropdownToggle(`mobile-${item.label}`)}
+                        className={`w-full text-left flex items-center justify-between px-3 py-2 rounded-md text-base font-medium ${
+                          item.current
+                            ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue bg-gray-100 dark:bg-gray-700'
+                            : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue hover:bg-gray-100 dark:hover:bg-gray-700'
+                        }`}
+                      >
+                        {item.label}
+                        <ChevronDown className={`h-4 w-4 transition-transform ${
+                          openDropdown === `mobile-${item.label}` ? 'rotate-180' : ''
+                        }`} />
+                      </button>
+                      
+                      {openDropdown === `mobile-${item.label}` && (
+                        <div className="pl-4 mt-2 space-y-1">
+                          {item.dropdownItems?.map((dropdownItem) => (
+                            <Link
+                              key={dropdownItem.href}
+                              to={dropdownItem.href}
+                              onClick={() => {
+                                closeDropdown();
+                                setIsMobileMenuOpen(false);
+                              }}
+                              className="flex items-center px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md"
+                            >
+                              <span className="mr-3">{dropdownItem.icon}</span>
+                              <div className="flex items-center">
+                                <span>{dropdownItem.label}</span>
+                                {dropdownItem.isPremium && (
+                                  <span className="ml-2 px-2 py-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-medium rounded-full">
+                                    Premium
+                                  </span>
+                                )}
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`block px-3 py-2 rounded-md text-base font-medium ${
+                        item.current
+                          ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue bg-gray-100 dark:bg-gray-700'
+                          : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue hover:bg-gray-100 dark:hover:bg-gray-700'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+            
+            {/* Mobile controls */}
+            <div className="px-2 pt-2 pb-3 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <LanguageSwitcher variant="buttons" />
+                  <ThemeToggle />
+                </div>
+                <UserMenu />
+              </div>
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* App Tour */}
+      {isTourRunning && (
+        <AppTour
+          isRunning={isTourRunning}
+          onComplete={markTourComplete}
+          onSkip={markTourComplete}
+        />
+      )}
+    </>
   );
 };
 
-export default ValuePropositionSection;
+export default Navbar;
