@@ -15,15 +15,38 @@
   },
   "home": {
     "hero": {
-      "title": "Secure Your Supply Chain with Enterprise-Grade Risk Management",
-      "subtitle": "VendorSoluce empowers organizations to assess, monitor, and mitigate third-party risks with NIST SP 800-161 aligned tools.",
-      "description": "From vendor assessments to SBOM analysis, we make supply chain security accessible and actionable for teams of all sizes.",
+      "title": "Turn Vendor Risk into Competitive Advantage",
+      "subtitle": "Secure Your Supply Chain. Accelerate Your Business.",
+      "description": "Stop worrying about vendor vulnerabilities and start leveraging supply chain intelligence. VendorSoluce transforms vendor risk management from a bottleneck into a business accelerator with automated assessments and complete supply chain visibility.",
       "cta1": "Start Free Assessment",
-      "cta2": "Schedule Demo",
-      "whyChoose": "Why Choose Our Platform",
-      "benefit1": "Reduce compliance costs by up to 60%",
-      "benefit2": "Automate repetitive assessment tasks",
-      "benefit3": "Get executive-ready reports in minutes"
+      "cta2": "Schedule Live Demo",
+      
+      "benefits": {
+        "section1": {
+          "title": "70% Faster Onboarding",
+          "benefit1": "Automate vendor security assessments",
+          "benefit2": "Self-service vendor portal",
+          "benefit3": "Streamlined compliance workflows"
+        },
+        "section2": {
+          "title": "Complete Supply Chain Visibility", 
+          "benefit1": "See all vendor risks in one place",
+          "benefit2": "nth-party risk mapping",
+          "benefit3": "Real-time monitoring & alerts"
+        },
+        "section3": {
+          "title": "Always Audit-Ready",
+          "benefit1": "NIST SP 800-161 compliance",
+          "benefit2": "Automated documentation", 
+          "benefit3": "Continuous compliance tracking"
+        }
+      },
+      
+      "trustIndicators": {
+        "customers": "500+ Enterprise Customers",
+        "assessments": "10,000+ Vendors Assessed",
+        "success": "99.7% Compliance Success Rate"
+      }
     },
     "assessments": {
       "title": "Available Assessments",
