@@ -65,12 +65,13 @@ const ValuePropositionSection: React.FC = () => {
           description: 'Send CMMC and NIST Privacy Framework assessments through secure vendor portal.',
           benefits: [
             'CMMC Level 1 & 2 assessment templates',
+            'CMMC Level 1 & 2 assessment templates',
             'NIST Privacy Framework questionnaires',
             'Automated scoring and risk rating',
             'Secure evidence collection portal',
             'Real-time progress tracking and notifications'
           ],
-          cta: 'Send Assessment',
+      icon: <ShieldCheck className="h-8 w-8 text-vendorsoluce-green" />,
           link: '/vendor-assessments'
         }
       ]
@@ -79,7 +80,7 @@ const ValuePropositionSection: React.FC = () => {
       id: 'procurement',
       title: 'Procurement Teams',
       description: 'Streamline vendor selection and management with risk-based decision making tools.',
-      icon: <Building className="h-8 w-8 text-vendorsoluce-navy" />,
+      icon: <Building2 className="h-8 w-8 text-vendorsoluce-navy" />,
       challenges: [
         'Balancing cost, quality, and security in vendor selection',
         'Managing vendor relationships throughout their lifecycle',
@@ -265,7 +266,7 @@ const ValuePropositionSection: React.FC = () => {
                       <Link to={solution.link}>
                         <Button variant="primary" size="sm">
                           {solution.cta}
-                          <ChevronRight className="h-4 w-4 ml-1" />
+                          <ArrowRight className="h-4 w-4 ml-1" />
                         </Button>
                       </Link>
                     </div>

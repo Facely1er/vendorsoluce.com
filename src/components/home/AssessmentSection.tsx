@@ -3,11 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { 
-  Shield, 
-  FileCheck, 
-  BarChart3, 
-  FileJson,
-  ChevronRight
+  ShieldCheck,
+  FileSearch,
+  Users,
+  Network,
+  ArrowRight,
+  Crown
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +20,7 @@ const AssessmentSection: React.FC = () => {
       id: 'supply-chain',
       title: t('home.assessments.supplyChain.title'),
       description: t('home.assessments.supplyChain.description'),
-      icon: Shield,
+      icon: ShieldCheck,
       features: [
         t('home.assessments.supplyChain.features.0'),
         t('home.assessments.supplyChain.features.1'),
@@ -34,7 +35,7 @@ const AssessmentSection: React.FC = () => {
       id: 'sbom',
       title: t('home.assessments.sbomAnalysis.title'),
       description: t('home.assessments.sbomAnalysis.description'),
-      icon: FileJson,
+      icon: FileSearch,
       features: [
         t('home.assessments.sbomAnalysis.features.0'),
         t('home.assessments.sbomAnalysis.features.1'),
@@ -49,26 +50,29 @@ const AssessmentSection: React.FC = () => {
       id: 'vendor',
       title: t('home.assessments.vendorAssessments.title'),
       description: t('home.assessments.vendorAssessments.description'),
-      icon: BarChart3,
+      icon: Users,
       features: [
         t('home.assessments.vendorAssessments.features.0'),
         t('home.assessments.vendorAssessments.features.1'),
         t('home.assessments.vendorAssessments.features.2'),
         t('home.assessments.vendorAssessments.features.3')
       ],
-      badges: ['NIST SP 800-161', 'ISO 31000'],
+      badges: ['CMMC Level 1 & 2', 'NIST Privacy Framework', 'Premium'],
+      isPremium: true,
       buttonVariant: 'outline' as const,
-      link: '/vendor-security-assessments'
+      link: '/vendor-assessments'
     }
   ];
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-900">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">{t('home.assessments.title')}</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">
+            {t('home.assessments.title')}
+          </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            {t('home.assessments.description')}
+            {t('home.assessments.subtitle')}
           </p>
         </div>
 
@@ -84,8 +88,13 @@ const AssessmentSection: React.FC = () => {
                   {assessment.badges.map((badge, badgeIndex) => (
                     <span
                       key={badgeIndex}
-                      className="px-2 py-1 bg-gray-700 text-gray-300 text-xs rounded-md"
+                      className={`px-2 py-1 text-xs rounded-md ${
+                        badge === 'Premium' 
+                          ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-medium'
+                          : 'bg-gray-700 text-gray-300'
+                      }`}
                     >
+                      {badge === 'Premium' && <Crown className="inline h-3 w-3 mr-1" />}
                       {badge}
                     </span>
                   ))}
@@ -107,12 +116,23 @@ const AssessmentSection: React.FC = () => {
                     className="w-full"
                   >
                     {t('home.assessments.startAssessment')}
-                    <ChevronRight className="h-4 w-4 ml-2" />
+                    <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
                 </Link>
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <p className="text-gray-400 mb-4">
+            {t('home.assessments.needHelp')}
+          </p>
+          <Link to="/contact">
+            <Button variant="outline" className="border-gray-600 text-gray-300 hover:bg-gray-700">
+              {t('home.assessments.contactUs')}
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
