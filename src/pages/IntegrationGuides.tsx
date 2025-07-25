@@ -65,12 +65,12 @@ const ValuePropositionSection: React.FC = () => {
           description: 'Send CMMC and NIST Privacy Framework assessments through secure vendor portal.',
           benefits: [
             'CMMC Level 1 & 2 assessment templates',
+            'CMMC Level 1 & 2 assessment templates',
             'NIST Privacy Framework questionnaires',
             'Automated scoring and risk rating',
             'Secure evidence collection portal',
             'Real-time progress tracking and notifications'
           ],
-          cta: 'Send Assessment',
           link: '/vendor-assessments'
         }
       ]
@@ -272,6 +272,9 @@ const ValuePropositionSection: React.FC = () => {
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="w-10 h-10 bg-vendorsoluce-blue/10 dark:bg-vendorsoluce-blue/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <GitBranch className="h-5 w-5 text-vendorsoluce-blue dark:text-vendorsoluce-blue" />
+                    </div>
                     {solution.benefits.map((benefit, benefitIndex) => (
                       <div key={benefitIndex} className="flex items-start">
                         <CheckCircle className="h-4 w-4 text-vendorsoluce-green mr-2 mt-0.5 flex-shrink-0" />
@@ -281,6 +284,9 @@ const ValuePropositionSection: React.FC = () => {
                   </div>
                 </CardContent>
               </Card>
+                    <div className="w-10 h-10 bg-vendorsoluce-blue/10 dark:bg-vendorsoluce-blue/30 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <Code className="h-5 w-5 text-vendorsoluce-blue dark:text-vendorsoluce-blue" />
+                    </div>
             ))}
           </div>
         </div>
