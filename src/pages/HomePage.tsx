@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
       <AssessmentSection />
       <ValuePropositionSection />
       <FeatureSection />
-      <QuickToolsSection />
+      {/*  <QuickToolsSection /> */}
       <CTASection />
     </main>
   );
