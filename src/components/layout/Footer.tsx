@@ -3,6 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { 
   ShieldCheck, 
+  Shield,
   Building, 
   Building2,
   ArrowRight,
