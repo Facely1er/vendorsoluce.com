@@ -3,319 +3,429 @@ import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card'
 import { Button } from '../components/ui/Button';
 import { 
   Shield, 
-  Building, 
-  Building2,
-  ShieldCheck,
   Users, 
-  ArrowRight,
-  Lock, 
-  FileCheck, 
-  BarChart3, 
-  FileJson,
-  ChevronRight,
-  Target,
-  TrendingUp,
+  Plus,
+  FileCheck,
+  Clock,
+  AlertTriangle,
   CheckCircle,
-  AlertTriangle
+  Send,
+  Eye,
+  Filter,
+  Search,
+  Download,
+  BarChart3,
+  TrendingUp,
+  Crown
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useVendors } from '../hooks/useVendors';
+import CreateAssessmentModal from '../components/vendor-assessments/CreateAssessmentModal';
+import AssessmentProgressTracker from '../components/vendor-assessments/AssessmentProgressTracker';
 
-interface Stakeholder {
+interface Assessment {
   id: string;
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  challenges: string[];
-  solutions: {
-    title: string;
-    description: string;
-    benefits: string[];
-    cta: string;
-    link: string;
-  }[];
+  vendorName: string;
+  frameworkName: string;
+  status: 'pending' | 'sent' | 'in_progress' | 'completed' | 'reviewed';
+  sentDate: string | null;
+  dueDate: string | null;
+  completedDate: string | null;
+  overallScore: number | null;
+  progress: number;
+  contactEmail: string;
+  assessmentType: 'cmmc_level_1' | 'cmmc_level_2' | 'nist_privacy' | 'custom';
 }
 
-const ValuePropositionSection: React.FC = () => {
-  const [activeStakeholder, setActiveStakeholder] = useState<string>('security');
+interface Framework {
+  id: string;
+  name: string;
+  description: string;
+  questionCount: number;
+  estimatedTime: string;
+}
 
-  const stakeholders: Stakeholder[] = [
+const VendorSecurityAssessments: React.FC = () => {
+  const { vendors, loading } = useVendors();
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState<string>('all');
+  
+  // Mock assessment data - in a real app this would come from the database
+  const [assessments, setAssessments] = useState<Assessment[]>([
     {
-      id: 'security',
-      title: 'Security Teams',
-      description: 'Comprehensive tools for identifying, assessing, and mitigating supply chain security risks.',
-      icon: <Shield className="h-8 w-8 text-vendorsoluce-green" />,
-      challenges: [
-        'Limited visibility into supplier security practices',
-        'Time-consuming manual assessment processes',
-        'Difficulty tracking vulnerabilities across software components',
-        'Complex compliance requirements like NIST SP 800-161'
-      ],
-      solutions: [
-        {
-          title: 'Automated SBOM Analysis',
-          description: 'Instantly analyze software components for vulnerabilities and license compliance.',
-          benefits: [
-            'Identify critical vulnerabilities in minutes',
-            'Track open source licenses automatically',
-            'Generate compliance reports for audits',
-            'Monitor component health continuously'
-          ],
-          cta: 'Analyze SBOM Now',
-          link: '/sbom-analyzer'
-        },
-        {
-          title: 'Vendor Security Assessments',
-          description: 'Send CMMC and NIST Privacy Framework assessments through secure vendor portal.',
-          benefits: [
-            'CMMC Level 1 & 2 assessment templates',
-            'CMMC Level 1 & 2 assessment templates',
-            'CMMC Level 1 & 2 assessment templates',
-            'CMMC Level 1 & 2 assessment templates',
-            'NIST Privacy Framework questionnaires',
-            'Automated scoring and risk rating',
-            'Secure evidence collection portal',
-            'Real-time progress tracking and notifications'
-          ],
-          cta: 'Start Assessment',
-          link: '/vendor-assessments'
-        }
-      ]
+      id: 'assess-001',
+      vendorName: 'TechCorp Solutions',
+      frameworkName: 'CMMC Level 2',
+      status: 'in_progress',
+      sentDate: '2025-01-10',
+      dueDate: '2025-01-25',
+      completedDate: null,
+      overallScore: null,
+      progress: 65,
+      contactEmail: 'security@techcorp.com',
+      assessmentType: 'cmmc_level_2'
     },
     {
-      id: 'procurement',
-      title: 'Procurement Teams',
-      description: 'Streamline vendor selection and management with risk-based decision making tools.',
-      icon: <Building2 className="h-8 w-8 text-vendorsoluce-navy" />,
-      challenges: [
-        'Balancing cost, quality, and security in vendor selection',
-        'Managing vendor relationships throughout their lifecycle',
-        'Ensuring contract terms include appropriate security clauses',
-        'Demonstrating due diligence for audit purposes'
-      ],
-      solutions: [
-        {
-          title: 'Vendor Risk Calculator',
-          description: 'Calculate preliminary risk scores to inform vendor selection decisions.',
-          benefits: [
-            'Standardized risk assessment criteria',
-            'Immediate risk scoring for new vendors',
-            'Data-driven vendor comparison',
-            'Integration with procurement workflows'
-          ],
-          cta: 'Calculate Risk',
-          link: '/tools/vendor-risk-calculator'
-        },
-        {
-          title: 'Vendor Risk Dashboard',
-          description: 'Monitor and manage your vendor portfolio with centralized risk visibility.',
-          benefits: [
-            'Real-time risk monitoring',
-            'Automated compliance tracking',
-            'Contract renewal alerts',
-            'Executive reporting dashboards'
-          ],
-          cta: 'View Dashboard',
-          link: '/vendor-risk-dashboard'
-        }
-      ]
+      id: 'assess-002',
+      vendorName: 'CloudSecure Inc',
+      frameworkName: 'NIST Privacy Framework',
+      status: 'completed',
+      sentDate: '2025-01-05',
+      dueDate: '2025-01-20',
+      completedDate: '2025-01-18',
+      overallScore: 85,
+      progress: 100,
+      contactEmail: 'compliance@cloudsecure.com',
+      assessmentType: 'nist_privacy'
     },
     {
-      id: 'compliance',
-      title: 'Compliance Officers',
-      description: 'Ensure adherence to regulatory requirements with built-in compliance frameworks.',
-      icon: <Lock className="h-8 w-8 text-vendorsoluce-teal" />,
-      challenges: [
-        'Keeping up with evolving regulatory requirements',
-        'Documenting compliance efforts for audits',
-        'Ensuring vendors meet contractual obligations',
-        'Managing compliance across multiple frameworks'
-      ],
-      solutions: [
-        {
-          title: 'NIST SP 800-161 Assessment',
-          description: 'Comprehensive supply chain risk assessment aligned with federal standards.',
-          benefits: [
-            'Pre-built NIST control templates',
-            'Automated compliance scoring',
-            'Audit-ready documentation',
-            'Gap analysis and recommendations'
-          ],
-          cta: 'Start Assessment',
-          link: '/supply-chain-assessment'
-        },
-        {
-          title: 'Compliance Templates',
-          description: 'Access pre-built templates for common compliance scenarios.',
-          benefits: [
-            'Federal compliance templates',
-            'Industry-specific questionnaires',
-            'Risk assessment matrices',
-            'Executive summary templates'
-          ],
-          cta: 'Download Templates',
-          link: '/templates'
-        }
-      ]
+      id: 'assess-003',
+      vendorName: 'DevTools Pro',
+      frameworkName: 'CMMC Level 1',
+      status: 'sent',
+      sentDate: '2025-01-12',
+      dueDate: '2025-01-27',
+      completedDate: null,
+      overallScore: null,
+      progress: 0,
+      contactEmail: 'security@devtools.com',
+      assessmentType: 'cmmc_level_1'
+    }
+  ]);
+
+  // Available assessment frameworks
+  const frameworks: Framework[] = [
+    {
+      id: 'cmmc_level_1',
+      name: 'CMMC Level 1',
+      description: 'Basic cybersecurity hygiene practices for protecting Federal Contract Information (FCI)',
+      questionCount: 17,
+      estimatedTime: '1-2 hours'
     },
     {
-      id: 'executives',
-      title: 'Executive Leadership',
-      description: 'Strategic insights and reporting to make informed decisions about supply chain risks.',
-      icon: <Users className="h-8 w-8 text-vendorsoluce-blue" />,
-      challenges: [
-        'Understanding supply chain risk exposure',
-        'Making informed investment decisions',
-        'Demonstrating risk management to stakeholders',
-        'Balancing operational efficiency with security'
-      ],
-      solutions: [
-        {
-          title: 'Executive Dashboards',
-          description: 'High-level insights into your organization\'s supply chain risk posture.',
-          benefits: [
-            'Key risk metrics and trends',
-            'Vendor portfolio health overview',
-            'Compliance status summaries',
-            'Strategic risk recommendations'
-          ],
-          cta: 'View Dashboard',
-          link: '/dashboard'
-        },
-        {
-          title: 'Risk Reporting',
-          description: 'Generate executive-level reports for board meetings and stakeholder updates.',
-          benefits: [
-            'Automated report generation',
-            'Customizable metrics and KPIs',
-            'Trend analysis and forecasting',
-            'Stakeholder-ready presentations'
-          ],
-          cta: 'Generate Report',
-          link: '/vendor-risk-dashboard'
-        }
-      ]
+      id: 'cmmc_level_2',
+      name: 'CMMC Level 2',
+      description: 'Intermediate practices for protecting Controlled Unclassified Information (CUI)',
+      questionCount: 110,
+      estimatedTime: '4-6 hours'
+    },
+    {
+      id: 'nist_privacy',
+      name: 'NIST Privacy Framework',
+      description: 'Comprehensive privacy risk management assessment',
+      questionCount: 45,
+      estimatedTime: '2-3 hours'
     }
   ];
 
-  const activeStakeholderData = stakeholders.find(s => s.id === activeStakeholder) || stakeholders[0];
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'completed': return 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20';
+      case 'in_progress': return 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20';
+      case 'sent': return 'text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-900/20';
+      case 'pending': return 'text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-900/20';
+      case 'reviewed': return 'text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20';
+      default: return 'text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-900/20';
+    }
+  };
 
-  return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Designed for Every Supply Chain Stakeholder
-          </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            VendorSoluce addresses the unique challenges faced by different teams in your organization, 
-            providing tailored solutions that deliver measurable value to each stakeholder.
-          </p>
-        </div>
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'completed': return <CheckCircle className="h-4 w-4" />;
+      case 'in_progress': return <Clock className="h-4 w-4" />;
+      case 'sent': return <Send className="h-4 w-4" />;
+      case 'pending': return <FileCheck className="h-4 w-4" />;
+      case 'reviewed': return <Eye className="h-4 w-4" />;
+      default: return <Clock className="h-4 w-4" />;
+    }
+  };
 
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {stakeholders.map((stakeholder) => (
-            <button
-              key={stakeholder.id}
-              onClick={() => setActiveStakeholder(stakeholder.id)}
-              className={`flex items-center px-4 py-2 rounded-lg font-medium transition-all ${
-                activeStakeholder === stakeholder.id
-                  ? 'bg-vendorsoluce-green text-white shadow-md'
-                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
-              }`}
-            >
-              <span className="mr-2">{stakeholder.icon}</span>
-              <span className="ml-2">{stakeholder.title}</span>
-            </button>
-          ))}
-        </div>
+  const filteredAssessments = assessments.filter(assessment => {
+    const matchesSearch = assessment.vendorName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         assessment.frameworkName.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = statusFilter === 'all' || assessment.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
-        {/* Active Stakeholder Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Challenges */}
-          <Card className="lg:col-span-1">
-            <CardHeader>
-              <CardTitle className="flex items-center  text-gray-900 dark:text-white">
-                <AlertTriangle className="h-5 w-5 mr-2 text-orange-500" />
-                Common Challenges
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">{activeStakeholderData.description}</p>
-              <ul className="space-y-3">
-                {activeStakeholderData.challenges.map((challenge, index) => (
-                  <li key={index} className="flex items-start">
-                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <span className="text-gray-700 dark:text-gray-300 text-sm">{challenge}</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
+  const handleCreateSuccess = () => {
+    setShowCreateModal(false);
+    // In a real app, you would refetch assessments here
+  };
 
-          {/* Solutions */}
-          <div className="lg:col-span-2 space-y-6">
-            {activeStakeholderData.solutions.map((solution, index) => (
-              <Card key={index} className="border-l-4 border-l-vendorsoluce-green">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                        {solution.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">
-                        {solution.description}
-                      </p>
-                    </div>
-                    <div className="ml-4">
-                      <Link to={solution.link}>
-                        <Button variant="primary" size="sm">
-                          {solution.cta}
-                          <ArrowRight className="h-4 w-4 ml-1" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {solution.benefits.map((benefit, benefitIndex) => (
-                      <div key={benefitIndex} className="flex items-start">
-                        <CheckCircle className="h-4 w-4 text-vendorsoluce-green mr-2 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-gray-700 dark:text-gray-300">{benefit}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Call to Action */}
-        <div className="mt-12 text-center">
-          <div className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green rounded-lg p-8 text-white">
-            <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Supply Chain Security?</h3>
-            <p className="text-xl text-gray-100 mb-6">
-              Join organizations worldwide who trust VendorSoluce to secure their supply chains and meet compliance requirements.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/supply-chain-assessment">
-                <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100">
-                  <Target className="h-5 w-5 mr-2" />
-                  Start Free Assessment
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20">
-                  <Users className="h-5 w-5 mr-2" />
-                  Schedule Demo
-                </Button>
-              </Link>
-            </div>
-          </div>
+  if (loading) {
+    return (
+      <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="flex items-center justify-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-vendorsoluce-green"></div>
         </div>
       </div>
-    </section>
+    );
+  }
+
+  return (
+    <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      {/* Header */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="flex items-center mb-2">
+              <Crown className="h-6 w-6 text-yellow-500 mr-2" />
+              <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-medium px-2 py-1 rounded-full">
+                Premium Feature
+              </span>
+            </div>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Vendor Security Assessments
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl">
+              Send CMMC and NIST Privacy Framework assessments to your vendors through a secure portal. 
+              Track progress, collect evidence, and automate compliance scoring.
+            </p>
+          </div>
+          <Button 
+            variant="primary" 
+            size="lg"
+            onClick={() => setShowCreateModal(true)}
+            className="flex items-center"
+          >
+            <Plus className="h-5 w-5 mr-2" />
+            Create Assessment
+          </Button>
+        </div>
+      </div>
+
+      {/* Premium Features Showcase */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <Card className="border-l-4 border-l-yellow-500">
+          <CardContent className="p-6">
+            <div className="flex items-center mb-4">
+              <Shield className="h-8 w-8 text-yellow-500 mr-3" />
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">CMMC Assessments</h3>
+            </div>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
+              Pre-built CMMC Level 1 & 2 assessment templates with automated scoring and evidence collection.
+            </p>
+            <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li>• DoD-aligned question sets</li>
+              <li>• Automated compliance scoring</li>
+              <li>• Evidence collection portal</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card className="border-l-4 border-l-blue-500">
+          <CardContent className="p-6">
+            <div className="flex items-center mb-4">
+              <Users className="h-8 w-8 text-blue-500 mr-3" />
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">Vendor Portal</h3>
+            </div>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
+              Secure assessment portal for vendors to complete questionnaires and upload evidence.
+            </p>
+            <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li>• Secure access with unique links</li>
+              <li>• Progress saving and resume</li>
+              <li>• Automated notifications</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card className="border-l-4 border-l-green-500">
+          <CardContent className="p-6">
+            <div className="flex items-center mb-4">
+              <BarChart3 className="h-8 w-8 text-green-500 mr-3" />
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">Analytics & Reporting</h3>
+            </div>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
+              Advanced analytics and executive reporting for vendor compliance status.
+            </p>
+            <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+              <li>• Compliance trend analysis</li>
+              <li>• Executive dashboards</li>
+              <li>• Automated report generation</li>
+            </ul>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Progress Tracker */}
+      <AssessmentProgressTracker assessments={assessments} />
+
+      {/* Filters and Search */}
+      <Card className="mb-6">
+        <CardContent className="p-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div className="flex flex-col md:flex-row gap-4 flex-1">
+              <div className="relative">
+                <Search className="h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search assessments..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white w-full md:w-64"
+                />
+              </div>
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              >
+                <option value="all">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="sent">Sent</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+                <option value="reviewed">Reviewed</option>
+              </select>
+            </div>
+            <Button variant="outline" size="sm">
+              <Download className="h-4 w-4 mr-2" />
+              Export Report
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Assessments Table */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <span>Vendor Assessments</span>
+            <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+              {filteredAssessments.length} assessments
+            </span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          {filteredAssessments.length === 0 ? (
+            <div className="text-center py-12">
+              <Shield className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                No assessments found
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
+                {searchTerm || statusFilter !== 'all' 
+                  ? 'No assessments match your current filters.' 
+                  : 'Get started by creating your first vendor security assessment.'}
+              </p>
+              {!searchTerm && statusFilter === 'all' && (
+                <Button variant="primary" onClick={() => setShowCreateModal(true)}>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Create First Assessment
+                </Button>
+              )}
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 dark:bg-gray-800">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      Vendor
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      Framework
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      Status
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      Progress
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      Due Date
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      Score
+                    </th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                  {filteredAssessments.map((assessment) => (
+                    <tr key={assessment.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div>
+                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                            {assessment.vendorName}
+                          </div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">
+                            {assessment.contactEmail}
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className="text-sm text-gray-900 dark:text-white">
+                          {assessment.frameworkName}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(assessment.status)}`}>
+                          {getStatusIcon(assessment.status)}
+                          <span className="ml-1 capitalize">{assessment.status.replace('_', ' ')}</span>
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mr-2">
+                            <div 
+                              className="bg-vendorsoluce-green h-2 rounded-full" 
+                              style={{ width: `${assessment.progress}%` }}
+                            />
+                          </div>
+                          <span className="text-sm text-gray-900 dark:text-white font-medium">
+                            {assessment.progress}%
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                        {assessment.dueDate ? new Date(assessment.dueDate).toLocaleDateString() : '-'}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {assessment.overallScore ? (
+                          <span className="text-sm font-medium text-gray-900 dark:text-white">
+                            {assessment.overallScore}%
+                          </span>
+                        ) : (
+                          <span className="text-sm text-gray-500 dark:text-gray-400">-</span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <div className="flex justify-end space-x-2">
+                          <Link to={`/vendor-assessments/${assessment.id}`}>
+                            <Button variant="ghost" size="sm">
+                              <Eye className="h-4 w-4" />
+                            </Button>
+                          </Link>
+                          <Button variant="ghost" size="sm">
+                            <Send className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Create Assessment Modal */}
+      {showCreateModal && (
+        <CreateAssessmentModal
+          vendors={vendors}
+          frameworks={frameworks}
+          onClose={() => setShowCreateModal(false)}
+          onSuccess={handleCreateSuccess}
+        />
+      )}
+    </main>
   );
 };
 
-export default ValuePropositionSection;
+export default VendorSecurityAssessments;
