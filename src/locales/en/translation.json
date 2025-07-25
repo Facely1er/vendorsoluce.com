@@ -8,23 +8,131 @@
     "contact": "Contact",
     "dashboard": "Dashboard",
     "signIn": "Sign In",
+    "signUp": "Sign Up",
     "signOut": "Sign Out",
-    "profile": "Profile"
+    "profile": "Profile",
+    "account": "Account Settings",
+    "logout": "Logout"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "add": "Add",
+    "remove": "Remove",
+    "upload": "Upload",
+    "download": "Download",
+    "export": "Export",
+    "import": "Import",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "refresh": "Refresh",
+    "previous": "Previous",
+    "next": "Next",
+    "submit": "Submit",
+    "close": "Close",
+    "back": "Back",
+    "continue": "Continue",
+    "finish": "Finish",
+    "yes": "Yes",
+    "no": "No",
+    "partial": "Partial",
+    "na": "N/A",
+    "required": "Required",
+    "optional": "Optional",
+    "all": "All",
+    "none": "None",
+    "select": "Select",
+    "selectAll": "Select All",
+    "clearAll": "Clear All",
+    "showing": "Showing",
+    "of": "of",
+    "results": "results",
+    "noResults": "No results found",
+    "tryAgain": "Try Again",
+    "retry": "Retry"
+  },
+  "auth": {
+    "signIn": {
+      "title": "Sign in to VendorSoluce",
+      "subtitle": "Enter your credentials to access your account",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot password?",
+      "signInButton": "Sign in",
+      "signingIn": "Signing in...",
+      "noAccount": "Don't have an account?",
+      "signUpLink": "Sign up",
+      "invalidCredentials": "Invalid email or password. Please try again."
+    },
+    "signUp": {
+      "title": "Create an Account",
+      "subtitle": "Join VendorSoluce to manage your supply chain security",
+      "fullName": "Full Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "createButton": "Create Account",
+      "creating": "Creating account...",
+      "haveAccount": "Already have an account?",
+      "signInLink": "Sign in",
+      "passwordMismatch": "Passwords do not match",
+      "passwordTooShort": "Password must be at least 6 characters long",
+      "registrationFailed": "Registration failed. This email may already be in use."
+    },
+    "profile": "Profile",
+    "account": "Account",
+    "login": "Login",
+    "logout": "Logout"
   },
   "home": {
     "hero": {
       "title": "Secure Your Supply Chain with Confidence",
       "subtitle": "Enterprise-grade supply chain risk management and vendor security assessment platform",
       "description": "VendorSoluce helps organizations identify, assess, and mitigate supply chain security risks through automated SBOM analysis, vendor assessments, and NIST-aligned compliance frameworks.",
-      "cta": {
-        "primary": "Start Free Assessment",
-        "secondary": "Schedule Demo"
+      "cta1": "Start Free Assessment",
+      "cta2": "Schedule Demo",
+      "whyChoose": "Why Choose VendorSoluce?",
+      "benefit1": "NIST SP 800-161 Aligned",
+      "benefit2": "Automated Risk Scoring",
+      "benefit3": "Federal Compliance Ready"
+    },
+    "assessments": {
+      "title": "Comprehensive Risk Assessments",
+      "description": "Evaluate your supply chain security posture with industry-standard frameworks and automated analysis tools.",
+      "startAssessment": "Start Assessment"
+    },
+    "features": {
+      "title": "Powerful Supply Chain Security Features",
+      "description": "Comprehensive tools designed to protect your organization from supply chain threats and ensure regulatory compliance.",
+      "feature1": {
+        "title": "Supply Chain Risk Assessment",
+        "description": "NIST SP 800-161 aligned assessments to evaluate your supply chain security posture."
       },
-      "benefits": {
-        "compliance": "NIST SP 800-161 Aligned",
-        "automation": "Automated Risk Scoring",
-        "federal": "Federal Compliance Ready"
+      "feature2": {
+        "title": "SBOM Analysis",
+        "description": "Automated analysis of software components for vulnerabilities and license compliance."
+      },
+      "feature3": {
+        "title": "Vendor Risk Management",
+        "description": "Comprehensive vendor risk tracking with automated scoring and compliance monitoring."
+      },
+      "feature4": {
+        "title": "Compliance Automation",
+        "description": "Streamlined compliance workflows with automated reporting and documentation."
       }
+    },
+    "quickTools": {
+      "title": "Quick Assessment Tools",
+      "description": "Get immediate insights with our rapid assessment and analysis tools designed for busy security professionals."
     },
     "stakeholders": {
       "title": "Designed for Every Supply Chain Stakeholder",
@@ -175,6 +283,1293 @@
           }
         }
       }
+    },
+    "cta": {
+      "title": "Start Securing Your Supply Chain Today",
+      "description": "Join thousands of organizations worldwide who trust VendorSoluce for their supply chain security needs."
     }
+  },
+  "assessment": {
+    "title": "Supply Chain Risk Assessment",
+    "subtitle": "Evaluate your organization's supply chain security posture based on NIST SP 800-161",
+    "backToHome": "Back to Home",
+    "overallScore": "Overall Score",
+    "score": "Score",
+    "complete": "Complete",
+    "incomplete": "Incomplete",
+    "current": "Current",
+    "view": "View",
+    "previousSection": "Previous Section",
+    "nextSection": "Next Section",
+    "viewResults": "View Results",
+    "startAssessment": "Start Assessment",
+    "continueAssessment": "Continue Assessment",
+    "saveProgress": "Save Progress",
+    "sections": {
+      "supplier": {
+        "title": "Supplier Risk Management",
+        "description": "Assess your organization's approach to managing supplier-related risks",
+        "questions": {
+          "sr1": {
+            "question": "Does your organization have documented policies and procedures for supplier risk management?",
+            "guidance": "This includes policies for supplier selection, evaluation, monitoring, and management throughout the relationship lifecycle."
+          },
+          "sr2": {
+            "question": "Do you perform risk assessments of suppliers before establishing business relationships?",
+            "guidance": "Risk assessments should evaluate supplier security practices, financial stability, and operational capabilities."
+          },
+          "sr3": {
+            "question": "Are supplier contracts required to include security requirements and right-to-audit clauses?",
+            "guidance": "Contracts should specify security requirements, compliance obligations, and provide audit rights."
+          },
+          "sr4": {
+            "question": "Do you monitor suppliers on an ongoing basis for changes in risk profile?",
+            "guidance": "Ongoing monitoring should include regular reassessments, security notifications, and performance reviews."
+          }
+        }
+      },
+      "threat": {
+        "title": "Supply Chain Threat Management",
+        "description": "Evaluate your organization's capability to identify and respond to supply chain threats",
+        "questions": {
+          "tm1": {
+            "question": "Does your organization actively monitor for supply chain threats and vulnerabilities?",
+            "guidance": "This includes monitoring threat intelligence feeds, vulnerability databases, and security advisories."
+          },
+          "tm2": {
+            "question": "Do you have processes to validate the integrity and authenticity of received products/services?",
+            "guidance": "Validation should include verification of product authenticity, integrity checks, and provenance tracking."
+          },
+          "tm3": {
+            "question": "Are there documented procedures for responding to supply chain security incidents?",
+            "guidance": "Procedures should cover incident detection, notification, containment, and recovery specific to supply chain events."
+          },
+          "tm4": {
+            "question": "Do you share and receive threat intelligence with suppliers and industry partners?",
+            "guidance": "Information sharing should include relevant threat indicators, attack patterns, and mitigation strategies."
+          }
+        }
+      },
+      "vulnerability": {
+        "title": "Vulnerability Management",
+        "description": "Assess your approach to managing vulnerabilities in supply chain components",
+        "questions": {
+          "vm1": {
+            "question": "Do you maintain software bills of materials (SBOMs) for critical systems and applications?",
+            "guidance": "SBOMs should include all software components, versions, dependencies, and licensing information."
+          },
+          "vm2": {
+            "question": "Are suppliers required to provide vulnerability notifications and security updates?",
+            "guidance": "Requirements should include timely notification of vulnerabilities and provision of security patches."
+          },
+          "vm3": {
+            "question": "Do you perform vulnerability scanning of supplier-provided software and systems?",
+            "guidance": "Scanning should be performed before deployment and on an ongoing basis for continuous monitoring."
+          },
+          "vm4": {
+            "question": "Is there a documented process for prioritizing and remediating supply chain vulnerabilities?",
+            "guidance": "Process should include risk assessment, prioritization criteria, and remediation timelines."
+          }
+        }
+      },
+      "information": {
+        "title": "Information Sharing",
+        "description": "Evaluate information sharing practices with supply chain partners",
+        "questions": {
+          "is1": {
+            "question": "Do you have formal agreements for sharing security information with key suppliers?",
+            "guidance": "Agreements should define what information is shared, how it's protected, and usage restrictions."
+          },
+          "is2": {
+            "question": "Are suppliers required to notify you of security incidents that could affect your organization?",
+            "guidance": "Notification requirements should include incident types, timeframes, and communication channels."
+          },
+          "is3": {
+            "question": "Do you participate in industry information sharing organizations or communities?",
+            "guidance": "Participation may include ISACs, industry groups, or government information sharing initiatives."
+          },
+          "is4": {
+            "question": "Is sensitive information properly classified and protected when shared with suppliers?",
+            "guidance": "Protection should include classification schemes, access controls, and handling requirements."
+          }
+        }
+      },
+      "incident": {
+        "title": "Incident Response",
+        "description": "Assess your organization's incident response capabilities for supply chain events",
+        "questions": {
+          "ir1": {
+            "question": "Does your incident response plan specifically address supply chain security incidents?",
+            "guidance": "Plan should include procedures for supplier-related incidents, notification processes, and coordination mechanisms."
+          },
+          "ir2": {
+            "question": "Are suppliers required to have incident response capabilities and plans?",
+            "guidance": "Supplier requirements should include documented incident response procedures and testing requirements."
+          },
+          "ir3": {
+            "question": "Do you conduct regular exercises or tests of supply chain incident response procedures?",
+            "guidance": "Exercises should test coordination with suppliers, communication procedures, and recovery capabilities."
+          },
+          "ir4": {
+            "question": "Is there a process for conducting post-incident reviews of supply chain security events?",
+            "guidance": "Reviews should identify lessons learned, process improvements, and preventive measures."
+          }
+        }
+      },
+      "lifecycle": {
+        "title": "Supplier Lifecycle Management",
+        "description": "Evaluate management of suppliers throughout their relationship lifecycle",
+        "questions": {
+          "sl1": {
+            "question": "Do you have documented procedures for supplier onboarding that include security requirements?",
+            "guidance": "Onboarding should include security assessments, contract negotiations, and baseline establishment."
+          },
+          "sl2": {
+            "question": "Are suppliers regularly reassessed for security compliance and risk changes?",
+            "guidance": "Reassessments should be risk-based with frequency determined by supplier criticality and risk level."
+          },
+          "sl3": {
+            "question": "Do you have procedures for managing supplier relationship changes and terminations?",
+            "guidance": "Procedures should address contract modifications, service transitions, and secure data return/destruction."
+          },
+          "sl4": {
+            "question": "Is supplier performance monitored against defined security metrics and SLAs?",
+            "guidance": "Monitoring should include security performance indicators, compliance metrics, and service level tracking."
+          }
+        }
+      }
+    }
+  },
+  "sbom": {
+    "title": "SBOM Analyzer",
+    "description": "Upload and analyze Software Bills of Materials to identify vulnerabilities, license issues, and compliance concerns in your software supply chain.",
+    "upload": {
+      "title": "Upload SBOM",
+      "dropHere": "Drop your SBOM file here",
+      "browseFiles": "Browse Files",
+      "supportedFormats": "Supports SPDX, CycloneDX, and plain text formats",
+      "analyzing": "Analyzing SBOM...",
+      "noSbom": "Upload a SBOM file to get started",
+      "uploadPrompt": "Select a SBOM file to analyze for vulnerabilities and compliance issues."
+    },
+    "results": {
+      "title": "Analysis Results",
+      "components": "Components",
+      "vulnerabilities": "Vulnerabilities",
+      "licenses": "Licenses",
+      "license": "License",
+      "supportedFormats": "Supported Formats"
+    }
+  },
+  "vendorRisk": {
+    "title": "Vendor Risk Dashboard",
+    "description": "Monitor and manage third-party vendor risks with comprehensive assessment tools and real-time risk monitoring.",
+    "totalVendors": "Total Vendors",
+    "monitoredVendors": "Monitored Vendors",
+    "riskOverview": "Risk Overview",
+    "highRisk": "High Risk",
+    "mediumRisk": "Medium Risk",
+    "lowRisk": "Low Risk",
+    "complianceStatus": "Compliance Status",
+    "compliant": "Compliant",
+    "partial": "Partial",
+    "nonCompliant": "Non-Compliant",
+    "vendorOverview": "Vendor Overview",
+    "addNewVendor": "Add New Vendor",
+    "table": {
+      "vendor": "Vendor",
+      "riskScore": "Risk Score",
+      "riskLevel": "Risk Level",
+      "complianceStatus": "Compliance Status",
+      "lastAssessment": "Last Assessment"
+    },
+    "riskScoring": {
+      "title": "Risk Scoring Guide",
+      "description": "Understanding how vendor risk scores are calculated and what they mean for your organization.",
+      "lowRisk": "Low Risk (80-100)",
+      "mediumRisk": "Medium Risk (60-79)",
+      "highRisk": "High Risk (40-59)",
+      "criticalRisk": "Critical Risk (0-39)",
+      "excellent": "Excellent security posture",
+      "acceptable": "Acceptable with monitoring",
+      "concerning": "Requires attention",
+      "unacceptable": "Immediate action required"
+    },
+    "actions": {
+      "title": "Recommended Actions",
+      "criticalRisk": {
+        "title": "Critical Risk Vendors",
+        "description": "Require immediate remediation or consideration of alternative vendors."
+      },
+      "highRisk": {
+        "title": "High Risk Vendors",
+        "description": "Implement additional controls and increase monitoring frequency."
+      },
+      "mediumRisk": {
+        "title": "Medium Risk Vendors",
+        "description": "Regular monitoring and periodic reassessment recommended."
+      },
+      "lowRisk": {
+        "title": "Low Risk Vendors",
+        "description": "Continue standard monitoring and annual reassessments."
+      }
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "overview": "Here's an overview of your supply chain security posture",
+    "quickActions": "Quick Actions",
+    "recentActivity": "Recent Activity",
+    "riskDistribution": "Risk Distribution",
+    "metrics": {
+      "totalVendors": "Total Vendors",
+      "highRiskVendors": "High Risk Vendors",
+      "totalVulnerabilities": "Total Vulnerabilities",
+      "assessments": "Assessments"
+    },
+    "actions": {
+      "addVendor": "Add Vendor",
+      "runAssessment": "Run Assessment",
+      "analyzeSbom": "Analyze SBOM",
+      "viewReports": "View Reports"
+    }
+  },
+  "quickTools": {
+    "sbomScan": {
+      "title": "SBOM Quick Scan",
+      "description": "Rapidly scan Software Bills of Materials for immediate security insights and vulnerability identification.",
+      "action": "Quick Scan",
+      "scanComplete": "Scan complete! Your SBOM has been analyzed.",
+      "noVulnerabilities": "No critical vulnerabilities detected in your SBOM.",
+      "fullAnalysis": "Run Full Analysis",
+      "formatInfo": "Upload SPDX, CycloneDX, or plain text component lists for instant analysis."
+    },
+    "riskCalculator": {
+      "title": "Vendor Risk Calculator",
+      "description": "Calculate preliminary vendor risk scores using standardized assessment criteria to support procurement decisions.",
+      "action": "Calculate Risk",
+      "inputTitle": "Risk Assessment Input",
+      "vendorName": "Vendor Name",
+      "vendorNamePlaceholder": "Enter vendor or company name",
+      "riskFactors": "Risk Factors",
+      "lowRisk": "Low Risk",
+      "highRisk": "High Risk",
+      "calculate": "Calculate Risk Score",
+      "resultsTitle": "Risk Assessment Results",
+      "vendorRiskScore": "Vendor Risk Score",
+      "recommendation": "Recommendation",
+      "viewDashboard": "View Full Dashboard",
+      "howToUse": "How to Use",
+      "step1": "Enter the vendor name you want to assess",
+      "step2": "Rate each risk factor on a scale of 1-5",
+      "step3": "Click calculate to get an immediate risk score",
+      "disclaimer": "This calculator provides preliminary risk estimates. Conduct full assessments for critical vendors.",
+      "factors": {
+        "dataAccess": {
+          "name": "Data Access Level",
+          "description": "Level of access to sensitive data or systems"
+        },
+        "criticality": {
+          "name": "Business Criticality",
+          "description": "How critical this vendor is to business operations"
+        },
+        "securityControls": {
+          "name": "Security Controls",
+          "description": "Quality and maturity of vendor's security controls"
+        },
+        "compliance": {
+          "name": "Compliance Status",
+          "description": "Vendor's compliance with relevant standards and regulations"
+        },
+        "systemExposure": {
+          "name": "System Exposure",
+          "description": "Level of integration with internal systems"
+        }
+      },
+      "results": {
+        "low": "This vendor presents low risk. Standard monitoring procedures are sufficient.",
+        "medium": "This vendor presents moderate risk. Enhanced monitoring and regular assessments recommended.",
+        "high": "This vendor presents high risk. Implement additional controls and frequent monitoring.",
+        "critical": "This vendor presents critical risk. Immediate action required - consider alternative vendors."
+      }
+    },
+    "nistChecklist": {
+      "title": "NIST 800-161 Checklist",
+      "description": "Quick compliance check against NIST SP 800-161 supply chain risk management controls for rapid assessment.",
+      "action": "Check Compliance",
+      "checklistTitle": "NIST SP 800-161 Control Checklist",
+      "instructions": "Review each control and mark whether your organization has implemented it. This provides a quick compliance overview.",
+      "checkCompliance": "Check Compliance Status",
+      "complianceResults": "Compliance Results",
+      "implemented": "Controls Implemented",
+      "goodCompliance": "Good Compliance Posture",
+      "improvementNeeded": "Improvement Needed",
+      "compliantMessage": "Your organization shows strong alignment with NIST SP 800-161 controls.",
+      "nonCompliantMessage": "Consider conducting a full assessment to identify improvement areas.",
+      "fullAssessment": "Run Full Assessment",
+      "downloadReport": "Download Report",
+      "aboutTitle": "About NIST SP 800-161",
+      "aboutText1": "NIST Special Publication 800-161 provides guidance for managing cyber supply chain risks in federal information systems and organizations.",
+      "aboutText2": "This checklist covers key control areas to help you quickly assess your current compliance posture.",
+      "keyAreas": "Key Control Areas:",
+      "areas": {
+        "governance": "Supply Chain Risk Management Governance",
+        "supplierManagement": "Supplier Assessment and Management",
+        "productSecurity": "Product and Service Security",
+        "incidentResponse": "Supply Chain Incident Response",
+        "informationSharing": "Information Sharing and Collaboration"
+      },
+      "complianceLevels": {
+        "high": "High Compliance",
+        "moderate": "Moderate Compliance",
+        "low": "Low Compliance"
+      },
+      "items": {
+        "scrm1": "Establish supply chain risk management policy and procedures",
+        "scrm2": "Designate supply chain risk management officials",
+        "scrm3": "Conduct supply chain risk assessments",
+        "scrm4": "Establish supplier security requirements",
+        "scrm5": "Monitor supplier compliance and performance",
+        "scrm6": "Implement component authenticity verification",
+        "scrm7": "Establish secure development practices",
+        "scrm8": "Create supply chain incident response procedures",
+        "scrm9": "Implement information sharing mechanisms",
+        "scrm10": "Conduct regular program reviews and updates"
+      }
+    }
+  },
+  "pricing": {
+    "title": "Choose Your Plan",
+    "subtitle": "Select the perfect plan for your organization's supply chain security needs, with flexible options from startups to enterprises.",
+    "tiers": {
+      "starter": {
+        "name": "Starter",
+        "description": "Perfect for small organizations getting started with supply chain risk management",
+        "maxVendors": "Up to 25 vendors",
+        "maxUsers": "3 users included",
+        "cta": "Start Free Trial",
+        "features": {
+          "nistBasic": "Basic NIST SP 800-161 assessment",
+          "sbomAnalyzer": "SBOM analyzer (5 analyses/month)",
+          "vendorDashboard": "Vendor risk dashboard",
+          "emailSupport": "Email support",
+          "standardTemplates": "Standard assessment templates",
+          "basicReporting": "Basic reporting and exports"
+        }
+      },
+      "professional": {
+        "name": "Professional",
+        "description": "Comprehensive features for growing organizations with multiple vendors and compliance requirements",
+        "maxVendors": "Up to 100 vendors",
+        "maxUsers": "10 users included",
+        "popular": "Most Popular",
+        "cta": "Start Free Trial",
+        "features": {
+          "everythingStarter": "Everything in Starter",
+          "advancedNist": "Advanced NIST SP 800-161 assessments",
+          "unlimitedSbom": "Unlimited SBOM analyses",
+          "apiAccess": "API access and integrations",
+          "prioritySupport": "Priority support",
+          "customTemplates": "Custom assessment templates",
+          "advancedReporting": "Advanced reporting and analytics",
+          "workflowAutomation": "Workflow automation",
+          "threatIntelligence": "Threat intelligence feeds"
+        }
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "description": "Advanced features for large organizations with complex supply chains and regulatory requirements",
+        "maxVendors": "Unlimited vendors",
+        "maxUsers": "Unlimited users",
+        "cta": "Contact Sales",
+        "features": {
+          "everythingProfessional": "Everything in Professional",
+          "dedicatedManager": "Dedicated customer success manager",
+          "customIntegrations": "Custom integrations and API support",
+          "advancedAnalytics": "Advanced analytics and predictive insights",
+          "multiTenant": "Multi-tenant and white-label options",
+          "ssoSecurity": "SSO and advanced security features",
+          "customBranding": "Custom branding and workflows",
+          "professionalServices": "Professional services and training",
+          "slaGuarantees": "SLA guarantees and premium support"
+        }
+      },
+      "federal": {
+        "name": "Federal",
+        "description": "Specialized solution for federal agencies and contractors with enhanced security and compliance features",
+        "maxVendors": "Unlimited vendors",
+        "maxUsers": "Unlimited users",
+        "cta": "Contact Federal Sales",
+        "features": {
+          "fedrampAuth": "FedRAMP authorized platform",
+          "fullNistCompliance": "Complete NIST SP 800-161 compliance suite",
+          "govCloudDeployment": "Government cloud deployment options",
+          "enhancedSecurity": "Enhanced security and audit controls",
+          "federalReporting": "Federal-specific reporting templates",
+          "cacPivAuth": "CAC/PIV authentication support",
+          "atoSupport": "ATO package and compliance documentation",
+          "federalSupportTeam": "Dedicated federal support team",
+          "fismaCompliance": "FISMA compliance and security controls"
+        }
+      }
+    },
+    "enterpriseFeatures": {
+      "title": "Enterprise & Federal Features",
+      "features": {
+        "advancedVulnerability": "Advanced vulnerability intelligence and correlation",
+        "predictiveAnalytics": "Predictive risk analytics and machine learning",
+        "supplyChainMapping": "Multi-tier supply chain mapping and visualization",
+        "incidentAutomation": "Automated incident response and orchestration",
+        "thirdPartyScoring": "Third-party risk scoring and benchmarking",
+        "regulatoryAutomation": "Regulatory change management and automation"
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "questions": {
+        "freeTrial": {
+          "question": "Do you offer a free trial?",
+          "answer": "Yes, we offer a 14-day free trial for all paid plans. No credit card required to get started."
+        },
+        "changePlans": {
+          "question": "Can I change my plan later?",
+          "answer": "Absolutely! You can upgrade or downgrade your plan at any time. Changes take effect immediately."
+        },
+        "paymentMethods": {
+          "question": "What payment methods do you accept?",
+          "answer": "We accept all major credit cards, ACH transfers, and purchase orders for enterprise customers."
+        },
+        "dataSecure": {
+          "question": "How secure is my data?",
+          "answer": "Your data is encrypted at rest and in transit. We maintain SOC 2 Type II certification and are FedRAMP authorized."
+        },
+        "customIntegrations": {
+          "question": "Do you offer custom integrations?",
+          "answer": "Yes, our Enterprise and Federal plans include custom integrations and dedicated API support."
+        },
+        "supportIncluded": {
+          "question": "What support is included?",
+          "answer": "All plans include email support. Professional plans add priority support, and Enterprise plans include phone support and dedicated success managers."
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to Secure Your Supply Chain?",
+      "subtitle": "Join thousands of organizations worldwide who trust VendorSoluce for their supply chain security.",
+      "startTrial": "Start Free Trial",
+      "scheduleDemo": "Schedule Demo"
+    }
+  },
+  "about": {
+    "title": "About VendorSoluce",
+    "subtitle": "We're on a mission to make supply chain security accessible, actionable, and aligned with federal standards for organizations of all sizes.",
+    "story": {
+      "title": "Our Story",
+      "description": "Learn about our journey and commitment to supply chain security excellence."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To secure the digital supply chain by making enterprise-grade security assessments accessible to all organizations."
+    },
+    "vision": {
+      "title": "Our Vision", 
+      "description": "A world where organizations can confidently manage their supply chain risks with powerful yet simple tools."
+    },
+    "values": {
+      "title": "Our Values",
+      "securityFirst": {
+        "title": "Security First",
+        "description": "We believe in security by design, not as an afterthought."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "We strive for excellence in all we do, from product quality to customer support."
+      },
+      "integrity": {
+        "title": "Integrity",
+        "description": "We build trust through transparency, honest communication, and doing what's right."
+      }
+    },
+    "team": {
+      "title": "Join Our Team",
+      "description": "We're always looking for talented individuals passionate about security and building great products."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We're here to help you secure your supply chain. Reach out with any questions about our platform or supply chain risk management.",
+    "form": {
+      "title": "Get in Touch",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "company": "Company",
+      "topic": "How can we help?",
+      "message": "Message",
+      "topics": {
+        "productInfo": "Product Information",
+        "techSupport": "Technical Support",
+        "scheduleDemo": "Schedule a Demo",
+        "partnership": "Partnership Opportunities",
+        "federalCompliance": "Federal Compliance Questions",
+        "other": "Other"
+      },
+      "terms": "I agree to the privacy policy and consent to being contacted regarding my inquiry.",
+      "submit": "Submit",
+      "submitting": "Submitting...",
+      "thankYou": "Thank You!",
+      "confirmationMessage": "We've received your message and will get back to you shortly.",
+      "sendAnother": "Send Another Message"
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Headquarters",
+      "hours": "Hours"
+    },
+    "demo": {
+      "title": "Schedule a Demo",
+      "description": "See how VendorSoluce can help secure your supply chain and meet federal compliance requirements.",
+      "duration": "30-minute personalized demo",
+      "scheduleNow": "Schedule Now"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions"
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated",
+    "sections": {
+      "introduction": "Introduction",
+      "informationCollection": "Information We Collect",
+      "informationUse": "How We Use Your Information",
+      "informationSharing": "Sharing Your Information",
+      "dataSecurity": "Security of Your Information",
+      "userRights": "Your Privacy Rights",
+      "cookies": "Cookies and Tracking",
+      "children": "Children's Privacy",
+      "international": "International Data Transfers",
+      "retention": "Data Retention",
+      "contact": "Contact Us"
+    }
+  },
+  "templates": {
+    "title": "Templates & Resources",
+    "description": "Download comprehensive templates and resources to accelerate your supply chain risk management implementation.",
+    "categories": {
+      "vendorQuestionnaires": {
+        "title": "Vendor Assessment Questionnaires",
+        "description": "Ready-to-use questionnaires for evaluating vendor security practices",
+        "items": {
+          "nistComplete": "NIST SP 800-161 Complete Assessment",
+          "vendorQuick": "Vendor Security Quick Assessment",
+          "cloudProvider": "Cloud Provider Security Assessment",
+          "softwareProvider": "Software Provider Security Assessment"
+        }
+      },
+      "sbomTemplates": {
+        "title": "SBOM Templates & Tools",
+        "description": "Templates and tools for Software Bill of Materials management",
+        "items": {
+          "spdx": "SPDX SBOM Template",
+          "cyclonedx": "CycloneDX SBOM Template",
+          "generator": "SBOM Generator Script",
+          "report": "SBOM Analysis Report Example"
+        }
+      },
+      "riskAssessment": {
+        "title": "Risk Assessment Tools",
+        "description": "Tools and templates for conducting supply chain risk assessments",
+        "items": {
+          "scoringMatrix": "Vendor Risk Scoring Matrix",
+          "managementPlan": "Risk Management Plan Template",
+          "riskRegister": "Supply Chain Risk Register",
+          "execSummary": "Executive Summary Template"
+        }
+      }
+    },
+    "nistResources": {
+      "title": "NIST SP 800-161 Resources",
+      "keyDocuments": {
+        "title": "Key Documents",
+        "items": {
+          "nistRev1": {
+            "title": "NIST SP 800-161 Rev. 1",
+            "description": "Official NIST publication on supply chain risk management"
+          },
+          "quickStart": {
+            "title": "Quick Start Implementation Guide",
+            "description": "30-day implementation guide for federal agencies"
+          },
+          "controlMapping": {
+            "title": "Control Implementation Mapping",
+            "description": "Detailed mapping of NIST controls to implementation activities"
+          }
+        }
+      }
+    },
+    "implementationGuides": {
+      "title": "Implementation Guides",
+      "items": {
+        "federalCompliance": {
+          "title": "Federal Compliance Guide",
+          "description": "Comprehensive guide for federal agencies and contractors"
+        },
+        "maturityModel": {
+          "title": "Supply Chain Maturity Model",
+          "description": "Assess and improve your supply chain security maturity"
+        },
+        "sbomGuide": {
+          "title": "SBOM Implementation Guide",
+          "description": "Step-by-step guide for implementing SBOM practices"
+        }
+      }
+    },
+    "customization": {
+      "title": "Need Custom Templates?",
+      "description": "Our team can help create custom assessment templates and tools specific to your industry or compliance requirements.",
+      "contactButton": "Contact Our Team"
+    },
+    "download": "Download"
+  },
+  "howItWorks": {
+    "title": "How VendorSoluce Works",
+    "subtitle": "Comprehensive supply chain risk management in four simple steps, designed to integrate seamlessly with your existing processes.",
+    "hero": {
+      "tryNow": "Try Now",
+      "scheduleDemo": "Schedule Demo"
+    },
+    "process": {
+      "title": "Our Process",
+      "description": "Follow our proven methodology to assess, monitor, and mitigate supply chain risks.",
+      "stepTitle": "Step"
+    },
+    "steps": {
+      "assess": {
+        "title": "Assess Your Supply Chain",
+        "description": "Start with comprehensive NIST SP 800-161 aligned assessments to evaluate your current supply chain security posture.",
+        "cta": "Start Assessment",
+        "features": {
+          "nist": "NIST SP 800-161 aligned questionnaires",
+          "questions": "24 questions across 6 key domains",
+          "scoring": "Automated risk scoring and compliance rating",
+          "recommendations": "Detailed recommendations and action plans"
+        }
+      },
+      "vendors": {
+        "title": "Manage Your Vendors",
+        "description": "Add, assess, and continuously monitor your vendor portfolio with automated risk scoring and compliance tracking.",
+        "cta": "Manage Vendors",
+        "features": {
+          "assessment": "Comprehensive vendor security assessments",
+          "monitoring": "Continuous risk monitoring and alerts",
+          "scoring": "Automated risk scoring and tiering",
+          "reporting": "Executive dashboards and compliance reports"
+        }
+      },
+      "sbom": {
+        "title": "Analyze Software Components",
+        "description": "Upload and analyze Software Bills of Materials to identify vulnerabilities and ensure license compliance.",
+        "cta": "Analyze SBOM",
+        "features": {
+          "formats": "Support for SPDX, CycloneDX, and other formats",
+          "vulnerability": "Automated vulnerability scanning and assessment",
+          "license": "License compliance checking and reporting",
+          "compliance": "Integration with supply chain risk assessments"
+        }
+      },
+      "monitor": {
+        "title": "Monitor and Report",
+        "description": "Maintain ongoing visibility into your supply chain risks with automated monitoring and comprehensive reporting.",
+        "cta": "View Dashboard",
+        "features": {
+          "dashboard": "Real-time risk dashboards and metrics",
+          "alerts": "Automated alerts for risk changes",
+          "trends": "Trend analysis and predictive insights",
+          "reports": "Automated compliance and executive reporting"
+        }
+      }
+    },
+    "benefits": {
+      "title": "Why Choose VendorSoluce",
+      "description": "Discover the key benefits that make VendorSoluce the preferred choice for supply chain security.",
+      "compliance": {
+        "title": "Regulatory Compliance",
+        "description": "Built-in support for NIST SP 800-161, CMMC, and federal requirements"
+      },
+      "efficiency": {
+        "title": "Operational Efficiency",
+        "description": "Reduce manual work with automated assessments and reporting"
+      },
+      "insights": {
+        "title": "Actionable Insights",
+        "description": "Get clear, prioritized recommendations to improve your security posture"
+      },
+      "automation": {
+        "title": "Workflow Automation",
+        "description": "Streamline processes with automated workflows and integrations"
+      }
+    },
+    "quickTools": {
+      "title": "Quick Start Tools",
+      "description": "Get immediate value with our rapid assessment tools designed for busy professionals.",
+      "riskCalculator": {
+        "title": "Vendor Risk Calculator",
+        "description": "Get instant risk scores for vendor evaluation and selection decisions.",
+        "cta": "Calculate Risk"
+      },
+      "sbomScan": {
+        "title": "SBOM Quick Scan",
+        "description": "Rapid analysis of software components for immediate security insights.",
+        "cta": "Scan SBOM"
+      },
+      "nistChecklist": {
+        "title": "NIST Compliance Checklist",
+        "description": "Quick compliance check against NIST SP 800-161 requirements.",
+        "cta": "Check Compliance"
+      }
+    },
+    "integration": {
+      "title": "Seamless Integration",
+      "description": "VendorSoluce integrates with your existing tools and workflows for maximum efficiency.",
+      "features": {
+        "api": "RESTful API",
+        "apiDesc": "Comprehensive API for custom integrations",
+        "export": "Data Export",
+        "exportDesc": "Export data in multiple formats",
+        "alerts": "Alert Systems",
+        "alertsDesc": "Real-time notifications and alerts",
+        "templates": "Custom Templates",
+        "templatesDesc": "Customizable assessment templates"
+      },
+      "cta": "View Integration Guide"
+    },
+    "getStarted": {
+      "title": "Ready to Get Started?",
+      "description": "Begin your supply chain security journey today with our comprehensive platform.",
+      "steps": {
+        "step1": {
+          "title": "Sign Up",
+          "description": "Create your account and set up your organization profile"
+        },
+        "step2": {
+          "title": "Configure",
+          "description": "Add your vendors and configure assessment templates"
+        },
+        "step3": {
+          "title": "Assess",
+          "description": "Run your first assessment and start managing risks"
+        }
+      },
+      "cta": {
+        "signup": "Start Free Trial",
+        "resources": "Download Resources"
+      }
+    }
+  },
+  "navigation": {
+    "home": "Home"
+  },
+  "components": {
+    "yes": "Yes",
+    "no": "No",
+    "partial": "Partial"
+  },
+  "supplyChain": {
+    "sections": {
+      "supplier": {
+        "title": "Supplier Risk Management",
+        "description": "Assess your organization's approach to managing supplier-related risks",
+        "questions": {
+          "sr1": {
+            "question": "Does your organization have documented policies and procedures for supplier risk management?",
+            "guidance": "This includes policies for supplier selection, evaluation, monitoring, and management throughout the relationship lifecycle."
+          },
+          "sr2": {
+            "question": "Do you perform risk assessments of suppliers before establishing business relationships?",
+            "guidance": "Risk assessments should evaluate supplier security practices, financial stability, and operational capabilities."
+          },
+          "sr3": {
+            "question": "Are supplier contracts required to include security requirements and right-to-audit clauses?",
+            "guidance": "Contracts should specify security requirements, compliance obligations, and provide audit rights."
+          },
+          "sr4": {
+            "question": "Do you monitor suppliers on an ongoing basis for changes in risk profile?",
+            "guidance": "Ongoing monitoring should include regular reassessments, security notifications, and performance reviews."
+          }
+        }
+      },
+      "threat": {
+        "title": "Supply Chain Threat Management",
+        "description": "Evaluate your organization's capability to identify and respond to supply chain threats",
+        "questions": {
+          "tm1": {
+            "question": "Does your organization actively monitor for supply chain threats and vulnerabilities?",
+            "guidance": "This includes monitoring threat intelligence feeds, vulnerability databases, and security advisories."
+          },
+          "tm2": {
+            "question": "Do you have processes to validate the integrity and authenticity of received products/services?",
+            "guidance": "Validation should include verification of product authenticity, integrity checks, and provenance tracking."
+          },
+          "tm3": {
+            "question": "Are there documented procedures for responding to supply chain security incidents?",
+            "guidance": "Procedures should cover incident detection, notification, containment, and recovery specific to supply chain events."
+          },
+          "tm4": {
+            "question": "Do you share and receive threat intelligence with suppliers and industry partners?",
+            "guidance": "Information sharing should include relevant threat indicators, attack patterns, and mitigation strategies."
+          }
+        }
+      },
+      "vulnerability": {
+        "title": "Vulnerability Management",
+        "description": "Assess your approach to managing vulnerabilities in supply chain components",
+        "questions": {
+          "vm1": {
+            "question": "Do you maintain software bills of materials (SBOMs) for critical systems and applications?",
+            "guidance": "SBOMs should include all software components, versions, dependencies, and licensing information."
+          },
+          "vm2": {
+            "question": "Are suppliers required to provide vulnerability notifications and security updates?",
+            "guidance": "Requirements should include timely notification of vulnerabilities and provision of security patches."
+          },
+          "vm3": {
+            "question": "Do you perform vulnerability scanning of supplier-provided software and systems?",
+            "guidance": "Scanning should be performed before deployment and on an ongoing basis for continuous monitoring."
+          },
+          "vm4": {
+            "question": "Is there a documented process for prioritizing and remediating supply chain vulnerabilities?",
+            "guidance": "Process should include risk assessment, prioritization criteria, and remediation timelines."
+          }
+        }
+      },
+      "information": {
+        "title": "Information Sharing",
+        "description": "Evaluate information sharing practices with supply chain partners",
+        "questions": {
+          "is1": {
+            "question": "Do you have formal agreements for sharing security information with key suppliers?",
+            "guidance": "Agreements should define what information is shared, how it's protected, and usage restrictions."
+          },
+          "is2": {
+            "question": "Are suppliers required to notify you of security incidents that could affect your organization?",
+            "guidance": "Notification requirements should include incident types, timeframes, and communication channels."
+          },
+          "is3": {
+            "question": "Do you participate in industry information sharing organizations or communities?",
+            "guidance": "Participation may include ISACs, industry groups, or government information sharing initiatives."
+          },
+          "is4": {
+            "question": "Is sensitive information properly classified and protected when shared with suppliers?",
+            "guidance": "Protection should include classification schemes, access controls, and handling requirements."
+          }
+        }
+      },
+      "incident": {
+        "title": "Incident Response",
+        "description": "Assess your organization's incident response capabilities for supply chain events",
+        "questions": {
+          "ir1": {
+            "question": "Does your incident response plan specifically address supply chain security incidents?",
+            "guidance": "Plan should include procedures for supplier-related incidents, notification processes, and coordination mechanisms."
+          },
+          "ir2": {
+            "question": "Are suppliers required to have incident response capabilities and plans?",
+            "guidance": "Supplier requirements should include documented incident response procedures and testing requirements."
+          },
+          "ir3": {
+            "question": "Do you conduct regular exercises or tests of supply chain incident response procedures?",
+            "guidance": "Exercises should test coordination with suppliers, communication procedures, and recovery capabilities."
+          },
+          "ir4": {
+            "question": "Is there a process for conducting post-incident reviews of supply chain security events?",
+            "guidance": "Reviews should identify lessons learned, process improvements, and preventive measures."
+          }
+        }
+      },
+      "lifecycle": {
+        "title": "Supplier Lifecycle Management",
+        "description": "Evaluate management of suppliers throughout their relationship lifecycle",
+        "questions": {
+          "sl1": {
+            "question": "Do you have documented procedures for supplier onboarding that include security requirements?",
+            "guidance": "Onboarding should include security assessments, contract negotiations, and baseline establishment."
+          },
+          "sl2": {
+            "question": "Are suppliers regularly reassessed for security compliance and risk changes?",
+            "guidance": "Reassessments should be risk-based with frequency determined by supplier criticality and risk level."
+          },
+          "sl3": {
+            "question": "Do you have procedures for managing supplier relationship changes and terminations?",
+            "guidance": "Procedures should address contract modifications, service transitions, and secure data return/destruction."
+          },
+          "sl4": {
+            "question": "Is supplier performance monitored against defined security metrics and SLAs?",
+            "guidance": "Monitoring should include security performance indicators, compliance metrics, and service level tracking."
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "templates": {
+      "title": "Templates & Resources",
+      "description": "Download comprehensive templates and resources to accelerate your supply chain risk management implementation.",
+      "categories": {
+        "vendorQuestionnaires": {
+          "title": "Vendor Assessment Questionnaires",
+          "description": "Ready-to-use questionnaires for evaluating vendor security practices",
+          "items": {
+            "nistComplete": "NIST SP 800-161 Complete Assessment",
+            "vendorQuick": "Vendor Security Quick Assessment",
+            "cloudProvider": "Cloud Provider Security Assessment",
+            "softwareProvider": "Software Provider Security Assessment"
+          }
+        },
+        "sbomTemplates": {
+          "title": "SBOM Templates & Tools",
+          "description": "Templates and tools for Software Bill of Materials management",
+          "items": {
+            "spdx": "SPDX SBOM Template",
+            "cyclonedx": "CycloneDX SBOM Template",
+            "generator": "SBOM Generator Script",
+            "report": "SBOM Analysis Report Example"
+          }
+        },
+        "riskAssessment": {
+          "title": "Risk Assessment Tools",
+          "description": "Tools and templates for conducting supply chain risk assessments",
+          "items": {
+            "scoringMatrix": "Vendor Risk Scoring Matrix",
+            "managementPlan": "Risk Management Plan Template",
+            "riskRegister": "Supply Chain Risk Register",
+            "execSummary": "Executive Summary Template"
+          }
+        }
+      },
+      "nistResources": {
+        "title": "NIST SP 800-161 Resources",
+        "keyDocuments": {
+          "title": "Key Documents",
+          "items": {
+            "nistRev1": {
+              "title": "NIST SP 800-161 Rev. 1",
+              "description": "Official NIST publication on supply chain risk management"
+            },
+            "quickStart": {
+              "title": "Quick Start Implementation Guide",
+              "description": "30-day implementation guide for federal agencies"
+            },
+            "controlMapping": {
+              "title": "Control Implementation Mapping",
+              "description": "Detailed mapping of NIST controls to implementation activities"
+            }
+          }
+        }
+      },
+      "implementationGuides": {
+        "title": "Implementation Guides",
+        "items": {
+          "federalCompliance": {
+            "title": "Federal Compliance Guide",
+            "description": "Comprehensive guide for federal agencies and contractors"
+          },
+          "maturityModel": {
+            "title": "Supply Chain Maturity Model",
+            "description": "Assess and improve your supply chain security maturity"
+          },
+          "sbomGuide": {
+            "title": "SBOM Implementation Guide",
+            "description": "Step-by-step guide for implementing SBOM practices"
+          }
+        }
+      },
+      "customization": {
+        "title": "Need Custom Templates?",
+        "description": "Our team can help create custom assessment templates and tools specific to your industry or compliance requirements.",
+        "contactButton": "Contact Our Team"
+      },
+      "download": "Download"
+    },
+    "apiDocs": {
+      "title": "API Documentation",
+      "description": "Complete reference for integrating VendorSoluce APIs into your applications and workflows.",
+      "overview": "API Overview",
+      "sections": {
+        "authentication": "Authentication",
+        "vendorRiskApi": "Vendor Risk API",
+        "sbomApi": "SBOM Analysis API",
+        "nistControlsApi": "NIST Controls API",
+        "rateLimits": "Rate Limits",
+        "webhooks": "Webhooks"
+      },
+      "authentication": {
+        "description": "All API requests require authentication using API keys. Include your API key in the Authorization header.",
+        "security": "Security Best Practices",
+        "securityTips": {
+          "clientSide": "Never expose API keys on the client side",
+          "envVars": "Store API keys in environment variables",
+          "ipRestrictions": "Use IP restrictions when possible",
+          "rotation": "Rotate API keys regularly"
+        }
+      },
+      "vendorRiskApi": {
+        "description": "Manage vendor data and risk assessments programmatically.",
+        "endpoints": "Available Endpoints",
+        "endpointDescriptions": {
+          "listVendors": "Retrieve all vendors",
+          "getVendor": "Get specific vendor details",
+          "createVendor": "Create new vendor",
+          "updateVendor": "Update vendor information",
+          "createAssessment": "Create vendor assessment",
+          "getRiskScore": "Get vendor risk score"
+        }
+      },
+      "sbomApi": {
+        "description": "Upload and analyze Software Bills of Materials programmatically.",
+        "endpoints": "Available Endpoints",
+        "supportedFormats": "Supported SBOM Formats",
+        "endpointDescriptions": {
+          "analyzeSbom": "Analyze uploaded SBOM",
+          "getAnalysis": "Retrieve analysis results",
+          "getVulnerabilities": "Get component vulnerabilities"
+        },
+        "formats": {
+          "spdx": "SPDX JSON, XML, and RDF formats",
+          "cyclonedx": "CycloneDX JSON and XML formats",
+          "plainText": "Plain text component lists"
+        }
+      },
+      "nistControlsApi": {
+        "description": "Access NIST SP 800-161 controls and assessment data.",
+        "endpoints": "Available Endpoints",
+        "endpointDescriptions": {
+          "listControls": "List all NIST controls",
+          "getControl": "Get specific control details",
+          "getQuestions": "Get assessment questions for control"
+        }
+      },
+      "rateLimits": {
+        "description": "API rate limits vary by plan to ensure fair usage and optimal performance.",
+        "plan": "Plan",
+        "rateLimit": "Rate Limit",
+        "burstLimit": "Burst Limit",
+        "plans": {
+          "free": "Free",
+          "standard": "Standard",
+          "enterprise": "Enterprise"
+        },
+        "limits": {
+          "free": {
+            "rate": "100 requests/hour",
+            "burst": "10 requests/minute"
+          },
+          "standard": {
+            "rate": "1,000 requests/hour",
+            "burst": "100 requests/minute"
+          },
+          "enterprise": {
+            "rate": "10,000 requests/hour",
+            "burst": "1,000 requests/minute"
+          }
+        }
+      },
+      "webhooks": {
+        "description": "Configure webhooks to receive real-time notifications about assessment completions, risk changes, and other events.",
+        "availableEvents": "Available Events",
+        "events": {
+          "vendorCreated": "Vendor created",
+          "vendorUpdated": "Vendor updated",
+          "assessmentCompleted": "Assessment completed",
+          "riskScoreChanged": "Risk score changed",
+          "sbomAnalyzed": "SBOM analyzed",
+          "vulnerabilityFound": "New vulnerability found"
+        },
+        "payloadExample": "Example Webhook Payload"
+      },
+      "common": {
+        "method": "Method",
+        "endpoint": "Endpoint",
+        "description": "Description",
+        "exampleRequest": "Example Request",
+        "exampleResponse": "Example Response"
+      }
+    }
+  },
+  "onboarding": {
+    "welcome": {
+      "title": "Welcome to VendorSoluce",
+      "subtitle": "Your complete supply chain risk management platform",
+      "description": "VendorSoluce helps you assess, monitor, and mitigate third-party risks across your supply chain with tools aligned with NIST SP 800-161.",
+      "features": {
+        "assess": "Assess Vendors",
+        "assessDesc": "NIST 800-161 compliant assessments",
+        "monitor": "Monitor Risks",
+        "monitorDesc": "Real-time risk dashboards",
+        "analyze": "Analyze SBOMs",
+        "analyzeDesc": "Software bill of materials analysis"
+      }
+    },
+    "profile": {
+      "title": "Your Role & Organization",
+      "subtitle": "Help us tailor your experience",
+      "description": "This helps us show you the most relevant features and content",
+      "role": "Your Primary Role",
+      "roles": {
+        "security": "Security Professional",
+        "procurement": "Procurement Manager",
+        "compliance": "Compliance Officer",
+        "risk": "Risk Manager",
+        "it": "IT Manager",
+        "executive": "Executive",
+        "other": "Other"
+      },
+      "organizationSize": "Organization Size",
+      "sizes": {
+        "startup": "Startup (1-50 employees)",
+        "small": "Small Business (51-200 employees)",
+        "medium": "Medium Business (201-1000 employees)",
+        "large": "Large Enterprise (1000+ employees)"
+      },
+      "industry": "Industry",
+      "industries": {
+        "technology": "Technology",
+        "healthcare": "Healthcare",
+        "financial": "Financial Services",
+        "manufacturing": "Manufacturing",
+        "government": "Government/Public Sector",
+        "defense": "Defense/Aerospace",
+        "energy": "Energy/Utilities",
+        "retail": "Retail/E-commerce",
+        "other": "Other"
+      }
+    },
+    "getStarted": {
+      "title": "Get Started",
+      "subtitle": "Choose your first action",
+      "description": "What would you like to do first?",
+      "options": {
+        "assessment": {
+          "title": "Run Supply Chain Assessment",
+          "description": "Evaluate your organization's supply chain security posture"
+        },
+        "vendor": {
+          "title": "Add Your First Vendor",
+          "description": "Start building your vendor risk portfolio"
+        },
+        "sbom": {
+          "title": "Analyze Software Components",
+          "description": "Upload and analyze a Software Bill of Materials"
+        },
+        "tour": {
+          "title": "Take a Quick Tour",
+          "description": "Learn about key features with a guided walkthrough"
+        }
+      }
+    },
+    "tour": {
+      "title": "VendorSoluce Key Features",
+      "features": {
+        "assessments": {
+          "title": "Supply Chain Assessments",
+          "description": "Comprehensive NIST SP 800-161 aligned assessments to evaluate your supply chain security posture across 6 key domains."
+        },
+        "vendors": {
+          "title": "Vendor Risk Management",
+          "description": "Track and monitor vendor risks with automated scoring, compliance tracking, and customizable dashboards."
+        },
+        "sbom": {
+          "title": "SBOM Analysis",
+          "description": "Analyze Software Bills of Materials for vulnerabilities, license compliance, and component risks with support for SPDX and CycloneDX formats."
+        },
+        "tools": {
+          "title": "Quick Tools",
+          "description": "Access rapid assessment tools like the Vendor Risk Calculator, SBOM Quick Scan, and NIST 800-161 Checklist."
+        }
+      }
+    },
+    "complete": {
+      "title": "Get Started",
+      "skipTour": "Skip Tour"
+    }
+  },
+  "errors": {
+    "general": "An error occurred. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "authentication": "Authentication failed. Please sign in again.",
+    "authorization": "You don't have permission to access this resource.",
+    "notFound": "The requested resource was not found.",
+    "validation": "Please correct the highlighted fields.",
+    "fileUpload": "File upload failed. Please try again.",
+    "fileTooLarge": "File is too large. Maximum size is {size}.",
+    "invalidFileType": "Invalid file type. Please upload a {types} file.",
+    "assessmentNotFound": "Assessment not found or has expired.",
+    "vendorNotFound": "Vendor not found.",
+    "sbomAnalysisFailed": "SBOM analysis failed. Please check your file format."
+  },
+  "notifications": {
+    "success": {
+      "saved": "Successfully saved!",
+      "updated": "Successfully updated!",
+      "deleted": "Successfully deleted!",
+      "created": "Successfully created!",
+      "uploaded": "Successfully uploaded!",
+      "exported": "Successfully exported!",
+      "imported": "Successfully imported!"
+    },
+    "info": {
+      "saving": "Saving...",
+      "loading": "Loading...",
+      "processing": "Processing...",
+      "uploading": "Uploading...",
+      "analyzing": "Analyzing...",
+      "generating": "Generating..."
+    }
+  },
+  "forms": {
+    "validation": {
+      "required": "This field is required",
+      "email": "Please enter a valid email address",
+      "phone": "Please enter a valid phone number",
+      "url": "Please enter a valid URL",
+      "minLength": "Must be at least {min} characters",
+      "maxLength": "Must be no more than {max} characters",
+      "passwordMismatch": "Passwords do not match",
+      "invalidFormat": "Invalid format"
+    },
+    "placeholders": {
+      "email": "Enter your email address",
+      "password": "Enter your password",
+      "name": "Enter your name",
+      "company": "Enter your company name",
+      "phone": "Enter your phone number",
+      "website": "https://example.com",
+      "message": "Enter your message here...",
+      "search": "Search...",
+      "selectOption": "Select an option"
+    }
+  },
+  "time": {
+    "justNow": "Just now",
+    "minutesAgo": "{count} minutes ago",
+    "hoursAgo": "{count} hours ago",
+    "daysAgo": "{count} days ago",
+    "weeksAgo": "{count} weeks ago",
+    "monthsAgo": "{count} months ago",
+    "yearsAgo": "{count} years ago"
+  },
+  "units": {
+    "bytes": "bytes",
+    "kb": "KB",
+    "mb": "MB",
+    "gb": "GB",
+    "percentage": "%",
+    "score": "score",
+    "vendors": "vendors",
+    "components": "components",
+    "vulnerabilities": "vulnerabilities"
   }
 }
