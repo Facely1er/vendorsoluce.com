@@ -14,7 +14,13 @@ export default defineConfig({
       }
     }
   },
+  preview: {
+    port: 4173,
+    strictPort: true,
+  },
   server: {
+    port: 5173,
+    strictPort: true,
     headers: {
       'Cross-Origin-Embedder-Policy': 'require-corp',
       'Cross-Origin-Opener-Policy': 'same-origin',
@@ -23,6 +29,9 @@ export default defineConfig({
       origin: '*',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       credentials: true,
+    },
+    historyApiFallback: {
+      index: '/index.html',
     },
   }
 });
