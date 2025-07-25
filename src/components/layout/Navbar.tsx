@@ -24,8 +24,7 @@ const Navbar: React.FC = () => {
     { title: t('navigation.solutions'), path: '#', icon: 'Layers' },
     { title: t('navigation.pricing'), path: '/pricing', icon: 'DollarSign' },
     { title: t('navigation.resources'), path: '#', icon: 'BookOpen' },
-    { title: t('navigation.about'), path: '/about', icon: 'Users' },
-    { title: t('navigation.contact'), path: '/contact', icon: 'Phone' },
+  
   ];
 
   const solutionItems: MenuItem[] = [
