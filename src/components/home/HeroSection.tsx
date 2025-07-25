@@ -14,11 +14,11 @@ const HeroSection: React.FC = () => {
           <div className="flex justify-center mb-6">
           </div>
           
-          <h1 className="text-3xl md:text-6xl font-bold mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
             {t('home.hero.title')}
           </h1>
           
-          <p className="text-2xl md:text-2xl text-gray-100 mb-8 max-w-4xl mx-auto">
+          <p className="text-2xl md:text-3xl text-gray-100 mb-8 max-w-4xl mx-auto">
             {t('home.hero.subtitle')}
           </p>
           
