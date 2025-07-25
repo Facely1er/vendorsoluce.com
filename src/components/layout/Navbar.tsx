@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   Menu, 
   X, 
@@ -8,8 +8,6 @@ import {
   Users, 
   FileText, 
   DollarSign, 
-  Info, 
-  Mail, 
   BookOpen, 
   Code, 
   ChevronDown 
@@ -23,6 +21,7 @@ import UserMenu from './UserMenu';
 const Navbar: React.FC = () => {
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
+  const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
@@ -62,10 +61,16 @@ const Navbar: React.FC = () => {
         { name: 'API Docs', path: '/api-docs' },
         { name: 'Integration', path: '/integration-guides' },
       ]
-    },
-    { name: 'About', path: '/about', icon: Info },
-    { name: 'Contact', path: '/contact', icon: Mail },
+    }
   ];
+
+  const isActivePath = (itemPath: string, dropdownPaths?: string[]) => {
+    if (location.pathname === itemPath) return true;
+    if (dropdownPaths) {
+      return dropdownPaths.some(path => location.pathname === path);
+    }
+    return false;
+  };
 
   return (
     <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40" data-tour="main-nav">
@@ -83,11 +88,15 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex md:space-x-8 items-center">
+          <nav className="hidden md:flex md:space-x-4 items-center">
             {navItems.map((item) => (
               item.dropdown ? (
                 <div key={item.name} className="relative group">
-                  <button className="text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                  <button className={`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
+                    isActivePath(item.path, item.dropdown.map(d => d.path))
+                      ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
+                  }`}>
                     {item.icon && <item.icon className="h-4 w-4 mr-1" />}
                     {item.name}
                     <ChevronDown className="ml-1 h-4 w-4" />
@@ -98,7 +107,11 @@ const Navbar: React.FC = () => {
                         <Link
                           key={subItem.name}
                           to={subItem.path}
-                          className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600"
+                          className={`block px-4 py-2 text-sm transition-colors ${
+                            location.pathname === subItem.path
+                              ? 'bg-vendorsoluce-pale-green text-vendorsoluce-navy dark:bg-vendorsoluce-navy/20 dark:text-vendorsoluce-blue font-medium'
+                              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
+                          }`}
                           role="menuitem"
                         >
                           {subItem.name}
@@ -111,7 +124,11 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className="text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue px-3 py-2 rounded-md text-sm font-medium flex items-center"
+                  className={`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
+                    isActivePath(item.path)
+                      ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
+                  }`}
                 >
                   {item.icon && <item.icon className="h-4 w-4 mr-1" />}
                   {item.name}
@@ -121,7 +138,11 @@ const Navbar: React.FC = () => {
             {isAuthenticated && (
               <Link
                 to="/dashboard"
-                className="text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue px-3 py-2 rounded-md text-sm font-medium flex items-center"
+                className={`px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors ${
+                  location.pathname === '/dashboard'
+                    ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
+                }`}
               >
                 <LayoutDashboard className="h-4 w-4 mr-1" />
                 Dashboard
@@ -164,7 +185,11 @@ const Navbar: React.FC = () => {
             {navItems.map((item) => (
               item.dropdown ? (
                 <div key={item.name}>
-                  <button className="text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue block px-3 py-2 rounded-md text-base font-medium w-full text-left">
+                  <button className={`block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors ${
+                    isActivePath(item.path, item.dropdown.map(d => d.path))
+                      ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
+                  }`}>
                     {item.icon && <item.icon className="h-5 w-5 mr-2 inline-block" />}
                     {item.name}
                   </button>
@@ -173,7 +198,11 @@ const Navbar: React.FC = () => {
                       <Link
                         key={subItem.name}
                         to={subItem.path}
-                        className="block px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+                        className={`block px-3 py-2 text-sm transition-colors rounded-md ${
+                          location.pathname === subItem.path
+                            ? 'bg-vendorsoluce-pale-green text-vendorsoluce-navy dark:bg-vendorsoluce-navy/20 dark:text-vendorsoluce-blue font-medium'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        }`}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {subItem.name}
@@ -185,7 +214,11 @@ const Navbar: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className="text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue block px-3 py-2 rounded-md text-base font-medium"
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                    isActivePath(item.path)
+                      ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
+                  }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.icon && <item.icon className="h-5 w-5 mr-2 inline-block" />}
@@ -196,7 +229,11 @@ const Navbar: React.FC = () => {
             {isAuthenticated && (
               <Link
                 to="/dashboard"
-                className="text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue block px-3 py-2 rounded-md text-base font-medium"
+                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                  location.pathname === '/dashboard'
+                    ? 'text-vendorsoluce-navy dark:text-vendorsoluce-blue font-semibold'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue'
+                }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <LayoutDashboard className="h-5 w-5 mr-2 inline-block" />

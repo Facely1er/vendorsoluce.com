@@ -5,16 +5,11 @@ import { Button } from '../ui/Button';
 import { 
   Shield, 
   Building2,
-  ShieldCheck,
   Users, 
   ArrowRight,
   Lock, 
-  FileCheck, 
-  BarChart3, 
-  FileJson,
   ChevronRight,
   Target,
-  TrendingUp,
   CheckCircle,
   AlertTriangle
 } from 'lucide-react';
