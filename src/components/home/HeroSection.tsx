@@ -12,9 +12,7 @@ const HeroSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center">
           <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-           
-            </div>
+            
           </div>
           
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
