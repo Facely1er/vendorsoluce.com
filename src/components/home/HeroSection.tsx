@@ -13,13 +13,19 @@ const HeroSection: React.FC = () => {
       <div 
         className="absolute inset-0 z-0 min-h-screen"
         style={{
-          backgroundColor: '#33691E',
-          backgroundImage: 'url("/background_hero_section.png")', // Fixed: relative path from public folder
-          backgroundSize: '80% 80%',
-          backgroundPosition: 'top center',
+          backgroundImage: 'url("/background_hero_section.png")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundBlendMode: 'overlay',
-          opacity: 0.2
+        }}
+      ></div>
+      
+      {/* Static Dark Overlay - Same for All Themes */}
+      <div 
+        className="absolute inset-0 z-1 min-h-screen"
+        style={{
+          backgroundColor: '#1a2e1a', // Always dark green
+          opacity: 0.85 // Always same opacity
         }}
       ></div>
       
