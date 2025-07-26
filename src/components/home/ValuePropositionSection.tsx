@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
@@ -275,7 +275,7 @@ const ValuePropositionSection: React.FC = () => {
                     {solution.benefits.map((benefit, benefitIndex) => (
                       <div key={benefitIndex} className="flex items-start">
                         <CheckCircle className="h-4 w-4 text-vendorsoluce-green mr-3 mt-1 flex-shrink-0" />
-                        <span className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{benefit}</span>
+                        <span className="text-gray-700 dark:text-gray-300 leading-relaxed">{benefit}</span>
                       </div>
                     ))}
                   </div>
