@@ -271,7 +271,20 @@ export const downloadTemplateFile = async (templatePath: string, filename: strin
         await generatePdfFromHtml(htmlContent, filename);
         return;
       } else {
-        throw new Error('HTML template not found for PDF generation');
+        // Fallback: try to fetch HTML from public folder
+        const htmlTemplatePath = templatePath.replace('.pdf', '.html');
+        try {
+          const response = await fetch(htmlTemplatePath);
+          if (response.ok) {
+            const htmlContent = await response.text();
+            await generatePdfFromHtml(htmlContent, filename);
+            return;
+          } else {
+            throw new Error('HTML template not found for PDF generation');
+          }
+        } catch (fetchError) {
+          throw new Error('HTML template not found for PDF generation');
+        }
       }
     }
 
