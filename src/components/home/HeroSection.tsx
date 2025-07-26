@@ -14,18 +14,18 @@ const HeroSection: React.FC = () => {
         className="absolute inset-0 z-0 min-h-screen"
         style={{
           backgroundColor: '#33691E',
-          backgroundImage: 'url("/home/project/public/background_hero section.png")', // Replace with your image path
+          backgroundImage: 'url("/background_hero_section.png")', // Fixed: relative path from public folder
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundBlendMode: 'overlay', // This blends the image with the green background
-          opacity: 0.9 // Adjust opacity to control image visibility
+          backgroundBlendMode: 'overlay',
+          opacity: 0.9
         }}
       ></div>
       
       {/* Content */}
       <div className="max-w-7xl mx-auto">
-        <div className="relative z-10">
+        <div className="relative z-20">
           <div className="text-center">
             <div className="flex justify-center mb-6">
             </div>
