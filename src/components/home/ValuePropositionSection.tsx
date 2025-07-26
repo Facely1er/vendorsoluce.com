@@ -1,4 +1,4 @@
- import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
@@ -233,7 +233,7 @@ const ValuePropositionSection: React.FC = () => {
               </h3>
             </CardHeader>
             <CardContent className="pt-0">
-              <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+              <p className="text-base text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                 {activeStakeholderData.description}
               </p>
               <ul className="space-y-4">
@@ -257,7 +257,7 @@ const ValuePropositionSection: React.FC = () => {
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                         {solution.title}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                      <p className="text-base text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                         {solution.description}
                       </p>
                     </div>
