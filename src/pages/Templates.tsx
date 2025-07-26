@@ -35,7 +35,7 @@ const Templates: React.FC = () => {
               <Shield className="h-6 w-6 mr-2" />
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('resources.templates.categories.vendorQuestionnaires.title')}</h2>
             </div>
-            <p className="text-sm text-gray-600 dark:text-white">
+            <p className="text-sm text-gray-900 dark:text-white">
               {t('resources.templates.categories.vendorQuestionnaires.description')}
             </p>
           </div>
@@ -99,7 +99,7 @@ const Templates: React.FC = () => {
               <FileJson className="h-6 w-6 mr-2" />
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('resources.templates.categories.sbomTemplates.title')}</h2>
             </div>
-            <p className="text-sm text-gray-600 dark:text-white">
+            <p className="text-sm text-gray-900 dark:text-white">
               {t('resources.templates.categories.sbomTemplates.description')}
             </p>
           </div>
@@ -163,7 +163,7 @@ const Templates: React.FC = () => {
               <BarChart3 className="h-6 w-6 mr-2" />
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('resources.templates.categories.riskAssessment.title')}</h2>
             </div>
-            <p className="text-sm text-gray-600 dark:text-white">
+            <p className="text-sm text-gray-900 dark:text-white">
               {t('resources.templates.categories.riskAssessment.description')}
             </p>
           </div>
