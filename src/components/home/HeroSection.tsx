@@ -19,7 +19,7 @@ const HeroSection: React.FC = () => {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundBlendMode: 'overlay', // This blends the image with the green background
-          opacity: 0.9 // Adjust opacity to control image visibility
+          opacity: 0.3 // Adjust opacity to control image visibility
         }}
       ></div>
       
