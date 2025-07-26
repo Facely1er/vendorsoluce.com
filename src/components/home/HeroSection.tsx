@@ -14,7 +14,7 @@ const HeroSection: React.FC = () => {
         className="absolute inset-0 z-0 min-h-screen"
         style={{
           backgroundColor: '#33691E',
-          backgroundImage: 'url("/path-to-your-background-image.jpg")', // Replace with your image path
+          backgroundImage: 'url("/home/project/public/background_hero section.png")', // Replace with your image path
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
