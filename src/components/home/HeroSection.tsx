@@ -4,6 +4,7 @@ import { Shield, Target, Users, CheckCircle, Zap, Eye } from 'lucide-react';
 import Button from '../ui/Button';
 import { useTranslation } from 'react-i18next';
 
+export default HeroSection;
 const HeroSection: React.FC = () => {
   const { t } = useTranslation();
   
@@ -124,5 +125,6 @@ const HeroSection: React.FC = () => {
     </section>
   );
 };
-
 export default HeroSection;
+  )
+}
