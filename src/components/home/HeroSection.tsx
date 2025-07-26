@@ -8,8 +8,21 @@ const HeroSection: React.FC = () => {
   const { t } = useTranslation();
   
   return (
-    <section className="bg-gradient-to-r from-vendorsoluce-green to-vendorsoluce-light-green text-white py-16 px-4 sm:px-6 lg:px-8">
+    <section className="relative text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/section.inspect-element-1753549472981.jpeg')"
+        }}
+      ></div>
+      
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-vendorsoluce-green/85 to-vendorsoluce-light-green/85"></div>
+      
+      {/* Content */}
       <div className="max-w-7xl mx-auto">
+        <div className="relative z-10"></action>
         <div className="text-center">
           <div className="flex justify-center mb-6">
           </div>
