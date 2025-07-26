@@ -22,7 +22,7 @@ const HeroSection: React.FC = () => {
       
       {/* Content */}
       <div className="max-w-7xl mx-auto">
-        <div className="relative z-10"></action>
+        <div className="relative z-10">
         <div className="text-center">
           <div className="flex justify-center mb-6">
           </div>
