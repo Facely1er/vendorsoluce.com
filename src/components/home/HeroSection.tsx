@@ -11,10 +11,9 @@ const HeroSection: React.FC = () => {
     <section className="relative text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0 min-h-screen"
+        className="absolute inset-0 z-0 min-h-screen"
         style={{
-          backgroundImage: "url('https://images.pexels.com/photos/7439147/pexels-photo-7439147.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1')",
-          backgroundColor: '#1a4b39'
+          backgroundColor: '#33691E'
         }}
       ></div>
       
