@@ -13,7 +13,13 @@ const HeroSection: React.FC = () => {
       <div 
         className="absolute inset-0 z-0 min-h-screen"
         style={{
-          backgroundColor: '#33691E'
+          backgroundColor: '#33691E',
+          backgroundImage: 'url("/path-to-your-background-image.jpg")', // Replace with your image path
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundBlendMode: 'overlay', // This blends the image with the green background
+          opacity: 0.9 // Adjust opacity to control image visibility
         }}
       ></div>
       
