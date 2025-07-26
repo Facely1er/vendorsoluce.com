@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
@@ -251,7 +251,7 @@ const ValuePropositionSection: React.FC = () => {
           <div className="lg:col-span-2 space-y-8">
             {activeStakeholderData.solutions.map((solution, index) => (
               <Card key={index} className="border-l-4 border-l-vendorsoluce-green">
-                <CardContent className="p-8">
+                <CardContent className="px-8 pt-12 pb-8">
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
