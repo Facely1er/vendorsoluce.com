@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Card from '../components/ui/Card';
+import Card, { CardHeader, CardTitle, CardContent } from '../components/ui/Card';
 import VendorRiskTable from '../components/vendor/VendorRiskTable';
 import { VendorRisk } from '../types';
 import Button from '../components/ui/Button';
