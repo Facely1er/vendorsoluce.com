@@ -15,7 +15,7 @@ const HeroSection: React.FC = () => {
         style={{
           backgroundColor: '#33691E',
           backgroundImage: 'url("/background_hero_section.png")', // Fixed: relative path from public folder
-          backgroundSize: '100% Auto',
+          backgroundSize: '80% 80%',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundBlendMode: 'overlay',
