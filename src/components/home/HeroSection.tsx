@@ -121,8 +121,6 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
           {/* Trust Indicators 
           <div className="mt-12 pt-8 border-t border-white/20">
@@ -143,12 +141,8 @@ const HeroSection: React.FC = () => {
           </div>*/}
         </div>
       </div>
-        </div>
-      </div>
     </section>
   );
 };
 
 export default HeroSection;
-  )
-}
