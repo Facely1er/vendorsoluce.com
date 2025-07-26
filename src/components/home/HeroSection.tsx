@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, Target, Users, CheckCircle, Zap, Eye } from 'lucide-react';
 import Button from '../ui/Button';
@@ -60,17 +60,17 @@ const HeroSection: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-4">{t('home.hero.benefits.section1.title')}</h3>
                 <div className="text-gray-100 text-m space-y-2">
-                  <div className="flex items-center">
-                    <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                    {t('home.hero.benefits.section1.benefit1')}
+                  <div className="flex items-start">
+                    <CheckCircle className="h-4 w-4 mr-2 text-green-300 mt-0.5 flex-shrink-0" />
+                    <span>{t('home.hero.benefits.section1.benefit1')}</span>
                   </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                    {t('home.hero.benefits.section1.benefit2')}
+                  <div className="flex items-start">
+                    <CheckCircle className="h-4 w-4 mr-2 text-green-300 mt-0.5 flex-shrink-0" />
+                    <span>{t('home.hero.benefits.section1.benefit2')}</span>
                   </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                    {t('home.hero.benefits.section1.benefit3')}
+                  <div className="flex items-start">
+                    <CheckCircle className="h-4 w-4 mr-2 text-green-300 mt-0.5 flex-shrink-0" />
+                    <span>{t('home.hero.benefits.section1.benefit3')}</span>
                   </div>
                 </div>
               </div>
@@ -81,17 +81,17 @@ const HeroSection: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-4">{t('home.hero.benefits.section2.title')}</h3>
                 <div className="text-gray-100 text-m space-y-2">
-                  <div className="flex items-center">
-                    <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                    {t('home.hero.benefits.section2.benefit1')}
+                  <div className="flex items-start">
+                    <CheckCircle className="h-4 w-4 mr-2 text-green-300 mt-0.5 flex-shrink-0" />
+                    <span>{t('home.hero.benefits.section2.benefit1')}</span>
                   </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                    {t('home.hero.benefits.section2.benefit2')}
+                  <div className="flex items-start">
+                    <CheckCircle className="h-4 w-4 mr-2 text-green-300 mt-0.5 flex-shrink-0" />
+                    <span>{t('home.hero.benefits.section2.benefit2')}</span>
                   </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                    {t('home.hero.benefits.section2.benefit3')}
+                  <div className="flex items-start">
+                    <CheckCircle className="h-4 w-4 mr-2 text-green-300 mt-0.5 flex-shrink-0" />
+                    <span>{t('home.hero.benefits.section2.benefit3')}</span>
                   </div>
                 </div>
               </div>
@@ -102,17 +102,17 @@ const HeroSection: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-4">{t('home.hero.benefits.section3.title')}</h3>
                 <div className="text-gray-100 text-m space-y-2">
-                  <div className="flex items-center">
-                    <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                    {t('home.hero.benefits.section3.benefit1')}
+                  <div className="flex items-start">
+                    <CheckCircle className="h-4 w-4 mr-2 text-green-300 mt-0.5 flex-shrink-0" />
+                    <span>{t('home.hero.benefits.section3.benefit1')}</span>
                   </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                    {t('home.hero.benefits.section3.benefit2')}
+                  <div className="flex items-start">
+                    <CheckCircle className="h-4 w-4 mr-2 text-green-300 mt-0.5 flex-shrink-0" />
+                    <span>{t('home.hero.benefits.section3.benefit2')}</span>
                   </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
-                    {t('home.hero.benefits.section3.benefit3')}
+                  <div className="flex items-start">
+                    <CheckCircle className="h-4 w-4 mr-2 text-green-300 mt-0.5 flex-shrink-0" />
+                    <span>{t('home.hero.benefits.section3.benefit3')}</span>
                   </div>
                 </div>
               </div>
