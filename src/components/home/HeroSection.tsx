@@ -104,7 +104,7 @@ const HeroSection: React.FC = () => {
                 <Shield className="h-8 w-8 text-green-300" />
               </div>
               <h3 className="text-xl font-semibold mb-4">{t('home.hero.benefits.section3.title')}</h3>
-              <div className="text-gray-100 text-sm space-y-2">
+              <div className="text-gray-100 text-m space-y-2">
                 <div className="flex items-center">
                   <CheckCircle className="h-4 w-4 mr-2 text-green-300" />
                   {t('home.hero.benefits.section3.benefit1')}
