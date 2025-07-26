@@ -108,7 +108,7 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Trust Indicators */}
+          {/* Trust Indicators 
           <div className="mt-12 pt-8 border-t border-white/20">
             <div className="flex flex-col md:flex-row justify-center items-center gap-8 text-sm text-gray-200">
               <div className="flex items-center">
@@ -124,7 +124,7 @@ const HeroSection: React.FC = () => {
                 <span>{t('home.hero.trustIndicators.success')}</span>
               </div>
             </div>
-          </div>
+          </div>*/}
         </div>
       </div>
     </section>
