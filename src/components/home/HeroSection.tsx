@@ -18,7 +18,7 @@ const HeroSection: React.FC = () => {
       ></div>
       
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-vendorsoluce-green/85 to-vendorsoluce-light-green/85"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-vendorsoluce-green/40 to-vendorsoluce-light-green/40"></div>
       
       {/* Content */}
       <div className="max-w-7xl mx-auto">
