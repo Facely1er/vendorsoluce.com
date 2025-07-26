@@ -13,7 +13,7 @@ const HeroSection: React.FC = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
         style={{
-          backgroundImage: "url('/section.inspect-element-1753549472981.jpeg')"
+          backgroundImage: "url('https://images.pexels.com/photos/7439147/pexels-photo-7439147.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')"
         }}
       ></div>
       
