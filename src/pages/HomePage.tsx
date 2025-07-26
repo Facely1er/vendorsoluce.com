@@ -14,8 +14,8 @@ const HomePage: React.FC = () => {
     <main className="min-h-screen">
       <HeroSection />
       {/*<AssessmentSection /> */}
-      <FeatureSection /> 
-      <ValuePropositionSection />
+       <ValuePropositionSection />
+       <FeatureSection /> 
       {/*  <QuickToolsSection /> */}
       <CTASection />
     </main>
