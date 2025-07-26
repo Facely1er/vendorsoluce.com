@@ -19,7 +19,7 @@ const HeroSection: React.FC = () => {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           backgroundBlendMode: 'overlay',
-          opacity: 0.9
+          opacity: 0.5
         }}
       ></div>
       
