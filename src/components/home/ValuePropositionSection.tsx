@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
@@ -259,7 +259,7 @@ const ValuePropositionSection: React.FC = () => {
                     <p className="text-base text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                       {solution.description}
                     </p>
-                    <div className="mb-4">
+                    <div className="mb-4 text-center">
                       <Link to={solution.link}>
                         <Button variant="primary" size="sm">
                           {solution.cta}
