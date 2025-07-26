@@ -23,7 +23,7 @@ const HeroSection: React.FC = () => {
             {t('home.hero.subtitle')}
           </p>
           
-          <p className="text-lg text-gray-100 mb-10 max-w-3xl mx-auto opacity-0 animate-fade-in-up animate-delay-500">
+          <p className="text-xl text-gray-100 mb-10 max-w-3xl mx-auto opacity-0 animate-fade-in-up animate-delay-500">
             {t('home.hero.description')}
           </p>
           
