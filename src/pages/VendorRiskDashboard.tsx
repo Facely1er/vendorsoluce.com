@@ -5,7 +5,7 @@ import { VendorRisk } from '../types';
 import Button from '../components/ui/Button';
 import { useTranslation } from 'react-i18next';
 import { useVendors } from '../hooks/useVendors';
-import { Plus, RefreshCw } from 'lucide-react';
+import { Plus, RefreshCw, BarChart3, Zap, Shield, Brain } from 'lucide-react';
 import AddVendorModal from '../components/vendor/AddVendorModal';
 import ThreatIntelligenceFeed from '../components/vendor/ThreatIntelligenceFeed';
 import WorkflowAutomation from '../components/vendor/WorkflowAutomation';
@@ -83,11 +83,11 @@ const VendorRiskDashboard: React.FC = () => {
       <div className="mb-6">
         <nav className="flex space-x-8">
           {[
-            { id: 'dashboard', label: 'Overview Dashboard', icon: '📊' },
-            { id: 'workflows', label: 'Workflow Automation', icon: '⚡' },
-            { id: 'intelligence', label: 'Threat Intelligence', icon: '🛡️' },
-            { id: 'analytics', label: 'Predictive Analytics', icon: '🔮' }
-          ].map(({ id, label, icon }) => (
+            { id: 'dashboard', label: 'Overview Dashboard', icon: BarChart3 },
+            { id: 'workflows', label: 'Workflow Automation', icon: Zap },
+            { id: 'intelligence', label: 'Threat Intelligence', icon: Shield },
+            { id: 'analytics', label: 'Predictive Analytics', icon: Brain }
+          ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               onClick={() => setActiveView(id as any)}
@@ -97,7 +97,7 @@ const VendorRiskDashboard: React.FC = () => {
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
               }`}
             >
-              <span className="mr-2">{icon}</span>
+              <Icon className="h-4 w-4 mr-2" />
               {label}
             </button>
           ))}
