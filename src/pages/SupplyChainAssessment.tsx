@@ -351,9 +351,13 @@ const SupplyChainAssessment = () => {
 
   // Determine if we have enough answers to show results
   const hasCompletedMinimumSections = () => {
-    const totalQuestions = sections.reduce((total, section) => total + section.questions.length, 0);
-    const answeredQuestions = Object.keys(answers).length;
-    return answeredQuestions >= totalQuestions * 0.5; // 50% of all questions
+    let completedSections = 0;
+    sections.forEach((_, index) => {
+      if (calculateSectionScore(index).completed) {
+        completedSections++;
+      }
+    });
+    return completedSections >= Math.ceil(sections.length / 2);
   };
 
   const handleViewResults = async () => {
@@ -373,25 +377,15 @@ const SupplyChainAssessment = () => {
       
       // Save assessment as completed
       try {
-        const savedAssessment = await createOrUpdateAssessment({
+        await createOrUpdateAssessment({
           assessment_name: assessmentName,
           overall_score: getOverallScore(),
           section_scores: sectionScores,
           status: 'completed',
           completed_at: new Date().toISOString()
         }, answers);
-        
-        // Navigate to results page with the assessment ID
-        navigate(`/supply-chain-results/${savedAssessment?.id || 'latest'}`, { 
-          state: { 
-            overallScore: getOverallScore(),
-            sectionScores: sectionScores
-          }
-        });
-        return;
       } catch (err) {
         console.error('Error completing assessment:', err);
-        // Fall through to navigate with state only
       }
     }
     
@@ -463,9 +457,9 @@ const SupplyChainAssessment = () => {
               <div className="w-12 h-12 bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 rounded-full flex items-center justify-center mb-3">
                 <Shield className="h-6 w-6 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
               </div>
-              <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">NIST Aligned</h3>
+              <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">{t('assessment.startScreen.nistAligned')}</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Assessment based on NIST SP 800-161 Supply Chain Risk Management framework
+                {t('assessment.startScreen.nistDescription')}
               </p>
             </div>
 
@@ -473,9 +467,9 @@ const SupplyChainAssessment = () => {
               <div className="w-12 h-12 bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 rounded-full flex items-center justify-center mb-3">
                 <Clipboard className="h-6 w-6 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
               </div>
-              <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">Comprehensive</h3>
+              <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">{t('assessment.startScreen.comprehensive')}</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
-                24 questions across 6 key supply chain security domains
+                {t('assessment.startScreen.comprehensiveDescription')}
               </p>
             </div>
 
@@ -483,9 +477,9 @@ const SupplyChainAssessment = () => {
               <div className="w-12 h-12 bg-vendorsoluce-navy/10 dark:bg-vendorsoluce-navy/30 rounded-full flex items-center justify-center mb-3">
                 <FileText className="h-6 w-6 text-vendorsoluce-navy dark:text-vendorsoluce-blue" />
               </div>
-              <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">Actionable</h3>
+              <h3 className="text-lg font-medium mb-2 text-gray-900 dark:text-white">{t('assessment.startScreen.actionable')}</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Get personalized recommendations and a detailed compliance report
+                {t('assessment.startScreen.actionableDescription')}
               </p>
             </div>
           </div>
@@ -495,7 +489,7 @@ const SupplyChainAssessment = () => {
               <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 mr-3 flex-shrink-0" />
               <div>
                 <p className="text-blue-800 dark:text-blue-300 text-sm">
-                  This assessment will help you evaluate your organization's supply chain security posture against NIST SP 800-161 guidelines. You'll receive a detailed score and actionable recommendations to improve your security posture.
+                  {t('assessment.startScreen.infoMessage')}
                 </p>
               </div>
             </div>
@@ -507,7 +501,7 @@ const SupplyChainAssessment = () => {
             className="w-full"
             onClick={handleStartAssessment}
           >
-            Start Assessment
+            {t('assessment.startScreen.startAssessment')}
           </Button>
         </CardContent>
       </Card>
@@ -523,25 +517,25 @@ const SupplyChainAssessment = () => {
           className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue transition-colors mb-4"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back
+          {t('assessment.onboarding.back')}
         </button>
       </div>
 
       <Card>
         <CardHeader>
           <CardTitle className="text-xl text-gray-900 dark:text-white">
-            Name Your Assessment
+            {t('assessment.onboarding.nameYourAssessment')}
           </CardTitle>
         </CardHeader>
 
         <CardContent>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Give your assessment a descriptive name to help you identify it later. This name will appear in your assessment list and reports.
+            {t('assessment.onboarding.assessmentDescription')}
           </p>
 
           <div className="mb-6">
             <label htmlFor="assessmentName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Assessment Name
+              {t('assessment.onboarding.assessmentNameLabel')}
             </label>
             <input
               type="text"
@@ -549,28 +543,28 @@ const SupplyChainAssessment = () => {
               value={assessmentName}
               onChange={(e) => setAssessmentName(e.target.value)}
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendortal-navy focus:border-vendortal-navy bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-              placeholder="e.g., Q3 2025 Supply Chain Assessment"
+              placeholder={t('assessment.onboarding.assessmentNamePlaceholder')}
             />
           </div>
 
           <div className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-md mb-6">
-            <h3 className="font-medium text-gray-900 dark:text-white mb-2">What to expect:</h3>
+            <h3 className="font-medium text-gray-900 dark:text-white mb-2">{t('assessment.onboarding.whatToExpect')}</h3>
             <ul className="space-y-2 text-gray-600 dark:text-gray-400 text-sm">
               <li className="flex items-start">
                 <span className="text-green-500 mr-2">✓</span>
-                <span>24 questions across 6 supply chain security domains</span>
+                <span>{t('assessment.onboarding.expectation1')}</span>
               </li>
               <li className="flex items-start">
                 <span className="text-green-500 mr-2">✓</span>
-                <span>Approximately 15-20 minutes to complete</span>
+                <span>{t('assessment.onboarding.expectation2')}</span>
               </li>
               <li className="flex items-start">
                 <span className="text-green-500 mr-2">✓</span>
-                <span>Your progress is automatically saved</span>
+                <span>{t('assessment.onboarding.expectation3')}</span>
               </li>
               <li className="flex items-start">
                 <span className="text-green-500 mr-2">✓</span>
-                <span>Detailed results and recommendations</span>
+                <span>{t('assessment.onboarding.expectation4')}</span>
               </li>
             </ul>
           </div>
@@ -580,7 +574,7 @@ const SupplyChainAssessment = () => {
             className="w-full"
             onClick={handleContinueToAssessment}
           >
-            Continue to Assessment
+            {t('assessment.onboarding.continueToAssessment')}
           </Button>
         </CardContent>
       </Card>
@@ -622,7 +616,10 @@ const SupplyChainAssessment = () => {
           <div className="flex items-center space-x-3">
             {/* Assessment Progress Indicator */}
             <div className="text-sm text-gray-600 dark:text-gray-400">
-              Progress: {Object.keys(answers).length} / {sections.flatMap(s => s.questions).length} questions
+              {t('assessment.progress.progressLabel', { 
+                answered: Object.keys(answers).length, 
+                total: sections.flatMap(s => s.questions).length 
+              })}
             </div>
             
             {/* Restart Assessment Button */}
@@ -730,7 +727,10 @@ const SupplyChainAssessment = () => {
             <div className="mt-3">
               <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
                 <span>{t('assessment.sectionProgress')}</span>
-                <span>{sections[currentSection].questions.filter(q => answers[q.id]).length} / {sections[currentSection].questions.length}</span>
+                <span>{t('assessment.progress.questionsAnswered', {
+                  count: sections[currentSection].questions.filter(q => answers[q.id]).length,
+                  total: sections[currentSection].questions.length
+                })}</span>
               </div>
               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                 <div 
