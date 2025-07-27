@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AssessmentResults } from '../components/assessments/AssessmentResults';
 import { generateResultsPdf } from '../utils/generatePdf';
@@ -17,6 +19,7 @@ interface ResultData {
 
 const SupplyChainResults = () => {
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const location = useLocation();
   const { assessments, loading } = useSupplyChainAssessments();
   const [results, setResults] = useState<ResultData | null>(null);
@@ -143,8 +146,8 @@ const SupplyChainResults = () => {
       </div>
 
       <div className="mt-8 flex justify-end">
-        {completedAssessment && (
-          <Link to={`/supply-chain-recommendations/${completedAssessment.id}`}>
+        {assessments.length > 0 && assessments.find(a => a.status === 'completed') && (
+          <Link to={`/supply-chain-recommendations/${assessments.find(a => a.status === 'completed')?.id}`}>
         <button
           className="px-4 py-2 bg-vendorsoluce-navy text-white rounded hover:bg-vendorsoluce-navy/90 transition-colors"
         >
@@ -152,7 +155,7 @@ const SupplyChainResults = () => {
         </button>
           </Link>
         )}
-        {!completedAssessment && (
+        {(!assessments.length || !assessments.find(a => a.status === 'completed')) && (
           <Link to="/supply-chain-recommendations/demo">
             <button
               className="px-4 py-2 bg-vendorsoluce-navy text-white rounded hover:bg-vendorsoluce-navy/90 transition-colors"
