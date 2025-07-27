@@ -1,5 +1,6 @@
- import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Recommendations from '../components/assessments/Recommendations';
 import { generateRecommendationsPdf } from '../utils/generatePdf';
 import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
@@ -46,6 +47,7 @@ interface FilterState {
 }
 
 const SupplyChainRecommendations = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { assessments, loading, error } = useSupplyChainAssessments();
   const [recommendations, setRecommendations] = useState<RecommendationItem[]>([]);
@@ -164,7 +166,7 @@ const SupplyChainRecommendations = () => {
     setIsExporting(true);
     try {
       await generateRecommendationsPdf(
-        'Supply Chain Risk Management Recommendations',
+        t('supplyChainRecommendations.title'),
         filteredRecommendations,
         new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
         'supply-chain-recommendations.pdf'
@@ -251,14 +253,14 @@ const SupplyChainRecommendations = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="text-center py-12">
             <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Error Loading Recommendations</h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{t('supplyChainRecommendations.errors.loadingTitle')}</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6">{error}</p>
             <button
               onClick={() => window.location.reload()}
               className="inline-flex items-center px-4 py-2 bg-vendortal-navy text-white rounded-md hover:bg-vendortal-navy/90 transition-colors"
             >
               <TrendingUp className="h-4 w-4 mr-2" />
-              Retry
+              {t('supplyChainRecommendations.actions.retry')}
             </button>
           </div>
         </div>
@@ -276,10 +278,10 @@ const SupplyChainRecommendations = () => {
               <button
                 onClick={() => navigate('/supply-chain-results')}
                 className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-vendortal-navy focus:ring-offset-2 rounded-md p-1"
-                aria-label="Go back to supply chain results"
+                aria-label={t('supplyChainRecommendations.navigation.backToResults')}
               >
                 <ArrowLeft className="h-5 w-5 mr-1" />
-                Back to Results
+                {t('supplyChainRecommendations.navigation.backToResults')}
               </button>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
@@ -288,7 +290,7 @@ const SupplyChainRecommendations = () => {
                 className="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-vendortal-navy focus:ring-offset-2"
               >
                 <Filter className="h-4 w-4 mr-2" />
-                Filters
+                {t('supplyChainRecommendations.actions.filters')}
               </button>
               <button
                 onClick={handleExport}
@@ -296,7 +298,7 @@ const SupplyChainRecommendations = () => {
                 className="inline-flex items-center px-4 py-2 bg-vendortal-navy text-white rounded-md hover:bg-vendortal-navy/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-vendortal-navy focus:ring-offset-2"
               >
                 <Download className={`h-4 w-4 mr-2 ${isExporting ? 'animate-spin' : ''}`} />
-                {isExporting ? 'Exporting...' : 'Export PDF'}
+                {isExporting ? t('supplyChainRecommendations.actions.exporting') : t('supplyChainRecommendations.actions.exportPdf')}
               </button>
             </div>
           </div>
@@ -304,10 +306,10 @@ const SupplyChainRecommendations = () => {
           <div className="mb-6">
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 flex items-center">
               <Shield className="h-8 w-8 mr-3 text-vendortal-navy" />
-              Supply Chain Risk Management Recommendations
+              {t('supplyChainRecommendations.title')}
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              Based on NIST SP 800-161 Supply Chain Risk Management Practices
+              {t('supplyChainRecommendations.subtitle')}
             </p>
           </div>
 
@@ -316,7 +318,7 @@ const SupplyChainRecommendations = () => {
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Total Recommendations</p>
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('supplyChainRecommendations.stats.totalRecommendations')}</p>
                   <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.total}</p>
                 </div>
                 <FileText className="h-8 w-8 text-blue-500" />
@@ -325,7 +327,7 @@ const SupplyChainRecommendations = () => {
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Critical Priority</p>
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('supplyChainRecommendations.stats.criticalPriority')}</p>
                   <p className="text-2xl font-bold text-red-600 dark:text-red-400">{stats.critical}</p>
                 </div>
                 <AlertCircle className="h-8 w-8 text-red-500" />
@@ -334,7 +336,7 @@ const SupplyChainRecommendations = () => {
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">In Progress</p>
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('supplyChainRecommendations.stats.inProgress')}</p>
                   <p className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">{stats.inProgress}</p>
                 </div>
                 <Clock className="h-8 w-8 text-yellow-500" />
@@ -343,7 +345,7 @@ const SupplyChainRecommendations = () => {
             <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Completed</p>
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{t('supplyChainRecommendations.stats.completed')}</p>
                   <p className="text-2xl font-bold text-green-600 dark:text-green-400">{stats.completed}</p>
                 </div>
                 <CheckCircle className="h-8 w-8 text-green-500" />
@@ -357,7 +359,7 @@ const SupplyChainRecommendations = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search recommendations..."
+                placeholder={t('supplyChainRecommendations.search.placeholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-vendortal-navy focus:border-transparent transition-colors"
@@ -368,68 +370,68 @@ const SupplyChainRecommendations = () => {
               <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Priority</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('supplyChainRecommendations.filters.priority')}</label>
                     <select
                       value={filters.priority}
                       onChange={(e) => setFilters({...filters, priority: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendortal-navy focus:border-transparent"
                     >
-                      <option value="all">All Priorities</option>
+                      <option value="all">{t('supplyChainRecommendations.filters.allPriorities')}</option>
                       {filterOptions.priorities.map(priority => (
-                        <option key={priority} value={priority} className="capitalize">{priority}</option>
+                        <option key={priority} value={priority} className="capitalize">{t(`supplyChainRecommendations.priorities.${priority}`)}</option>
                       ))}
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('supplyChainRecommendations.filters.category')}</label>
                     <select
                       value={filters.category}
                       onChange={(e) => setFilters({...filters, category: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendortal-navy focus:border-transparent"
                     >
-                      <option value="all">All Categories</option>
+                      <option value="all">{t('supplyChainRecommendations.filters.allCategories')}</option>
                       {filterOptions.categories.map(category => (
                         <option key={category} value={category}>{category}</option>
                       ))}
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Timeframe</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('supplyChainRecommendations.filters.timeframe')}</label>
                     <select
                       value={filters.timeframe}
                       onChange={(e) => setFilters({...filters, timeframe: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendortal-navy focus:border-transparent"
                     >
-                      <option value="all">All Timeframes</option>
+                      <option value="all">{t('supplyChainRecommendations.filters.allTimeframes')}</option>
                       {filterOptions.timeframes.map(timeframe => (
-                        <option key={timeframe} value={timeframe} className="capitalize">{timeframe.replace('-', ' ')}</option>
+                        <option key={timeframe} value={timeframe} className="capitalize">{t(`supplyChainRecommendations.timeframes.${timeframe.replace('-', '')}`)}</option>
                       ))}
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Effort</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('supplyChainRecommendations.filters.effort')}</label>
                     <select
                       value={filters.effort}
                       onChange={(e) => setFilters({...filters, effort: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendortal-navy focus:border-transparent"
                     >
-                      <option value="all">All Effort Levels</option>
+                      <option value="all">{t('supplyChainRecommendations.filters.allEffortLevels')}</option>
                       {filterOptions.efforts.map(effort => (
-                        <option key={effort} value={effort} className="capitalize">{effort}</option>
+                        <option key={effort} value={effort} className="capitalize">{t(`supplyChainRecommendations.efforts.${effort}`)}</option>
                       ))}
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Status</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t('supplyChainRecommendations.filters.status')}</label>
                     <select
                       value={filters.status}
                       onChange={(e) => setFilters({...filters, status: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-vendortal-navy focus:border-transparent"
                     >
-                      <option value="all">All Statuses</option>
-                      <option value="not-started">Not Started</option>
-                      <option value="in-progress">In Progress</option>
-                      <option value="completed">Completed</option>
+                      <option value="all">{t('supplyChainRecommendations.filters.allStatuses')}</option>
+                      <option value="not-started">{t('supplyChainRecommendations.statuses.notStarted')}</option>
+                      <option value="in-progress">{t('supplyChainRecommendations.statuses.inProgress')}</option>
+                      <option value="completed">{t('supplyChainRecommendations.statuses.completed')}</option>
                     </select>
                   </div>
                 </div>
@@ -444,7 +446,7 @@ const SupplyChainRecommendations = () => {
                     })}
                     className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
                   >
-                    Clear all filters
+                    {t('supplyChainRecommendations.filters.clearAll')}
                   </button>
                 </div>
               </div>
@@ -457,8 +459,8 @@ const SupplyChainRecommendations = () => {
           {filteredRecommendations.length === 0 ? (
             <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
               <FileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No recommendations found</h3>
-              <p className="text-gray-600 dark:text-gray-400">Try adjusting your search terms or filters.</p>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('supplyChainRecommendations.emptyState.title')}</h3>
+              <p className="text-gray-600 dark:text-gray-400">{t('supplyChainRecommendations.emptyState.description')}</p>
             </div>
           ) : (
             filteredRecommendations.map((recommendation) => (
@@ -472,7 +474,7 @@ const SupplyChainRecommendations = () => {
                       <div className="flex items-start gap-3 mb-3">
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getPriorityColor(recommendation.priority)}`}>
                           {getPriorityIcon(recommendation.priority)}
-                          <span className="ml-1 capitalize">{recommendation.priority}</span>
+                          <span className="ml-1 capitalize">{t(`supplyChainRecommendations.priorities.${recommendation.priority}`)}</span>
                         </span>
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 border border-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600">
                           {recommendation.category}
@@ -494,39 +496,42 @@ const SupplyChainRecommendations = () => {
                       }`}
                     >
                       <CheckCircle className="h-4 w-4 mr-1" />
-                      {completedRecommendations.has(recommendation.id) ? 'Completed' : 'Mark Complete'}
+                      {completedRecommendations.has(recommendation.id) 
+                        ? t('supplyChainRecommendations.actions.completed') 
+                        : t('supplyChainRecommendations.actions.markComplete')
+                      }
                     </button>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 text-sm">
                     <div className="flex items-center text-gray-600 dark:text-gray-400">
                       <Calendar className="h-4 w-4 mr-2" />
-                      <span className="font-medium">Timeframe:</span>
-                      <span className="ml-1 capitalize">{recommendation.timeframe.replace('-', ' ')}</span>
+                      <span className="font-medium">{t('supplyChainRecommendations.labels.timeframe')}:</span>
+                      <span className="ml-1 capitalize">{t(`supplyChainRecommendations.timeframes.${recommendation.timeframe.replace('-', '')}`)}</span>
                     </div>
                     <div className="flex items-center text-gray-600 dark:text-gray-400">
                       <Users className="h-4 w-4 mr-2" />
-                      <span className="font-medium">Effort:</span>
-                      <span className="ml-1 capitalize">{recommendation.effort}</span>
+                      <span className="font-medium">{t('supplyChainRecommendations.labels.effort')}:</span>
+                      <span className="ml-1 capitalize">{t(`supplyChainRecommendations.efforts.${recommendation.effort}`)}</span>
                     </div>
                     <div className="flex items-center text-gray-600 dark:text-gray-400">
                       <TrendingUp className="h-4 w-4 mr-2" />
-                      <span className="font-medium">Impact:</span>
-                      <span className="ml-1">High</span>
+                      <span className="font-medium">{t('supplyChainRecommendations.labels.impact')}:</span>
+                      <span className="ml-1">{t('supplyChainRecommendations.impactLevels.high')}</span>
                     </div>
                   </div>
 
                   <details className="group">
                     <summary className="cursor-pointer text-vendortal-navy hover:text-vendortal-navy/80 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-vendortal-navy focus:ring-offset-2 rounded">
-                      View Implementation Steps
+                      {t('supplyChainRecommendations.actions.viewSteps')}
                     </summary>
                     <div className="mt-4 pl-4 border-l-2 border-gray-200 dark:border-gray-700">
                       <div className="mb-4">
-                        <h4 className="font-medium text-gray-900 dark:text-white mb-2">Expected Impact:</h4>
+                        <h4 className="font-medium text-gray-900 dark:text-white mb-2">{t('supplyChainRecommendations.labels.expectedImpact')}:</h4>
                         <p className="text-gray-600 dark:text-gray-300 text-sm">{recommendation.impact}</p>
                       </div>
                       <div className="mb-4">
-                        <h4 className="font-medium text-gray-900 dark:text-white mb-2">Implementation Steps:</h4>
+                        <h4 className="font-medium text-gray-900 dark:text-white mb-2">{t('supplyChainRecommendations.labels.implementationSteps')}:</h4>
                         <ol className="list-decimal list-inside space-y-2 text-sm text-gray-600 dark:text-gray-300">
                           {recommendation.steps.map((step, index) => (
                             <li key={index}>{step}</li>
@@ -535,7 +540,7 @@ const SupplyChainRecommendations = () => {
                       </div>
                       {recommendation.references.length > 0 && (
                         <div>
-                          <h4 className="font-medium text-gray-900 dark:text-white mb-2">References:</h4>
+                          <h4 className="font-medium text-gray-900 dark:text-white mb-2">{t('supplyChainRecommendations.labels.references')}:</h4>
                           <ul className="space-y-1 text-sm">
                             {recommendation.references.map((ref, index) => (
                               <li key={index}>
@@ -563,7 +568,10 @@ const SupplyChainRecommendations = () => {
         {/* Show results count */}
         {filteredRecommendations.length > 0 && (
           <div className="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
-            Showing {filteredRecommendations.length} of {recommendations.length} recommendations
+            {t('supplyChainRecommendations.resultsCount', { 
+              filtered: filteredRecommendations.length, 
+              total: recommendations.length 
+            })}
           </div>
         )}
       </div>
