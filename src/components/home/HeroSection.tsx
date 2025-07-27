@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Shield, Target, Users, CheckCircle, Zap, Eye } from 'lucide-react';
 import Button from '../ui/Button';
 import { useTranslation } from 'react-i18next';
+import TextCarousel from '../common/TextCarousel';
 
 const HeroSection: React.FC = () => {
   const { t } = useTranslation();
@@ -11,6 +12,15 @@ const HeroSection: React.FC = () => {
   const isDarkTheme = document.documentElement.classList.contains('dark') || 
                      localStorage.getItem('theme') === 'dark' ||
                      window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  // Define rotating texts for the carousel
+  const carouselTexts = [
+    t('home.hero.description'),
+    "Assess vendor risks with NIST SP 800-161 aligned frameworks and automated scoring systems.",
+    "Analyze Software Bills of Materials (SBOMs) for vulnerabilities and license compliance issues.",
+    "Monitor your supply chain continuously with real-time threat intelligence and risk alerts.",
+    "Generate compliance reports for audits and meet federal security requirements effortlessly."
+  ];
   
   return (
     <section className="relative text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -51,9 +61,14 @@ const HeroSection: React.FC = () => {
               {t('home.hero.subtitle')}
             </p>
             
-            <p className="text-xl text-gray-100 mb-10 max-w-3xl mx-auto opacity-0 animate-fade-in-up animate-delay-500">
-              {t('home.hero.description')}
-            </p>
+            <div className="text-xl text-gray-100 mb-10 max-w-3xl mx-auto opacity-0 animate-fade-in-up animate-delay-500">
+              <TextCarousel 
+                texts={carouselTexts}
+                interval={4000}
+                className="min-h-[3.5rem] flex items-center justify-center"
+                textClassName="text-center leading-relaxed"
+              />
+            </div>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12 opacity-0 animate-fade-in-up animate-delay-700">
               <Link to="/supply-chain-assessment">
