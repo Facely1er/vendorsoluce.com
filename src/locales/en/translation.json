@@ -501,6 +501,37 @@
     "saved": "Progress saved automatically",
     "saveError": "Error saving progress",
     "sections": "Sections",
+    
+    "startScreen": {
+      "startAssessment": "Start Assessment",
+      "nistAligned": "NIST Aligned",
+      "nistDescription": "Assessment based on NIST SP 800-161 Supply Chain Risk Management framework",
+      "comprehensive": "Comprehensive",
+      "comprehensiveDescription": "24 questions across 6 key supply chain security domains",
+      "actionable": "Actionable",
+      "actionableDescription": "Get personalized recommendations and a detailed compliance report",
+      "infoMessage": "This assessment will help you evaluate your organization's supply chain security posture against NIST SP 800-161 guidelines. You'll receive a detailed score and actionable recommendations to improve your security posture."
+    },
+    
+    "onboarding": {
+      "nameYourAssessment": "Name Your Assessment",
+      "assessmentDescription": "Give your assessment a descriptive name to help you identify it later. This name will appear in your assessment list and reports.",
+      "assessmentNameLabel": "Assessment Name",
+      "assessmentNamePlaceholder": "e.g., Q3 2025 Supply Chain Assessment",
+      "whatToExpect": "What to expect:",
+      "expectation1": "24 questions across 6 supply chain security domains",
+      "expectation2": "Approximately 15-20 minutes to complete",
+      "expectation3": "Your progress is automatically saved",
+      "expectation4": "Detailed results and recommendations",
+      "continueToAssessment": "Continue to Assessment",
+      "back": "Back"
+    },
+    
+    "progress": {
+      "progressLabel": "Progress: {{answered}} / {{total}} questions",
+      "questionsAnswered": "{{count}} / {{total}}"
+    },
+    
     "supplyChain": {
       "title": "Supply Chain Risk Assessment",
       "description": "Comprehensive assessment based on NIST SP 800-161 framework to evaluate supplier security posture and supply chain risks.",
