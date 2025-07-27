@@ -1396,5 +1396,79 @@
   },
   "app": {
     "name": "Supply Chain Security Platform"
+  },
+  "about": {
+    "title": "About VendorSoluce",
+    "subtitle": "We're on a mission to make supply chain security accessible, actionable, and aligned with federal standards for organizations of all sizes.",
+    "story": {
+      "title": "Our Story",
+      "paragraph1": "VendorSoluce was founded in 2023 by a team of cybersecurity and supply chain experts who recognized the critical need for better tools to manage third-party risk, especially for organizations working with federal contracts.",
+      "paragraph2": "After years of helping organizations manually implement NIST SP 800-161 controls and struggling with spreadsheets and disconnected tools, we decided to build a comprehensive platform that makes supply chain risk management accessible, effective, and aligned with federal requirements.",
+      "paragraph3": "Today, VendorSoluce helps organizations of all sizes assess, monitor, and mitigate risks across their supply chain with powerful tools designed specifically for NIST SP 800-161 compliance."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To secure the digital supply chain by making enterprise-grade security assessments accessible to all organizations and aligning them with federal compliance requirements."
+    },
+    "vision": {
+      "title": "Our Vision", 
+      "description": "A world where organizations can confidently manage their supply chain risks with tools that are powerful yet simple to use, enabling them to focus on innovation while maintaining security and compliance."
+    },
+    "values": {
+      "title": "Our Values",
+      "securityFirst": {
+        "title": "Security First",
+        "description": "We believe in security by design, not as an afterthought. This principle guides our product development and our company operations."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "We strive for excellence in all we do, from our product quality to customer support, and maintaining the highest standards."
+      },
+      "integrity": {
+        "title": "Integrity",
+        "description": "We build trust through transparency, honest communication, and always doing what's right for our customers and partners."
+      }
+    },
+    "whyChoose": {
+      "title": "Why Choose VendorSoluce",
+      "nistAlignment": {
+        "title": "NIST Alignment",
+        "description": "Our platform is built specifically for NIST SP 800-161 compliance, making it ideal for federal contractors and organizations working with government agencies."
+      },
+      "federalExperience": {
+        "title": "Federal Experience", 
+        "description": "Founded by leaders with extensive experience working with federal agencies and contractors on supply chain security challenges."
+      },
+      "comprehensiveSolution": {
+        "title": "Comprehensive Solution",
+        "description": "From vendor assessments to SBOM analysis and risk dashboards, we provide all the tools you need for effective supply chain risk management."
+      },
+      "apiFirst": {
+        "title": "API-First Architecture",
+        "description": "Our API-first approach allows for seamless integration with your existing systems, workflows, and security tools."
+      }
+    },
+    "careers": {
+      "title": "Join Our Team",
+      "subtitle": "We're always looking for talented individuals who are passionate about security, supply chain risk management, and building great products.",
+      "positions": {
+        "securityEngineer": {
+          "title": "Security Engineer",
+          "description": "Help build and secure our platform with a focus on supply chain security best practices.",
+          "type": "Remote • Full-time"
+        },
+        "productManager": {
+          "title": "Product Manager", 
+          "description": "Lead the development of new features focused on supply chain risk management.",
+          "type": "Remote • Full-time"
+        },
+        "customerSuccess": {
+          "title": "Customer Success Engineer",
+          "description": "Help customers implement and get the most out of our supply chain risk management tools.",
+          "type": "Remote • Full-time"
+        }
+      },
+      "viewAllPositions": "View All Open Positions"
+    }
   }
 }
