@@ -30,7 +30,7 @@ import APIDocumentation from './pages/APIDocumentation';
 import IntegrationGuides from './pages/IntegrationGuides';
 import NISTChecklist from './pages/tools/NISTChecklist';
 import SBOMQuickScan from './pages/tools/SBOMQuickScan';
-import VendorRiskCalculator from './pages/tools/VendorRiskCalculator';
+import VendorRiskRadar from './pages/tools/VendorRiskRadar';
 import VendorSecurityAssessments from './pages/VendorSecurityAssessments';
 import VendorAssessmentPortal from './pages/VendorAssessmentPortal';
 
@@ -59,7 +59,7 @@ function App() {
                   {/* Tools - can be public or protected based on requirements */}
                   <Route path="/tools/nist-checklist" element={<NISTChecklist />} />
                   <Route path="/tools/sbom-quick-scan" element={<SBOMQuickScan />} />
-                  <Route path="/tools/vendor-risk-calculator" element={<VendorRiskCalculator />} />
+                  <Route path="/tools/vendor-risk-radar" element={<VendorRiskRadar />} />
                   
                   {/* Assessment routes - public access for better user experience */}
                   <Route path="/supply-chain-assessment" element={<SupplyChainAssessment />} />

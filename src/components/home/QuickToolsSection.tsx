@@ -18,11 +18,11 @@ const QuickToolsSection: React.FC = () => {
       action: t('quickTools.sbomScan.action')
     },
     {
-      id: 'vendor-risk-calculator',
-      title: t('quickTools.riskCalculator.title'),
-      description: t('quickTools.riskCalculator.description'),
+      id: 'vendor-risk-radar',
+      title: t('quickTools.riskRadar.title'),
+      description: t('quickTools.riskRadar.description'),
       icon: 'Calculator',
-      action: t('quickTools.riskCalculator.action')
+      action: t('quickTools.riskRadar.action')
     },
     {
       id: 'nist-checklist',
@@ -48,8 +48,8 @@ const QuickToolsSection: React.FC = () => {
     switch (id) {
       case 'sbom-quick-scan':
         return '/tools/sbom-quick-scan';
-      case 'vendor-risk-calculator':
-        return '/tools/vendor-risk-calculator';
+      case 'vendor-risk-radar':
+        return '/tools/vendor-risk-radar';
       case 'nist-checklist':
         return '/tools/nist-checklist';
       default:
@@ -83,9 +83,9 @@ const QuickToolsSection: React.FC = () => {
               
               <div className="p-6 mt-auto">
                 <Link to={getToolPath(tool.id)}>
-                  <Button 
-                    variant={tool.id === 'sbom-quick-scan' ? 'secondary' : 
-                             tool.id === 'vendor-risk-calculator' ? 'primary' : 'outline'}
+                  <Button
+                    variant={tool.id === 'sbom-quick-scan' ? 'secondary' :
+                             tool.id === 'vendor-risk-radar' ? 'primary' : 'outline'}
                     className="w-full"
                   >
                     {tool.action}

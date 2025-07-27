@@ -248,7 +248,7 @@ const HowItWorks: React.FC = () => {
               {t('howItWorks.quickTools.riskCalculator.title')}
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-4">
-              {t('howItWorks.quickTools.riskCalculator.description')}
+              {t('quickTools.riskRadar.description')}
             </p>
             <Link to="/tools/vendor-risk-calculator">
               <Button variant="outline" size="sm" className="w-full">
