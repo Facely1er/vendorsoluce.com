@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Recommendations from '../components/assessments/Recommendations';
 import { generateRecommendationsPdf } from '../utils/generatePdf';
 import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
@@ -22,8 +23,104 @@ interface RecommendationItem {
 
 const SupplyChainRecommendations = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { assessments, loading } = useSupplyChainAssessments();
   const [recommendations, setRecommendations] = useState<RecommendationItem[]>([]);
+  
+  // Build recommendations from translation keys
+  const buildRecommendationsFromTranslations = (): RecommendationItem[] => {
+    const recommendationIds = ['sc1', 'sc2', 'sc3', 'sc4', 'sc5', 'sc6', 'sc7', 'sc8'];
+    
+    return recommendationIds.map(id => ({
+      id,
+      title: t(`recommendations.items.${id}.title`),
+      description: t(`recommendations.items.${id}.description`),
+      priority: id === 'sc1' || id === 'sc5' ? 'critical' : 
+                id === 'sc2' || id === 'sc3' || id === 'sc4' ? 'high' : 
+                id === 'sc6' || id === 'sc7' ? 'medium' : 'low',
+      category: id === 'sc1' ? t('recommendations.categories.supplierRiskManagement') :
+                id === 'sc2' ? t('recommendations.categories.incidentResponse') :
+                id === 'sc3' ? t('recommendations.categories.vulnerabilityManagement') :
+                id === 'sc4' ? t('recommendations.categories.governance') :
+                id === 'sc5' ? t('recommendations.categories.accessControl') :
+                id === 'sc6' ? t('recommendations.categories.businessContinuity') :
+                id === 'sc7' ? t('recommendations.categories.informationSharing') :
+                t('recommendations.categories.softwareSecurity'),
+      effort: id === 'sc2' || id === 'sc5' ? 'significant' : 'moderate',
+      timeframe: id === 'sc5' ? 'immediate' : 
+                 id === 'sc1' || id === 'sc2' || id === 'sc3' ? 'short-term' : 
+                 'medium-term',
+      impact: t(`recommendations.items.${id}.impact`),
+      steps: t(`recommendations.items.${id}.steps`, { returnObjects: true }) as string[],
+      references: getReferencesForRecommendation(id)
+    }));
+  };
+
+  // Get references for each recommendation
+  const getReferencesForRecommendation = (id: string) => {
+    const baseUrls = {
+      nist161: "https://csrc.nist.gov/publications/detail/sp/800-161/rev-1/final",
+      iso28001: "https://www.iso.org/standard/45654.html",
+      nist161AppendixC: "https://csrc.nist.gov/publications/detail/sp/800-161/rev-1/final",
+      cisaSupplyChain: "https://www.cisa.gov/cyber-supply-chain-risk-management",
+      nist218: "https://csrc.nist.gov/publications/detail/sp/800-218/final",
+      ntiaSbom: "https://www.ntia.gov/sbom",
+      nist8276: "https://csrc.nist.gov/publications/detail/nistir/8276/final",
+      csaCAI: "https://cloudsecurityalliance.org/research/guidance/",
+      nist207: "https://csrc.nist.gov/publications/detail/sp/800-207/final",
+      nsaCisaRemote: "https://www.cisa.gov/publication/securing-remote-access-software",
+      nist34: "https://csrc.nist.gov/publications/detail/sp/800-34/rev-1/final",
+      iso22301: "https://www.iso.org/standard/75106.html",
+      nist150: "https://csrc.nist.gov/publications/detail/sp/800-150/final",
+      cisaInfoSharing: "https://www.cisa.gov/information-sharing-and-awareness",
+      slsaFramework: "https://slsa.dev/"
+    };
+
+    switch (id) {
+      case 'sc1':
+        return [
+          { title: t('recommendations.references.nist161'), url: baseUrls.nist161 },
+          { title: t('recommendations.references.iso28001'), url: baseUrls.iso28001 }
+        ];
+      case 'sc2':
+        return [
+          { title: t('recommendations.references.nist161AppendixC'), url: baseUrls.nist161AppendixC },
+          { title: t('recommendations.references.cisaSupplyChain'), url: baseUrls.cisaSupplyChain }
+        ];
+      case 'sc3':
+        return [
+          { title: t('recommendations.references.nist218'), url: baseUrls.nist218 },
+          { title: t('recommendations.references.ntiaSbom'), url: baseUrls.ntiaSbom }
+        ];
+      case 'sc4':
+        return [
+          { title: t('recommendations.references.nist8276'), url: baseUrls.nist8276 },
+          { title: t('recommendations.references.csaCAI'), url: baseUrls.csaCAI }
+        ];
+      case 'sc5':
+        return [
+          { title: t('recommendations.references.nist207'), url: baseUrls.nist207 },
+          { title: t('recommendations.references.nsaCisaRemote'), url: baseUrls.nsaCisaRemote }
+        ];
+      case 'sc6':
+        return [
+          { title: t('recommendations.references.nist34'), url: baseUrls.nist34 },
+          { title: t('recommendations.references.iso22301'), url: baseUrls.iso22301 }
+        ];
+      case 'sc7':
+        return [
+          { title: t('recommendations.references.nist150'), url: baseUrls.nist150 },
+          { title: t('recommendations.references.cisaInfoSharing'), url: baseUrls.cisaInfoSharing }
+        ];
+      case 'sc8':
+        return [
+          { title: t('recommendations.references.nist218'), url: baseUrls.nist218 },
+          { title: t('recommendations.references.slsaFramework'), url: baseUrls.slsaFramework }
+        ];
+      default:
+        return [];
+    }
+  };
   
   // Generate recommendations based on assessment results
   useEffect(() => {
@@ -37,53 +134,65 @@ const SupplyChainRecommendations = () => {
         const generatedRecommendations = generateRecommendations(sectionScores);
         setRecommendations(generatedRecommendations);
       } else {
-        // If no completed assessment found, use mock recommendations
-        setRecommendations(mockRecommendations);
+        // If no completed assessment found, use translated recommendations
+        const translatedRecommendations = buildRecommendationsFromTranslations();
+        setRecommendations(translatedRecommendations);
       }
     } else if (!loading) {
-      // If no assessments found, use mock recommendations
-      setRecommendations(mockRecommendations);
+      // If no assessments found, use translated recommendations
+      const translatedRecommendations = buildRecommendationsFromTranslations();
+      setRecommendations(translatedRecommendations);
     }
-  }, [assessments, loading]);
+  }, [assessments, loading, t]);
 
   // Generate recommendations based on section scores
   const generateRecommendations = (sectionScores: any[]): RecommendationItem[] => {
+    const allRecommendations = buildRecommendationsFromTranslations();
     const generatedRecommendations: RecommendationItem[] = [];
     
     // Find low-scoring sections and add relevant recommendations
     sectionScores.forEach(section => {
       if (section.percentage < 60) {
         // Add recommendations based on section title
-        if (section.title.includes('Supplier Risk')) {
-          generatedRecommendations.push({
-            ...mockRecommendations[0], // Use Supplier Risk Tiering recommendation
-            priority: section.percentage < 40 ? 'critical' : 'high'
-          });
+        if (section.title.includes('Supplier') || section.title.includes('Fournisseur')) {
+          const recommendation = allRecommendations.find(r => r.id === 'sc1');
+          if (recommendation) {
+            generatedRecommendations.push({
+              ...recommendation,
+              priority: section.percentage < 40 ? 'critical' : 'high'
+            });
+          }
         }
         
-        if (section.title.includes('Incident Response')) {
-          generatedRecommendations.push({
-            ...mockRecommendations[1], // Use Incident Response recommendation
-            priority: section.percentage < 40 ? 'critical' : 'high'
-          });
+        if (section.title.includes('Incident') || section.title.includes('Réponse')) {
+          const recommendation = allRecommendations.find(r => r.id === 'sc2');
+          if (recommendation) {
+            generatedRecommendations.push({
+              ...recommendation,
+              priority: section.percentage < 40 ? 'critical' : 'high'
+            });
+          }
         }
         
-        if (section.title.includes('Vulnerability')) {
-          generatedRecommendations.push({
-            ...mockRecommendations[2], // Use Vulnerability Management recommendation
-            priority: section.percentage < 40 ? 'critical' : 'high'
-          });
+        if (section.title.includes('Vulnerability') || section.title.includes('Vulnérabilité')) {
+          const recommendation = allRecommendations.find(r => r.id === 'sc3');
+          if (recommendation) {
+            generatedRecommendations.push({
+              ...recommendation,
+              priority: section.percentage < 40 ? 'critical' : 'high'
+            });
+          }
         }
       }
     });
     
-    // If no specific recommendations were added, use the mock ones
+    // If no specific recommendations were added, use all translated recommendations
     if (generatedRecommendations.length === 0) {
-      return mockRecommendations;
+      return allRecommendations;
     }
     
     // Add some medium/low priority recommendations to round out the list
-    const remainingRecommendations = mockRecommendations.filter(rec => 
+    const remainingRecommendations = allRecommendations.filter(rec => 
       !generatedRecommendations.some(genRec => genRec.id === rec.id)
     );
     
@@ -97,11 +206,12 @@ const SupplyChainRecommendations = () => {
   };
 
   const handleExport = async () => {
+    const filename = t('recommendations.supplyChain.exportFilename');
     await generateRecommendationsPdf(
-      'Supply Chain Risk Management Recommendations',
+      t('recommendations.supplyChain.title'),
       recommendations,
       new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
-      'supply-chain-recommendations.pdf'
+      filename
     );
   };
 
@@ -116,8 +226,8 @@ const SupplyChainRecommendations = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <Recommendations
-        title="Supply Chain Risk Management Recommendations"
-        subtitle="Based on NIST SP 800-161 Supply Chain Risk Management Practices"
+        title={t('recommendations.supplyChain.title')}
+        subtitle={t('recommendations.supplyChain.subtitle')}
         assessmentType="supplychain"
         recommendations={recommendations}
         onBack={() => navigate('/supply-chain-results')}
@@ -126,232 +236,5 @@ const SupplyChainRecommendations = () => {
     </div>
   );
 };
-
-// Mock recommendations data
-const mockRecommendations: RecommendationItem[] = [
-  {
-    id: "sc1",
-    title: "Implement Supplier Risk Tiering System",
-    description: "Develop a formal risk-based tiering system for suppliers to prioritize assessment and monitoring activities based on criticality and access to sensitive data or systems.",
-    priority: "critical",
-    category: "Supplier Risk Management",
-    effort: "moderate",
-    timeframe: "short-term",
-    impact: "A structured supplier tiering system enables efficient allocation of resources to the most critical supplier relationships and helps focus security requirements proportional to risk.",
-    steps: [
-      "Define criteria for supplier categorization (e.g., access to sensitive data, operational importance, ease of replacement)",
-      "Develop a scoring methodology to determine supplier tier assignment",
-      "Classify all existing suppliers according to the new system",
-      "Document differentiated security requirements for each tier",
-      "Implement tier-specific assessment and monitoring processes"
-    ],
-    references: [
-      {
-        title: "NIST SP 800-161r1 - Supply Chain Risk Management Practices",
-        url: "https://csrc.nist.gov/publications/detail/sp/800-161/rev-1/final"
-      },
-      {
-        title: "ISO 28001:2007 Security management systems for the supply chain",
-        url: "https://www.iso.org/standard/45654.html"
-      }
-    ]
-  },
-  {
-    id: "sc2",
-    title: "Establish Supply Chain Incident Response Procedures",
-    description: "Develop specific incident response procedures for supply chain security incidents, including third-party breaches, compromised software components, and hardware tampering.",
-    priority: "high",
-    category: "Incident Response",
-    effort: "significant",
-    timeframe: "short-term",
-    impact: "Dedicated supply chain incident procedures reduce response time and improve coordination during incidents that involve suppliers or third parties.",
-    steps: [
-      "Identify supply chain incident scenarios specific to your organization",
-      "Define roles and responsibilities for supply chain incident response",
-      "Establish communication protocols with key suppliers",
-      "Create playbooks for common supply chain incident types",
-      "Conduct tabletop exercises to test procedures",
-      "Document recovery and continuity procedures for critical supplier disruptions"
-    ],
-    references: [
-      {
-        title: "NIST SP 800-161r1 - Appendix C: Supply Chain Threat Scenarios",
-        url: "https://csrc.nist.gov/publications/detail/sp/800-161/rev-1/final"
-      },
-      {
-        title: "CISA Cyber Supply Chain Risk Management",
-        url: "https://www.cisa.gov/cyber-supply-chain-risk-management"
-      }
-    ]
-  },
-  {
-    id: "sc3",
-    title: "Implement Software Component Analysis",
-    description: "Deploy automated tools to inventory and analyze software dependencies, libraries, and components used in applications to identify potential security vulnerabilities in the software supply chain.",
-    priority: "high",
-    category: "Vulnerability Management",
-    effort: "moderate",
-    timeframe: "short-term",
-    impact: "Software component analysis enables early identification of vulnerable dependencies and reduces the risk of supply chain compromises through third-party code.",
-    steps: [
-      "Select and implement a software composition analysis (SCA) tool",
-      "Integrate SCA into development and build pipelines",
-      "Generate a software bill of materials (SBOM) for all applications",
-      "Establish a process to review and remediate identified vulnerabilities",
-      "Document acceptable risk thresholds for different component types",
-      "Implement continuous monitoring for newly discovered vulnerabilities"
-    ],
-    references: [
-      {
-        title: "NIST SP 800-218 - Secure Software Development Framework",
-        url: "https://csrc.nist.gov/publications/detail/sp/800-218/final"
-      },
-      {
-        title: "NTIA Software Bill of Materials",
-        url: "https://www.ntia.gov/sbom"
-      }
-    ]
-  },
-  {
-    id: "sc4",
-    title: "Implement Vendor Security Requirements in Contracts",
-    description: "Develop standardized security language for supplier contracts that clearly defines security requirements, assessment rights, incident notification, and compliance expectations.",
-    priority: "high",
-    category: "Governance",
-    effort: "moderate",
-    timeframe: "medium-term",
-    impact: "Contractual security requirements establish clear expectations and provide leverage to enforce security practices across the supply chain.",
-    steps: [
-      "Work with legal and procurement teams to develop standard security clauses",
-      "Define tiered security requirements based on supplier criticality",
-      "Include requirements for incident notification, right-to-audit, and vulnerability disclosure",
-      "Establish consequences for non-compliance with security requirements",
-      "Implement a review process for security terms in all new contracts",
-      "Develop a roadmap for updating existing contracts"
-    ],
-    references: [
-      {
-        title: "NIST IR 8276 - Key Practices in Cyber Supply Chain Risk Management",
-        url: "https://csrc.nist.gov/publications/detail/nistir/8276/final"
-      },
-      {
-        title: "Cloud Security Alliance - Consensus Assessments Initiative Questionnaire",
-        url: "https://cloudsecurityalliance.org/research/guidance/"
-      }
-    ]
-  },
-  {
-    id: "sc5",
-    title: "Create Secure Supplier Remote Access Controls",
-    description: "Implement enhanced security controls for supplier remote access to internal systems, including dedicated access pathways, MFA, and granular monitoring.",
-    priority: "critical",
-    category: "Access Control",
-    effort: "significant",
-    timeframe: "immediate",
-    impact: "Secured supplier access reduces the risk of unauthorized access through trusted third-party connections, a common attack vector in supply chain compromises.",
-    steps: [
-      "Inventory all supplier remote access connections",
-      "Implement dedicated access methods (e.g., VPNs, secure gateways) for supplier connections",
-      "Require MFA for all supplier remote access",
-      "Implement just-in-time and just-enough access principles",
-      "Deploy enhanced monitoring and logging for supplier activities",
-      "Establish regular access review processes for supplier accounts"
-    ],
-    references: [
-      {
-        title: "NIST SP 800-207 - Zero Trust Architecture",
-        url: "https://csrc.nist.gov/publications/detail/sp/800-207/final"
-      },
-      {
-        title: "NSA/CISA Guidance for Securing Remote Access",
-        url: "https://www.cisa.gov/publication/securing-remote-access-software"
-      }
-    ]
-  },
-  {
-    id: "sc6",
-    title: "Develop Supplier Contingency Plans",
-    description: "Create contingency plans for critical supplier disruptions, including identification of alternate suppliers, service continuity procedures, and emergency response actions.",
-    priority: "medium",
-    category: "Business Continuity",
-    effort: "moderate",
-    timeframe: "medium-term",
-    impact: "Supplier contingency planning improves organizational resilience and reduces the impact of supply chain disruptions.",
-    steps: [
-      "Identify single points of failure in the supply chain",
-      "Qualify alternate suppliers for critical components",
-      "Develop continuity procedures for supplier disruptions",
-      "Create emergency acquisition procedures",
-      "Establish inventory management strategies for critical components",
-      "Test contingency plans through tabletop exercises"
-    ],
-    references: [
-      {
-        title: "NIST SP 800-34r1 - Contingency Planning Guide",
-        url: "https://csrc.nist.gov/publications/detail/sp/800-34/rev-1/final"
-      },
-      {
-        title: "ISO 22301 - Business Continuity Management",
-        url: "https://www.iso.org/standard/75106.html"
-      }
-    ]
-  },
-  {
-    id: "sc7",
-    title: "Establish Threat Intelligence Sharing with Suppliers",
-    description: "Create a framework for sharing relevant threat intelligence with key suppliers and receiving intelligence about supply chain threats from partners.",
-    priority: "medium",
-    category: "Information Sharing",
-    effort: "moderate",
-    timeframe: "medium-term",
-    impact: "Collaborative threat intelligence sharing improves detection and prevention capabilities across the supply chain ecosystem.",
-    steps: [
-      "Identify the types of threat intelligence relevant to share with suppliers",
-      "Establish secure channels for intelligence exchange",
-      "Develop information sharing agreements with key suppliers",
-      "Implement automated threat intelligence sharing where possible",
-      "Join relevant information sharing communities like ISACs",
-      "Create processes to act on received intelligence"
-    ],
-    references: [
-      {
-        title: "NIST SP 800-150 - Guide to Cyber Threat Information Sharing",
-        url: "https://csrc.nist.gov/publications/detail/sp/800-150/final"
-      },
-      {
-        title: "CISA Information Sharing and Awareness",
-        url: "https://www.cisa.gov/information-sharing-and-awareness"
-      }
-    ]
-  },
-  {
-    id: "sc8",
-    title: "Implement Secure Software Delivery Verification",
-    description: "Establish processes to verify the integrity and authenticity of software delivered through the supply chain using code signing, checksum verification, and secure delivery methods.",
-    priority: "low",
-    category: "Software Security",
-    effort: "moderate",
-    timeframe: "medium-term",
-    impact: "Software verification reduces the risk of compromised or tampered code entering the environment through trusted supply chain channels.",
-    steps: [
-      "Require suppliers to implement code signing for all software deliverables",
-      "Establish secure hash verification procedures",
-      "Document secure software delivery and verification processes",
-      "Train relevant staff on verification procedures",
-      "Implement automated verification where possible",
-      "Establish incident procedures for failed verifications"
-    ],
-    references: [
-      {
-        title: "NIST SP 800-218 - Secure Software Development Framework",
-        url: "https://csrc.nist.gov/publications/detail/sp/800-218/final"
-      },
-      {
-        title: "SLSA Framework for Supply Chain Integrity",
-        url: "https://slsa.dev/"
-      }
-    ]
-  }
-];
 
 export default SupplyChainRecommendations;
