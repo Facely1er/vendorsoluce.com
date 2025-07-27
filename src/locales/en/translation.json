@@ -2255,3 +2255,145 @@
     "name": "Supply Chain Security Platform"
   }
 }
+{
+  "integrationGuides": {
+    "title": "Integration Guides",
+    "description": "Connect VendorSoluce with your existing systems and workflows. Follow our step-by-step guides to integrate supply chain risk management into your technology stack.",
+    
+    "quickStart": {
+      "title": "Getting Started with VendorSoluce API",
+      "description": "New to VendorSoluce integrations? Start with our REST API guide to understand the basics of authentication, endpoints, and data formats.",
+      "viewApiDocs": "View API Documentation",
+      "downloadSDKs": "Download SDKs"
+    },
+    
+    "categories": {
+      "all": "All Integrations",
+      "api": "API Integration", 
+      "webhooks": "Webhooks",
+      "sso": "SSO/Authentication",
+      "export": "Data Export",
+      "automation": "Automation"
+    },
+    
+    "difficulty": {
+      "beginner": "beginner",
+      "intermediate": "intermediate", 
+      "advanced": "advanced"
+    },
+    
+    "guides": {
+      "restApi": {
+        "title": "REST API Integration",
+        "description": "Connect your applications to VendorSoluce using our REST API for vendor data, assessments, and SBOM analysis.",
+        "estimatedTime": "30-60 minutes",
+        "steps": [
+          "Obtain API credentials from your VendorSoluce dashboard",
+          "Set up authentication headers in your application", 
+          "Make your first API call to fetch vendor data",
+          "Implement error handling and rate limiting",
+          "Test the integration with sample data"
+        ]
+      },
+      "webhookSetup": {
+        "title": "Webhook Configuration",
+        "description": "Receive real-time notifications when vendor risk scores change, assessments complete, or vulnerabilities are detected.",
+        "estimatedTime": "45 minutes",
+        "steps": [
+          "Configure webhook endpoints in your VendorSoluce dashboard",
+          "Set up a secure HTTPS endpoint to receive webhooks",
+          "Verify webhook signatures for security", 
+          "Handle different event types (risk changes, assessments)",
+          "Implement retry logic for failed webhook deliveries"
+        ]
+      },
+      "ssoIntegration": {
+        "title": "Single Sign-On (SSO)",
+        "description": "Integrate VendorSoluce with your organization's identity provider using SAML 2.0 or OpenID Connect.",
+        "estimatedTime": "2-4 hours",
+        "steps": [
+          "Configure your identity provider (IdP) settings",
+          "Exchange SAML metadata with VendorSoluce",
+          "Set up attribute mapping for user roles",
+          "Test SSO login flow with test users",
+          "Configure group-based access controls"
+        ]
+      },
+      "dataExport": {
+        "title": "Automated Data Export", 
+        "description": "Set up scheduled exports of vendor data, assessment results, and compliance reports to your data warehouse.",
+        "estimatedTime": "20 minutes",
+        "steps": [
+          "Choose your preferred export format (CSV, JSON, XML)",
+          "Configure export schedules in the dashboard",
+          "Set up secure file transfer (SFTP, S3, etc.)",
+          "Map data fields to your internal systems",
+          "Test the export process and validate data"
+        ]
+      },
+      "workflowAutomation": {
+        "title": "Workflow Automation",
+        "description": "Automate vendor onboarding, risk assessments, and compliance tracking using VendorSoluce APIs.",
+        "estimatedTime": "1-2 hours", 
+        "steps": [
+          "Design your automation workflow",
+          "Set up trigger conditions (new vendor, risk threshold)",
+          "Configure automated actions (send assessments, alerts)",
+          "Implement approval workflows for high-risk vendors",
+          "Monitor and optimize automation performance"
+        ]
+      },
+      "cloudIntegration": {
+        "title": "Cloud Platform Integration",
+        "description": "Connect VendorSoluce with AWS, Azure, or GCP for enhanced security monitoring and compliance.",
+        "estimatedTime": "2-3 hours",
+        "steps": [
+          "Set up cloud service credentials and permissions",
+          "Configure VendorSoluce cloud connectors", 
+          "Map cloud resources to vendor relationships",
+          "Enable automated compliance monitoring",
+          "Set up alerting for security events"
+        ]
+      }
+    },
+    
+    "common": {
+      "implementationSteps": "Implementation Steps:",
+      "moreSteps": "+ {{count}} more steps",
+      "codeExample": "Code Example:",
+      "copied": "Copied",
+      "copy": "Copy", 
+      "viewGuide": "View Guide",
+      "examples": "Examples"
+    },
+    
+    "sdks": {
+      "title": "SDKs and Tools",
+      "javascript": {
+        "title": "JavaScript SDK",
+        "description": "Official JavaScript/TypeScript SDK for web and Node.js applications.",
+        "npmInstall": "npm install",
+        "github": "GitHub"
+      },
+      "python": {
+        "title": "Python SDK", 
+        "description": "Python library for data science and automation workflows.",
+        "pipInstall": "pip install",
+        "pypi": "PyPI"
+      },
+      "cli": {
+        "title": "CLI Tool",
+        "description": "Command-line interface for batch operations and CI/CD integration.",
+        "download": "Download",
+        "docs": "Docs"
+      }
+    },
+    
+    "support": {
+      "title": "Need Integration Support?",
+      "description": "Our technical team is here to help you integrate VendorSoluce with your systems. Get personalized support for complex integrations and custom implementations.",
+      "contactSupport": "Contact Support",
+      "scheduleConsultation": "Schedule Consultation"
+    }
+  }
+}
