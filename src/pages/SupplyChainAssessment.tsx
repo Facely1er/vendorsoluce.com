@@ -22,6 +22,7 @@ const SupplyChainAssessment = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [error, setError] = useState<string | null>(null);
   
   // Reference to track if we've already initialized from currentAssessment
   const initializedRef = useRef(false);
