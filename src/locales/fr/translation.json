@@ -333,6 +333,162 @@
       "viewAllPositions": "Voir Tous les Postes Ouverts"
     }
   },
+  "vendorRiskRadar": {
+    "title": "Radar des Risques Fournisseurs",
+    "description": "Évaluez les risques fournisseurs en mettant l'accent sur la confidentialité des données, les exigences de protection et la conformité réglementaire",
+    
+    "steps": {
+      "selectCategory": "1. Sélectionner la Catégorie Fournisseur",
+      "vendorInfo": "2. Informations Fournisseur", 
+      "riskDimensions": "3. Dimensions d'Évaluation des Risques"
+    },
+
+    "vendorCategories": {
+      "cloudStorage": {
+        "name": "Stockage Cloud et Sauvegarde",
+        "description": "Services de stockage de fichiers, sauvegarde et gestion de documents",
+        "commonUseCase": "Stockage de documents, partage de fichiers, solutions de sauvegarde",
+        "privacyImpact": "Élevé - Hébergement et traitement direct des données",
+        "commonRegulations": ["RGPD", "SOX", "HIPAA", "SOC 2"]
+      },
+      "paymentProcessor": {
+        "name": "Traitement des Paiements", 
+        "description": "Passerelles de paiement, facturation et services de transactions financières",
+        "commonUseCase": "Traitement de cartes de crédit, facturation d'abonnements, paiements",
+        "privacyImpact": "Critique - Traitement des données financières et DPI",
+        "commonRegulations": ["PCI DSS", "RGPD", "PSD2", "SOX"]
+      },
+      "hrSoftware": {
+        "name": "RH et Gestion du Personnel",
+        "description": "SIRH, paie, recrutement et systèmes de gestion des employés", 
+        "commonUseCase": "Données employés, paie, gestion de la performance",
+        "privacyImpact": "Élevé - Données sensibles des employés et personnelles",
+        "commonRegulations": ["RGPD", "CCPA", "Droit du Travail", "SOX"]
+      },
+      "saasProductivity": {
+        "name": "Outils de Productivité SaaS",
+        "description": "Logiciels de collaboration, communication et productivité",
+        "commonUseCase": "Email, messagerie, gestion de projet, CRM", 
+        "privacyImpact": "Moyen - Communications d'entreprise et données de flux de travail",
+        "commonRegulations": ["RGPD", "SOC 2", "ISO 27001"]
+      },
+      "analyticsMarketing": {
+        "name": "Analytique et Marketing",
+        "description": "Analyse de données, automatisation marketing et suivi client",
+        "commonUseCase": "Analyse client, campagnes marketing, suivi",
+        "privacyImpact": "Élevé - Suivi du comportement client et DPI",
+        "commonRegulations": ["RGPD", "CCPA", "PECR", "ePrivacy"]
+      },
+      "infrastructure": {
+        "name": "Infrastructure et Hébergement",
+        "description": "Infrastructure cloud, hébergement et services techniques", 
+        "commonUseCase": "Hébergement serveur, infrastructure cloud, CDN",
+        "privacyImpact": "Moyen-Élevé - Accès aux données au niveau infrastructure",
+        "commonRegulations": ["SOC 2", "ISO 27001", "RGPD", "FedRAMP"]
+      }
+    },
+
+    "riskDimensions": {
+      "dataSensitivity": {
+        "name": "Niveau de Sensibilité des Données",
+        "shortName": "Sensibilité des Données",
+        "description": "Classification et sensibilité des données en cours de traitement",
+        "privacyRegulations": ["RGPD Art. 9", "CCPA", "HIPAA"],
+        "protectionRequirements": ["Classification des Données", "Contrôles d'Accès", "Chiffrement au Repos"]
+      },
+      "accessControl": {
+        "name": "Contrôle d'Accès et Authentification", 
+        "shortName": "Contrôle d'Accès",
+        "description": "Gestion d'identité et mécanismes de contrôle d'accès",
+        "privacyRegulations": ["RGPD Art. 25", "SOX", "ISO 27001"],
+        "protectionRequirements": ["AMF", "Accès Basé sur les Rôles", "Journalisation d'Audit"]
+      },
+      "dataResidency": {
+        "name": "Résidence et Juridiction des Données",
+        "shortName": "Résidence des Données", 
+        "description": "Localisation géographique et juridiction légale du traitement des données",
+        "privacyRegulations": ["RGPD Art. 44-49", "Schrems II", "Lois de Localisation des Données"],
+        "protectionRequirements": ["Décisions d'Adéquation", "CTC", "Cartographie des Données"]
+      },
+      "retentionControl": {
+        "name": "Rétention et Suppression des Données",
+        "shortName": "Contrôle de Rétention",
+        "description": "Gestion du cycle de vie des données et capacités de suppression",
+        "privacyRegulations": ["RGPD Art. 17", "CCPA", "Minimisation des Données"],
+        "protectionRequirements": ["Politiques de Rétention", "Suppression Sécurisée", "Portabilité des Données"]
+      },
+      "encryptionStandards": {
+        "name": "Normes de Chiffrement et de Sécurité",
+        "shortName": "Chiffrement",
+        "description": "Contrôles cryptographiques et mise en œuvre de la sécurité",
+        "privacyRegulations": ["RGPD Art. 32", "PCI DSS", "FIPS 140-2"],
+        "protectionRequirements": ["Chiffrement en Transit", "Chiffrement au Repos", "Gestion des Clés"]
+      },
+      "complianceFramework": {
+        "name": "Conformité et Certification", 
+        "shortName": "Conformité",
+        "description": "Conformité réglementaire et certifications de l'industrie",
+        "privacyRegulations": ["SOC 2", "ISO 27001", "Normes de l'Industrie"],
+        "protectionRequirements": ["Audits Réguliers", "Surveillance de la Conformité", "Réponse aux Incidents"]
+      }
+    },
+
+    "form": {
+      "vendorNameLabel": "Nom du Fournisseur",
+      "vendorNamePlaceholder": "Entrez le nom du fournisseur...",
+      "categoryOverview": "Aperçu de la Catégorie",
+      "commonUseCase": "Cas d'Usage Courant :",
+      "privacyImpact": "Impact sur la Confidentialité :",
+      "keyRegulations": "Réglementations Clés :",
+      "lowRisk": "Faible Risque",
+      "highRisk": "Risque Élevé",
+      "privacyRegulations": "Réglementations de Confidentialité :",
+      "protectionRequirements": "Exigences de Protection :"
+    },
+
+    "buttons": {
+      "generateRadar": "Générer le Radar des Risques",
+      "viewFullDashboard": "Voir le Tableau de Bord Complet"
+    },
+
+    "results": {
+      "radarVisualization": "Visualisation du Radar des Risques", 
+      "overallAssessment": "Évaluation Globale des Risques",
+      "privacyRecommendations": "Recommandations de Confidentialité",
+      "currentRisk": "Risque Actuel",
+      "requiredControls": "Contrôles Requis"
+    },
+
+    "howToUse": {
+      "title": "Comment Utiliser le Radar des Risques",
+      "step1": "Choisissez la catégorie de fournisseur qui correspond le mieux à votre cas d'usage pour charger les paramètres de risque de base",
+      "step2": "Ajustez les dimensions de risque en fonction de votre sensibilité de données spécifique et de vos exigences réglementaires", 
+      "step3": "Générez le graphique radar pour visualiser les niveaux de risque et les écarts de contrôles requis"
+    },
+
+    "demo": {
+      "title": "Mode Démo Actif",
+      "description": "Utilisation de CloudCorp Document Storage comme exemple. Sélectionnez une catégorie pour voir différents profils de risque."
+    },
+
+    "errors": {
+      "enterVendorName": "Veuillez entrer un nom de fournisseur",
+      "calculationFailed": "Échec du calcul du score de risque"
+    },
+
+    "status": {
+      "saving": "Sauvegarde en cours...",
+      "saved": "Progrès sauvegardé automatiquement", 
+      "analyzing": "Analyse du risque fournisseur..."
+    },
+
+    "riskLevels": {
+      "low": "Faible",
+      "medium": "Moyen", 
+      "high": "Élevé",
+      "critical": "Critique"
+    }
+  },
   "nav": {
     "home": "Accueil",
     "solutions": "Solutions",
@@ -833,7 +989,242 @@
     "portal": {
       "title": "Portail d'Évaluation des Fournisseurs",
       "features": {
-        "title": "Fonctionnalités du Portail Fournisseur Sécurisé",
+        "title": "Sécurité Complète de la Chaîne d'Approvisionnement",
+        "description": "Tout ce dont vous avez besoin pour évaluer, surveiller et gérer les risques de la chaîne d'approvisionnement",
+        "feature1": {
+          "title": "Évaluation des Risques",
+          "description": "Évaluations alignées NIST SP 800-161"
+        },
+        "feature2": {
+          "title": "Analyse SBOM", 
+          "description": "Scan de vulnérabilités des composants logiciels"
+        },
+        "feature3": {
+          "title": "Gestion des Fournisseurs",
+          "description": "Surveillance complète des risques fournisseurs"
+        },
+        "feature4": {
+          "title": "Automatisation",
+          "description": "Automatisation des flux de travail et reporting"
+        },
+        "learnMore": "En Savoir Plus"
+      },
+      "stakeholders": {
+        "title": "Conçu pour Chaque Partie Prenante de la Chaîne d'Approvisionnement", 
+        "description": "VendorSoluce répond aux défis uniques rencontrés par les différentes équipes de votre organisation",
+        "common": {
+          "challenges": "Défis Communs"
+        },
+        "security": {
+          "title": "Équipes de Sécurité",
+          "description": "Outils complets pour identifier, évaluer et atténuer les risques de sécurité de la chaîne d'approvisionnement",
+          "challenges": {
+            "visibility": "Visibilité limitée sur les pratiques de sécurité des fournisseurs",
+            "manual": "Processus d'évaluation manuels chronophages", 
+            "tracking": "Difficulté à suivre les vulnérabilités dans les composants logiciels",
+            "compliance": "Exigences de conformité complexes comme NIST SP 800-161"
+          },
+          "solutions": {
+            "sbom": {
+              "title": "Analyse SBOM Automatisée",
+              "description": "Analysez instantanément les composants logiciels pour les vulnérabilités et la conformité des licences",
+              "benefits": {
+                "vulnerabilities": "Identifier les vulnérabilités critiques en minutes",
+                "licenses": "Suivre automatiquement les licences open source", 
+                "reports": "Générer des rapports de conformité pour les audits",
+                "monitoring": "Surveiller continuellement la santé des composants"
+              },
+              "cta": "Analyser SBOM Maintenant"
+            },
+            "assessments": {
+              "title": "Évaluations de Sécurité des Fournisseurs",
+              "description": "Envoyez des évaluations CMMC et NIST Privacy Framework via un portail fournisseur sécurisé",
+              "benefits": {
+                "cmmc": "Modèles d'évaluation CMMC Niveau 1 et 2",
+                "nist": "Questionnaires NIST Privacy Framework",
+                "scoring": "Notation automatisée et évaluation des risques",
+                "portal": "Portail sécurisé de collecte de preuves",
+                "tracking": "Suivi en temps réel des progrès et notifications"
+              },
+              "cta": "Commencer l'Évaluation"
+            }
+          }
+        },
+        "procurement": {
+          "title": "Équipes d'Approvisionnement",
+          "description": "Rationalisez la sélection et la gestion des fournisseurs avec des outils de prise de décision basés sur les risques",
+          "challenges": {
+            "balancing": "Équilibrer coût, qualité et sécurité dans la sélection des fournisseurs",
+            "lifecycle": "Gérer les relations fournisseurs tout au long de leur cycle de vie",
+            "contracts": "S'assurer que les termes contractuels incluent des clauses de sécurité appropriées", 
+            "diligence": "Démontrer la diligence raisonnable à des fins d'audit"
+          },
+          "solutions": {
+            "calculator": {
+              "title": "Calculateur de Risque Fournisseur",
+              "description": "Calculez les scores de risque préliminaires pour éclairer les décisions de sélection des fournisseurs",
+              "benefits": {
+                "criteria": "Critères standardisés d'évaluation des risques",
+                "scoring": "Notation immédiate des risques pour les nouveaux fournisseurs",
+                "comparison": "Comparaison de fournisseurs basée sur les données",
+                "integration": "Intégration avec les flux de travail d'approvisionnement"
+              },
+              "cta": "Calculer le Risque"
+            },
+            "dashboard": {
+              "title": "Tableau de Bord des Risques Fournisseurs", 
+              "description": "Surveillez et gérez votre portefeuille de fournisseurs avec une visibilité centralisée des risques",
+              "benefits": {
+                "monitoring": "Surveillance des risques en temps réel",
+                "tracking": "Suivi automatisé de la conformité", 
+                "alerts": "Alertes de renouvellement de contrat",
+                "reporting": "Tableaux de bord de reporting exécutif"
+              },
+              "cta": "Voir le Tableau de Bord"
+            }
+          }
+        },
+        "compliance": {
+          "title": "Responsables de la Conformité",
+          "description": "Assurez le respect des exigences réglementaires avec des cadres de conformité intégrés",
+          "challenges": {
+            "evolving": "Suivre l'évolution des exigences réglementaires",
+            "documenting": "Documenter les efforts de conformité pour les audits",
+            "obligations": "S'assurer que les fournisseurs respectent leurs obligations contractuelles",
+            "frameworks": "Gérer la conformité à travers plusieurs cadres"
+          },
+          "solutions": {
+            "nist": {
+              "title": "Évaluation NIST SP 800-161",
+              "description": "Évaluation complète des risques de la chaîne d'approvisionnement alignée sur les normes fédérales",
+              "benefits": {
+                "templates": "Modèles de contrôles NIST pré-construits",
+                "scoring": "Notation automatisée de la conformité",
+                "documentation": "Documentation prête pour audit",
+                "analysis": "Analyse des écarts et recommandations"
+              },
+              "cta": "Commencer l'Évaluation"
+            },
+            "templates": {
+              "title": "Modèles de Conformité",
+              "description": "Accédez à des modèles pré-construits pour les scénarios de conformité courants",
+              "benefits": {
+                "federal": "Modèles de conformité fédérale",
+                "industry": "Questionnaires spécifiques à l'industrie",
+                "matrices": "Matrices d'évaluation des risques", 
+                "executive": "Modèles de résumé exécutif"
+              },
+              "cta": "Télécharger les Modèles"
+            }
+          }
+        },
+        "executives": {
+          "title": "Direction Exécutive",
+          "description": "Insights stratégiques et reporting pour prendre des décisions éclairées sur les risques de la chaîne d'approvisionnement",
+          "challenges": {
+            "understanding": "Comprendre l'exposition aux risques de la chaîne d'approvisionnement",
+            "investment": "Prendre des décisions d'investissement éclairées",
+            "demonstrating": "Démontrer la gestion des risques aux parties prenantes",
+            "balancing": "Équilibrer l'efficacité opérationnelle avec la sécurité"
+          },
+          "solutions": {
+            "dashboards": {
+              "title": "Tableaux de Bord Exécutifs", 
+              "description": "Insights de haut niveau sur la posture de risque de la chaîne d'approvisionnement de votre organisation",
+              "benefits": {
+                "metrics": "Métriques clés de risque et tendances",
+                "portfolio": "Vue d'ensemble de la santé du portefeuille de fournisseurs",
+                "compliance": "Résumés du statut de conformité",
+                "recommendations": "Recommandations stratégiques de risque"
+              },
+              "cta": "Voir le Tableau de Bord"
+            },
+            "reporting": {
+              "title": "Reporting des Risques",
+              "description": "Générez des rapports de niveau exécutif pour les réunions du conseil et les mises à jour des parties prenantes",
+              "benefits": {
+                "automated": "Génération automatisée de rapports",
+                "customizable": "Métriques et KPI personnalisables",
+                "analysis": "Analyse des tendances et prévisions",
+                "presentations": "Présentations prêtes pour les parties prenantes"
+              },
+              "cta": "Générer un Rapport"
+            }
+          }
+        },
+        "cta": {
+          "title": "Prêt à Transformer la Sécurité de Votre Chaîne d'Approvisionnement ?",
+          "description": "Rejoignez les organisations du monde entier qui font confiance à VendorSoluce pour sécuriser leurs chaînes d'approvisionnement",
+          "startAssessment": "Commencer l'Évaluation Gratuite",
+          "scheduleDemo": "Planifier une Démo"
+        }
+      },
+      "hero": {
+        "title_line1": "Contrôlez vos risques de chaîne d'approvisionnement.",
+        "title_line2": "Accélérez votre entreprise.",
+        "subtitle": "Transformez le risque fournisseur en avantage concurrentiel",
+        "description": "VendorSoluce transforme la gestion des risques fournisseurs en moteur de croissance avec des évaluations automatisées et une transparence complète de la chaîne d'approvisionnement.",
+        "cta1": "Commencer l'Évaluation Gratuite",
+        "cta2": "Planifier une Démo en Direct",
+        "carousel": {
+          "text1": "Outils complets de chaîne d'approvisionnement alignés sur NIST SP 800-161 pour une visibilité et un contrôle complets des risques dans votre écosystème de fournisseurs.",
+          "text2": "Évaluations automatisées des risques fournisseurs avec des cadres alignés NIST, assurant la conformité tout en rationalisant vos processus d'approvisionnement.",
+          "text3": "Capacités d'analyse SBOM avancées pour identifier les vulnérabilités et les problèmes de conformité des licences dans vos composants logiciels.",
+          "text4": "Surveillance continue et alertes en temps réel pour les menaces de la chaîne d'approvisionnement, gardant votre organisation protégée 24h/24.",
+          "text5": "Reporting de conformité et tableaux de bord prêts pour les dirigeants pour les cadres NIST, CMMC et ISO afin de démontrer la posture de sécurité."
+        },
+        "benefits": {
+          "section1": {
+            "title": "Évaluation Instantanée des Risques",
+            "benefit1": "Évaluations NIST SP 800-161 complètes en minutes",
+            "benefit2": "Notation automatisée des risques fournisseurs et priorisation",
+            "benefit3": "Détection et analyse des vulnérabilités en temps réel"
+          },
+          "section2": {
+            "title": "Visibilité Complète de la Chaîne d'Approvisionnement",
+            "benefit1": "Cartographie et surveillance de bout en bout de la chaîne d'approvisionnement", 
+            "benefit2": "Analyse SBOM pour la transparence des composants logiciels",
+            "benefit3": "Capacités d'évaluation des risques des fournisseurs multi-niveaux"
+          },
+          "section3": {
+            "title": "Prêt pour la Conformité Fédérale",
+            "benefit1": "Cadres d'évaluation alignés NIST SP 800-161",
+            "benefit2": "Support de conformité CMMC et FedRAMP",
+            "benefit3": "Documentation et reporting prêts pour audit"
+          }
+        }
+      },
+      "cta": {
+        "title": "Prêt à Sécuriser Votre Chaîne d'Approvisionnement ?",
+        "description": "Rejoignez des milliers d'organisations utilisant VendorSoluce pour gérer les risques de la chaîne d'approvisionnement et atteindre la conformité."
+      },
+      "company": {
+        "about": "À Propos de Nous",
+        "contact": "Contact",
+        "pricing": "Tarifs",
+        "privacy": "Politique de Confidentialité"
+      }
+    },
+    "cta": {
+      "text": "Commencer l'Évaluation Gratuite"
+    },
+    "copyright": "© 2025 ERMITS LLC. Tous droits réservés.",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "security": "Sécurité"
+  },
+  "misc": {
+    "json": "JSON",
+    "csv": "CSV",
+    "div": "div",
+    "content-type": "Content-Type",
+    "en-US": "fr-FR",
+    "Please log in to import data": "Veuillez vous connecter pour importer des données",
+    "Report generation would start here": "La génération de rapport commencerait ici"
+  },
+  "app": {
+    "name": "Plateforme de sécurité de la chaîne d'approvisionnement"
+  }title": "Fonctionnalités du Portail Fournisseur Sécurisé",
         "capabilities": {
           "title": "Capacités du Portail",
           "secureLinks": "Liens d'évaluation uniques sécurisés",
@@ -1874,240 +2265,4 @@
         }
       },
       "features": {
-        "title": "Sécurité Complète de la Chaîne d'Approvisionnement",
-        "description": "Tout ce dont vous avez besoin pour évaluer, surveiller et gérer les risques de la chaîne d'approvisionnement",
-        "feature1": {
-          "title": "Évaluation des Risques",
-          "description": "Évaluations alignées NIST SP 800-161"
-        },
-        "feature2": {
-          "title": "Analyse SBOM", 
-          "description": "Scan de vulnérabilités des composants logiciels"
-        },
-        "feature3": {
-          "title": "Gestion des Fournisseurs",
-          "description": "Surveillance complète des risques fournisseurs"
-        },
-        "feature4": {
-          "title": "Automatisation",
-          "description": "Automatisation des flux de travail et reporting"
-        },
-        "learnMore": "En Savoir Plus"
-      },
-      "stakeholders": {
-        "title": "Conçu pour Chaque Partie Prenante de la Chaîne d'Approvisionnement", 
-        "description": "VendorSoluce répond aux défis uniques rencontrés par les différentes équipes de votre organisation",
-        "common": {
-          "challenges": "Défis Communs"
-        },
-        "security": {
-          "title": "Équipes de Sécurité",
-          "description": "Outils complets pour identifier, évaluer et atténuer les risques de sécurité de la chaîne d'approvisionnement",
-          "challenges": {
-            "visibility": "Visibilité limitée sur les pratiques de sécurité des fournisseurs",
-            "manual": "Processus d'évaluation manuels chronophages", 
-            "tracking": "Difficulté à suivre les vulnérabilités dans les composants logiciels",
-            "compliance": "Exigences de conformité complexes comme NIST SP 800-161"
-          },
-          "solutions": {
-            "sbom": {
-              "title": "Analyse SBOM Automatisée",
-              "description": "Analysez instantanément les composants logiciels pour les vulnérabilités et la conformité des licences",
-              "benefits": {
-                "vulnerabilities": "Identifier les vulnérabilités critiques en minutes",
-                "licenses": "Suivre automatiquement les licences open source", 
-                "reports": "Générer des rapports de conformité pour les audits",
-                "monitoring": "Surveiller continuellement la santé des composants"
-              },
-              "cta": "Analyser SBOM Maintenant"
-            },
-            "assessments": {
-              "title": "Évaluations de Sécurité des Fournisseurs",
-              "description": "Envoyez des évaluations CMMC et NIST Privacy Framework via un portail fournisseur sécurisé",
-              "benefits": {
-                "cmmc": "Modèles d'évaluation CMMC Niveau 1 et 2",
-                "nist": "Questionnaires NIST Privacy Framework",
-                "scoring": "Notation automatisée et évaluation des risques",
-                "portal": "Portail sécurisé de collecte de preuves",
-                "tracking": "Suivi en temps réel des progrès et notifications"
-              },
-              "cta": "Commencer l'Évaluation"
-            }
-          }
-        },
-        "procurement": {
-          "title": "Équipes d'Approvisionnement",
-          "description": "Rationalisez la sélection et la gestion des fournisseurs avec des outils de prise de décision basés sur les risques",
-          "challenges": {
-            "balancing": "Équilibrer coût, qualité et sécurité dans la sélection des fournisseurs",
-            "lifecycle": "Gérer les relations fournisseurs tout au long de leur cycle de vie",
-            "contracts": "S'assurer que les termes contractuels incluent des clauses de sécurité appropriées", 
-            "diligence": "Démontrer la diligence raisonnable à des fins d'audit"
-          },
-          "solutions": {
-            "calculator": {
-              "title": "Calculateur de Risque Fournisseur",
-              "description": "Calculez les scores de risque préliminaires pour éclairer les décisions de sélection des fournisseurs",
-              "benefits": {
-                "criteria": "Critères standardisés d'évaluation des risques",
-                "scoring": "Notation immédiate des risques pour les nouveaux fournisseurs",
-                "comparison": "Comparaison de fournisseurs basée sur les données",
-                "integration": "Intégration avec les flux de travail d'approvisionnement"
-              },
-              "cta": "Calculer le Risque"
-            },
-            "dashboard": {
-              "title": "Tableau de Bord des Risques Fournisseurs", 
-              "description": "Surveillez et gérez votre portefeuille de fournisseurs avec une visibilité centralisée des risques",
-              "benefits": {
-                "monitoring": "Surveillance des risques en temps réel",
-                "tracking": "Suivi automatisé de la conformité", 
-                "alerts": "Alertes de renouvellement de contrat",
-                "reporting": "Tableaux de bord de reporting exécutif"
-              },
-              "cta": "Voir le Tableau de Bord"
-            }
-          }
-        },
-        "compliance": {
-          "title": "Responsables de la Conformité",
-          "description": "Assurez le respect des exigences réglementaires avec des cadres de conformité intégrés",
-          "challenges": {
-            "evolving": "Suivre l'évolution des exigences réglementaires",
-            "documenting": "Documenter les efforts de conformité pour les audits",
-            "obligations": "S'assurer que les fournisseurs respectent leurs obligations contractuelles",
-            "frameworks": "Gérer la conformité à travers plusieurs cadres"
-          },
-          "solutions": {
-            "nist": {
-              "title": "Évaluation NIST SP 800-161",
-              "description": "Évaluation complète des risques de la chaîne d'approvisionnement alignée sur les normes fédérales",
-              "benefits": {
-                "templates": "Modèles de contrôles NIST pré-construits",
-                "scoring": "Notation automatisée de la conformité",
-                "documentation": "Documentation prête pour audit",
-                "analysis": "Analyse des écarts et recommandations"
-              },
-              "cta": "Commencer l'Évaluation"
-            },
-            "templates": {
-              "title": "Modèles de Conformité",
-              "description": "Accédez à des modèles pré-construits pour les scénarios de conformité courants",
-              "benefits": {
-                "federal": "Modèles de conformité fédérale",
-                "industry": "Questionnaires spécifiques à l'industrie",
-                "matrices": "Matrices d'évaluation des risques", 
-                "executive": "Modèles de résumé exécutif"
-              },
-              "cta": "Télécharger les Modèles"
-            }
-          }
-        },
-        "executives": {
-          "title": "Direction Exécutive",
-          "description": "Insights stratégiques et reporting pour prendre des décisions éclairées sur les risques de la chaîne d'approvisionnement",
-          "challenges": {
-            "understanding": "Comprendre l'exposition aux risques de la chaîne d'approvisionnement",
-            "investment": "Prendre des décisions d'investissement éclairées",
-            "demonstrating": "Démontrer la gestion des risques aux parties prenantes",
-            "balancing": "Équilibrer l'efficacité opérationnelle avec la sécurité"
-          },
-          "solutions": {
-            "dashboards": {
-              "title": "Tableaux de Bord Exécutifs", 
-              "description": "Insights de haut niveau sur la posture de risque de la chaîne d'approvisionnement de votre organisation",
-              "benefits": {
-                "metrics": "Métriques clés de risque et tendances",
-                "portfolio": "Vue d'ensemble de la santé du portefeuille de fournisseurs",
-                "compliance": "Résumés du statut de conformité",
-                "recommendations": "Recommandations stratégiques de risque"
-              },
-              "cta": "Voir le Tableau de Bord"
-            },
-            "reporting": {
-              "title": "Reporting des Risques",
-              "description": "Générez des rapports de niveau exécutif pour les réunions du conseil et les mises à jour des parties prenantes",
-              "benefits": {
-                "automated": "Génération automatisée de rapports",
-                "customizable": "Métriques et KPI personnalisables",
-                "analysis": "Analyse des tendances et prévisions",
-                "presentations": "Présentations prêtes pour les parties prenantes"
-              },
-              "cta": "Générer un Rapport"
-            }
-          }
-        },
-        "cta": {
-          "title": "Prêt à Transformer la Sécurité de Votre Chaîne d'Approvisionnement ?",
-          "description": "Rejoignez les organisations du monde entier qui font confiance à VendorSoluce pour sécuriser leurs chaînes d'approvisionnement",
-          "startAssessment": "Commencer l'Évaluation Gratuite",
-          "scheduleDemo": "Planifier une Démo"
-        }
-      },
-      "hero": {
-        "title_line1": "Contrôlez vos risques de chaîne d'approvisionnement.",
-        "title_line2": "Accélérez votre entreprise.",
-        "subtitle": "Transformez le risque fournisseur en avantage concurrentiel",
-        "description": "VendorSoluce transforme la gestion des risques fournisseurs en moteur de croissance avec des évaluations automatisées et une transparence complète de la chaîne d'approvisionnement.",
-        "cta1": "Commencer l'Évaluation Gratuite",
-        "cta2": "Planifier une Démo en Direct",
-        "carousel": {
-          "text1": "Outils complets de chaîne d'approvisionnement alignés sur NIST SP 800-161 pour une visibilité et un contrôle complets des risques dans votre écosystème de fournisseurs.",
-          "text2": "Évaluations automatisées des risques fournisseurs avec des cadres alignés NIST, assurant la conformité tout en rationalisant vos processus d'approvisionnement.",
-          "text3": "Capacités d'analyse SBOM avancées pour identifier les vulnérabilités et les problèmes de conformité des licences dans vos composants logiciels.",
-          "text4": "Surveillance continue et alertes en temps réel pour les menaces de la chaîne d'approvisionnement, gardant votre organisation protégée 24h/24.",
-          "text5": "Reporting de conformité et tableaux de bord prêts pour les dirigeants pour les cadres NIST, CMMC et ISO afin de démontrer la posture de sécurité."
-        },
-        "benefits": {
-          "section1": {
-            "title": "Évaluation Instantanée des Risques",
-            "benefit1": "Évaluations NIST SP 800-161 complètes en minutes",
-            "benefit2": "Notation automatisée des risques fournisseurs et priorisation",
-            "benefit3": "Détection et analyse des vulnérabilités en temps réel"
-          },
-          "section2": {
-            "title": "Visibilité Complète de la Chaîne d'Approvisionnement",
-            "benefit1": "Cartographie et surveillance de bout en bout de la chaîne d'approvisionnement", 
-            "benefit2": "Analyse SBOM pour la transparence des composants logiciels",
-            "benefit3": "Capacités d'évaluation des risques des fournisseurs multi-niveaux"
-          },
-          "section3": {
-            "title": "Prêt pour la Conformité Fédérale",
-            "benefit1": "Cadres d'évaluation alignés NIST SP 800-161",
-            "benefit2": "Support de conformité CMMC et FedRAMP",
-            "benefit3": "Documentation et reporting prêts pour audit"
-          }
-        }
-      },
-      "cta": {
-        "title": "Prêt à Sécuriser Votre Chaîne d'Approvisionnement ?",
-        "description": "Rejoignez des milliers d'organisations utilisant VendorSoluce pour gérer les risques de la chaîne d'approvisionnement et atteindre la conformité."
-      },
-      "company": {
-        "about": "À Propos de Nous",
-        "contact": "Contact",
-        "pricing": "Tarifs",
-        "privacy": "Politique de Confidentialité"
-      }
-    },
-    "cta": {
-      "text": "Commencer l'Évaluation Gratuite"
-    },
-    "copyright": "© 2025 ERMITS LLC. Tous droits réservés.",
-    "privacy": "Politique de confidentialité",
-    "terms": "Conditions d'utilisation",
-    "security": "Sécurité"
-  },
-  "misc": {
-    "json": "JSON",
-    "csv": "CSV",
-    "div": "div",
-    "content-type": "Content-Type",
-    "en-US": "fr-FR",
-    "Please log in to import data": "Veuillez vous connecter pour importer des données",
-    "Report generation would start here": "La génération de rapport commencerait ici"
-  },
-  "app": {
-    "name": "Plateforme de sécurité de la chaîne d'approvisionnement"
-  }
-}
+        "
