@@ -2,11 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { AlertTriangle, CheckCircle, Circle, Info, ArrowLeft, ArrowRight, Clipboard, FileText, Shield } from 'lucide-react';
+import { RotateCcw } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
 import { useAuth } from '../context/AuthContext';
 import DataImportExport from '../components/data/DataImportExport';
+import { Card as UICard } from '../components/ui/Card';
 
 const SupplyChainAssessment = () => {
   const { t } = useTranslation();
@@ -358,6 +360,9 @@ const SupplyChainAssessment = () => {
   };
 
   const handleViewResults = async () => {
+    // Clear any existing error state
+    setError(null);
+    
     if (isAuthenticated) {
       // Calculate section scores
       const sectionScores = sections.map((section, index) => {
@@ -399,6 +404,21 @@ const SupplyChainAssessment = () => {
     });
   };
 
+  const handleBackToStart = () => {
+    setAssessmentStage('startScreen');
+    setCurrentSection(0);
+  };
+
+  const handleRestartAssessment = async () => {
+    // Clear all answers and reset to beginning
+    setAnswers({});
+    setCurrentSection(0);
+    setAssessmentStage('onboarding');
+    setSaveStatus('idle');
+    
+    // If user is authenticated, we might want to create a new assessment
+    // For now, we'll just reset the UI state
+  };
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-8 flex justify-center items-center h-64">
@@ -572,29 +592,95 @@ const SupplyChainAssessment = () => {
   // The main assessment UI (original code with minor adjustments)
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-6">
-        <Link to="/" className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue transition-colors mb-4">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          {t('assessment.backToHome')}
-        </Link>
-        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{assessmentName}</h1>
-        <p className="text-gray-600 dark:text-gray-300 mb-6">{t('assessment.subtitle')}</p>
-        
-        {isAuthenticated && assessments.length > 0 && (
-          <div className="mb-6 flex justify-end">
-            <DataImportExport
-              dataType="assessments"
-              data={assessments}
-              onImportComplete={(result) => {
-                if (result.success) {
-                  refetch();
-                }
-              }}
-              onRefresh={refetch}
-            />
+      {/* Enhanced Navigation Header */}
+      <div className="mb-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div className="flex items-center space-x-4">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleBackToStart}
+              className="flex items-center"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              {t('assessment.backToStart')}
+            </Button>
+            
+            <Link to="/" className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue transition-colors">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              {t('assessment.backToHome')}
+            </Link>
           </div>
-        )}
+          
+          <div className="flex items-center space-x-3">
+            {/* Assessment Progress Indicator */}
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              Progress: {Object.keys(answers).length} / {sections.flatMap(s => s.questions).length} questions
+            </div>
+            
+            {/* Restart Assessment Button */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleRestartAssessment}
+              className="flex items-center text-orange-600 dark:text-orange-400 border-orange-300 dark:border-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20"
+            >
+              <RotateCcw className="mr-2 h-4 w-4" />
+              {t('assessment.restartAssessment')}
+            </Button>
+          </div>
+        </div>
+        
+        {/* Assessment Title and Description */}
+        <div className="mt-4">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{assessmentName}</h1>
+          <p className="text-gray-600 dark:text-gray-300 mt-2">{t('assessment.subtitle')}</p>
+        </div>
       </div>
+      
+      {/* Save Status Indicator */}
+      {saveStatus !== 'idle' && (
+        <UICard className="mb-4 border-l-4 border-l-vendorsoluce-green">
+          <div className="p-3 flex items-center">
+            {saveStatus === 'saving' && (
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-vendorsoluce-green mr-2"></div>
+            )}
+            {saveStatus === 'saved' && (
+              <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+            )}
+            {saveStatus === 'error' && (
+              <AlertTriangle className="h-4 w-4 text-red-500 mr-2" />
+            )}
+            <span className={`text-sm font-medium ${
+              saveStatus === 'saved' ? 'text-green-700 dark:text-green-400' :
+              saveStatus === 'error' ? 'text-red-700 dark:text-red-400' :
+              'text-gray-700 dark:text-gray-300'
+            }`}>
+              {saveStatus === 'saving' && t('assessment.saving')}
+              {saveStatus === 'saved' && t('assessment.saved')}
+              {saveStatus === 'error' && t('assessment.saveError')}
+            </span>
+          </div>
+        </UICard>
+      )}
+      
+      {/* Import/Export Section */}
+      {isAuthenticated && assessments.length > 0 && (
+        <div className="mb-6 flex justify-end">
+          <DataImportExport
+            dataType="assessments"
+            data={assessments}
+            onImportComplete={(result) => {
+              if (result.success) {
+                refetch();
+              }
+            }}
+            onRefresh={refetch}
+          />
+        </div>
+      )}
+      
+      {/* Remove old header elements since they're now in the enhanced navigation */}
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mb-8">
         {sections.map((section, index) => {
@@ -625,20 +711,36 @@ const SupplyChainAssessment = () => {
       <Card className="p-6">
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">{sections[currentSection].title}</h2>
-            <p className="text-gray-600 dark:text-gray-300">{sections[currentSection].description}</p>
+            <div className="flex items-center space-x-3 mb-2">
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">{sections[currentSection].title}</h2>
+              <span className="text-sm bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 px-2 py-1 rounded-full">
+                {t('assessment.section')} {currentSection + 1} / {sections.length}
+              </span>
+            </div>
+            <p className="text-gray-600 dark:text-gray-300 mb-2">{sections[currentSection].description}</p>
+            
+            {/* Section Progress Bar */}
+            <div className="mt-3">
+              <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
+                <span>{t('assessment.sectionProgress')}</span>
+                <span>{sections[currentSection].questions.filter(q => answers[q.id]).length} / {sections[currentSection].questions.length}</span>
+              </div>
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                <div 
+                  className="bg-vendorsoluce-green h-2 rounded-full transition-all duration-300"
+                  style={{ 
+                    width: `${(sections[currentSection].questions.filter(q => answers[q.id]).length / sections[currentSection].questions.length) * 100}%` 
+                  }}
+                ></div>
+              </div>
+            </div>
           </div>
+          
           <div className="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
-            {saveStatus === 'saving' && (
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-vendortal-navy mr-2"></div>
-            )}
-            {saveStatus === 'saved' && (
-              <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-            )}
-            {saveStatus === 'error' && (
-              <AlertTriangle className="h-4 w-4 text-red-500 mr-2" />
-            )}
-            {t('assessment.overallScore')}: {getOverallScore()}%
+            <div className="text-center">
+              <div className="text-2xl font-bold text-vendorsoluce-green">{getOverallScore()}%</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">{t('assessment.overallScore')}</div>
+            </div>
           </div>
         </div>
 

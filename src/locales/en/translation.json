@@ -490,9 +490,16 @@
     "overallScore": "Overall Score",
     "score": "Score",
     "backToHome": "Back to Home",
+    "backToStart": "Back to Assessment Start",
+    "restartAssessment": "Restart Assessment",
+    "section": "Section",
+    "sectionProgress": "Section Progress",
     "previousSection": "Previous Section",
     "nextSection": "Next Section",
     "viewResults": "View Results",
+    "saving": "Saving progress...",
+    "saved": "Progress saved automatically",
+    "saveError": "Error saving progress"
     "sections": "Sections",
     "supplyChain": {
       "title": "Supply Chain Risk Assessment",
