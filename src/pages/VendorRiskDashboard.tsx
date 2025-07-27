@@ -23,6 +23,7 @@ const VendorRiskDashboard: React.FC = () => {
   const { assessments } = useSupplyChainAssessments();
   const [showAddModal, setShowAddModal] = useState(false);
   const [activeView, setActiveView] = useState<'dashboard' | 'workflows' | 'intelligence' | 'analytics'>('dashboard');
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   // Transform vendors data to match VendorRisk interface
   const vendorRiskData: VendorRisk[] = vendors.map(vendor => ({
@@ -46,6 +47,19 @@ const VendorRiskDashboard: React.FC = () => {
     nonCompliant: vendorRiskData.filter(v => v.complianceStatus === 'Non-Compliant').length,
   };
 
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    try {
+      await refetch();
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
+
+  const handleViewChange = (view: 'dashboard' | 'workflows' | 'intelligence' | 'analytics') => {
+    setActiveView(view);
+  };
+
   if (loading) {
     return (
       <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -61,9 +75,14 @@ const VendorRiskDashboard: React.FC = () => {
       <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center">
           <p className="text-red-600 dark:text-red-400 mb-4">Error loading vendors: {error}</p>
-          <Button onClick={refetch} variant="outline">
-            <RefreshCw className="h-4 w-4 mr-2" />
-            Retry
+          <Button 
+            onClick={handleRefresh} 
+            variant="outline"
+            disabled={isRefreshing}
+            aria-label="Retry loading vendors"
+          >
+            <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+            {isRefreshing ? 'Retrying...' : 'Retry'}
           </Button>
         </div>
       </main>
@@ -72,6 +91,7 @@ const VendorRiskDashboard: React.FC = () => {
   
   return (
     <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      {/* Header Section */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">{t('vendorRisk.title')}</h1>
         <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl">
@@ -80,283 +100,294 @@ const VendorRiskDashboard: React.FC = () => {
       </div>
       
       {/* Enhanced Navigation */}
-      <div className="mb-6">
-        <nav className="flex space-x-8">
-          {[
-            { id: 'dashboard', label: 'Overview Dashboard', icon: BarChart3 },
-            { id: 'workflows', label: 'Workflow Automation', icon: Zap },
-            { id: 'intelligence', label: 'Threat Intelligence', icon: Shield },
-            { id: 'analytics', label: 'Predictive Analytics', icon: Brain }
-          ].map(({ id, label, icon: Icon }) => (
-            <button
-              key={id}
-              onClick={() => setActiveView(id as any)}
-              className={`flex items-center px-3 py-2 rounded-md text-sm font-medium ${
-                activeView === id
-                  ? 'bg-vendorsoluce-navy text-white'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
-              }`}
-            >
-              <Icon className="h-4 w-4 mr-2" />
-              {label}
-            </button>
-          ))}
+      <div className="mb-8">
+        <nav className="border-b border-gray-200 dark:border-gray-700" role="navigation" aria-label="Dashboard sections">
+          <div className="flex flex-wrap -mb-px">
+            {[
+              { id: 'dashboard', label: 'Overview Dashboard', icon: BarChart3 },
+              { id: 'workflows', label: 'Workflow Automation', icon: Zap },
+              { id: 'intelligence', label: 'Threat Intelligence', icon: Shield },
+              { id: 'analytics', label: 'Predictive Analytics', icon: Brain }
+            ].map(({ id, label, icon: Icon }) => (
+              <button
+                key={id}
+                onClick={() => handleViewChange(id as any)}
+                className={`flex items-center px-4 py-3 mr-2 text-sm font-medium border-b-2 rounded-t-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-vendortal-navy focus:ring-offset-2 ${
+                  activeView === id
+                    ? 'border-vendortal-navy text-vendortal-navy bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400'
+                    : 'border-transparent text-gray-700 dark:text-gray-300 hover:text-vendortal-navy hover:border-gray-300 dark:hover:text-gray-200'
+                }`}
+                role="tab"
+                aria-selected={activeView === id}
+                aria-controls={`${id}-panel`}
+              >
+                <Icon className="h-4 w-4 mr-2" />
+                <span className="hidden sm:inline">{label}</span>
+                <span className="sm:hidden">{label.split(' ')[0]}</span>
+              </button>
+            ))}
+          </div>
         </nav>
       </div>
 
-      {/* Dashboard View */}
-      {activeView === 'dashboard' && (
-        <>
-          <GetStartedWidget 
-            vendorCount={vendors.length}
-            assessmentCount={assessments.length}
-            sbomCount={analyses.length}
-          />
-        </>
-      )}
+      {/* Content Sections with consistent spacing */}
+      <div className="space-y-8">
+        {/* Dashboard View */}
+        {activeView === 'dashboard' && (
+          <div id="dashboard-panel" role="tabpanel" aria-labelledby="dashboard-tab" className="space-y-8">
+            <GetStartedWidget 
+              vendorCount={vendors.length}
+              assessmentCount={assessments.length}
+              sbomCount={analyses.length}
+            />
 
-      {/* Traditional Vendor List View */}
-      {activeView === 'dashboard' && (
-        <>
-      {/* Enhanced Dashboard Widget */}
-      {vendors.length > 3 || assessments.length > 2 || analyses.length > 2 ? (
-        <div className="mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Advanced Dashboard</h2>
-            <Button variant="outline" size="sm">
-              View Full Dashboard
-            </Button>
-          </div>
-          <CustomizableDashboard />
-        </div>
-      ) : null}
+            {/* Enhanced Dashboard Widget */}
+            {(vendors.length > 3 || assessments.length > 2 || analyses.length > 2) && (
+              <Card className="p-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">Advanced Dashboard</h2>
+                  <Button variant="outline" size="sm" className="w-full sm:w-auto">
+                    View Full Dashboard
+                  </Button>
+                </div>
+                <CustomizableDashboard />
+              </Card>
+            )}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <Card className="p-6">
-          <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('vendorRisk.totalVendors')}</h2>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white">{vendorRiskData.length}</p>
-          <div className="mt-2 text-sm text-gray-500 dark:text-gray-400">{t('vendorRisk.monitoredVendors')}</div>
-        </Card>
-        
-        <Card className="p-6">
-          <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('vendorRisk.riskOverview')}</h2>
-          <div className="grid grid-cols-2 gap-2">
-            <div className="text-center p-2 rounded-md bg-red-50 dark:bg-red-900/20">
-              <span className="text-xl font-bold text-red-600 dark:text-red-400">{riskCounts.high}</span>
-              <div className="text-xs text-red-600 dark:text-red-400">{t('vendorRisk.highRisk')}</div>
+            {/* Statistics Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+                <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('vendorRisk.totalVendors')}</h2>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white">{vendorRiskData.length}</p>
+                <div className="mt-2 text-sm text-gray-500 dark:text-gray-400">{t('vendorRisk.monitoredVendors')}</div>
+              </Card>
+              
+              <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+                <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('vendorRisk.riskOverview')}</h2>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="text-center p-2 rounded-md bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+                    <span className="text-xl font-bold text-red-600 dark:text-red-400">{riskCounts.high}</span>
+                    <div className="text-xs text-red-600 dark:text-red-400">{t('vendorRisk.highRisk')}</div>
+                  </div>
+                  <div className="text-center p-2 rounded-md bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800">
+                    <span className="text-xl font-bold text-yellow-600 dark:text-yellow-400">{riskCounts.medium}</span>
+                    <div className="text-xs text-yellow-600 dark:text-yellow-400">{t('vendorRisk.mediumRisk')}</div>
+                  </div>
+                </div>
+              </Card>
+              
+              <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+                <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('vendorRisk.complianceStatus')}</h2>
+                <div className="grid grid-cols-3 gap-1">
+                  <div className="text-center p-2 rounded-md bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+                    <span className="text-lg font-bold text-green-600 dark:text-green-400">{complianceCounts.compliant}</span>
+                    <div className="text-xs text-green-600 dark:text-green-400 leading-tight">{t('vendorRisk.compliant')}</div>
+                  </div>
+                  <div className="text-center p-2 rounded-md bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800">
+                    <span className="text-lg font-bold text-yellow-600 dark:text-yellow-400">{complianceCounts.partial}</span>
+                    <div className="text-xs text-yellow-600 dark:text-yellow-400 leading-tight">{t('vendorRisk.partial')}</div>
+                  </div>
+                  <div className="text-center p-2 rounded-md bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+                    <span className="text-lg font-bold text-red-600 dark:text-red-400">{complianceCounts.nonCompliant}</span>
+                    <div className="text-xs text-red-600 dark:text-red-400 leading-tight">{t('vendorRisk.nonCompliant')}</div>
+                  </div>
+                </div>
+              </Card>
             </div>
-            <div className="text-center p-2 rounded-md bg-yellow-50 dark:bg-yellow-900/20">
-              <span className="text-xl font-bold text-yellow-600 dark:text-yellow-400">{riskCounts.medium}</span>
-              <div className="text-xs text-yellow-600 dark:text-yellow-400">{t('vendorRisk.mediumRisk')}</div>
-            </div>
-          </div>
-        </Card>
-        
-        <Card className="p-6">
-          <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('vendorRisk.complianceStatus')}</h2>
-          <div className="grid grid-cols-3 gap-2">
-            <div className="text-center p-2 rounded-md bg-green-50 dark:bg-green-900/20">
-              <span className="text-xl font-bold text-green-600 dark:text-green-400">{complianceCounts.compliant}</span>
-              <div className="text-xs text-green-600 dark:text-green-400">{t('vendorRisk.compliant')}</div>
-            </div>
-            <div className="text-center p-2 rounded-md bg-yellow-50 dark:bg-yellow-900/20">
-              <span className="text-xl font-bold text-yellow-600 dark:text-yellow-400">{complianceCounts.partial}</span>
-              <div className="text-xs text-yellow-600 dark:text-yellow-400">{t('vendorRisk.partial')}</div>
-            </div>
-            <div className="text-center p-2 rounded-md bg-red-50 dark:bg-red-900/20">
-              <span className="text-xl font-bold text-red-600 dark:text-red-400">{complianceCounts.nonCompliant}</span>
-              <div className="text-xs text-red-600 dark:text-red-400">{t('vendorRisk.nonCompliant')}</div>
-            </div>
-          </div>
-        </Card>
-      </div>
-      
-      <Card className="mb-8">
-        <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex flex-col sm:flex-row justify-between sm:items-center">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('vendorRisk.vendorOverview')}</h2>
-            <div className="mt-4 sm:mt-0">
-              <div className="flex flex-col sm:flex-row gap-2">
-                <DataImportExport
-                  dataType="vendors"
-                  data={vendors}
-                  onImportComplete={(result) => {
-                    if (result.success) {
-                      refetch();
-                    }
-                  }}
-                  onRefresh={refetch}
-                />
-              <Button variant="primary" size="sm" onClick={() => setShowAddModal(true)}>
-                <Plus className="h-4 w-4 mr-2" />
-                {t('vendorRisk.addNewVendor')}
-              </Button>
+            
+            {/* Vendor Table Section */}
+            <Card className="overflow-hidden">
+              <div className="p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-4">
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('vendorRisk.vendorOverview')}</h2>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <DataImportExport
+                      dataType="vendors"
+                      data={vendors}
+                      onImportComplete={(result) => {
+                        if (result.success) {
+                          handleRefresh();
+                        }
+                      }}
+                      onRefresh={handleRefresh}
+                    />
+                    <Button 
+                      variant="primary" 
+                      size="sm" 
+                      onClick={() => setShowAddModal(true)}
+                      className="w-full sm:w-auto"
+                      aria-label="Add new vendor"
+                    >
+                      <Plus className="h-4 w-4 mr-2" />
+                      {t('vendorRisk.addNewVendor')}
+                    </Button>
+                  </div>
+                </div>
               </div>
+              
+              {vendorRiskData.length > 0 ? (
+                <VendorRiskTable 
+                  vendors={vendorRiskData}
+                  onRefresh={handleRefresh}
+                />
+              ) : (
+                <div className="p-12 text-center bg-gray-50 dark:bg-gray-800/30">
+                  <div className="max-w-sm mx-auto">
+                    <div className="mb-4">
+                      <BarChart3 className="h-12 w-12 text-gray-400 mx-auto" />
+                    </div>
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">No vendors added yet. Start by adding your first vendor.</p>
+                    <Button 
+                      variant="primary" 
+                      onClick={() => setShowAddModal(true)}
+                      className="w-full sm:w-auto"
+                    >
+                      <Plus className="h-4 w-4 mr-2" />
+                      Add First Vendor
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </Card>
+            
+            {/* Risk Information Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <Card className="p-6">
+                <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{t('vendorRisk.riskScoring.title')}</h2>
+                <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  {t('vendorRisk.riskScoring.description')}
+                </p>
+                <div className="space-y-4">
+                  {[
+                    { level: 'lowRisk', color: 'green', width: '100%', status: 'excellent' },
+                    { level: 'mediumRisk', color: 'yellow', width: '75%', status: 'acceptable' },
+                    { level: 'highRisk', color: 'orange', width: '50%', status: 'concerning' },
+                    { level: 'criticalRisk', color: 'red', width: '25%', status: 'unacceptable' }
+                  ].map(({ level, color, width, status }) => (
+                    <div key={level}>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                          {t(`vendorRisk.riskScoring.${level}`)}
+                        </span>
+                        <span className={`text-sm font-medium text-${color}-600 dark:text-${color}-400`}>
+                          {t(`vendorRisk.riskScoring.${status}`)}
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                        <div 
+                          className={`bg-${color}-500 h-3 rounded-full transition-all duration-500 ease-out`}
+                          style={{ width }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+              
+              <Card className="p-6">
+                <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{t('vendorRisk.actions.title')}</h2>
+                <div className="space-y-4">
+                  {[
+                    { type: 'criticalRisk', color: 'red', icon: '!' },
+                    { type: 'highRisk', color: 'orange', icon: '!' },
+                    { type: 'mediumRisk', color: 'yellow', icon: '!' },
+                    { type: 'lowRisk', color: 'green', icon: '✓' }
+                  ].map(({ type, color, icon }) => (
+                    <div key={type} className="flex items-start space-x-3">
+                      <div className={`flex-shrink-0 h-6 w-6 rounded-full bg-${color}-100 dark:bg-${color}-900/30 flex items-center justify-center mt-0.5`}>
+                        <span className={`text-${color}-600 dark:text-${color}-400 text-sm font-medium`}>{icon}</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-sm font-medium text-gray-900 dark:text-white">
+                          {t(`vendorRisk.actions.${type}.title`)}
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                          {t(`vendorRisk.actions.${type}.description`)}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
             </div>
-          </div>
-        </div>
-        
-        {vendorRiskData.length > 0 ? (
-          <VendorRiskTable 
-            vendors={vendorRiskData}
-            onRefresh={refetch}
-          />
-        ) : (
-          <div className="p-12 text-center">
-            <p className="text-gray-500 dark:text-gray-400 mb-4">No vendors added yet. Start by adding your first vendor.</p>
-            <Button variant="primary" onClick={() => setShowAddModal(true)}>
-              <Plus className="h-4 w-4 mr-2" />
-              Add First Vendor
-            </Button>
           </div>
         )}
-      </Card>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card className="p-6">
-          <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{t('vendorRisk.riskScoring.title')}</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
-            {t('vendorRisk.riskScoring.description')}
-          </p>
-          <div className="space-y-3 mt-4">
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('vendorRisk.riskScoring.lowRisk')}</span>
-                <span className="text-sm font-medium text-green-600 dark:text-green-400">{t('vendorRisk.riskScoring.excellent')}</span>
+
+        {/* Workflow Automation View */}
+        {activeView === 'workflows' && (
+          <div id="workflows-panel" role="tabpanel" aria-labelledby="workflows-tab" className="space-y-6">
+            <Card className="p-6">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Workflow Automation</h2>
+                  <p className="text-gray-600 dark:text-gray-300 mt-1">Automate your vendor risk management processes</p>
+                </div>
+                <Button variant="primary" size="sm">
+                  <Plus className="h-4 w-4 mr-2" />
+                  New Workflow
+                </Button>
               </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div className="bg-green-500 h-2 rounded-full" style={{ width: '100%' }}></div>
-              </div>
-            </div>
-            
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('vendorRisk.riskScoring.mediumRisk')}</span>
-                <span className="text-sm font-medium text-yellow-600 dark:text-yellow-400">{t('vendorRisk.riskScoring.acceptable')}</span>
-              </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div className="bg-yellow-500 h-2 rounded-full" style={{ width: '75%' }}></div>
-              </div>
-            </div>
-            
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('vendorRisk.riskScoring.highRisk')}</span>
-                <span className="text-sm font-medium text-orange-600 dark:text-orange-400">{t('vendorRisk.riskScoring.concerning')}</span>
-              </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div className="bg-orange-500 h-2 rounded-full" style={{ width: '50%' }}></div>
-              </div>
-            </div>
-            
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('vendorRisk.riskScoring.criticalRisk')}</span>
-                <span className="text-sm font-medium text-red-600 dark:text-red-400">{t('vendorRisk.riskScoring.unacceptable')}</span>
-              </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div className="bg-red-500 h-2 rounded-full" style={{ width: '25%' }}></div>
-              </div>
-            </div>
+              <WorkflowAutomation />
+            </Card>
           </div>
-        </Card>
-        
-        <Card className="p-6">
-          <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{t('vendorRisk.actions.title')}</h2>
-          <ul className="space-y-3">
-            <li className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mt-0.5">
-                <span className="text-red-600 dark:text-red-400 text-xs">!</span>
+        )}
+
+        {/* Threat Intelligence View */}
+        {activeView === 'intelligence' && (
+          <div id="intelligence-panel" role="tabpanel" aria-labelledby="intelligence-tab" className="space-y-6">
+            <Card className="p-6">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Threat Intelligence</h2>
+                <p className="text-gray-600 dark:text-gray-300 mt-1">Monitor security threats affecting your vendors</p>
               </div>
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-gray-900 dark:text-white">{t('vendorRisk.actions.criticalRisk.title')}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  {t('vendorRisk.actions.criticalRisk.description')}
-                </p>
-              </div>
-            </li>
+              <ThreatIntelligenceFeed vendorIds={vendorRiskData.map(v => v.id)} />
+            </Card>
             
-            <li className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mt-0.5">
-                <span className="text-orange-600 dark:text-orange-400 text-xs">!</span>
+            <Card>
+              <CardHeader>
+                <CardTitle>Threat Intelligence Sources</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="text-center p-6 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-shadow">
+                    <div className="text-2xl font-bold text-gray-900 dark:text-white">5</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Active Sources</div>
+                  </div>
+                  <div className="text-center p-6 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-shadow">
+                    <div className="text-2xl font-bold text-gray-900 dark:text-white">142</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Threats Today</div>
+                  </div>
+                  <div className="text-center p-6 border border-gray-200 dark:border-gray-700 rounded-lg hover:shadow-md transition-shadow">
+                    <div className="text-2xl font-bold text-gray-900 dark:text-white">98%</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Coverage</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {/* Predictive Analytics View */}
+        {activeView === 'analytics' && (
+          <div id="analytics-panel" role="tabpanel" aria-labelledby="analytics-tab" className="space-y-6">
+            <Card className="p-6">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Predictive Analytics</h2>
+                <p className="text-gray-600 dark:text-gray-300 mt-1">AI-powered insights and risk predictions</p>
               </div>
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-gray-900 dark:text-white">{t('vendorRisk.actions.highRisk.title')}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  {t('vendorRisk.actions.highRisk.description')}
-                </p>
-              </div>
-            </li>
-            
-            <li className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center mt-0.5">
-                <span className="text-yellow-600 dark:text-yellow-400 text-xs">!</span>
-              </div>
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-gray-900 dark:text-white">{t('vendorRisk.actions.mediumRisk.title')}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  {t('vendorRisk.actions.mediumRisk.description')}
-                </p>
-              </div>
-            </li>
-            
-            <li className="flex items-start">
-              <div className="flex-shrink-0 h-5 w-5 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mt-0.5">
-                <span className="text-green-600 dark:text-green-400 text-xs">✓</span>
-              </div>
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-gray-900 dark:text-white">{t('vendorRisk.actions.lowRisk.title')}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  {t('vendorRisk.actions.lowRisk.description')}
-                </p>
-              </div>
-            </li>
-          </ul>
-        </Card>
+              <PredictiveAnalytics />
+            </Card>
+          </div>
+        )}
       </div>
-        </>
-      )}
 
-      {/* Workflow Automation View */}
-      {activeView === 'workflows' && <WorkflowAutomation />}
-
-      {/* Threat Intelligence View */}
-      {activeView === 'intelligence' && (
-        <div className="space-y-6">
-          <ThreatIntelligenceFeed vendorIds={vendorRiskData.map(v => v.id)} />
-          <Card>
-            <CardHeader>
-              <CardTitle>Threat Intelligence Sources</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                  <div className="text-lg font-bold text-gray-900 dark:text-white">5</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Active Sources</div>
-                </div>
-                <div className="text-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                  <div className="text-lg font-bold text-gray-900 dark:text-white">142</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Threats Today</div>
-                </div>
-                <div className="text-center p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
-                  <div className="text-lg font-bold text-gray-900 dark:text-white">98%</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Coverage</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-
-      {/* Predictive Analytics View */}
-      {activeView === 'analytics' && <PredictiveAnalytics />}
-
+      {/* Add Vendor Modal */}
       {showAddModal && (
         <AddVendorModal 
           onClose={() => setShowAddModal(false)}
           onSuccess={() => {
             setShowAddModal(false);
-            refetch();
+            handleRefresh();
           }}
         />
       )}
