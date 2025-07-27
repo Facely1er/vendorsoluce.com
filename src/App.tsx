@@ -33,6 +33,8 @@ import SBOMQuickScan from './pages/tools/SBOMQuickScan';
 import VendorRiskRadar from './pages/tools/VendorRiskRadar';
 import VendorSecurityAssessments from './pages/VendorSecurityAssessments';
 import VendorAssessmentPortal from './pages/VendorAssessmentPortal';
+import ProfilePage from './pages/ProfilePage';
+import AccountPage from './pages/AccountPage';
 
 function App() {
   return (
@@ -83,6 +85,16 @@ function App() {
                   <Route path="/onboarding" element={
                     <ProtectedRoute>
                       <OnboardingPage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/profile" element={
+                    <ProtectedRoute>
+                      <ProfilePage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/account" element={
+                    <ProtectedRoute>
+                      <AccountPage />
                     </ProtectedRoute>
                   } />
                   
