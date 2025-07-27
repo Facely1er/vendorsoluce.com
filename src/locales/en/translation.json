@@ -333,6 +333,162 @@
       "viewAllPositions": "View All Open Positions"
     }
   },
+  "vendorRiskRadar": {
+    "title": "Vendor Risk Radar",
+    "description": "Assess vendor risks with focus on data privacy, protection requirements, and regulatory compliance",
+    
+    "steps": {
+      "selectCategory": "1. Select Vendor Category",
+      "vendorInfo": "2. Vendor Information", 
+      "riskDimensions": "3. Risk Assessment Dimensions"
+    },
+
+    "vendorCategories": {
+      "cloudStorage": {
+        "name": "Cloud Storage & Backup",
+        "description": "File storage, backup, and document management services",
+        "commonUseCase": "Document storage, file sharing, backup solutions",
+        "privacyImpact": "High - Direct data hosting and processing",
+        "commonRegulations": ["GDPR", "SOX", "HIPAA", "SOC 2"]
+      },
+      "paymentProcessor": {
+        "name": "Payment Processing", 
+        "description": "Payment gateways, billing, and financial transaction services",
+        "commonUseCase": "Credit card processing, subscription billing, payments",
+        "privacyImpact": "Critical - Financial and PII data processing",
+        "commonRegulations": ["PCI DSS", "GDPR", "PSD2", "SOX"]
+      },
+      "hrSoftware": {
+        "name": "HR & Workforce Management",
+        "description": "HRIS, payroll, recruiting, and employee management systems", 
+        "commonUseCase": "Employee data, payroll, performance management",
+        "privacyImpact": "High - Sensitive employee and personal data",
+        "commonRegulations": ["GDPR", "CCPA", "Employment Law", "SOX"]
+      },
+      "saasProductivity": {
+        "name": "SaaS Productivity Tools",
+        "description": "Collaboration, communication, and productivity software",
+        "commonUseCase": "Email, messaging, project management, CRM", 
+        "privacyImpact": "Medium - Business communications and workflow data",
+        "commonRegulations": ["GDPR", "SOC 2", "ISO 27001"]
+      },
+      "analyticsMarketing": {
+        "name": "Analytics & Marketing",
+        "description": "Data analytics, marketing automation, and customer tracking",
+        "commonUseCase": "Customer analytics, marketing campaigns, tracking",
+        "privacyImpact": "High - Customer behavior and PII tracking",
+        "commonRegulations": ["GDPR", "CCPA", "PECR", "ePrivacy"]
+      },
+      "infrastructure": {
+        "name": "Infrastructure & Hosting",
+        "description": "Cloud infrastructure, hosting, and technical services", 
+        "commonUseCase": "Server hosting, cloud infrastructure, CDN",
+        "privacyImpact": "Medium-High - Infrastructure-level data access",
+        "commonRegulations": ["SOC 2", "ISO 27001", "GDPR", "FedRAMP"]
+      }
+    },
+
+    "riskDimensions": {
+      "dataSensitivity": {
+        "name": "Data Sensitivity Level",
+        "shortName": "Data Sensitivity",
+        "description": "Classification and sensitivity of data being processed",
+        "privacyRegulations": ["GDPR Art. 9", "CCPA", "HIPAA"],
+        "protectionRequirements": ["Data Classification", "Access Controls", "Encryption at Rest"]
+      },
+      "accessControl": {
+        "name": "Access Control & Authentication", 
+        "shortName": "Access Control",
+        "description": "Identity management and access control mechanisms",
+        "privacyRegulations": ["GDPR Art. 25", "SOX", "ISO 27001"],
+        "protectionRequirements": ["MFA", "Role-Based Access", "Audit Logging"]
+      },
+      "dataResidency": {
+        "name": "Data Residency & Jurisdiction",
+        "shortName": "Data Residency", 
+        "description": "Geographic location and legal jurisdiction of data processing",
+        "privacyRegulations": ["GDPR Art. 44-49", "Schrems II", "Data Localization Laws"],
+        "protectionRequirements": ["Adequacy Decisions", "SCCs", "Data Mapping"]
+      },
+      "retentionControl": {
+        "name": "Data Retention & Deletion",
+        "shortName": "Retention Control",
+        "description": "Data lifecycle management and deletion capabilities",
+        "privacyRegulations": ["GDPR Art. 17", "CCPA", "Data Minimization"],
+        "protectionRequirements": ["Retention Policies", "Secure Deletion", "Data Portability"]
+      },
+      "encryptionStandards": {
+        "name": "Encryption & Security Standards",
+        "shortName": "Encryption",
+        "description": "Cryptographic controls and security implementation",
+        "privacyRegulations": ["GDPR Art. 32", "PCI DSS", "FIPS 140-2"],
+        "protectionRequirements": ["Encryption in Transit", "Encryption at Rest", "Key Management"]
+      },
+      "complianceFramework": {
+        "name": "Compliance & Certification", 
+        "shortName": "Compliance",
+        "description": "Regulatory compliance and industry certifications",
+        "privacyRegulations": ["SOC 2", "ISO 27001", "Industry Standards"],
+        "protectionRequirements": ["Regular Audits", "Compliance Monitoring", "Incident Response"]
+      }
+    },
+
+    "form": {
+      "vendorNameLabel": "Vendor Name",
+      "vendorNamePlaceholder": "Enter vendor name...",
+      "categoryOverview": "Category Overview",
+      "commonUseCase": "Common Use Case:",
+      "privacyImpact": "Privacy Impact:",
+      "keyRegulations": "Key Regulations:",
+      "lowRisk": "Low Risk",
+      "highRisk": "High Risk",
+      "privacyRegulations": "Privacy Regulations:",
+      "protectionRequirements": "Protection Requirements:"
+    },
+
+    "buttons": {
+      "generateRadar": "Generate Risk Radar",
+      "viewFullDashboard": "View Full Dashboard"
+    },
+
+    "results": {
+      "radarVisualization": "Risk Radar Visualization", 
+      "overallAssessment": "Overall Risk Assessment",
+      "privacyRecommendations": "Privacy Recommendations",
+      "currentRisk": "Current Risk",
+      "requiredControls": "Required Controls"
+    },
+
+    "howToUse": {
+      "title": "How to Use the Risk Radar",
+      "step1": "Choose the vendor category that best matches your use case to load baseline risk settings",
+      "step2": "Adjust risk dimensions based on your specific data sensitivity and regulatory requirements", 
+      "step3": "Generate the radar chart to visualize risk levels and required control gaps"
+    },
+
+    "demo": {
+      "title": "Demo Mode Active",
+      "description": "Using CloudCorp Document Storage as example. Select a category to see different risk profiles."
+    },
+
+    "errors": {
+      "enterVendorName": "Please enter a vendor name",
+      "calculationFailed": "Failed to calculate risk score"
+    },
+
+    "status": {
+      "saving": "Saving progress...",
+      "saved": "Progress saved automatically", 
+      "analyzing": "Analyzing vendor risk..."
+    },
+
+    "riskLevels": {
+      "low": "Low",
+      "medium": "Medium", 
+      "high": "High",
+      "critical": "Critical"
+    }
+  },
   "nav": {
     "home": "Home",
     "solutions": "Solutions",
