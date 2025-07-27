@@ -164,42 +164,42 @@ const SBOMAnalyzer: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <Card className="border-l-4 border-l-vendorsoluce-teal">
           <CardContent className="p-6">
-            <div className="flex items-center mb-4">
+            <div className="flex items-center mb-4 mt-2">
               <FileJson className="h-8 w-8 text-vendorsoluce-teal mr-3" />
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                {t('sbom.features.analysis.title')}
+                {t('sbom.features.componentAnalysis.title')}
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-300">
-              {t('sbom.features.analysis.description')}
+              {t('sbom.features.componentAnalysis.description')}
             </p>
           </CardContent>
         </Card>
 
         <Card className="border-l-4 border-l-vendorsoluce-green">
           <CardContent className="p-6">
-            <div className="flex items-center mb-4">
+            <div className="flex items-center mb-4 mt-2">
               <Shield className="h-8 w-8 text-vendorsoluce-green mr-3" />
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                {t('sbom.features.security.title')}
+                {t('sbom.features.vulnerabilityDetection.title')}
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-300">
-              {t('sbom.features.security.description')}
+              {t('sbom.features.vulnerabilityDetection.description')}
             </p>
           </CardContent>
         </Card>
 
         <Card className="border-l-4 border-l-vendorsoluce-blue">
           <CardContent className="p-6">
-            <div className="flex items-center mb-4">
+            <div className="flex items-center mb-4 mt-2">
               <BarChart3 className="h-8 w-8 text-vendorsoluce-blue mr-3" />
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                {t('sbom.features.compliance.title')}
+                {t('sbom.features.licenseCompliance.title')}
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-300">
-              {t('sbom.features.compliance.description')}
+              {t('sbom.features.licenseCompliance.description')}
             </p>
           </CardContent>
         </Card>
