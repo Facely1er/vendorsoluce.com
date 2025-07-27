@@ -19,6 +19,13 @@
       "title_line2": "Accelerate Your Business.",
       "subtitle": "Turn Vendor Risk into Competitive Advantage",
       "description": "VendorSoluce transforms vendor risk management into a growth driver with automated assessments and complete supply chain transparency.",
+      "carousel": {
+        "text1": "Comprehensive tools for vendor assessment, SBOM analysis, and compliance reporting aligned with federal security standards.",
+        "text2": "Assess vendor risks with NIST SP 800-161 aligned frameworks and automated scoring systems.",
+        "text3": "Analyze Software Bills of Materials (SBOMs) for vulnerabilities and license compliance issues.",
+        "text4": "Monitor your supply chain continuously with real-time threat intelligence and risk alerts.",
+        "text5": "Generate compliance reports for audits and meet federal security requirements effortlessly."
+      },
       "cta1": "Start Free Assessment",
       "cta2": "Schedule Live Demo",
       
