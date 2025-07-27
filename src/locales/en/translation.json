@@ -656,24 +656,68 @@
     }
   },
   "sbom": {
-    "title": "SBOM Analysis",
-    "description": "Upload and analyze your Software Bill of Materials for vulnerabilities and compliance",
+    "title": "SBOM Analyzer",
+    "description": "Analyze Software Bill of Materials (SBOM) files to identify vulnerabilities, license issues, and compliance gaps in your software components.",
+    "features": {
+      "componentAnalysis": {
+        "title": "Component Analysis",
+        "description": "Comprehensive analysis of software components, dependencies, and their security posture."
+      },
+      "vulnerabilityDetection": {
+        "title": "Vulnerability Detection",
+        "description": "Identify known vulnerabilities in your software components with detailed risk assessments."
+      },
+      "licenseCompliance": {
+        "title": "License Compliance",
+        "description": "Track open source licenses and ensure compliance with organizational policies."
+      }
+    },
     "upload": {
       "title": "Upload SBOM",
-      "uploadPrompt": "Upload your SBOM file",
+      "supportedFormats": "Supported Formats",
+      "noSbom": "No SBOM Uploaded",
+      "uploadPrompt": "Upload a Software Bill of Materials file to begin analysis. We support SPDX, CycloneDX, and other standard formats.",
+      "dropHere": "Drop your SBOM file here",
       "browseFiles": "Browse Files",
-      "dropHere": "Drop files here",
-      "supportedFormats": "Supported formats: SPDX, CycloneDX, SWID",
-      "analyzing": "Analyzing SBOM...",
-      "noSbom": "No SBOM file selected"
+      "analyzing": "Analyzing SBOM..."
     },
     "results": {
       "title": "Analysis Results",
       "components": "Components",
       "vulnerabilities": "Vulnerabilities",
       "licenses": "Licenses",
-      "license": "License",
-      "supportedFormats": "Supported Formats"
+      "overallSecurityScore": "Overall Security Score",
+      "criticalCVEs": "Critical CVEs",
+      "licenseIssues": "License Issues",
+      "recommendations": "Recommendations:",
+      "immediateAction": "Immediate action required: {{count}} critical vulnerabilities found",
+      "goodPosture": "Good security posture. Continue monitoring for new vulnerabilities.",
+      "reviewComponents": "Review and update vulnerable components. Consider implementing automated scanning."
+    },
+    "recentAnalyses": "Recent Analyses",
+    "export": "Export",
+    "aboutSBOM": {
+      "title": "About SBOM Analysis",
+      "whatIsSBOM": "What is SBOM?",
+      "sbomDescription": "A Software Bill of Materials (SBOM) is a formal record containing the details and supply chain relationships of various components used in building software. It provides transparency into software composition and enables effective vulnerability management.",
+      "benefits": {
+        "identifyVulnerabilities": "Identify vulnerable components quickly",
+        "trackLicenses": "Track open source licenses for compliance",
+        "meetRequirements": "Meet federal transparency requirements"
+      },
+      "nistAlignment": "NIST SP 800-161 Alignment",
+      "nistDescription": "Our SBOM analysis aligns with NIST SP 800-161 supply chain risk management practices, helping organizations meet federal compliance requirements.",
+      "controls": {
+        "authenticity": "Control C-SCRM-7: Component authenticity",
+        "management": "Control C-SCRM-16: SBOM management",
+        "executiveOrder": "Executive Order 14028 requirements"
+      },
+      "helpSection": {
+        "title": "Need Help Getting Started?",
+        "description": "Learn more about SBOM implementation and download templates to get started.",
+        "downloadTemplates": "Download Templates",
+        "implementationGuide": "Implementation Guide"
+      }
     }
   },
   "vendorRisk": {
@@ -1352,38 +1396,5 @@
   },
   "app": {
     "name": "Supply Chain Security Platform"
-  },
-  "sbom": {
-    "title": "SBOM Analyzer",
-    "description": "Analyze Software Bill of Materials (SBOM) files to identify vulnerabilities, license issues, and compliance gaps in your software components.",
-    "features": {
-      "analysis": {
-        "title": "Component Analysis",
-        "description": "Comprehensive analysis of software components, dependencies, and their security posture."
-      },
-      "security": {
-        "title": "Vulnerability Detection",
-        "description": "Identify known vulnerabilities in your software components with detailed risk assessments."
-      },
-      "compliance": {
-        "title": "License Compliance",
-        "description": "Track open source licenses and ensure compliance with organizational policies."
-      }
-    },
-    "upload": {
-      "title": "Upload SBOM",
-      "supportedFormats": "Supported Formats",
-      "noSbom": "No SBOM Uploaded",
-      "uploadPrompt": "Upload a Software Bill of Materials file to begin analysis. We support SPDX, CycloneDX, and other standard formats.",
-      "dropHere": "Drop your SBOM file here",
-      "browseFiles": "Browse Files",
-      "analyzing": "Analyzing SBOM..."
-    },
-    "results": {
-      "title": "Analysis Results",
-      "components": "Components",
-      "vulnerabilities": "Vulnerabilities",
-      "licenses": "Licenses"
-    }
   }
 }
