@@ -210,7 +210,7 @@ const onboardVendor = async (vendorData) => {
       <Card className="mb-8 border-l-4 border-l-vendorsoluce-green">
         <CardContent className="p-6">
           <div className="flex items-start">
-            <div className="pt-2 w-12 h-12 bg-vendorsoluce-green/10 rounded-full flex items-center justify-center mr-6">
+            <div className="pt-4 w-12 h-12 bg-vendorsoluce-green/10 rounded-full flex items-center justify-center mr-4">
               <Book className="h-6 w-6 text-vendorsoluce-green" />
             </div>
             <div className="flex-1">
