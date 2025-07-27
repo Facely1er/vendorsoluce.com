@@ -1611,14 +1611,13 @@
       "scanComplete": "Scan Terminé",
       "noVulnerabilities": "Aucune vulnérabilité critique trouvée",
       "fullAnalysis": "Exécuter l'Analyse Complète",
-      "formatInfo": "Supporte les formats SPDX, CycloneDX et SWID",
-"riskRadar": {
-  "title": "Radar des Risques Fournisseurs",
-  "description": "Visualisez les risques fournisseurs avec des graphiques radar complets et des évaluations de confidentialité",
-  "action": "Lancer le Radar"
-}
+      "formatInfo": "Supporte les formats SPDX, CycloneDX et SWID"
     },
-   
+    "riskRadar": {
+      "title": "Radar des Risques Fournisseurs",
+      "description": "Visualisez les risques fournisseurs avec des graphiques radar complets et des évaluations de confidentialité",
+      "action": "Lancer le Radar"
+    },
     "riskCalculator": {
       "title": "Calculateur de risque fournisseur",
       "description": "Calculez instantanément les scores de risque fournisseur",
@@ -2151,19 +2150,16 @@
         "exampleResponse": "Exemple de Réponse"
       }
     }
-
-{
+  },
   "integrationGuides": {
     "title": "Guides d'Intégration",
     "description": "Connectez VendorSoluce avec vos systèmes et flux de travail existants. Suivez nos guides étape par étape pour intégrer la gestion des risques de la chaîne d'approvisionnement dans votre pile technologique.",
-    
     "quickStart": {
       "title": "Commencer avec l'API VendorSoluce",
       "description": "Nouveau dans les intégrations VendorSoluce ? Commencez par notre guide API REST pour comprendre les bases de l'authentification, des points de terminaison et des formats de données.",
       "viewApiDocs": "Voir la Documentation API",
       "downloadSDKs": "Télécharger les SDKs"
     },
-    
     "categories": {
       "all": "Toutes les Intégrations",
       "api": "Intégration API",
@@ -2172,13 +2168,11 @@
       "export": "Export de Données",
       "automation": "Automatisation"
     },
-    
     "difficulty": {
       "beginner": "débutant",
       "intermediate": "intermédiaire",
       "advanced": "avancé"
     },
-    
     "guides": {
       "restApi": {
         "title": "Intégration API REST",
@@ -2253,7 +2247,6 @@
         ]
       }
     },
-    
     "common": {
       "implementationSteps": "Étapes d'Implémentation :",
       "moreSteps": "+ {{count}} étapes supplémentaires",
@@ -2263,7 +2256,6 @@
       "viewGuide": "Voir le Guide",
       "examples": "Exemples"
     },
-    
     "sdks": {
       "title": "SDKs et Outils",
       "javascript": {
@@ -2285,16 +2277,13 @@
         "docs": "Documentation"
       }
     },
-    
     "support": {
       "title": "Besoin d'Aide pour l'Intégration ?",
       "description": "Notre équipe technique est là pour vous aider à intégrer VendorSoluce avec vos systèmes. Obtenez un support personnalisé pour les intégrations complexes et les implémentations personnalisées.",
       "contactSupport": "Contacter le Support",
       "scheduleConsultation": "Planifier une Consultation"
     }
-  }
-}
- 
+  },
   "navigation": {
     "home": "Accueil",
     "solutions": "Solutions",
