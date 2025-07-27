@@ -253,7 +253,8 @@
       "feature4": {
         "title": "Rapports de conformité",
         "description": "Rapports prêts pour les dirigeants pour les cadres de conformité NIST, CMMC et ISO"
-      }
+      },
+      "learnMore": "En savoir plus"
     },
     "benefits": {
       "title": "Pourquoi choisir notre plateforme",
