@@ -336,13 +336,11 @@
   "vendorRiskRadar": {
     "title": "Vendor Risk Radar",
     "description": "Assess vendor risks with focus on data privacy, protection requirements, and regulatory compliance",
-    
     "steps": {
       "selectCategory": "1. Select Vendor Category",
       "vendorInfo": "2. Vendor Information", 
       "riskDimensions": "3. Risk Assessment Dimensions"
     },
-
     "vendorCategories": {
       "cloudStorage": {
         "name": "Cloud Storage & Backup",
@@ -387,7 +385,6 @@
         "commonRegulations": ["SOC 2", "ISO 27001", "GDPR", "FedRAMP"]
       }
     },
-
     "riskDimensions": {
       "dataSensitivity": {
         "name": "Data Sensitivity Level",
@@ -432,7 +429,6 @@
         "protectionRequirements": ["Regular Audits", "Compliance Monitoring", "Incident Response"]
       }
     },
-
     "form": {
       "vendorNameLabel": "Vendor Name",
       "vendorNamePlaceholder": "Enter vendor name...",
@@ -445,12 +441,10 @@
       "privacyRegulations": "Privacy Regulations:",
       "protectionRequirements": "Protection Requirements:"
     },
-
     "buttons": {
       "generateRadar": "Generate Risk Radar",
       "viewFullDashboard": "View Full Dashboard"
     },
-
     "results": {
       "radarVisualization": "Risk Radar Visualization", 
       "overallAssessment": "Overall Risk Assessment",
@@ -458,30 +452,25 @@
       "currentRisk": "Current Risk",
       "requiredControls": "Required Controls"
     },
-
     "howToUse": {
       "title": "How to Use the Risk Radar",
       "step1": "Choose the vendor category that best matches your use case to load baseline risk settings",
       "step2": "Adjust risk dimensions based on your specific data sensitivity and regulatory requirements", 
       "step3": "Generate the radar chart to visualize risk levels and required control gaps"
     },
-
     "demo": {
       "title": "Demo Mode Active",
       "description": "Using CloudCorp Document Storage as example. Select a category to see different risk profiles."
     },
-
     "errors": {
       "enterVendorName": "Please enter a vendor name",
       "calculationFailed": "Failed to calculate risk score"
     },
-
     "status": {
       "saving": "Saving progress...",
       "saved": "Progress saved automatically", 
       "analyzing": "Analyzing vendor risk..."
     },
-
     "riskLevels": {
       "low": "Low",
       "medium": "Medium", 
@@ -569,7 +558,6 @@
       },
       "cta1": "Start Free Assessment",
       "cta2": "Schedule Live Demo",
-      
       "benefits": {
         "section1": {
           "title": "70% Faster Onboarding",
@@ -590,7 +578,6 @@
           "benefit3": "Continuous compliance tracking"
         }
       },
-      
       "trustIndicators": {
         "customers": "500+ Enterprise Customers",
         "assessments": "10,000+ Vendors Assessed",
@@ -818,7 +805,6 @@
     "title": "Vendor Security Assessments",
     "description": "Send CMMC and NIST Privacy Framework assessments to your vendors through a secure portal. Track progress, collect evidence, and automate compliance scoring.",
     "premiumFeature": "Premium Feature",
-    
     "buttons": {
       "newAssessment": "Create Assessment",
       "createFirstAssessment": "Create First Assessment",
@@ -828,7 +814,6 @@
       "signUpFreeTrial": "Sign Up for Free Trial",
       "viewPricing": "View Pricing"
     },
-    
     "features": {
       "cmmcAssessments": {
         "title": "CMMC Assessments",
@@ -852,7 +837,6 @@
         "feature3": "Automated report generation"
       }
     },
-    
     "frameworks": {
       "cmmcLevel1": {
         "name": "CMMC Level 1",
@@ -871,13 +855,11 @@
         "description": "Security and privacy controls for information systems"
       }
     },
-    
     "estimatedTime": {
       "short": "1-2 hours",
       "medium": "2-3 hours",
       "long": "4-6 hours"
     },
-    
     "status": {
       "pending": "Pending",
       "sent": "Sent",
@@ -885,19 +867,15 @@
       "completed": "Completed",
       "reviewed": "Reviewed"
     },
-    
     "search": {
       "placeholder": "Search assessments..."
     },
-    
     "filters": {
       "allStatuses": "All Statuses"
     },
-    
     "actions": {
       "exportReport": "Export Report"
     },
-    
     "table": {
       "title": "Vendor Assessments",
       "count": "{{count}} assessments",
@@ -911,13 +889,11 @@
         "actions": "Actions"
       }
     },
-    
     "emptyState": {
       "title": "No assessments found",
       "noMatches": "No assessments match your current filters.",
       "noAssessments": "Get started by creating your first vendor security assessment."
     },
-    
     "overview": {
       "premiumBenefits": {
         "title": "Premium Assessment Features",
@@ -965,7 +941,6 @@
         "multiFramework": "Multi-framework support"
       }
     },
-    
     "assessments": {
       "title": "Active Assessments",
       "fields": {
@@ -977,7 +952,6 @@
         "notSet": "Not set"
       }
     },
-    
     "templates": {
       "title": "Assessment Framework Templates",
       "fields": {
@@ -985,7 +959,6 @@
         "estimatedTime": "Est. Time"
       }
     },
-    
     "portal": {
       "title": "Vendor Assessment Portal",
       "features": {
@@ -1009,7 +982,6 @@
         "exampleUrl": "Example Portal URL:"
       }
     },
-    
     "upgrade": {
       "title": "Unlock Premium Assessment Features",
       "description": "Create an account to send CMMC and NIST Privacy Framework assessments to your vendors"
@@ -1042,7 +1014,6 @@
     "saved": "Progress saved automatically",
     "saveError": "Error saving progress",
     "sections": "Sections",
-    
     "startScreen": {
       "startAssessment": "Start Assessment",
       "nistAligned": "NIST Aligned",
@@ -1053,7 +1024,6 @@
       "actionableDescription": "Get personalized recommendations and a detailed compliance report",
       "infoMessage": "This assessment will help you evaluate your organization's supply chain security posture against NIST SP 800-161 guidelines. You'll receive a detailed score and actionable recommendations to improve your security posture."
     },
-    
     "onboarding": {
       "nameYourAssessment": "Name Your Assessment",
       "assessmentDescription": "Give your assessment a descriptive name to help you identify it later. This name will appear in your assessment list and reports.",
@@ -1067,12 +1037,10 @@
       "continueToAssessment": "Continue to Assessment",
       "back": "Back"
     },
-    
     "progress": {
       "progressLabel": "Progress: {{answered}} / {{total}} questions",
       "questionsAnswered": "{{count}} / {{total}}"
     },
-    
     "supplyChain": {
       "title": "Supply Chain Risk Assessment",
       "description": "Comprehensive assessment based on NIST SP 800-161 framework to evaluate supplier security posture and supply chain risks.",
@@ -1941,6 +1909,139 @@
       }
     }
   },
+  "integrationGuides": {
+    "title": "Integration Guides",
+    "description": "Connect VendorSoluce with your existing systems and workflows. Follow our step-by-step guides to integrate supply chain risk management into your technology stack.",
+    "quickStart": {
+      "title": "Getting Started with VendorSoluce API",
+      "description": "New to VendorSoluce integrations? Start with our REST API guide to understand the basics of authentication, endpoints, and data formats.",
+      "viewApiDocs": "View API Documentation",
+      "downloadSDKs": "Download SDKs"
+    },
+    "categories": {
+      "all": "All Integrations",
+      "api": "API Integration", 
+      "webhooks": "Webhooks",
+      "sso": "SSO/Authentication",
+      "export": "Data Export",
+      "automation": "Automation"
+    },
+    "difficulty": {
+      "beginner": "beginner",
+      "intermediate": "intermediate", 
+      "advanced": "advanced"
+    },
+    "guides": {
+      "restApi": {
+        "title": "REST API Integration",
+        "description": "Connect your applications to VendorSoluce using our REST API for vendor data, assessments, and SBOM analysis.",
+        "estimatedTime": "30-60 minutes",
+        "steps": [
+          "Obtain API credentials from your VendorSoluce dashboard",
+          "Set up authentication headers in your application", 
+          "Make your first API call to fetch vendor data",
+          "Implement error handling and rate limiting",
+          "Test the integration with sample data"
+        ]
+      },
+      "webhookSetup": {
+        "title": "Webhook Configuration",
+        "description": "Receive real-time notifications when vendor risk scores change, assessments complete, or vulnerabilities are detected.",
+        "estimatedTime": "45 minutes",
+        "steps": [
+          "Configure webhook endpoints in your VendorSoluce dashboard",
+          "Set up a secure HTTPS endpoint to receive webhooks",
+          "Verify webhook signatures for security", 
+          "Handle different event types (risk changes, assessments)",
+          "Implement retry logic for failed webhook deliveries"
+        ]
+      },
+      "ssoIntegration": {
+        "title": "Single Sign-On (SSO)",
+        "description": "Integrate VendorSoluce with your organization's identity provider using SAML 2.0 or OpenID Connect.",
+        "estimatedTime": "2-4 hours",
+        "steps": [
+          "Configure your identity provider (IdP) settings",
+          "Exchange SAML metadata with VendorSoluce",
+          "Set up attribute mapping for user roles",
+          "Test SSO login flow with test users",
+          "Configure group-based access controls"
+        ]
+      },
+      "dataExport": {
+        "title": "Automated Data Export", 
+        "description": "Set up scheduled exports of vendor data, assessment results, and compliance reports to your data warehouse.",
+        "estimatedTime": "20 minutes",
+        "steps": [
+          "Choose your preferred export format (CSV, JSON, XML)",
+          "Configure export schedules in the dashboard",
+          "Set up secure file transfer (SFTP, S3, etc.)",
+          "Map data fields to your internal systems",
+          "Test the export process and validate data"
+        ]
+      },
+      "workflowAutomation": {
+        "title": "Workflow Automation",
+        "description": "Automate vendor onboarding, risk assessments, and compliance tracking using VendorSoluce APIs.",
+        "estimatedTime": "1-2 hours", 
+        "steps": [
+          "Design your automation workflow",
+          "Set up trigger conditions (new vendor, risk threshold)",
+          "Configure automated actions (send assessments, alerts)",
+          "Implement approval workflows for high-risk vendors",
+          "Monitor and optimize automation performance"
+        ]
+      },
+      "cloudIntegration": {
+        "title": "Cloud Platform Integration",
+        "description": "Connect VendorSoluce with AWS, Azure, or GCP for enhanced security monitoring and compliance.",
+        "estimatedTime": "2-3 hours",
+        "steps": [
+          "Set up cloud service credentials and permissions",
+          "Configure VendorSoluce cloud connectors", 
+          "Map cloud resources to vendor relationships",
+          "Enable automated compliance monitoring",
+          "Set up alerting for security events"
+        ]
+      }
+    },
+    "common": {
+      "implementationSteps": "Implementation Steps:",
+      "moreSteps": "+ {{count}} more steps",
+      "codeExample": "Code Example:",
+      "copied": "Copied",
+      "copy": "Copy", 
+      "viewGuide": "View Guide",
+      "examples": "Examples"
+    },
+    "sdks": {
+      "title": "SDKs and Tools",
+      "javascript": {
+        "title": "JavaScript SDK",
+        "description": "Official JavaScript/TypeScript SDK for web and Node.js applications.",
+        "npmInstall": "npm install",
+        "github": "GitHub"
+      },
+      "python": {
+        "title": "Python SDK", 
+        "description": "Python library for data science and automation workflows.",
+        "pipInstall": "pip install",
+        "pypi": "PyPI"
+      },
+      "cli": {
+        "title": "CLI Tool",
+        "description": "Command-line interface for batch operations and CI/CD integration.",
+        "download": "Download",
+        "docs": "Docs"
+      }
+    },
+    "support": {
+      "title": "Need Integration Support?",
+      "description": "Our technical team is here to help you integrate VendorSoluce with your systems. Get personalized support for complex integrations and custom implementations.",
+      "contactSupport": "Contact Support",
+      "scheduleConsultation": "Schedule Consultation"
+    }
+  },
   "navigation": {
     "home": "Home",
     "solutions": "Solutions",
@@ -2037,201 +2138,6 @@
           "description": "Workflow automation and reporting"
         },
         "learnMore": "Learn More"
-      },
-      "stakeholders": {
-        "title": "Designed for Every Supply Chain Stakeholder", 
-        "description": "VendorSoluce addresses the unique challenges faced by different teams in your organization",
-        "common": {
-          "challenges": "Common Challenges"
-        },
-        "security": {
-          "title": "Security Teams",
-          "description": "Comprehensive tools for identifying, assessing, and mitigating supply chain security risks",
-          "challenges": {
-            "visibility": "Limited visibility into supplier security practices",
-            "manual": "Time-consuming manual assessment processes", 
-            "tracking": "Difficulty tracking vulnerabilities across software components",
-            "compliance": "Complex compliance requirements like NIST SP 800-161"
-          },
-          "solutions": {
-            "sbom": {
-              "title": "Automated SBOM Analysis",
-              "description": "Instantly analyze software components for vulnerabilities and license compliance",
-              "benefits": {
-                "vulnerabilities": "Identify critical vulnerabilities in minutes",
-                "licenses": "Track open source licenses automatically", 
-                "reports": "Generate compliance reports for audits",
-                "monitoring": "Monitor component health continuously"
-              },
-              "cta": "Analyze SBOM Now"
-            },
-            "assessments": {
-              "title": "Vendor Security Assessments",
-              "description": "Send CMMC and NIST Privacy Framework assessments through secure vendor portal",
-              "benefits": {
-                "cmmc": "CMMC Level 1 & 2 assessment templates",
-                "nist": "NIST Privacy Framework questionnaires",
-                "scoring": "Automated scoring and risk rating",
-                "portal": "Secure evidence collection portal",
-                "tracking": "Real-time progress tracking and notifications"
-              },
-              "cta": "Start Assessment"
-            }
-          }
-        },
-        "procurement": {
-          "title": "Procurement Teams",
-          "description": "Streamline vendor selection and management with risk-based decision making tools",
-          "challenges": {
-            "balancing": "Balancing cost, quality, and security in vendor selection",
-            "lifecycle": "Managing vendor relationships throughout their lifecycle",
-            "contracts": "Ensuring contract terms include appropriate security clauses", 
-            "diligence": "Demonstrating due diligence for audit purposes"
-          },
-          "solutions": {
-            "calculator": {
-              "title": "Vendor Risk Calculator",
-              "description": "Calculate preliminary risk scores to inform vendor selection decisions",
-              "benefits": {
-                "criteria": "Standardized risk assessment criteria",
-                "scoring": "Immediate risk scoring for new vendors",
-                "comparison": "Data-driven vendor comparison",
-                "integration": "Integration with procurement workflows"
-              },
-              "cta": "Calculate Risk"
-            },
-            "dashboard": {
-              "title": "Vendor Risk Dashboard", 
-              "description": "Monitor and manage your vendor portfolio with centralized risk visibility",
-              "benefits": {
-                "monitoring": "Real-time risk monitoring",
-                "tracking": "Automated compliance tracking", 
-                "alerts": "Contract renewal alerts",
-                "reporting": "Executive reporting dashboards"
-              },
-              "cta": "View Dashboard"
-            }
-          }
-        },
-        "compliance": {
-          "title": "Compliance Officers",
-          "description": "Ensure adherence to regulatory requirements with built-in compliance frameworks",
-          "challenges": {
-            "evolving": "Keeping up with evolving regulatory requirements",
-            "documenting": "Documenting compliance efforts for audits",
-            "obligations": "Ensuring vendors meet contractual obligations",
-            "frameworks": "Managing compliance across multiple frameworks"
-          },
-          "solutions": {
-            "nist": {
-              "title": "NIST SP 800-161 Assessment",
-              "description": "Comprehensive supply chain risk assessment aligned with federal standards",
-              "benefits": {
-                "templates": "Pre-built NIST control templates",
-                "scoring": "Automated compliance scoring",
-                "documentation": "Audit-ready documentation",
-                "analysis": "Gap analysis and recommendations"
-              },
-              "cta": "Start Assessment"
-            },
-            "templates": {
-              "title": "Compliance Templates",
-              "description": "Access pre-built templates for common compliance scenarios",
-              "benefits": {
-                "federal": "Federal compliance templates",
-                "industry": "Industry-specific questionnaires",
-                "matrices": "Risk assessment matrices", 
-                "executive": "Executive summary templates"
-              },
-              "cta": "Download Templates"
-            }
-          }
-        },
-        "executives": {
-          "title": "Executive Leadership",
-          "description": "Strategic insights and reporting to make informed decisions about supply chain risks",
-          "challenges": {
-            "understanding": "Understanding supply chain risk exposure",
-            "investment": "Making informed investment decisions",
-            "demonstrating": "Demonstrating risk management to stakeholders",
-            "balancing": "Balancing operational efficiency with security"
-          },
-          "solutions": {
-            "dashboards": {
-              "title": "Executive Dashboards", 
-              "description": "High-level insights into your organization's supply chain risk posture",
-              "benefits": {
-                "metrics": "Key risk metrics and trends",
-                "portfolio": "Vendor portfolio health overview",
-                "compliance": "Compliance status summaries",
-                "recommendations": "Strategic risk recommendations"
-              },
-              "cta": "View Dashboard"
-            },
-            "reporting": {
-              "title": "Risk Reporting",
-              "description": "Generate executive-level reports for board meetings and stakeholder updates",
-              "benefits": {
-                "automated": "Automated report generation",
-                "customizable": "Customizable metrics and KPIs",
-                "analysis": "Trend analysis and forecasting",
-                "presentations": "Stakeholder-ready presentations"
-              },
-              "cta": "Generate Report"
-            }
-          }
-        },
-        "cta": {
-          "title": "Ready to Transform Your Supply Chain Security?",
-          "description": "Join organizations worldwide who trust VendorSoluce to secure their supply chains",
-          "startAssessment": "Start Free Assessment",
-          "scheduleDemo": "Schedule Demo"
-        }
-      },
-      "hero": {
-        "title_line1": "Control your supply chain risks.",
-        "title_line2": "Accelerate your business.",
-        "subtitle": "Transform vendor risk into competitive advantage",
-        "description": "VendorSoluce transforms vendor risk management into a growth engine with automated assessments and complete supply chain transparency.",
-        "cta1": "Start Free Assessment",
-        "cta2": "Schedule Live Demo",
-        "carousel": {
-          "text1": "Comprehensive supply chain tools aligned with NIST SP 800-161 for complete risk visibility and control across your vendor ecosystem.",
-          "text2": "Automated vendor risk assessments with NIST-aligned frameworks, ensuring compliance while streamlining your procurement processes.",
-          "text3": "Advanced SBOM analysis capabilities to identify vulnerabilities and license compliance issues in your software components.",
-          "text4": "Continuous monitoring and real-time alerts for supply chain threats, keeping your organization protected around the clock.",
-          "text5": "Executive-ready compliance reporting and dashboards for NIST, CMMC, and ISO frameworks to demonstrate security posture."
-        },
-        "benefits": {
-          "section1": {
-            "title": "Instant Risk Assessment",
-            "benefit1": "Complete NIST SP 800-161 assessments in minutes",
-            "benefit2": "Automated vendor risk scoring and prioritization",
-            "benefit3": "Real-time vulnerability detection and analysis"
-          },
-          "section2": {
-            "title": "Complete Supply Chain Visibility",
-            "benefit1": "End-to-end supply chain mapping and monitoring", 
-            "benefit2": "SBOM analysis for software component transparency",
-            "benefit3": "Multi-tier supplier risk assessment capabilities"
-          },
-          "section3": {
-            "title": "Federal Compliance Ready",
-            "benefit1": "NIST SP 800-161 aligned assessment frameworks",
-            "benefit2": "CMMC and FedRAMP compliance support",
-            "benefit3": "Audit-ready documentation and reporting"
-          }
-        }
-      },
-      "cta": {
-        "title": "Ready to Secure Your Supply Chain?",
-        "description": "Join thousands of organizations using VendorSoluce to manage supply chain risks and achieve compliance."
-      },
-      "company": {
-        "about": "About Us",
-        "contact": "Contact",
-        "pricing": "Pricing",
-        "privacy": "Privacy Policy"
       }
     },
     "cta": {
@@ -2253,147 +2159,5 @@
   },
   "app": {
     "name": "Supply Chain Security Platform"
-  }
-}
-{
-  "integrationGuides": {
-    "title": "Integration Guides",
-    "description": "Connect VendorSoluce with your existing systems and workflows. Follow our step-by-step guides to integrate supply chain risk management into your technology stack.",
-    
-    "quickStart": {
-      "title": "Getting Started with VendorSoluce API",
-      "description": "New to VendorSoluce integrations? Start with our REST API guide to understand the basics of authentication, endpoints, and data formats.",
-      "viewApiDocs": "View API Documentation",
-      "downloadSDKs": "Download SDKs"
-    },
-    
-    "categories": {
-      "all": "All Integrations",
-      "api": "API Integration", 
-      "webhooks": "Webhooks",
-      "sso": "SSO/Authentication",
-      "export": "Data Export",
-      "automation": "Automation"
-    },
-    
-    "difficulty": {
-      "beginner": "beginner",
-      "intermediate": "intermediate", 
-      "advanced": "advanced"
-    },
-    
-    "guides": {
-      "restApi": {
-        "title": "REST API Integration",
-        "description": "Connect your applications to VendorSoluce using our REST API for vendor data, assessments, and SBOM analysis.",
-        "estimatedTime": "30-60 minutes",
-        "steps": [
-          "Obtain API credentials from your VendorSoluce dashboard",
-          "Set up authentication headers in your application", 
-          "Make your first API call to fetch vendor data",
-          "Implement error handling and rate limiting",
-          "Test the integration with sample data"
-        ]
-      },
-      "webhookSetup": {
-        "title": "Webhook Configuration",
-        "description": "Receive real-time notifications when vendor risk scores change, assessments complete, or vulnerabilities are detected.",
-        "estimatedTime": "45 minutes",
-        "steps": [
-          "Configure webhook endpoints in your VendorSoluce dashboard",
-          "Set up a secure HTTPS endpoint to receive webhooks",
-          "Verify webhook signatures for security", 
-          "Handle different event types (risk changes, assessments)",
-          "Implement retry logic for failed webhook deliveries"
-        ]
-      },
-      "ssoIntegration": {
-        "title": "Single Sign-On (SSO)",
-        "description": "Integrate VendorSoluce with your organization's identity provider using SAML 2.0 or OpenID Connect.",
-        "estimatedTime": "2-4 hours",
-        "steps": [
-          "Configure your identity provider (IdP) settings",
-          "Exchange SAML metadata with VendorSoluce",
-          "Set up attribute mapping for user roles",
-          "Test SSO login flow with test users",
-          "Configure group-based access controls"
-        ]
-      },
-      "dataExport": {
-        "title": "Automated Data Export", 
-        "description": "Set up scheduled exports of vendor data, assessment results, and compliance reports to your data warehouse.",
-        "estimatedTime": "20 minutes",
-        "steps": [
-          "Choose your preferred export format (CSV, JSON, XML)",
-          "Configure export schedules in the dashboard",
-          "Set up secure file transfer (SFTP, S3, etc.)",
-          "Map data fields to your internal systems",
-          "Test the export process and validate data"
-        ]
-      },
-      "workflowAutomation": {
-        "title": "Workflow Automation",
-        "description": "Automate vendor onboarding, risk assessments, and compliance tracking using VendorSoluce APIs.",
-        "estimatedTime": "1-2 hours", 
-        "steps": [
-          "Design your automation workflow",
-          "Set up trigger conditions (new vendor, risk threshold)",
-          "Configure automated actions (send assessments, alerts)",
-          "Implement approval workflows for high-risk vendors",
-          "Monitor and optimize automation performance"
-        ]
-      },
-      "cloudIntegration": {
-        "title": "Cloud Platform Integration",
-        "description": "Connect VendorSoluce with AWS, Azure, or GCP for enhanced security monitoring and compliance.",
-        "estimatedTime": "2-3 hours",
-        "steps": [
-          "Set up cloud service credentials and permissions",
-          "Configure VendorSoluce cloud connectors", 
-          "Map cloud resources to vendor relationships",
-          "Enable automated compliance monitoring",
-          "Set up alerting for security events"
-        ]
-      }
-    },
-    
-    "common": {
-      "implementationSteps": "Implementation Steps:",
-      "moreSteps": "+ {{count}} more steps",
-      "codeExample": "Code Example:",
-      "copied": "Copied",
-      "copy": "Copy", 
-      "viewGuide": "View Guide",
-      "examples": "Examples"
-    },
-    
-    "sdks": {
-      "title": "SDKs and Tools",
-      "javascript": {
-        "title": "JavaScript SDK",
-        "description": "Official JavaScript/TypeScript SDK for web and Node.js applications.",
-        "npmInstall": "npm install",
-        "github": "GitHub"
-      },
-      "python": {
-        "title": "Python SDK", 
-        "description": "Python library for data science and automation workflows.",
-        "pipInstall": "pip install",
-        "pypi": "PyPI"
-      },
-      "cli": {
-        "title": "CLI Tool",
-        "description": "Command-line interface for batch operations and CI/CD integration.",
-        "download": "Download",
-        "docs": "Docs"
-      }
-    },
-    
-    "support": {
-      "title": "Need Integration Support?",
-      "description": "Our technical team is here to help you integrate VendorSoluce with your systems. Get personalized support for complex integrations and custom implementations.",
-      "contactSupport": "Contact Support",
-      "scheduleConsultation": "Schedule Consultation"
-    }
   }
 }
