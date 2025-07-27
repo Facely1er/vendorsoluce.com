@@ -30,7 +30,7 @@ const HeroSection: React.FC = () => {
       <div 
         className="absolute inset-0 z-1 min-h-screen"
         style={{
-          backgroundColor: isDarkTheme ? '#1a2e1a' : '#f8fdf8', // Dark green or very light green
+          backgroundColor: isDarkTheme ? '#1a2e1a' : '#1a2e1a', // Dark green or very light green
           opacity: 0.85 // Same professional opacity for both themes
         }}
       ></div>
