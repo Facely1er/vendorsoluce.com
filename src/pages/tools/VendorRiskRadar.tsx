@@ -304,7 +304,7 @@ const VendorRiskRadar: React.FC = () => {
           risk_score: calculatedRiskScore,
           risk_level: riskLevel,
           compliance_status: riskLevel === 'Low' ? 'Compliant' : 
-                            riskLevel === 'Medium' ? 'Requires Review' : 'High Risk',
+                            riskLevel === 'Medium' ? 'Partial' : 'Non-Compliant',
           notes: `Category: ${selectedCat?.name || 'Custom'} | Privacy Impact: ${selectedCat?.privacyImpact || 'To be assessed'} | Compliance Gaps: ${complianceGaps.join(', ')}`
         });
       }
