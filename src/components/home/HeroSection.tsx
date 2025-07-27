@@ -19,7 +19,7 @@ const HeroSection: React.FC = () => {
         className="absolute inset-0 z-0 min-h-screen"
         style={{
           backgroundImage: 'url("/background_hero_section.png")',
-          backgroundSize: '90% 70%',
+          backgroundSize: '100% 70%',
           backgroundPosition: 'contain',
           backgroundRepeat: 'no-repeat',
           
