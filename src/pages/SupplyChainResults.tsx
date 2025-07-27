@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AssessmentResults } from '../components/assessments/AssessmentResults';
 import { generateResultsPdf } from '../utils/generatePdf';
 import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
@@ -32,9 +32,11 @@ const SupplyChainResults = () => {
         overallScore: location.state.overallScore,
         sectionScores: location.state.sectionScores
       });
+      return; // Early return to prevent further processing
     } else if (!loading && assessments.length > 0) {
       // Find the most recent completed assessment
-      const completedAssessment = assessments.find(a => a.status === 'completed');
+      const completedAssessments = assessments.filter(a => a.status === 'completed');
+      const completedAssessment = completedAssessments.length > 0 ? completedAssessments[0] : null;
       
       if (completedAssessment) {
         setResults({

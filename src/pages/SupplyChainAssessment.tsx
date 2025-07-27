@@ -373,15 +373,25 @@ const SupplyChainAssessment = () => {
       
       // Save assessment as completed
       try {
-        await createOrUpdateAssessment({
+        const savedAssessment = await createOrUpdateAssessment({
           assessment_name: assessmentName,
           overall_score: getOverallScore(),
           section_scores: sectionScores,
           status: 'completed',
           completed_at: new Date().toISOString()
         }, answers);
+        
+        // Navigate to results page with the assessment ID
+        navigate(`/supply-chain-results/${savedAssessment?.id || 'latest'}`, { 
+          state: { 
+            overallScore: getOverallScore(),
+            sectionScores: sectionScores
+          }
+        });
+        return;
       } catch (err) {
         console.error('Error completing assessment:', err);
+        // Fall through to navigate with state only
       }
     }
     

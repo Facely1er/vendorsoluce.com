@@ -63,7 +63,7 @@ function App() {
                   
                   {/* Assessment routes - public access for better user experience */}
                   <Route path="/supply-chain-assessment" element={<SupplyChainAssessment />} />
-                  <Route path="/supply-chain-results/:id" element={<SupplyChainResults />} />
+                  <Route path="/supply-chain-results/:id?" element={<SupplyChainResults />} />
                   <Route path="/supply-chain-recommendations/:id" element={<SupplyChainRecommendations />} />
                   <Route path="/sbom-analyzer" element={<SBOMAnalyzer />} />
                   <Route path="/sbom-analysis/:id" element={<SBOMAnalysisPage />} />
