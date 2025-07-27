@@ -11,6 +11,7 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<void>;
   signUp: (email: string, password: string, fullName: string) => Promise<void>;
   signOut: () => Promise<void>;
+  logout: () => Promise<void>;
   markOnboardingComplete: (profileData?: {
     role?: string;
     company_size?: string;
@@ -140,11 +141,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const signOut = async () => {
+  const logout = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
     navigate('/');
   };
+  
+  const signOut = logout; // Alias for backward compatibility
 
   const markOnboardingComplete = async (profileData?: {
     role?: string;
@@ -210,6 +213,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signIn,
     signUp,
     signOut,
+    logout,
     markOnboardingComplete,
      markTourComplete,
      startTour,

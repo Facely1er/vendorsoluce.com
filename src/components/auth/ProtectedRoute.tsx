@@ -24,7 +24,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 
   if (requireAuth && !isAuthenticated) {
     // Redirect to login if not authenticated
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/signin" state={{ from: location }} replace />;
   }
 
   if (!requireAuth && isAuthenticated) {
