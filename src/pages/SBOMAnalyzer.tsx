@@ -249,7 +249,7 @@ const SBOMAnalyzer: React.FC = () => {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <TrendingUp className="h-5 w-5 mr-2 text-vendorsoluce-green" />
-                  Recent Analyses
+                  {t('sbom.recentAnalyses')}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -287,7 +287,7 @@ const SBOMAnalyzer: React.FC = () => {
                   </CardTitle>
                   <Button variant="outline" size="sm" onClick={exportResults}>
                     <Download className="h-4 w-4 mr-2" />
-                    Export
+                    {t('sbom.export')}
                   </Button>
                 </div>
               </CardHeader>
@@ -302,7 +302,7 @@ const SBOMAnalyzer: React.FC = () => {
                     }`}>
                       {currentAnalysis.riskScore}%
                     </div>
-                    <p className="text-gray-600 dark:text-gray-400">Overall Security Score</p>
+                    <p className="text-gray-600 dark:text-gray-400">{t('sbom.results.overallSecurityScore')}</p>
                   </div>
 
                   {/* Key Metrics */}
@@ -329,26 +329,26 @@ const SBOMAnalyzer: React.FC = () => {
                       <div className="text-2xl font-bold text-red-600 dark:text-red-400">
                         {currentAnalysis.criticalVulnerabilities}
                       </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">Critical CVEs</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">{t('sbom.results.criticalCVEs')}</div>
                     </div>
                     
                     <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
                       <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
                         {currentAnalysis.licenseIssues}
                       </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400">License Issues</div>
+                      <div className="text-sm text-gray-600 dark:text-gray-400">{t('sbom.results.licenseIssues')}</div>
                     </div>
                   </div>
 
                   {/* Recommendations */}
                   <div className="space-y-3">
-                    <h4 className="font-medium text-gray-900 dark:text-white">Recommendations:</h4>
+                    <h4 className="font-medium text-gray-900 dark:text-white">{t('sbom.results.recommendations')}</h4>
                     
                     {currentAnalysis.criticalVulnerabilities > 0 && (
                       <div className="flex items-center p-3 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
                         <AlertTriangle className="h-5 w-5 text-red-600 dark:text-red-400 mr-3" />
                         <span className="text-red-800 dark:text-red-300">
-                          Immediate action required: {currentAnalysis.criticalVulnerabilities} critical vulnerabilities found
+                          {t('sbom.results.immediateAction', { count: currentAnalysis.criticalVulnerabilities })}
                         </span>
                       </div>
                     )}
@@ -357,14 +357,14 @@ const SBOMAnalyzer: React.FC = () => {
                       <div className="flex items-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
                         <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400 mr-3" />
                         <span className="text-green-800 dark:text-green-300">
-                          Good security posture. Continue monitoring for new vulnerabilities.
+                          {t('sbom.results.goodPosture')}
                         </span>
                       </div>
                     ) : (
                       <div className="flex items-center p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
                         <AlertTriangle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mr-3" />
                         <span className="text-yellow-800 dark:text-yellow-300">
-                          Review and update vulnerable components. Consider implementing automated scanning.
+                          {t('sbom.results.reviewComponents')}
                         </span>
                       </div>
                     )}
@@ -390,52 +390,52 @@ const SBOMAnalyzer: React.FC = () => {
       <div className="mt-12">
         <Card>
           <CardHeader>
-            <CardTitle>About SBOM Analysis</CardTitle>
+            <CardTitle>{t('sbom.aboutSBOM.title')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
-                  What is SBOM?
+                  {t('sbom.aboutSBOM.whatIsSBOM')}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  A Software Bill of Materials (SBOM) is a formal record containing the details and supply chain relationships of various components used in building software. It provides transparency into software composition and enables effective vulnerability management.
+                  {t('sbom.aboutSBOM.sbomDescription')}
                 </p>
                 <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                   <li className="flex items-start">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span>Identify vulnerable components quickly</span>
+                    <span>{t('sbom.aboutSBOM.benefits.identifyVulnerabilities')}</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span>Track open source licenses for compliance</span>
+                    <span>{t('sbom.aboutSBOM.benefits.trackLicenses')}</span>
                   </li>
                   <li className="flex items-start">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span>Meet federal transparency requirements</span>
+                    <span>{t('sbom.aboutSBOM.benefits.meetRequirements')}</span>
                   </li>
                 </ul>
               </div>
               
               <div>
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
-                  NIST SP 800-161 Alignment
+                  {t('sbom.aboutSBOM.nistAlignment')}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  Our SBOM analysis aligns with NIST SP 800-161 supply chain risk management practices, helping organizations meet federal compliance requirements.
+                  {t('sbom.aboutSBOM.nistDescription')}
                 </p>
                 <div className="space-y-3">
                   <div className="flex items-center">
                     <div className="w-2 h-2 bg-vendorsoluce-teal rounded-full mr-3"></div>
-                    <span className="text-sm text-gray-700 dark:text-gray-300">Control C-SCRM-7: Component authenticity</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{t('sbom.aboutSBOM.controls.authenticity')}</span>
                   </div>
                   <div className="flex items-center">
                     <div className="w-2 h-2 bg-vendorsoluce-teal rounded-full mr-3"></div>
-                    <span className="text-sm text-gray-700 dark:text-gray-300">Control C-SCRM-16: SBOM management</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{t('sbom.aboutSBOM.controls.management')}</span>
                   </div>
                   <div className="flex items-center">
                     <div className="w-2 h-2 bg-vendorsoluce-teal rounded-full mr-3"></div>
-                    <span className="text-sm text-gray-700 dark:text-gray-300">Executive Order 14028 requirements</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{t('sbom.aboutSBOM.controls.executiveOrder')}</span>
                   </div>
                 </div>
               </div>
@@ -443,20 +443,20 @@ const SBOMAnalyzer: React.FC = () => {
             
             <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
               <h4 className="font-medium text-blue-800 dark:text-blue-300 mb-2">
-                Need Help Getting Started?
+                {t('sbom.aboutSBOM.helpSection.title')}
               </h4>
               <p className="text-sm text-blue-700 dark:text-blue-400 mb-3">
-                Learn more about SBOM implementation and download templates to get started.
+                {t('sbom.aboutSBOM.helpSection.description')}
               </p>
               <div className="flex space-x-3">
                 <Link to="/templates">
                   <Button variant="outline" size="sm">
-                    Download Templates
+                    {t('sbom.aboutSBOM.helpSection.downloadTemplates')}
                   </Button>
                 </Link>
                 <Link to="/how-it-works">
                   <Button variant="outline" size="sm">
-                    Implementation Guide
+                    {t('sbom.aboutSBOM.helpSection.implementationGuide')}
                   </Button>
                 </Link>
               </div>
