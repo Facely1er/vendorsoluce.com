@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
           {/* Company Info - Back on the left */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center mb-3">
-              <img src="/vendorsoluce.png" alt={t('footer.company.name')} className="h-6 w-auto mr-2" />
+              <img src="/vendorsoluce.png" alt={t('footer.company.name')} className="h-8 w-auto mr-2" />
               <span className="text-lg font-bold">{t('footer.company.name')}</span>
             </div>
             <p className="text-gray-300 mb-3 text-sm">
