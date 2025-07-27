@@ -351,13 +351,9 @@ const SupplyChainAssessment = () => {
 
   // Determine if we have enough answers to show results
   const hasCompletedMinimumSections = () => {
-    let completedSections = 0;
-    sections.forEach((_, index) => {
-      if (calculateSectionScore(index).completed) {
-        completedSections++;
-      }
-    });
-    return completedSections >= Math.ceil(sections.length / 2);
+    const totalQuestions = sections.reduce((total, section) => total + section.questions.length, 0);
+    const answeredQuestions = Object.keys(answers).length;
+    return answeredQuestions >= totalQuestions * 0.5; // 50% of all questions
   };
 
   const handleViewResults = async () => {
