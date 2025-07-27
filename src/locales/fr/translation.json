@@ -1,4 +1,338 @@
 {
+  "contact": {
+    "title": "Nous Contacter",
+    "description": "Nous sommes là pour vous aider à sécuriser votre chaîne d'approvisionnement. N'hésitez pas à nous contacter pour toute question concernant notre plateforme ou la gestion des risques de la chaîne d'approvisionnement.",
+    "form": {
+      "title": "Entrer en Contact",
+      "fields": {
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "email": "Adresse Email",
+        "phone": "Numéro de Téléphone",
+        "company": "Entreprise",
+        "message": "Message",
+        "messagePlaceholder": "Veuillez fournir des détails sur votre demande...",
+        "topic": {
+          "label": "Comment pouvons-nous vous aider ?",
+          "placeholder": "Sélectionnez un sujet",
+          "options": {
+            "productInfo": "Informations Produit",
+            "techSupport": "Support Technique",
+            "demo": "Planifier une Démo",
+            "partnership": "Opportunités de Partenariat",
+            "compliance": "Questions de Conformité Fédérale",
+            "other": "Autre"
+          }
+        },
+        "termsPrefix": "J'accepte la",
+        "privacyPolicy": "politique de confidentialité",
+        "termsSuffix": "et consens à être contacté concernant ma demande."
+      },
+      "validation": {
+        "requiredFields": "Veuillez remplir tous les champs obligatoires.",
+        "termsRequired": "Veuillez accepter la politique de confidentialité.",
+        "submitError": "Échec de l'envoi de votre message. Veuillez réessayer plus tard."
+      },
+      "submit": "Envoyer",
+      "submitting": "Envoi en cours...",
+      "success": {
+        "title": "Merci !",
+        "message": "Nous avons reçu votre message et vous répondrons sous peu.",
+        "sendAnother": "Envoyer un Autre Message"
+      }
+    },
+    "info": {
+      "title": "Informations de Contact",
+      "email": {
+        "label": "Email",
+        "value": "contact@ermits.com"
+      },
+      "phone": {
+        "label": "Téléphone",
+        "value": "+1 (240) 599-0102"
+      },
+      "address": {
+        "label": "Siège Social",
+        "line1": "8300 McCullough Lane",
+        "line2": "Suite 203",
+        "line3": "Gaithersburg, MD 20877"
+      },
+      "hours": {
+        "label": "Horaires",
+        "weekdays": "Lundi - Vendredi : 9h00 - 18h00 ET",
+        "weekends": "Samedi - Dimanche : Fermé"
+      }
+    },
+    "demo": {
+      "title": "Planifier une Démo",
+      "description": "Découvrez comment VendorSoluce peut aider à sécuriser votre chaîne d'approvisionnement et répondre aux exigences de conformité fédérale.",
+      "duration": "Démo personnalisée de 30 minutes",
+      "button": "Planifier Maintenant"
+    },
+    "faq": {
+      "title": "Questions Fréquemment Posées",
+      "questions": {
+        "nist": {
+          "question": "Comment VendorSoluce aide-t-il avec la conformité NIST 800-161 ?",
+          "answer": "VendorSoluce fournit des modèles d'évaluation, des mappages de contrôles et une notation des risques qui s'alignent avec les exigences NIST SP 800-161, facilitant la mise en œuvre et la documentation du programme de gestion des risques de la chaîne d'approvisionnement des organisations."
+        },
+        "integration": {
+          "question": "VendorSoluce peut-il s'intégrer avec notre plateforme GRC existante ?",
+          "answer": "Oui, VendorSoluce offre des intégrations API avec les principales plateformes GRC incluant ServiceNow, RSA Archer, MetricStream, et plus. Nos guides d'intégration fournissent des instructions étape par étape."
+        },
+        "sbom": {
+          "question": "Quels formats SBOM VendorSoluce supporte-t-il ?",
+          "answer": "VendorSoluce supporte tous les principaux formats SBOM incluant SPDX (JSON, XML, RDF), CycloneDX (JSON, XML), et peut également traiter des listes de composants en texte simple."
+        },
+        "setup": {
+          "question": "À quelle vitesse pouvons-nous commencer avec VendorSoluce ?",
+          "answer": "La plupart des clients sont opérationnels en une journée. Notre processus d'intégration inclut un gestionnaire de succès client dédié, et notre plateforme est conçue pour une configuration en libre-service facile."
+        },
+        "services": {
+          "question": "VendorSoluce offre-t-il des services professionnels ?",
+          "answer": "Oui, nous offrons des services professionnels pour les clients qui ont besoin d'aide avec l'implémentation, la personnalisation, ou la création de modèles d'évaluation personnalisés pour des industries ou exigences de conformité spécifiques."
+        },
+        "security": {
+          "question": "Quelles certifications de sécurité VendorSoluce a-t-il ?",
+          "answer": "VendorSoluce est certifié SOC 2 Type II et conforme FedRAMP Moderate, assurant que vos données sont protégées selon les plus hauts standards de l'industrie."
+        }
+      }
+    },
+    "cta": {
+      "title": "Prêt à sécuriser votre chaîne d'approvisionnement ?",
+      "description": "Commencez avec VendorSoluce aujourd'hui et apportez la conformité NIST SP 800-161 à votre organisation.",
+      "demoButton": "Planifier une Démo",
+      "freeButton": "Essayer Gratuitement"
+    }
+  },
+  "privacy": {
+    "title": "Politique de Confidentialité",
+    "lastUpdated": "Dernière mise à jour : 15 avril 2025",
+    "section1": {
+      "title": "1. Introduction",
+      "paragraph1": "VendorSoluce (\"nous\", \"notre\", ou \"nos\") s'engage à protéger votre confidentialité. Cette Politique de Confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous visitez notre site web vendorsoluce.com, utilisez notre plateforme, ou utilisez notre application mobile (collectivement, les \"Services\").",
+      "paragraph2": "Veuillez lire attentivement cette Politique de Confidentialité. Si vous n'acceptez pas les termes de cette Politique de Confidentialité, veuillez ne pas accéder aux Services. En accédant ou utilisant nos Services, vous consentez à la collecte, l'utilisation et le stockage de vos informations comme décrit dans cette Politique de Confidentialité.",
+      "paragraph3": "Nous nous réservons le droit d'apporter des modifications à cette Politique de Confidentialité à tout moment et pour toute raison. Nous vous alerterons de tout changement en mettant à jour la date de \"Dernière mise à jour\" de cette Politique de Confidentialité. Vous êtes encouragé à examiner périodiquement cette Politique de Confidentialité pour rester informé des mises à jour."
+    },
+    "section2": {
+      "title": "2. Informations Que Nous Collectons",
+      "personalInfo": {
+        "title": "Informations Personnelles",
+        "description": "Nous pouvons collecter des informations personnelles que vous nous fournissez volontairement lorsque vous vous inscrivez sur les Services, exprimez un intérêt à obtenir des informations sur nous ou nos produits et Services, participez à des activités sur les Services, ou nous contactez autrement. Les informations personnelles que nous collectons peuvent inclure :",
+        "items": {
+          "contact": "Nom, adresse email, numéro de téléphone, et données de contact ou d'authentification",
+          "billing": "Adresse de facturation, informations de paiement, et données financières",
+          "employer": "Informations sur l'employeur et titre du poste",
+          "preferences": "Préférences et paramètres utilisateur",
+          "other": "Autres informations que vous choisissez de fournir"
+        }
+      },
+      "automaticData": {
+        "title": "Données Collectées Automatiquement",
+        "description": "Nous collectons automatiquement certaines informations lorsque vous visitez, utilisez ou naviguez sur les Services. Ces informations ne révèlent pas votre identité spécifique mais peuvent inclure :",
+        "items": {
+          "device": "Informations sur l'appareil et l'utilisation, telles que votre adresse IP, caractéristiques du navigateur et de l'appareil, système d'exploitation, préférences linguistiques, URL de référence, nom de l'appareil, pays, localisation, et informations sur comment et quand vous utilisez nos Services",
+          "tracking": "Informations collectées via des cookies, balises pixel, et autres technologies de suivi"
+        }
+      },
+      "thirdParty": {
+        "title": "Informations de Tiers",
+        "description": "Nous pouvons collecter des informations vous concernant à partir de sources tierces, telles que des bases de données publiques, partenaires de marketing conjoint, plateformes de médias sociaux, et autres tiers. Des exemples d'informations que nous recevons d'autres sources incluent des informations de profil de médias sociaux, des prospects marketing, et des résultats de recherche et liens, incluant des listes payantes."
+      }
+    },
+    "section3": {
+      "title": "3. Comment Nous Utilisons Vos Informations",
+      "description": "Nous utilisons les informations que nous collectons à diverses fins commerciales, incluant :",
+      "items": {
+        "provide": "Fournir, exploiter et maintenir nos Services",
+        "improve": "Améliorer, personnaliser et étendre nos Services",
+        "understand": "Comprendre et analyser comment vous utilisez nos Services",
+        "develop": "Développer de nouveaux produits, services, fonctionnalités et fonctionnalités",
+        "communicate": "Communiquer avec vous, incluant le service client, les mises à jour et les fins marketing",
+        "process": "Traiter vos transactions et gérer votre compte",
+        "fraud": "Trouver et prévenir la fraude, et répondre aux problèmes de confiance et de sécurité",
+        "compliance": "À des fins de conformité, processus légal et application de la loi"
+      }
+    },
+    "section4": {
+      "title": "4. Partage de Vos Informations",
+      "description": "Nous pouvons partager vos informations dans les situations suivantes :",
+      "items": {
+        "serviceProviders": {
+          "title": "Fournisseurs de Services",
+          "description": "Nous pouvons partager vos informations avec des fournisseurs tiers, prestataires de services, contractants ou agents qui fournissent des services pour nous ou en notre nom."
+        },
+        "businessTransfers": {
+          "title": "Transferts d'Entreprise",
+          "description": "Nous pouvons partager ou transférer vos informations en relation avec, ou pendant les négociations de, toute fusion, vente d'actifs d'entreprise, financement, ou acquisition de tout ou partie de notre entreprise à une autre société."
+        },
+        "affiliates": {
+          "title": "Affiliés",
+          "description": "Nous pouvons partager vos informations avec nos affiliés, auquel cas nous exigerons que ces affiliés respectent cette Politique de Confidentialité."
+        },
+        "businessPartners": {
+          "title": "Partenaires Commerciaux",
+          "description": "Nous pouvons partager vos informations avec nos partenaires commerciaux pour vous offrir certains produits, services ou promotions."
+        },
+        "consent": {
+          "title": "Avec Votre Consentement",
+          "description": "Nous pouvons divulguer vos informations à toute autre fin avec votre consentement."
+        },
+        "otherUsers": {
+          "title": "Autres Utilisateurs",
+          "description": "Lorsque vous partagez des informations personnelles ou interagissez autrement avec des zones publiques des Services, ces informations peuvent être vues par tous les utilisateurs et peuvent être distribuées publiquement."
+        }
+      }
+    },
+    "section5": {
+      "title": "5. Sécurité de Vos Informations",
+      "description": "Nous utilisons des mesures de sécurité administratives, techniques et physiques pour aider à protéger vos informations personnelles contre l'accès, l'utilisation ou la divulgation non autorisés. Celles-ci incluent :",
+      "items": {
+        "encryption": "Chiffrement des données sensibles au repos et en transit",
+        "assessments": "Évaluations de sécurité régulières et tests de pénétration",
+        "accessControls": "Contrôles d'accès et exigences d'authentification",
+        "monitoring": "Surveillance des activités suspectes",
+        "physical": "Sécurité physique de nos centres de données et bureaux"
+      },
+      "disclaimer": "Bien que nous ayons mis en place des mesures de sécurité raisonnables, veuillez comprendre qu'aucun système de sécurité n'est impénétrable, et nous ne pouvons pas garantir la sécurité absolue de nos bases de données, ni garantir que les informations que vous fournissez ne seront pas interceptées lors de la transmission sur Internet."
+    },
+    "section6": {
+      "title": "6. Vos Droits de Confidentialité",
+      "description": "Selon votre localisation, vous pouvez avoir les droits suivants concernant vos informations personnelles :",
+      "rights": {
+        "access": {
+          "title": "Droit d'Accès",
+          "description": "Vous pouvez demander à examiner les informations personnelles que nous avons collectées à votre sujet."
+        },
+        "rectification": {
+          "title": "Droit de Rectification",
+          "description": "Vous pouvez demander que nous corrigions toute information personnelle inexacte ou incomplète."
+        },
+        "erasure": {
+          "title": "Droit à l'Effacement",
+          "description": "Vous pouvez demander la suppression de vos informations personnelles, sous réserve de certaines exceptions."
+        },
+        "restrict": {
+          "title": "Droit de Restreindre le Traitement",
+          "description": "Vous pouvez demander que nous restreignions le traitement de vos informations dans certaines circonstances."
+        },
+        "portability": {
+          "title": "Droit à la Portabilité des Données",
+          "description": "Vous pouvez demander une copie de vos informations personnelles dans un format structuré et lisible par machine."
+        },
+        "object": {
+          "title": "Droit d'Objection",
+          "description": "Vous pouvez vous opposer à notre traitement de vos informations personnelles dans certaines circonstances."
+        }
+      },
+      "exercise": "Pour exercer ces droits, veuillez nous contacter en utilisant les informations de contact fournies à la fin de cette Politique de Confidentialité. Nous répondrons à votre demande dans un délai raisonnable."
+    },
+    "section7": {
+      "title": "7. Cookies et Technologies de Suivi",
+      "paragraph1": "Nous utilisons des cookies et des technologies de suivi similaires pour collecter et utiliser des informations vous concernant, y compris pour diffuser de la publicité basée sur les intérêts. Les cookies sont de petits fichiers de données placés sur votre appareil. Nous utilisons à la fois des cookies de session (qui expirent une fois que vous fermez votre navigateur web) et des cookies persistants (qui restent sur votre appareil jusqu'à ce que vous les supprimiez).",
+      "paragraph2": "Vous pouvez configurer votre navigateur pour refuser tous ou certains cookies de navigateur, ou pour vous alerter lorsque des cookies sont envoyés. Cependant, si vous désactivez ou refusez les cookies, veuillez noter que certaines parties des Services peuvent être inaccessibles ou ne pas fonctionner correctement."
+    },
+    "section8": {
+      "title": "8. Confidentialité des Enfants",
+      "paragraph1": "Nos Services ne sont pas destinés à être utilisés par des enfants de moins de 18 ans. Nous ne collectons pas sciemment d'informations personnelles d'enfants de moins de 18 ans. Si vous avez moins de 18 ans, n'utilisez pas et ne fournissez aucune information sur nos Services. Si nous apprenons que nous avons collecté ou reçu des informations personnelles d'un enfant de moins de 18 ans sans vérification du consentement parental, nous supprimerons ces informations."
+    },
+    "section9": {
+      "title": "9. Transferts Internationaux de Données",
+      "paragraph1": "Nous sommes basés aux États-Unis et traitons les données à la fois à l'intérieur et à l'extérieur des États-Unis. Si vous accédez à nos Services depuis l'extérieur des États-Unis, veuillez être conscient que vos informations peuvent être transférées vers, stockées et traitées par nous dans nos installations et par nos fournisseurs de services tiers aux États-Unis et dans d'autres pays.",
+      "paragraph2": "Si vous êtes un résident de l'Espace Économique Européen (EEE), nous nous assurons que vos données sont protégées lorsqu'elles sont transférées en dehors de l'EEE. Nous nous appuyons sur des mécanismes tels que les clauses contractuelles standard, la certification Privacy Shield, ou d'autres moyens légaux pour transférer des données à l'international."
+    },
+    "section10": {
+      "title": "10. Conservation des Données",
+      "description": "Nous ne conserverons vos informations personnelles que le temps nécessaire aux fins énoncées dans cette Politique de Confidentialité. Nous conserverons et utiliserons vos informations dans la mesure nécessaire pour nous conformer à nos obligations légales, résoudre les litiges et faire respecter nos politiques. Lorsque nous n'avons plus besoin de vos informations personnelles, nous les supprimerons ou les anonymiserons de manière sécurisée."
+    },
+    "section11": {
+      "title": "11. Nous Contacter",
+      "description": "Si vous avez des questions ou des commentaires sur cette Politique de Confidentialité, veuillez nous contacter à :",
+      "contact": {
+        "company": "VendorSoluce",
+        "address1": "8300 McCullough Lane, Suite 203",
+        "address2": "Gaithersburg, MD 20877",
+        "email": "Email : contact@ermits.com",
+        "phone": "Téléphone : +1 (240) 599-0102"
+      }
+    }
+  },
+  "about": {
+    "page": {
+      "title": "À Propos de VendorSoluce",
+      "subtitle": "Nous avons pour mission de rendre la sécurité de la chaîne d'approvisionnement accessible, exploitable et alignée sur les normes fédérales pour les organisations de toutes tailles."
+    },
+    "story": {
+      "title": "Notre Histoire",
+      "paragraph1": "VendorSoluce a été fondé en 2023 par une équipe d'experts en cybersécurité et chaîne d'approvisionnement qui ont reconnu le besoin critique de meilleurs outils pour gérer les risques tiers, en particulier pour les organisations travaillant avec des contrats fédéraux.",
+      "paragraph2": "Après des années à aider les organisations à implémenter manuellement les contrôles NIST SP 800-161 et à lutter avec des feuilles de calcul et des outils déconnectés, nous avons décidé de construire une plateforme complète qui rend la gestion des risques de la chaîne d'approvisionnement accessible, efficace et alignée sur les exigences fédérales.",
+      "paragraph3": "Aujourd'hui, VendorSoluce aide les organisations de toutes tailles à évaluer, surveiller et atténuer les risques dans leur chaîne d'approvisionnement avec des outils puissants conçus spécifiquement pour la conformité NIST SP 800-161."
+    },
+    "mission": {
+      "title": "Notre Mission",
+      "description": "Sécuriser la chaîne d'approvisionnement numérique en rendant les évaluations de sécurité de niveau entreprise accessibles à toutes les organisations et en les alignant sur les exigences de conformité fédérale."
+    },
+    "vision": {
+      "title": "Notre Vision",
+      "description": "Un monde où les organisations peuvent gérer en toute confiance les risques de leur chaîne d'approvisionnement avec des outils puissants mais simples à utiliser, leur permettant de se concentrer sur l'innovation tout en maintenant la sécurité et la conformité."
+    },
+    "values": {
+      "title": "Nos Valeurs",
+      "security": {
+        "title": "Sécurité d'Abord",
+        "description": "Nous croyons en la sécurité par conception, pas comme une réflexion après coup. Ce principe guide notre développement de produits et nos opérations d'entreprise."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "Nous visons l'excellence dans tout ce que nous faisons, de la qualité de nos produits au support client, et maintenons les plus hauts standards."
+      },
+      "integrity": {
+        "title": "Intégrité",
+        "description": "Nous construisons la confiance par la transparence, une communication honnête, et en faisant toujours ce qui est juste pour nos clients et partenaires."
+      }
+    },
+    "whyChoose": {
+      "title": "Pourquoi Choisir VendorSoluce",
+      "nistAlignment": {
+        "title": "Alignement NIST",
+        "description": "Notre plateforme est construite spécifiquement pour la conformité NIST SP 800-161, la rendant idéale pour les contractants fédéraux et les organisations travaillant avec des agences gouvernementales."
+      },
+      "federalExperience": {
+        "title": "Expérience Fédérale",
+        "description": "Fondé par des dirigeants ayant une vaste expérience de travail avec des agences fédérales et des contractants sur les défis de sécurité de la chaîne d'approvisionnement."
+      },
+      "comprehensiveSolution": {
+        "title": "Solution Complète",
+        "description": "Des évaluations de fournisseurs à l'analyse SBOM et aux tableaux de bord de risques, nous fournissons tous les outils dont vous avez besoin pour une gestion efficace des risques de la chaîne d'approvisionnement."
+      },
+      "apiFirst": {
+        "title": "Architecture API-First",
+        "description": "Notre approche API-first permet une intégration transparente avec vos systèmes, flux de travail et outils de sécurité existants."
+      }
+    },
+    "careers": {
+      "title": "Rejoignez Notre Équipe",
+      "subtitle": "Nous recherchons toujours des individus talentueux passionnés par la sécurité, la gestion des risques de la chaîne d'approvisionnement et la construction de grands produits.",
+      "jobs": {
+        "securityEngineer": {
+          "title": "Ingénieur Sécurité",
+          "description": "Aidez à construire et sécuriser notre plateforme en vous concentrant sur les meilleures pratiques de sécurité de la chaîne d'approvisionnement.",
+          "details": "Télétravail • Temps plein"
+        },
+        "productManager": {
+          "title": "Chef de Produit",
+          "description": "Dirigez le développement de nouvelles fonctionnalités axées sur la gestion des risques de la chaîne d'approvisionnement.",
+          "details": "Télétravail • Temps plein"
+        },
+        "customerSuccess": {
+          "title": "Ingénieur Succès Client",
+          "description": "Aidez les clients à implémenter et tirer le meilleur parti de nos outils de gestion des risques de la chaîne d'approvisionnement.",
+          "details": "Télétravail • Temps plein"
+        }
+      },
+      "viewAllPositions": "Voir Tous les Postes Ouverts"
+    }
+  },
   "nav": {
     "home": "Accueil",
     "solutions": "Solutions",
@@ -12,6 +346,57 @@
     "signIn": "Se connecter",
     "signOut": "Se déconnecter",
     "premium": "Premium"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "retry": "Réessayer",
+    "retrying": "Nouvel essai...",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "continue": "Continuer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "close": "Fermer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "remove": "Retirer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "export": "Exporter",
+    "import": "Importer",
+    "download": "Télécharger",
+    "upload": "Télécharger",
+    "refresh": "Actualiser",
+    "view": "Voir",
+    "details": "Détails",
+    "summary": "Résumé",
+    "status": "Statut",
+    "actions": "Actions",
+    "settings": "Paramètres",
+    "preferences": "Préférences",
+    "help": "Aide",
+    "support": "Support",
+    "documentation": "Documentation",
+    "feedback": "Commentaires",
+    "success": "Succès",
+    "warning": "Avertissement",
+    "info": "Info",
+    "confirm": "Confirmer",
+    "yes": "Oui",
+    "no": "Non",
+    "maybe": "Peut-être",
+    "unknown": "Inconnu",
+    "pending": "En attente",
+    "completed": "Terminé",
+    "failed": "Échoué",
+    "active": "Actif",
+    "inactive": "Inactif",
+    "enabled": "Activé",
+    "disabled": "Désactivé"
   },
   "home": {
     "hero": {
@@ -481,17 +866,17 @@
     "getStarted": "Commencer"
   },
   "assessment": {
-    "title": "Évaluation de la chaîne d'approvisionnement",
-    "subtitle": "Évaluez la posture de sécurité de votre chaîne d'approvisionnement",
+    "title": "Évaluation des Risques de la Chaîne d'Approvisionnement",
+    "subtitle": "Évaluation complète alignée NIST SP 800-161",
+    "view": "Voir l'Évaluation",
+    "current": "Évaluation Actuelle",
+    "complete": "Terminé",
+    "incomplete": "Incomplet",
+    "overallScore": "Score global",
+    "score": "Score",
     "backToHome": "Retour à l'accueil",
     "backToStart": "Retour au début de l'évaluation",
     "restartAssessment": "Redémarrer l'évaluation",
-    "score": "Score",
-    "complete": "Terminé",
-    "incomplete": "Incomplet",
-    "current": "Actuel",
-    "view": "Voir",
-    "overallScore": "Score global",
     "section": "Section",
     "sectionProgress": "Progrès de la section",
     "previousSection": "Section précédente",
@@ -772,6 +1157,54 @@
     "compliant": "Conforme",
     "nonCompliant": "Non Conforme",
     "partial": "Partiel",
+    "navigation": {
+      "overviewDashboard": "Tableau de Bord Général",
+      "workflowAutomation": "Automatisation des Flux de Travail",
+      "threatIntelligence": "Renseignement sur les Menaces",
+      "predictiveAnalytics": "Analytique Prédictive"
+    },
+    "dashboard": {
+      "advancedDashboard": "Tableau de Bord Avancé",
+      "exportDashboard": "Exporter le Tableau de Bord",
+      "viewFullDashboard": "Voir le Tableau de Bord Complet"
+    },
+    "workflows": {
+      "title": "Automatisation des Flux de Travail",
+      "description": "Automatisez vos processus de gestion des risques fournisseurs",
+      "newWorkflow": "Nouveau Flux de Travail",
+      "manageAutomation": "Gérer l'Automatisation",
+      "stats": {
+        "activeTasks": "Tâches Actives",
+        "completed": "Terminées",
+        "overdue": "En Retard",
+        "automationRules": "Règles d'Automatisation"
+      }
+    },
+    "threatIntelligence": {
+      "title": "Renseignement sur les Menaces",
+      "description": "Surveillez les menaces de sécurité affectant vos fournisseurs",
+      "stats": {
+        "activeSources": "Sources Actives",
+        "threatsToday": "Menaces Aujourd'hui",
+        "coverage": "Couverture"
+      },
+      "sources": {
+        "title": "Sources de Renseignement sur les Menaces"
+      }
+    },
+    "analytics": {
+      "title": "Analytique Prédictive",
+      "description": "Insights alimentés par l'IA et prédictions de risques",
+      "exportReport": {
+        "title": "Exporter le Rapport d'Analytique",
+        "description": "Générer un rapport complet de vos insights analytiques",
+        "button": "Exporter le Rapport"
+      }
+    },
+    "alerts": {
+      "workflowCreation": "La création de flux de travail s'ouvrirait ici. Cette fonctionnalité vous permet de créer des règles d'automatisation personnalisées pour la gestion des risques fournisseurs.",
+      "automationManagement": "L'interface de gestion de l'automatisation s'ouvrirait ici. Configurez les déclencheurs, actions et paramètres de notification."
+    },
     "table": {
       "vendor": "Fournisseur",
       "riskScore": "Score de Risque",
