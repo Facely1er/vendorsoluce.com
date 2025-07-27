@@ -214,7 +214,7 @@ const onboardVendor = async (vendorData) => {
               <Book className="h-6 w-6 text-vendorsoluce-green" />
             </div>
             <div className="flex-1">
-              <h2 className="pt-2 text-xl font-bold text-gray-900 dark:text-white mb-2">
+              <h2 className="pt-4 text-xl font-bold text-gray-900 dark:text-white mb-2">
                 {t('integrationGuides.quickStart.title')}
               </h2>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
