@@ -50,14 +50,14 @@ const VendorRiskRadar: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
-  // Vendor categorization schemes
+  // Vendor categorization schemes using translations
   const vendorCategories: VendorCategory[] = [
     {
       id: 'cloud_storage',
-      name: 'Cloud Storage & Backup',
-      description: 'File storage, backup, and document management services',
+      name: t('vendorRiskRadar.vendorCategories.cloudStorage.name'),
+      description: t('vendorRiskRadar.vendorCategories.cloudStorage.description'),
       icon: <Database className="h-5 w-5 text-blue-600" />,
-      commonUseCase: 'Document storage, file sharing, backup solutions',
+      commonUseCase: t('vendorRiskRadar.vendorCategories.cloudStorage.commonUseCase'),
       riskTemplate: {
         data_sensitivity: 4,
         access_control: 3,
@@ -66,15 +66,15 @@ const VendorRiskRadar: React.FC = () => {
         encryption_standards: 2,
         compliance_framework: 3
       },
-      privacyImpact: 'High - Direct data hosting and processing',
-      commonRegulations: ['GDPR', 'SOX', 'HIPAA', 'SOC 2']
+      privacyImpact: t('vendorRiskRadar.vendorCategories.cloudStorage.privacyImpact'),
+      commonRegulations: t('vendorRiskRadar.vendorCategories.cloudStorage.commonRegulations', { returnObjects: true }) as string[]
     },
     {
       id: 'payment_processor',
-      name: 'Payment Processing',
-      description: 'Payment gateways, billing, and financial transaction services',
+      name: t('vendorRiskRadar.vendorCategories.paymentProcessor.name'),
+      description: t('vendorRiskRadar.vendorCategories.paymentProcessor.description'),
       icon: <Shield className="h-5 w-5 text-green-600" />,
-      commonUseCase: 'Credit card processing, subscription billing, payments',
+      commonUseCase: t('vendorRiskRadar.vendorCategories.paymentProcessor.commonUseCase'),
       riskTemplate: {
         data_sensitivity: 5,
         access_control: 4,
@@ -83,15 +83,15 @@ const VendorRiskRadar: React.FC = () => {
         encryption_standards: 5,
         compliance_framework: 5
       },
-      privacyImpact: 'Critical - Financial and PII data processing',
-      commonRegulations: ['PCI DSS', 'GDPR', 'PSD2', 'SOX']
+      privacyImpact: t('vendorRiskRadar.vendorCategories.paymentProcessor.privacyImpact'),
+      commonRegulations: t('vendorRiskRadar.vendorCategories.paymentProcessor.commonRegulations', { returnObjects: true }) as string[]
     },
     {
       id: 'hr_software',
-      name: 'HR & Workforce Management',
-      description: 'HRIS, payroll, recruiting, and employee management systems',
+      name: t('vendorRiskRadar.vendorCategories.hrSoftware.name'),
+      description: t('vendorRiskRadar.vendorCategories.hrSoftware.description'),
       icon: <Users className="h-5 w-5 text-purple-600" />,
-      commonUseCase: 'Employee data, payroll, performance management',
+      commonUseCase: t('vendorRiskRadar.vendorCategories.hrSoftware.commonUseCase'),
       riskTemplate: {
         data_sensitivity: 5,
         access_control: 4,
@@ -100,15 +100,15 @@ const VendorRiskRadar: React.FC = () => {
         encryption_standards: 3,
         compliance_framework: 4
       },
-      privacyImpact: 'High - Sensitive employee and personal data',
-      commonRegulations: ['GDPR', 'CCPA', 'Employment Law', 'SOX']
+      privacyImpact: t('vendorRiskRadar.vendorCategories.hrSoftware.privacyImpact'),
+      commonRegulations: t('vendorRiskRadar.vendorCategories.hrSoftware.commonRegulations', { returnObjects: true }) as string[]
     },
     {
       id: 'saas_productivity',
-      name: 'SaaS Productivity Tools',
-      description: 'Collaboration, communication, and productivity software',
+      name: t('vendorRiskRadar.vendorCategories.saasProductivity.name'),
+      description: t('vendorRiskRadar.vendorCategories.saasProductivity.description'),
       icon: <Zap className="h-5 w-5 text-orange-600" />,
-      commonUseCase: 'Email, messaging, project management, CRM',
+      commonUseCase: t('vendorRiskRadar.vendorCategories.saasProductivity.commonUseCase'),
       riskTemplate: {
         data_sensitivity: 3,
         access_control: 3,
@@ -117,15 +117,15 @@ const VendorRiskRadar: React.FC = () => {
         encryption_standards: 2,
         compliance_framework: 2
       },
-      privacyImpact: 'Medium - Business communications and workflow data',
-      commonRegulations: ['GDPR', 'SOC 2', 'ISO 27001']
+      privacyImpact: t('vendorRiskRadar.vendorCategories.saasProductivity.privacyImpact'),
+      commonRegulations: t('vendorRiskRadar.vendorCategories.saasProductivity.commonRegulations', { returnObjects: true }) as string[]
     },
     {
       id: 'analytics_marketing',
-      name: 'Analytics & Marketing',
-      description: 'Data analytics, marketing automation, and customer tracking',
+      name: t('vendorRiskRadar.vendorCategories.analyticsMarketing.name'),
+      description: t('vendorRiskRadar.vendorCategories.analyticsMarketing.description'),
       icon: <Eye className="h-5 w-5 text-pink-600" />,
-      commonUseCase: 'Customer analytics, marketing campaigns, tracking',
+      commonUseCase: t('vendorRiskRadar.vendorCategories.analyticsMarketing.commonUseCase'),
       riskTemplate: {
         data_sensitivity: 4,
         access_control: 2,
@@ -134,15 +134,15 @@ const VendorRiskRadar: React.FC = () => {
         encryption_standards: 2,
         compliance_framework: 3
       },
-      privacyImpact: 'High - Customer behavior and PII tracking',
-      commonRegulations: ['GDPR', 'CCPA', 'PECR', 'ePrivacy']
+      privacyImpact: t('vendorRiskRadar.vendorCategories.analyticsMarketing.privacyImpact'),
+      commonRegulations: t('vendorRiskRadar.vendorCategories.analyticsMarketing.commonRegulations', { returnObjects: true }) as string[]
     },
     {
       id: 'infrastructure',
-      name: 'Infrastructure & Hosting',
-      description: 'Cloud infrastructure, hosting, and technical services',
+      name: t('vendorRiskRadar.vendorCategories.infrastructure.name'),
+      description: t('vendorRiskRadar.vendorCategories.infrastructure.description'),
       icon: <Building className="h-5 w-5 text-gray-600" />,
-      commonUseCase: 'Server hosting, cloud infrastructure, CDN',
+      commonUseCase: t('vendorRiskRadar.vendorCategories.infrastructure.commonUseCase'),
       riskTemplate: {
         data_sensitivity: 3,
         access_control: 4,
@@ -151,78 +151,78 @@ const VendorRiskRadar: React.FC = () => {
         encryption_standards: 4,
         compliance_framework: 4
       },
-      privacyImpact: 'Medium-High - Infrastructure-level data access',
-      commonRegulations: ['SOC 2', 'ISO 27001', 'GDPR', 'FedRAMP']
+      privacyImpact: t('vendorRiskRadar.vendorCategories.infrastructure.privacyImpact'),
+      commonRegulations: t('vendorRiskRadar.vendorCategories.infrastructure.commonRegulations', { returnObjects: true }) as string[]
     }
   ];
 
-  // Risk dimensions focused on data privacy and protection
+  // Risk dimensions focused on data privacy and protection using translations
   const [riskDimensions, setRiskDimensions] = useState<RiskDimension[]>([
     {
       id: 'data_sensitivity',
-      name: 'Data Sensitivity Level',
-      shortName: 'Data Sensitivity',
-      description: 'Classification and sensitivity of data being processed',
+      name: t('vendorRiskRadar.riskDimensions.dataSensitivity.name'),
+      shortName: t('vendorRiskRadar.riskDimensions.dataSensitivity.shortName'),
+      description: t('vendorRiskRadar.riskDimensions.dataSensitivity.description'),
       weight: 5,
       value: 1,
       icon: <Database className="h-5 w-5 text-red-600" />,
-      privacyRegulations: ['GDPR Art. 9', 'CCPA', 'HIPAA'],
-      protectionRequirements: ['Data Classification', 'Access Controls', 'Encryption at Rest']
+      privacyRegulations: t('vendorRiskRadar.riskDimensions.dataSensitivity.privacyRegulations', { returnObjects: true }) as string[],
+      protectionRequirements: t('vendorRiskRadar.riskDimensions.dataSensitivity.protectionRequirements', { returnObjects: true }) as string[]
     },
     {
       id: 'access_control',
-      name: 'Access Control & Authentication',
-      shortName: 'Access Control',
-      description: 'Identity management and access control mechanisms',
+      name: t('vendorRiskRadar.riskDimensions.accessControl.name'),
+      shortName: t('vendorRiskRadar.riskDimensions.accessControl.shortName'),
+      description: t('vendorRiskRadar.riskDimensions.accessControl.description'),
       weight: 4,
       value: 1,
       icon: <Lock className="h-5 w-5 text-blue-600" />,
-      privacyRegulations: ['GDPR Art. 25', 'SOX', 'ISO 27001'],
-      protectionRequirements: ['MFA', 'Role-Based Access', 'Audit Logging']
+      privacyRegulations: t('vendorRiskRadar.riskDimensions.accessControl.privacyRegulations', { returnObjects: true }) as string[],
+      protectionRequirements: t('vendorRiskRadar.riskDimensions.accessControl.protectionRequirements', { returnObjects: true }) as string[]
     },
     {
       id: 'data_residency',
-      name: 'Data Residency & Jurisdiction',
-      shortName: 'Data Residency',
-      description: 'Geographic location and legal jurisdiction of data processing',
+      name: t('vendorRiskRadar.riskDimensions.dataResidency.name'),
+      shortName: t('vendorRiskRadar.riskDimensions.dataResidency.shortName'),
+      description: t('vendorRiskRadar.riskDimensions.dataResidency.description'),
       weight: 4,
       value: 1,
       icon: <Globe className="h-5 w-5 text-green-600" />,
-      privacyRegulations: ['GDPR Art. 44-49', 'Schrems II', 'Data Localization Laws'],
-      protectionRequirements: ['Adequacy Decisions', 'SCCs', 'Data Mapping']
+      privacyRegulations: t('vendorRiskRadar.riskDimensions.dataResidency.privacyRegulations', { returnObjects: true }) as string[],
+      protectionRequirements: t('vendorRiskRadar.riskDimensions.dataResidency.protectionRequirements', { returnObjects: true }) as string[]
     },
     {
       id: 'retention_control',
-      name: 'Data Retention & Deletion',
-      shortName: 'Retention Control',
-      description: 'Data lifecycle management and deletion capabilities',
+      name: t('vendorRiskRadar.riskDimensions.retentionControl.name'),
+      shortName: t('vendorRiskRadar.riskDimensions.retentionControl.shortName'),
+      description: t('vendorRiskRadar.riskDimensions.retentionControl.description'),
       weight: 3,
       value: 1,
       icon: <FileText className="h-5 w-5 text-purple-600" />,
-      privacyRegulations: ['GDPR Art. 17', 'CCPA', 'Data Minimization'],
-      protectionRequirements: ['Retention Policies', 'Secure Deletion', 'Data Portability']
+      privacyRegulations: t('vendorRiskRadar.riskDimensions.retentionControl.privacyRegulations', { returnObjects: true }) as string[],
+      protectionRequirements: t('vendorRiskRadar.riskDimensions.retentionControl.protectionRequirements', { returnObjects: true }) as string[]
     },
     {
       id: 'encryption_standards',
-      name: 'Encryption & Security Standards',
-      shortName: 'Encryption',
-      description: 'Cryptographic controls and security implementation',
+      name: t('vendorRiskRadar.riskDimensions.encryptionStandards.name'),
+      shortName: t('vendorRiskRadar.riskDimensions.encryptionStandards.shortName'),
+      description: t('vendorRiskRadar.riskDimensions.encryptionStandards.description'),
       weight: 4,
       value: 1,
       icon: <Shield className="h-5 w-5 text-orange-600" />,
-      privacyRegulations: ['GDPR Art. 32', 'PCI DSS', 'FIPS 140-2'],
-      protectionRequirements: ['Encryption in Transit', 'Encryption at Rest', 'Key Management']
+      privacyRegulations: t('vendorRiskRadar.riskDimensions.encryptionStandards.privacyRegulations', { returnObjects: true }) as string[],
+      protectionRequirements: t('vendorRiskRadar.riskDimensions.encryptionStandards.protectionRequirements', { returnObjects: true }) as string[]
     },
     {
       id: 'compliance_framework',
-      name: 'Compliance & Certification',
-      shortName: 'Compliance',
-      description: 'Regulatory compliance and industry certifications',
+      name: t('vendorRiskRadar.riskDimensions.complianceFramework.name'),
+      shortName: t('vendorRiskRadar.riskDimensions.complianceFramework.shortName'),
+      description: t('vendorRiskRadar.riskDimensions.complianceFramework.description'),
       weight: 3,
       value: 1,
       icon: <Eye className="h-5 w-5 text-teal-600" />,
-      privacyRegulations: ['SOC 2', 'ISO 27001', 'Industry Standards'],
-      protectionRequirements: ['Regular Audits', 'Compliance Monitoring', 'Incident Response']
+      privacyRegulations: t('vendorRiskRadar.riskDimensions.complianceFramework.privacyRegulations', { returnObjects: true }) as string[],
+      protectionRequirements: t('vendorRiskRadar.riskDimensions.complianceFramework.protectionRequirements', { returnObjects: true }) as string[]
     }
   ]);
 
@@ -269,7 +269,7 @@ const VendorRiskRadar: React.FC = () => {
 
   const calculateRiskScore = async () => {
     if (!vendorName.trim()) {
-      setError('Please enter a vendor name');
+      setError(t('vendorRiskRadar.errors.enterVendorName'));
       return;
     }
     
@@ -312,7 +312,7 @@ const VendorRiskRadar: React.FC = () => {
       setCalculationComplete(true);
     } catch (err) {
       console.error('Error calculating risk:', err);
-      setError(err instanceof Error ? err.message : 'Failed to calculate risk score');
+      setError(err instanceof Error ? err.message : t('vendorRiskRadar.errors.calculationFailed'));
     } finally {
       setIsLoading(false);
     }
@@ -368,9 +368,9 @@ const VendorRiskRadar: React.FC = () => {
           <ArrowLeft className="mr-2 h-4 w-4" />
           {t('navigation.home')}
         </Link>
-        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">Vendor Risk Radar</h1>
+        <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{t('vendorRiskRadar.title')}</h1>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
-          Assess vendor risks with focus on data privacy, protection requirements, and regulatory compliance
+          {t('vendorRiskRadar.description')}
         </p>
       </div>
       
@@ -380,7 +380,7 @@ const VendorRiskRadar: React.FC = () => {
           {/* Vendor Category Selection */}
           <Card>
             <CardHeader>
-              <CardTitle>1. Select Vendor Category</CardTitle>
+              <CardTitle>{t('vendorRiskRadar.steps.selectCategory')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -415,7 +415,7 @@ const VendorRiskRadar: React.FC = () => {
           {/* Vendor Details */}
           <Card>
             <CardHeader>
-              <CardTitle>2. Vendor Information</CardTitle>
+              <CardTitle>{t('vendorRiskRadar.steps.vendorInfo')}</CardTitle>
             </CardHeader>
             <CardContent>
               {error && (
@@ -427,24 +427,24 @@ const VendorRiskRadar: React.FC = () => {
               
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Vendor Name
+                  {t('vendorRiskRadar.form.vendorNameLabel')}
                 </label>
                 <input
                   type="text"
                   value={vendorName}
                   onChange={(e) => setVendorName(e.target.value)}
                   className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                  placeholder="Enter vendor name..."
+                  placeholder={t('vendorRiskRadar.form.vendorNamePlaceholder')}
                 />
               </div>
 
               {selectedCategory && (
                 <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                  <h4 className="font-medium text-gray-900 dark:text-white mb-2">Category Overview</h4>
+                  <h4 className="font-medium text-gray-900 dark:text-white mb-2">{t('vendorRiskRadar.form.categoryOverview')}</h4>
                   <div className="space-y-2 text-sm">
-                    <p><strong>Common Use Case:</strong> {vendorCategories.find(c => c.id === selectedCategory)?.commonUseCase}</p>
-                    <p><strong>Privacy Impact:</strong> {vendorCategories.find(c => c.id === selectedCategory)?.privacyImpact}</p>
-                    <p><strong>Key Regulations:</strong> {vendorCategories.find(c => c.id === selectedCategory)?.commonRegulations.join(', ')}</p>
+                    <p><strong>{t('vendorRiskRadar.form.commonUseCase')}</strong> {vendorCategories.find(c => c.id === selectedCategory)?.commonUseCase}</p>
+                    <p><strong>{t('vendorRiskRadar.form.privacyImpact')}</strong> {vendorCategories.find(c => c.id === selectedCategory)?.privacyImpact}</p>
+                    <p><strong>{t('vendorRiskRadar.form.keyRegulations')}</strong> {vendorCategories.find(c => c.id === selectedCategory)?.commonRegulations.join(', ')}</p>
                   </div>
                 </div>
               )}
@@ -454,7 +454,7 @@ const VendorRiskRadar: React.FC = () => {
           {/* Risk Dimensions */}
           <Card>
             <CardHeader>
-              <CardTitle>3. Risk Assessment Dimensions</CardTitle>
+              <CardTitle>{t('vendorRiskRadar.steps.riskDimensions')}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
@@ -468,10 +468,10 @@ const VendorRiskRadar: React.FC = () => {
                         
                         <div className="text-xs space-y-1">
                           <div>
-                            <strong>Privacy Regulations:</strong> {dimension.privacyRegulations.join(', ')}
+                            <strong>{t('vendorRiskRadar.form.privacyRegulations')}</strong> {dimension.privacyRegulations.join(', ')}
                           </div>
                           <div>
-                            <strong>Protection Requirements:</strong> {dimension.protectionRequirements.join(', ')}
+                            <strong>{t('vendorRiskRadar.form.protectionRequirements')}</strong> {dimension.protectionRequirements.join(', ')}
                           </div>
                         </div>
                       </div>
@@ -479,8 +479,8 @@ const VendorRiskRadar: React.FC = () => {
                     
                     <div className="mt-3">
                       <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
-                        <span>Low Risk</span>
-                        <span>High Risk</span>
+                        <span>{t('vendorRiskRadar.form.lowRisk')}</span>
+                        <span>{t('vendorRiskRadar.form.highRisk')}</span>
                       </div>
                       <div className="flex gap-2">
                         {[1, 2, 3, 4, 5].map((value) => (
@@ -513,7 +513,7 @@ const VendorRiskRadar: React.FC = () => {
                 ) : (
                   <Send className="h-4 w-4 mr-2" />
                 )}
-                Generate Risk Radar
+                {t('vendorRiskRadar.buttons.generateRadar')}
               </Button>
             </CardContent>
           </Card>
@@ -526,7 +526,7 @@ const VendorRiskRadar: React.FC = () => {
               {/* Radar Chart */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Risk Radar Visualization</CardTitle>
+                  <CardTitle>{t('vendorRiskRadar.results.radarVisualization')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="h-80">
@@ -540,7 +540,7 @@ const VendorRiskRadar: React.FC = () => {
                           tick={{ fontSize: 8 }}
                         />
                         <Radar
-                          name="Current Risk"
+                          name={t('vendorRiskRadar.results.currentRisk')}
                           dataKey="risk"
                           stroke="#ef4444"
                           fill="#ef4444"
@@ -548,7 +548,7 @@ const VendorRiskRadar: React.FC = () => {
                           strokeWidth={2}
                         />
                         <Radar
-                          name="Required Controls"
+                          name={t('vendorRiskRadar.results.requiredControls')}
                           dataKey="required"
                           stroke="#10b981"
                           fill="#10b981"
@@ -565,7 +565,7 @@ const VendorRiskRadar: React.FC = () => {
               {/* Risk Score */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Overall Risk Assessment</CardTitle>
+                  <CardTitle>{t('vendorRiskRadar.results.overallAssessment')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-center mb-4">
@@ -575,7 +575,7 @@ const VendorRiskRadar: React.FC = () => {
                   
                   <div className="space-y-3">
                     <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white mb-2">Privacy Recommendations</h4>
+                      <h4 className="font-medium text-gray-900 dark:text-white mb-2">{t('vendorRiskRadar.results.privacyRecommendations')}</h4>
                       <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
                         {getPrivacyRecommendations().slice(0, 3).map((rec, index) => (
                           <li key={index} className="flex items-start">
@@ -591,14 +591,14 @@ const VendorRiskRadar: React.FC = () => {
 
               <Link to="/vendor-risk-dashboard">
                 <Button variant="outline" className="w-full">
-                  View Full Dashboard
+                  {t('vendorRiskRadar.buttons.viewFullDashboard')}
                 </Button>
               </Link>
             </div>
           ) : (
             <Card>
               <CardHeader>
-                <CardTitle>How to Use the Risk Radar</CardTitle>
+                <CardTitle>{t('vendorRiskRadar.howToUse.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -607,7 +607,7 @@ const VendorRiskRadar: React.FC = () => {
                       1
                     </div>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      Choose the vendor category that best matches your use case to load baseline risk settings
+                      {t('vendorRiskRadar.howToUse.step1')}
                     </p>
                   </div>
                   <div className="flex items-start">
@@ -615,7 +615,7 @@ const VendorRiskRadar: React.FC = () => {
                       2
                     </div>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      Adjust risk dimensions based on your specific data sensitivity and regulatory requirements
+                      {t('vendorRiskRadar.howToUse.step2')}
                     </p>
                   </div>
                   <div className="flex items-start">
@@ -623,7 +623,7 @@ const VendorRiskRadar: React.FC = () => {
                       3
                     </div>
                     <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      Generate the radar chart to visualize risk levels and required control gaps
+                      {t('vendorRiskRadar.howToUse.step3')}
                     </p>
                   </div>
                 </div>
@@ -632,8 +632,8 @@ const VendorRiskRadar: React.FC = () => {
                   <div className="flex items-start">
                     <AlertTriangle className="h-5 w-5 text-blue-500 mr-3 mt-0.5 flex-shrink-0" />
                     <div className="text-sm text-gray-600 dark:text-gray-400">
-                      <p className="font-medium mb-1">Demo Mode Active</p>
-                      <p>Using CloudCorp Document Storage as example. Select a category to see different risk profiles.</p>
+                      <p className="font-medium mb-1">{t('vendorRiskRadar.demo.title')}</p>
+                      <p>{t('vendorRiskRadar.demo.description')}</p>
                     </div>
                   </div>
                 </div>
