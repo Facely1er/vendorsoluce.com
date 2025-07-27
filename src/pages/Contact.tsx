@@ -70,6 +70,7 @@ const Contact: React.FC = () => {
       });
 
       if (error) {
+        console.error('Edge function error:', error);
         throw error;
       }
 
@@ -77,7 +78,7 @@ const Contact: React.FC = () => {
       setFormSubmitted(true);
     } catch (err: any) {
       console.error('Error submitting form:', err);
-      setFormError('Failed to submit your message. Please try again later.');
+      setFormError(err.message || 'Failed to submit your message. Please try again later.');
     } finally {
       setIsSubmitting(false);
     }
