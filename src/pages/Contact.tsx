@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 import { Link } from 'react-router-dom';
@@ -7,6 +8,7 @@ import { Mail, Phone, MapPin, Clock, MessageSquare, AlertCircle, CheckCircle } f
 import { supabase } from '../lib/supabase';
 
 const Contact: React.FC = () => {
+  const { t } = useTranslation();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,13 +46,13 @@ const Contact: React.FC = () => {
 
     // Basic validation
     if (!formData.email || !formData.firstName || !formData.lastName || !formData.message) {
-      setFormError('Please fill in all required fields.');
+      setFormError(t('contact.form.validation.requiredFields'));
       setIsSubmitting(false);
       return;
     }
 
     if (!formData.terms) {
-      setFormError('Please agree to the privacy policy.');
+      setFormError(t('contact.form.validation.termsRequired'));
       setIsSubmitting(false);
       return;
     }
@@ -78,7 +80,7 @@ const Contact: React.FC = () => {
       setFormSubmitted(true);
     } catch (err: any) {
       console.error('Error submitting form:', err);
-      setFormError(err.message || 'Failed to submit your message. Please try again later.');
+      setFormError(err.message || t('contact.form.validation.submitError'));
     } finally {
       setIsSubmitting(false);
     }
@@ -87,9 +89,9 @@ const Contact: React.FC = () => {
   return (
     <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Contact Us</h1>
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{t('contact.title')}</h1>
         <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-          We're here to help you secure your supply chain. Reach out with any questions about our platform or supply chain risk management.
+          {t('contact.description')}
         </p>
       </div>
       
@@ -101,9 +103,9 @@ const Contact: React.FC = () => {
                 <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle className="h-8 w-8 text-green-600 dark:text-green-400" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Thank You!</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('contact.form.success.title')}</h2>
                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                  We've received your message and will get back to you shortly.
+                  {t('contact.form.success.message')}
                 </p>
                 <Button 
                   variant="outline" 
@@ -121,12 +123,12 @@ const Contact: React.FC = () => {
                     });
                   }}
                 >
-                  Send Another Message
+                  {t('contact.form.success.sendAnother')}
                 </Button>
               </div>
             ) : (
               <>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Get in Touch</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('contact.form.title')}</h2>
                 
                 {formError && (
                   <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md flex items-start">
@@ -139,7 +141,7 @@ const Contact: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                       <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        First Name<span className="text-red-500">*</span>
+                        {t('contact.form.fields.firstName')}<span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
@@ -153,7 +155,7 @@ const Contact: React.FC = () => {
                     
                     <div>
                       <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Last Name<span className="text-red-500">*</span>
+                        {t('contact.form.fields.lastName')}<span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
@@ -169,7 +171,7 @@ const Contact: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Email Address<span className="text-red-500">*</span>
+                        {t('contact.form.fields.email')}<span className="text-red-500">*</span>
                       </label>
                       <input
                         type="email"
@@ -183,7 +185,7 @@ const Contact: React.FC = () => {
                     
                     <div>
                       <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Phone Number
+                        {t('contact.form.fields.phone')}
                       </label>
                       <input
                         type="tel"
@@ -197,7 +199,7 @@ const Contact: React.FC = () => {
                   
                   <div className="mb-6">
                     <label htmlFor="company" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Company
+                      {t('contact.form.fields.company')}
                     </label>
                     <input
                       type="text"
@@ -210,7 +212,7 @@ const Contact: React.FC = () => {
                   
                   <div className="mb-6">
                     <label htmlFor="topic" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      How can we help?
+                      {t('contact.form.fields.topic.label')}
                     </label>
                     <select
                       id="topic"
@@ -218,19 +220,19 @@ const Contact: React.FC = () => {
                       onChange={handleInputChange}
                       className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendorsoluce-navy focus:border-vendorsoluce-navy bg-white dark:bg-gray-800 dark:text-white"
                     >
-                      <option value="">Select a topic</option>
-                      <option value="Product Information">Product Information</option>
-                      <option value="Technical Support">Technical Support</option>
-                      <option value="Schedule a Demo">Schedule a Demo</option>
-                      <option value="Partnership Opportunities">Partnership Opportunities</option>
-                      <option value="Federal Compliance Questions">Federal Compliance Questions</option>
-                      <option value="Other">Other</option>
+                      <option value="">{t('contact.form.fields.topic.placeholder')}</option>
+                      <option value="Product Information">{t('contact.form.fields.topic.options.productInfo')}</option>
+                      <option value="Technical Support">{t('contact.form.fields.topic.options.techSupport')}</option>
+                      <option value="Schedule a Demo">{t('contact.form.fields.topic.options.demo')}</option>
+                      <option value="Partnership Opportunities">{t('contact.form.fields.topic.options.partnership')}</option>
+                      <option value="Federal Compliance Questions">{t('contact.form.fields.topic.options.compliance')}</option>
+                      <option value="Other">{t('contact.form.fields.topic.options.other')}</option>
                     </select>
                   </div>
                   
                   <div className="mb-6">
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Message<span className="text-red-500">*</span>
+                      {t('contact.form.fields.message')}<span className="text-red-500">*</span>
                     </label>
                     <textarea
                       id="message"
@@ -238,7 +240,7 @@ const Contact: React.FC = () => {
                       value={formData.message}
                       onChange={handleInputChange}
                       className="w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-vendorsoluce-navy focus:border-vendorsoluce-navy bg-white dark:bg-gray-800 dark:text-white"
-                      placeholder="Please provide details about your inquiry..."
+                      placeholder={t('contact.form.fields.messagePlaceholder')}
                       required
                     ></textarea>
                   </div>
@@ -254,7 +256,7 @@ const Contact: React.FC = () => {
                         required
                       />
                       <label htmlFor="terms" className="ml-2 text-sm text-gray-600 dark:text-gray-400">
-                        I agree to the <Link to="/privacy" className="text-vendorsoluce-navy dark:text-vendorsoluce-blue hover:underline">privacy policy</Link> and consent to being contacted regarding my inquiry.
+                        {t('contact.form.fields.termsPrefix')} <Link to="/privacy" className="text-vendorsoluce-navy dark:text-vendorsoluce-blue hover:underline">{t('contact.form.fields.privacyPolicy')}</Link> {t('contact.form.fields.termsSuffix')}
                       </label>
                     </div>
                   </div>
@@ -269,10 +271,10 @@ const Contact: React.FC = () => {
                     {isSubmitting ? (
                       <>
                         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                        Submitting...
+                        {t('contact.form.submitting')}
                       </>
                     ) : (
-                      'Submit'
+                      t('contact.form.submit')
                     )}
                   </Button>
                 </form>
@@ -283,14 +285,14 @@ const Contact: React.FC = () => {
         
         <div>
           <Card className="p-6 mb-6">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Contact Information</h2>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('contact.info.title')}</h2>
             <ul className="space-y-4">
               <li className="flex items-start">
                 <Mail className="h-5 w-5 text-vendorsoluce-navy dark:text-vendorsoluce-blue mr-3 mt-0.5" />
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">Email</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">{t('contact.info.email.label')}</p>
                   <a href="mailto:contact@ermits.com" className="text-gray-600 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue">
-                    contact@ermits.com
+                    {t('contact.info.email.value')}
                   </a>
                 </div>
               </li>
@@ -298,9 +300,9 @@ const Contact: React.FC = () => {
               <li className="flex items-start">
                 <Phone className="h-5 w-5 text-vendorsoluce-navy dark:text-vendorsoluce-blue mr-3 mt-0.5" />
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">Phone</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">{t('contact.info.phone.label')}</p>
                   <a href="tel:+18886186160" className="text-gray-600 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue">
-                    +1 (240) 599-0102
+                    {t('contact.info.phone.value')}
                   </a>
                 </div>
               </li>
@@ -308,11 +310,11 @@ const Contact: React.FC = () => {
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-vendorsoluce-navy dark:text-vendorsoluce-blue mr-3 mt-0.5" />
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">Headquarters</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">{t('contact.info.address.label')}</p>
                   <p className="text-gray-600 dark:text-gray-300">
-                    8300 McCullough Lane<br />
-                    Suite 203<br />
-                    Gaithersburg, MD 20877
+                    {t('contact.info.address.line1')}<br />
+                    {t('contact.info.address.line2')}<br />
+                    {t('contact.info.address.line3')}
                   </p>
                 </div>
               </li>
@@ -320,10 +322,10 @@ const Contact: React.FC = () => {
               <li className="flex items-start">
                 <Clock className="h-5 w-5 text-vendorsoluce-navy dark:text-vendorsoluce-blue mr-3 mt-0.5" />
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">Hours</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">{t('contact.info.hours.label')}</p>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Monday - Friday: 9:00 AM - 6:00 PM ET<br />
-                    Saturday - Sunday: Closed
+                    {t('contact.info.hours.weekdays')}<br />
+                    {t('contact.info.hours.weekends')}
                   </p>
                 </div>
               </li>
@@ -331,13 +333,13 @@ const Contact: React.FC = () => {
           </Card>
           
           <Card className="p-6">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Schedule a Demo</h2>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('contact.demo.title')}</h2>
             <p className="text-gray-600 dark:text-gray-300 mb-4">
-              See how VendorSoluce can help secure your supply chain and meet federal compliance requirements.
+              {t('contact.demo.description')}
             </p>
             <div className="flex items-center mb-4">
               <MessageSquare className="h-5 w-5 text-vendorsoluce-teal mr-2" />
-              <span className="text-sm text-gray-600 dark:text-gray-300">30-minute personalized demo</span>
+              <span className="text-sm text-gray-600 dark:text-gray-300">{t('contact.demo.duration')}</span>
             </div>
             <Button 
               variant="secondary" 
@@ -356,54 +358,54 @@ const Contact: React.FC = () => {
                }, 100);
               }}
             >
-              Schedule Now
+              {t('contact.demo.button')}
             </Button>
           </Card>
         </div>
       </div>
       
       <section className="mb-16">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Frequently Asked Questions</h2>
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">{t('contact.faq.title')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">How does VendorSoluce help with NIST 800-161 compliance?</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t('contact.faq.questions.nist.question')}</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              VendorSoluce provides assessment templates, controls mapping, and risk scoring that aligns with NIST SP 800-161 requirements, making it easier for organizations to implement and document their supply chain risk management program.
+              {t('contact.faq.questions.nist.answer')}
             </p>
           </div>
           
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Can VendorSoluce integrate with our existing GRC platform?</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t('contact.faq.questions.integration.question')}</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              Yes, VendorSoluce offers API integrations with major GRC platforms including ServiceNow, RSA Archer, MetricStream, and more. Our integration guides provide step-by-step instructions.
+              {t('contact.faq.questions.integration.answer')}
             </p>
           </div>
           
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">What SBOM formats does VendorSoluce support?</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t('contact.faq.questions.sbom.question')}</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              VendorSoluce supports all major SBOM formats including SPDX (JSON, XML, RDF), CycloneDX (JSON, XML), and can also process plain text component lists.
+              {t('contact.faq.questions.sbom.answer')}
             </p>
           </div>
           
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">How quickly can we get started with VendorSoluce?</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t('contact.faq.questions.setup.question')}</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              Most customers are up and running within a day. Our onboarding process includes a dedicated customer success manager, and our platform is designed for easy self-service setup.
+              {t('contact.faq.questions.setup.answer')}
             </p>
           </div>
           
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Does VendorSoluce offer professional services?</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t('contact.faq.questions.services.question')}</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              Yes, we offer professional services for customers who need help with implementation, customization, or creating custom assessment templates for specific industries or compliance requirements.
+              {t('contact.faq.questions.services.answer')}
             </p>
           </div>
           
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">What security certifications does VendorSoluce have?</h3>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t('contact.faq.questions.security.question')}</h3>
             <p className="text-gray-600 dark:text-gray-300">
-              VendorSoluce is SOC 2 Type II certified and FedRAMP Moderate compliant, ensuring your data is protected according to the highest industry standards.
+              {t('contact.faq.questions.security.answer')}
             </p>
           </div>
         </div>
@@ -413,9 +415,9 @@ const Contact: React.FC = () => {
         <div className="p-8 md:p-12">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
             <div className="mb-6 md:mb-0">
-              <h2 className="text-2xl font-bold mb-2">Ready to secure your supply chain?</h2>
+              <h2 className="text-2xl font-bold mb-2">{t('contact.cta.title')}</h2>
               <p className="text-gray-100 max-w-xl">
-                Get started with VendorSoluce today and bring NIST SP 800-161 compliance to your organization.
+                {t('contact.cta.description')}
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -431,7 +433,7 @@ const Contact: React.FC = () => {
                   document.getElementById('topic')?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                Schedule a Demo
+                {t('contact.cta.demoButton')}
               </Button>
               <Button 
                 variant="outline" 
@@ -439,7 +441,7 @@ const Contact: React.FC = () => {
                 className="bg-white text-vendorsoluce-navy hover:bg-gray-100"
                 onClick={() => window.location.href = '/supply-chain-assessment'}
               >
-                Try for Free
+                {t('contact.cta.freeButton')}
               </Button>
             </div>
           </div>
