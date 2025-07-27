@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useVendors } from '../hooks/useVendors';
 import { Plus, RefreshCw, BarChart3, Zap, Shield, Brain } from 'lucide-react';
 import AddVendorModal from '../components/vendor/AddVendorModal';
+import { generateRecommendationsPdf } from '../utils/generatePdf';
 import ThreatIntelligenceFeed from '../components/vendor/ThreatIntelligenceFeed';
 import WorkflowAutomation from '../components/vendor/WorkflowAutomation';
 import CustomizableDashboard from '../components/dashboard/CustomizableDashboard';
@@ -24,6 +25,17 @@ const VendorRiskDashboard: React.FC = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [activeView, setActiveView] = useState<'dashboard' | 'workflows' | 'intelligence' | 'analytics'>('dashboard');
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [workflowStats, setWorkflowStats] = useState({
+    activeTasks: 0,
+    completedTasks: 0,
+    overdueTasks: 0,
+    automationRules: 3
+  });
+  const [threatStats, setThreatStats] = useState({
+    activeSources: 5,
+    threatsToday: 142,
+    coverage: 98
+  });
 
   // Transform vendors data to match VendorRisk interface
   const vendorRiskData: VendorRisk[] = vendors.map(vendor => ({
@@ -60,11 +72,52 @@ const VendorRiskDashboard: React.FC = () => {
     setActiveView(view);
   };
 
+  const handleExportDashboard = async () => {
+    const recommendations = [
+      {
+        id: 'vendor-1',
+        title: 'Implement Enhanced Vendor Monitoring',
+        description: 'Establish continuous monitoring for high-risk vendors with automated alerts.',
+        priority: 'high' as const,
+        category: 'Vendor Management',
+        effort: 'moderate' as const,
+        timeframe: 'short-term' as const,
+        impact: 'Reduces response time to vendor incidents and improves overall risk visibility.',
+        steps: [
+          'Set up automated vendor monitoring dashboard',
+          'Configure risk threshold alerts',
+          'Establish escalation procedures',
+          'Train team on new monitoring tools'
+        ],
+        references: [
+          { title: 'NIST SP 800-161 Vendor Monitoring', url: 'https://csrc.nist.gov/publications/detail/sp/800-161/rev-1/final' }
+        ]
+      }
+    ];
+    
+    await generateRecommendationsPdf(
+      'Vendor Risk Management Recommendations',
+      recommendations,
+      new Date().toLocaleDateString(),
+      'vendor-risk-dashboard-recommendations.pdf'
+    );
+  };
+
+  const handleCreateWorkflow = () => {
+    // This would open a workflow creation modal in a real implementation
+    alert('Workflow creation would open here. This feature allows you to create custom automation rules for vendor risk management.');
+  };
+
+  const handleManageAutomation = () => {
+    // This would open automation management interface
+    alert('Automation management interface would open here. Configure triggers, actions, and notification settings.');
+  };
+
   if (loading) {
     return (
       <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-vendortal-navy"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-vendorsoluce-green"></div>
         </div>
       </main>
     );
@@ -112,10 +165,10 @@ const VendorRiskDashboard: React.FC = () => {
               <button
                 key={id}
                 onClick={() => handleViewChange(id as any)}
-                className={`flex items-center px-4 py-3 mr-2 text-sm font-medium border-b-2 rounded-t-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-vendortal-navy focus:ring-offset-2 ${
+                className={`flex items-center px-4 py-3 mr-2 text-sm font-medium border-b-2 rounded-t-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-vendorsoluce-navy focus:ring-offset-2 ${
                   activeView === id
-                    ? 'border-vendortal-navy text-vendortal-navy bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400'
-                    : 'border-transparent text-gray-700 dark:text-gray-300 hover:text-vendortal-navy hover:border-gray-300 dark:hover:text-gray-200'
+                    ? 'border-vendorsoluce-navy text-vendorsoluce-navy bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400'
+                    : 'border-transparent text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy hover:border-gray-300 dark:hover:text-gray-200'
                 }`}
                 role="tab"
                 aria-selected={activeView === id}
@@ -146,9 +199,15 @@ const VendorRiskDashboard: React.FC = () => {
               <Card className="p-6">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
                   <h2 className="text-xl font-bold text-gray-900 dark:text-white">Advanced Dashboard</h2>
-                  <Button variant="outline" size="sm" className="w-full sm:w-auto">
-                    View Full Dashboard
-                  </Button>
+                  <div className="flex space-x-2">
+                    <Button variant="outline" size="sm" onClick={handleExportDashboard}>
+                      <Plus className="h-4 w-4 mr-2" />
+                      Export Dashboard
+                    </Button>
+                    <Button variant="outline" size="sm" className="w-full sm:w-auto">
+                      View Full Dashboard
+                    </Button>
+                  </div>
                 </div>
                 <CustomizableDashboard />
               </Card>
@@ -321,11 +380,37 @@ const VendorRiskDashboard: React.FC = () => {
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Workflow Automation</h2>
                   <p className="text-gray-600 dark:text-gray-300 mt-1">Automate your vendor risk management processes</p>
+                  
+                  {/* Workflow Stats */}
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+                    <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+                      <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{workflowStats.activeTasks}</div>
+                      <div className="text-sm text-blue-600 dark:text-blue-400">Active Tasks</div>
+                    </div>
+                    <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg border border-green-200 dark:border-green-800">
+                      <div className="text-2xl font-bold text-green-600 dark:text-green-400">{workflowStats.completedTasks}</div>
+                      <div className="text-sm text-green-600 dark:text-green-400">Completed</div>
+                    </div>
+                    <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg border border-red-200 dark:border-red-800">
+                      <div className="text-2xl font-bold text-red-600 dark:text-red-400">{workflowStats.overdueTasks}</div>
+                      <div className="text-sm text-red-600 dark:text-red-400">Overdue</div>
+                    </div>
+                    <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800">
+                      <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{workflowStats.automationRules}</div>
+                      <div className="text-sm text-purple-600 dark:text-purple-400">Automation Rules</div>
+                    </div>
+                  </div>
                 </div>
-                <Button variant="primary" size="sm">
-                  <Plus className="h-4 w-4 mr-2" />
-                  New Workflow
-                </Button>
+                <div className="flex space-x-2">
+                  <Button variant="primary" size="sm" onClick={handleCreateWorkflow}>
+                    <Plus className="h-4 w-4 mr-2" />
+                    New Workflow
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={handleManageAutomation}>
+                    <Shield className="h-4 w-4 mr-2" />
+                    Manage Automation
+                  </Button>
+                </div>
               </div>
               <WorkflowAutomation />
             </Card>
@@ -339,6 +424,22 @@ const VendorRiskDashboard: React.FC = () => {
               <div className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Threat Intelligence</h2>
                 <p className="text-gray-600 dark:text-gray-300 mt-1">Monitor security threats affecting your vendors</p>
+                
+                {/* Threat Stats */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                  <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg border border-green-200 dark:border-green-800">
+                    <div className="text-2xl font-bold text-green-600 dark:text-green-400">{threatStats.activeSources}</div>
+                    <div className="text-sm text-green-600 dark:text-green-400">Active Sources</div>
+                  </div>
+                  <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg border border-orange-200 dark:border-orange-800">
+                    <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">{threatStats.threatsToday}</div>
+                    <div className="text-sm text-orange-600 dark:text-orange-400">Threats Today</div>
+                  </div>
+                  <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+                    <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{threatStats.coverage}%</div>
+                    <div className="text-sm text-blue-600 dark:text-blue-400">Coverage</div>
+                  </div>
+                </div>
               </div>
               <ThreatIntelligenceFeed vendorIds={vendorRiskData.map(v => v.id)} />
             </Card>
@@ -376,6 +477,20 @@ const VendorRiskDashboard: React.FC = () => {
                 <p className="text-gray-600 dark:text-gray-300 mt-1">AI-powered insights and risk predictions</p>
               </div>
               <PredictiveAnalytics />
+            </Card>
+            
+            {/* Export Dashboard Button */}
+            <Card className="p-6">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">Export Analytics Report</h3>
+                  <p className="text-gray-600 dark:text-gray-300">Generate a comprehensive report of your analytics insights</p>
+                </div>
+                <Button variant="primary" onClick={handleExportDashboard}>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Export Report
+                </Button>
+              </div>
             </Card>
           </div>
         )}
