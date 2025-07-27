@@ -33,6 +33,7 @@ const Footer: React.FC = () => {
               <img src="/vendorsoluce.png" alt={t('footer.company.name')} className="h-12 w-12 mr-2" />
               
               <span className="text-lg font-bold">{t('footer.company.name')}</span>
+              <span className="block text-xs text-gray-600 dark:text-gray-400 font-normal">by ERMITS</span>
             </div>
             <p className="text-gray-300 mb-3 text-sm">
               {t('footer.company.description')}
