@@ -27,7 +27,7 @@ const UserMenu: React.FC = () => {
 
   if (!isAuthenticated) {
     return (
-      <Link to="/login">
+      <Link to="/signin">
         <Button variant="primary" size="sm">
           {t('auth.login')}
         </Button>
