@@ -2152,6 +2152,150 @@
       }
     }
   },
+
+{
+  "integrationGuides": {
+    "title": "Guides d'Intégration",
+    "description": "Connectez VendorSoluce avec vos systèmes et flux de travail existants. Suivez nos guides étape par étape pour intégrer la gestion des risques de la chaîne d'approvisionnement dans votre pile technologique.",
+    
+    "quickStart": {
+      "title": "Commencer avec l'API VendorSoluce",
+      "description": "Nouveau dans les intégrations VendorSoluce ? Commencez par notre guide API REST pour comprendre les bases de l'authentification, des points de terminaison et des formats de données.",
+      "viewApiDocs": "Voir la Documentation API",
+      "downloadSDKs": "Télécharger les SDKs"
+    },
+    
+    "categories": {
+      "all": "Toutes les Intégrations",
+      "api": "Intégration API",
+      "webhooks": "Webhooks",
+      "sso": "SSO/Authentification",
+      "export": "Export de Données",
+      "automation": "Automatisation"
+    },
+    
+    "difficulty": {
+      "beginner": "débutant",
+      "intermediate": "intermédiaire",
+      "advanced": "avancé"
+    },
+    
+    "guides": {
+      "restApi": {
+        "title": "Intégration API REST",
+        "description": "Connectez vos applications à VendorSoluce en utilisant notre API REST pour les données fournisseurs, les évaluations et l'analyse SBOM.",
+        "estimatedTime": "30-60 minutes",
+        "steps": [
+          "Obtenez les identifiants API depuis votre tableau de bord VendorSoluce",
+          "Configurez les en-têtes d'authentification dans votre application",
+          "Effectuez votre premier appel API pour récupérer les données fournisseurs",
+          "Implémentez la gestion d'erreurs et la limitation du taux",
+          "Testez l'intégration avec des données d'exemple"
+        ]
+      },
+      "webhookSetup": {
+        "title": "Configuration des Webhooks",
+        "description": "Recevez des notifications en temps réel lorsque les scores de risque fournisseurs changent, les évaluations sont terminées ou des vulnérabilités sont détectées.",
+        "estimatedTime": "45 minutes",
+        "steps": [
+          "Configurez les points de terminaison webhook dans votre tableau de bord VendorSoluce",
+          "Configurez un point de terminaison HTTPS sécurisé pour recevoir les webhooks",
+          "Vérifiez les signatures webhook pour la sécurité",
+          "Gérez différents types d'événements (changements de risque, évaluations)",
+          "Implémentez la logique de nouvelle tentative pour les livraisons webhook échouées"
+        ]
+      },
+      "ssoIntegration": {
+        "title": "Authentification Unique (SSO)",
+        "description": "Intégrez VendorSoluce avec le fournisseur d'identité de votre organisation en utilisant SAML 2.0 ou OpenID Connect.",
+        "estimatedTime": "2-4 heures",
+        "steps": [
+          "Configurez les paramètres de votre fournisseur d'identité (IdP)",
+          "Échangez les métadonnées SAML avec VendorSoluce",
+          "Configurez le mappage d'attributs pour les rôles utilisateur",
+          "Testez le flux de connexion SSO avec des utilisateurs de test",
+          "Configurez les contrôles d'accès basés sur les groupes"
+        ]
+      },
+      "dataExport": {
+        "title": "Export Automatisé de Données",
+        "description": "Configurez des exports programmés des données fournisseurs, résultats d'évaluation et rapports de conformité vers votre entrepôt de données.",
+        "estimatedTime": "20 minutes",
+        "steps": [
+          "Choisissez votre format d'export préféré (CSV, JSON, XML)",
+          "Configurez les plannings d'export dans le tableau de bord",
+          "Configurez le transfert de fichiers sécurisé (SFTP, S3, etc.)",
+          "Mappez les champs de données à vos systèmes internes",
+          "Testez le processus d'export et validez les données"
+        ]
+      },
+      "workflowAutomation": {
+        "title": "Automatisation des Flux de Travail",
+        "description": "Automatisez l'intégration des fournisseurs, les évaluations de risques et le suivi de conformité en utilisant les APIs VendorSoluce.",
+        "estimatedTime": "1-2 heures",
+        "steps": [
+          "Concevez votre flux de travail d'automatisation",
+          "Configurez les conditions de déclenchement (nouveau fournisseur, seuil de risque)",
+          "Configurez les actions automatisées (envoyer évaluations, alertes)",
+          "Implémentez les flux de travail d'approbation pour les fournisseurs à haut risque",
+          "Surveillez et optimisez les performances d'automatisation"
+        ]
+      },
+      "cloudIntegration": {
+        "title": "Intégration de Plateforme Cloud",
+        "description": "Connectez VendorSoluce avec AWS, Azure ou GCP pour une surveillance de sécurité et conformité renforcées.",
+        "estimatedTime": "2-3 heures",
+        "steps": [
+          "Configurez les identifiants et permissions des services cloud",
+          "Configurez les connecteurs cloud VendorSoluce",
+          "Mappez les ressources cloud aux relations fournisseurs",
+          "Activez la surveillance automatisée de la conformité",
+          "Configurez les alertes pour les événements de sécurité"
+        ]
+      }
+    },
+    
+    "common": {
+      "implementationSteps": "Étapes d'Implémentation :",
+      "moreSteps": "+ {{count}} étapes supplémentaires",
+      "codeExample": "Exemple de Code :",
+      "copied": "Copié",
+      "copy": "Copier",
+      "viewGuide": "Voir le Guide",
+      "examples": "Exemples"
+    },
+    
+    "sdks": {
+      "title": "SDKs et Outils",
+      "javascript": {
+        "title": "SDK JavaScript",
+        "description": "SDK officiel JavaScript/TypeScript pour les applications web et Node.js.",
+        "npmInstall": "npm install",
+        "github": "GitHub"
+      },
+      "python": {
+        "title": "SDK Python",
+        "description": "Bibliothèque Python pour la science des données et les flux de travail d'automatisation.",
+        "pipInstall": "pip install",
+        "pypi": "PyPI"
+      },
+      "cli": {
+        "title": "Outil CLI",
+        "description": "Interface de ligne de commande pour les opérations par lots et l'intégration CI/CD.",
+        "download": "Télécharger",
+        "docs": "Documentation"
+      }
+    },
+    
+    "support": {
+      "title": "Besoin d'Aide pour l'Intégration ?",
+      "description": "Notre équipe technique est là pour vous aider à intégrer VendorSoluce avec vos systèmes. Obtenez un support personnalisé pour les intégrations complexes et les implémentations personnalisées.",
+      "contactSupport": "Contacter le Support",
+      "scheduleConsultation": "Planifier une Consultation"
+    }
+  }
+}
+ 
   "navigation": {
     "home": "Accueil",
     "solutions": "Solutions",
