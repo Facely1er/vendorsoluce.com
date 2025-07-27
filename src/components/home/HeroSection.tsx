@@ -20,7 +20,7 @@ const HeroSection: React.FC = () => {
         style={{
           backgroundImage: 'url("/background_hero_section.png")',
           backgroundSize: '90% 90%',
-          backgroundPosition: 'contain',
+          backgroundPosition: 'contain top center',
           backgroundRepeat: 'no-repeat',
           
         }}
