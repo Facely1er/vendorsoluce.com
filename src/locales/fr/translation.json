@@ -1352,5 +1352,38 @@
   },
   "app": {
     "name": "Plateforme de sécurité de chaîne d'approvisionnement"
+  },
+  "sbom": {
+    "title": "Analyseur SBOM",
+    "description": "Analysez les fichiers de nomenclature de logiciels (SBOM) pour identifier les vulnérabilités, les problèmes de licence et les lacunes de conformité dans vos composants logiciels.",
+    "features": {
+      "analysis": {
+        "title": "Analyse des composants",
+        "description": "Analyse complète des composants logiciels, des dépendances et de leur posture de sécurité."
+      },
+      "security": {
+        "title": "Détection de vulnérabilités",
+        "description": "Identifiez les vulnérabilités connues dans vos composants logiciels avec des évaluations de risque détaillées."
+      },
+      "compliance": {
+        "title": "Conformité des licences",
+        "description": "Suivez les licences open source et assurez la conformité avec les politiques organisationnelles."
+      }
+    },
+    "upload": {
+      "title": "Télécharger SBOM",
+      "supportedFormats": "Formats pris en charge",
+      "noSbom": "Aucun SBOM téléchargé",
+      "uploadPrompt": "Téléchargez un fichier de nomenclature de logiciels pour commencer l'analyse. Nous prenons en charge SPDX, CycloneDX et d'autres formats standard.",
+      "dropHere": "Déposez votre fichier SBOM ici",
+      "browseFiles": "Parcourir les fichiers",
+      "analyzing": "Analyse du SBOM..."
+    },
+    "results": {
+      "title": "Résultats de l'analyse",
+      "components": "Composants",
+      "vulnerabilities": "Vulnérabilités",
+      "licenses": "Licences"
+    }
   }
 }
