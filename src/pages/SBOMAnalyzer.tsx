@@ -7,6 +7,7 @@ import {
   TrendingUp, Clock, CheckCircle, XCircle,
   Download, Filter, Search, BarChart3
 } from 'lucide-react';
+import SBOMUploader from '../components/sbom/SBOMUploader';
 
 // Types for enterprise features
 interface VulnerabilityDetails {
