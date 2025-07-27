@@ -13,6 +13,57 @@
     "signOut": "Sign Out",
     "premium": "Premium"
   },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "retrying": "Retrying...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "remove": "Remove",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "export": "Export",
+    "import": "Import",
+    "download": "Download",
+    "upload": "Upload",
+    "refresh": "Refresh",
+    "view": "View",
+    "details": "Details",
+    "summary": "Summary",
+    "status": "Status",
+    "actions": "Actions",
+    "settings": "Settings",
+    "preferences": "Preferences",
+    "help": "Help",
+    "support": "Support",
+    "documentation": "Documentation",
+    "feedback": "Feedback",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "maybe": "Maybe",
+    "unknown": "Unknown",
+    "pending": "Pending",
+    "completed": "Completed",
+    "failed": "Failed",
+    "active": "Active",
+    "inactive": "Inactive",
+    "enabled": "Enabled",
+    "disabled": "Disabled"
+  },
   "home": {
     "hero": {
       "title_line1": "Control Your Supply Chain Risks.",
@@ -772,6 +823,54 @@
     "compliant": "Compliant",
     "nonCompliant": "Non-Compliant",
     "partial": "Partial",
+    "navigation": {
+      "overviewDashboard": "Overview Dashboard",
+      "workflowAutomation": "Workflow Automation",
+      "threatIntelligence": "Threat Intelligence",
+      "predictiveAnalytics": "Predictive Analytics"
+    },
+    "dashboard": {
+      "advancedDashboard": "Advanced Dashboard",
+      "exportDashboard": "Export Dashboard",
+      "viewFullDashboard": "View Full Dashboard"
+    },
+    "workflows": {
+      "title": "Workflow Automation",
+      "description": "Automate your vendor risk management processes",
+      "newWorkflow": "New Workflow",
+      "manageAutomation": "Manage Automation",
+      "stats": {
+        "activeTasks": "Active Tasks",
+        "completed": "Completed",
+        "overdue": "Overdue",
+        "automationRules": "Automation Rules"
+      }
+    },
+    "threatIntelligence": {
+      "title": "Threat Intelligence",
+      "description": "Monitor security threats affecting your vendors",
+      "stats": {
+        "activeSources": "Active Sources",
+        "threatsToday": "Threats Today",
+        "coverage": "Coverage"
+      },
+      "sources": {
+        "title": "Threat Intelligence Sources"
+      }
+    },
+    "analytics": {
+      "title": "Predictive Analytics",
+      "description": "AI-powered insights and risk predictions",
+      "exportReport": {
+        "title": "Export Analytics Report",
+        "description": "Generate a comprehensive report of your analytics insights",
+        "button": "Export Report"
+      }
+    },
+    "alerts": {
+      "workflowCreation": "Workflow creation would open here. This feature allows you to create custom automation rules for vendor risk management.",
+      "automationManagement": "Automation management interface would open here. Configure triggers, actions, and notification settings."
+    },
     "table": {
       "vendor": "Vendor",
       "riskScore": "Risk Score",
@@ -808,6 +907,124 @@
       "criticalRisk": {
         "title": "Critical Risk Vendors",
         "description": "Consider termination or require immediate security improvements"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: April 15, 2025",
+    "sections": {
+      "introduction": {
+        "title": "1. Introduction",
+        "content": {
+          "paragraph1": "VendorSoluce (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website vendorsoluce.com, use our platform, or use our mobile application (collectively, the \"Services\").",
+          "paragraph2": "Please read this Privacy Policy carefully. If you do not agree with the terms of this Privacy Policy, please do not access the Services. By accessing or using our Services, you consent to the collection, use, and storage of your information as outlined in this Privacy Policy.",
+          "paragraph3": "We reserve the right to make changes to this Privacy Policy at any time and for any reason. We will alert you about any changes by updating the \"Last updated\" date of this Privacy Policy. You are encouraged to periodically review this Privacy Policy to stay informed of updates."
+        }
+      },
+      "informationCollection": {
+        "title": "2. Information We Collect",
+        "personalInfo": {
+          "title": "Personal Information",
+          "description": "We may collect personal information that you voluntarily provide to us when you register on the Services, express an interest in obtaining information about us or our products and Services, participate in activities on the Services, or otherwise contact us. The personal information we collect may include:",
+          "items": [
+            "Name, email address, telephone number, and contact or authentication data",
+            "Billing address, payment information, and financial data",
+            "Employer information and job title",
+            "User preferences and settings",
+            "Other information you choose to provide"
+          ]
+        },
+        "automaticData": {
+          "title": "Data Collected Automatically",
+          "description": "We automatically collect certain information when you visit, use, or navigate the Services. This information does not reveal your specific identity but may include:",
+          "items": [
+            "Device and usage information, such as your IP address, browser and device characteristics, operating system, language preferences, referring URLs, device name, country, location, and information about how and when you use our Services",
+            "Information collected through cookies, pixel tags, and other tracking technologies"
+          ]
+        },
+        "thirdPartyInfo": {
+          "title": "Information from Third Parties",
+          "description": "We may collect information about you from third-party sources, such as public databases, joint marketing partners, social media platforms, and other third parties. Examples of the information we receive from other sources include social media profile information, marketing leads, and search results and links, including paid listings."
+        }
+      },
+      "informationUse": {
+        "title": "3. How We Use Your Information",
+        "description": "We use the information we collect for various business purposes, including:",
+        "purposes": [
+          "To provide, operate, and maintain our Services",
+          "To improve, personalize, and expand our Services",
+          "To understand and analyze how you use our Services",
+          "To develop new products, services, features, and functionality",
+          "To communicate with you, including for customer service, updates, and marketing purposes",
+          "To process your transactions and manage your account",
+          "To find and prevent fraud, and respond to trust and safety issues",
+          "For compliance, legal process, and law enforcement purposes"
+        ]
+      },
+      "informationSharing": {
+        "title": "4. Sharing Your Information",
+        "description": "We may share your information in the following situations:",
+        "situations": {
+          "serviceProviders": "Service Providers: We may share your information with third-party vendors, service providers, contractors, or agents who perform services for us or on our behalf.",
+          "businessTransfers": "Business Transfers: We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.",
+          "affiliates": "Affiliates: We may share your information with our affiliates, in which case we will require those affiliates to honor this Privacy Policy.",
+          "businessPartners": "Business Partners: We may share your information with our business partners to offer you certain products, services, or promotions.",
+          "consent": "With Your Consent: We may disclose your information for any other purpose with your consent.",
+          "otherUsers": "Other Users: When you share personal information or otherwise interact with public areas of the Services, such information may be viewed by all users and may be publicly distributed."
+        }
+      },
+      "security": {
+        "title": "5. Security of Your Information",
+        "description": "We use administrative, technical, and physical security measures to help protect your personal information from unauthorized access, use, or disclosure. These include:",
+        "measures": [
+          "Encryption of sensitive data at rest and in transit",
+          "Regular security assessments and penetration testing",
+          "Access controls and authentication requirements",
+          "Monitoring for suspicious activities",
+          "Physical security of our data centers and offices"
+        ],
+        "disclaimer": "While we have implemented reasonable security measures, please understand that no security system is impenetrable, and we cannot guarantee the absolute security of our databases, nor can we guarantee that information you supply will not be intercepted while being transmitted over the Internet."
+      },
+      "privacyRights": {
+        "title": "6. Your Privacy Rights",
+        "description": "Depending on your location, you may have the following rights regarding your personal information:",
+        "rights": {
+          "access": "Right to Access: You may request to review the personal information we have collected about you.",
+          "rectification": "Right to Rectification: You may request that we correct any inaccurate or incomplete personal information.",
+          "erasure": "Right to Erasure: You may request the deletion of your personal information, subject to certain exceptions.",
+          "restriction": "Right to Restrict Processing: You may request that we restrict the processing of your information under certain circumstances.",
+          "portability": "Right to Data Portability: You may request a copy of your personal information in a structured, machine-readable format.",
+          "object": "Right to Object: You may object to our processing of your personal information in certain circumstances."
+        },
+        "exercise": "To exercise these rights, please contact us using the contact information provided at the end of this Privacy Policy. We will respond to your request within a reasonable timeframe."
+      },
+      "cookies": {
+        "title": "7. Cookies and Tracking Technologies",
+        "description": "We use cookies and similar tracking technologies to collect and use information about you, including to serve interest-based advertising. Cookies are small data files placed on your device. We use both session cookies (which expire once you close your web browser) and persistent cookies (which stay on your device until you delete them).",
+        "types": "You can set your browser to refuse all or some browser cookies, or to alert you when cookies are being sent. However, if you disable or refuse cookies, please note that some parts of the Services may be inaccessible or not function properly."
+      },
+      "childrenPrivacy": {
+        "title": "8. Children's Privacy",
+        "content": "Our Services are not intended for use by children under the age of 18. We do not knowingly collect personal information from children under 18. If you are under 18, do not use or provide any information on our Services. If we learn we have collected or received personal information from a child under 18 without verification of parental consent, we will delete that information."
+      },
+      "internationalTransfers": {
+        "title": "9. International Data Transfers",
+        "us": "We are based in the United States and process data both inside and outside of the United States. If you are accessing our Services from outside the United States, please be aware that your information may be transferred to, stored, and processed by us in our facilities and by our third-party service providers in the United States and other countries.",
+        "eea": "If you are a resident of the European Economic Area (EEA), we ensure that your data is protected when transferred outside of the EEA. We rely on mechanisms such as standard contractual clauses, Privacy Shield certification, or other lawful means to transfer data internationally."
+      },
+      "dataRetention": {
+        "title": "10. Data Retention",
+        "content": "We will retain your personal information only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your information to the extent necessary to comply with our legal obligations, resolve disputes, and enforce our policies. When we no longer need your personal information, we will securely delete or anonymize it."
+      },
+      "contact": {
+        "title": "11. Contact Us",
+        "description": "If you have questions or comments about this Privacy Policy, please contact us at:",
+        "company": "VendorSoluce",
+        "address": "8300 McCullough Lane, Suite 203",
+        "city": "Gaithersburg, MD 20877",
+        "email": "Email: contact@ermits.com",
+        "phone": "Phone: +1 (240) 599-0102"
       }
     }
   },
