@@ -18,7 +18,14 @@
       "title_line1": "Controler vos risques tiers.", 
       "title_line2": "Accélérez votre entreprise.", 
       "subtitle": "Transformez le risque fournisseur en avantage concurrentiel",
-      "description": "VendorSoluce transforme la gestion des risques fournisseurs en moteur de croissance grâce à des évaluations automatisées et une transparence complète de la chaîne d’approvisionnement.",
+      "description": "VendorSoluce transforme la gestion des risques fournisseurs en moteur de croissance grâce à des évaluations automatisées et une transparence complète de la chaîne d'approvisionnement.",
+      "carousel": {
+        "text1": "Outils complets pour l'évaluation des fournisseurs, l'analyse SBOM et les rapports de conformité alignés sur les normes de sécurité fédérales.",
+        "text2": "Évaluez les risques des fournisseurs avec des cadres alignés NIST SP 800-161 et des systèmes de notation automatisés.",
+        "text3": "Analysez les nomenclatures de logiciels (SBOM) pour les vulnérabilités et les problèmes de conformité des licences.",
+        "text4": "Surveillez votre chaîne d'approvisionnement en continu avec la veille des menaces en temps réel et les alertes de risque.",
+        "text5": "Générez des rapports de conformité pour les audits et respectez facilement les exigences de sécurité fédérales."
+      },
       "cta1": "Commencer l'évaluation gratuite",
       "cta2": "Planifier une démo en direct",
       

@@ -15,11 +15,11 @@ const HeroSection: React.FC = () => {
   
   // Define rotating texts for the carousel
   const carouselTexts = [
-    t('home.hero.description'),
-    "Assess vendor risks with NIST SP 800-161 aligned frameworks and automated scoring systems.",
-    "Analyze Software Bills of Materials (SBOMs) for vulnerabilities and license compliance issues.",
-    "Monitor your supply chain continuously with real-time threat intelligence and risk alerts.",
-    "Generate compliance reports for audits and meet federal security requirements effortlessly."
+    t('home.hero.carousel.text1'),
+    t('home.hero.carousel.text2'),
+    t('home.hero.carousel.text3'),
+    t('home.hero.carousel.text4'),
+    t('home.hero.carousel.text5')
   ];
   
   return (
