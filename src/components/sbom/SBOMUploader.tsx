@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Upload, Check, AlertCircle } from 'lucide-react';
 import Button from '../ui/Button';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +11,7 @@ interface SBOMUploaderProps {
 
 const SBOMUploader: React.FC<SBOMUploaderProps> = ({ onUpload, isLoading = false }) => {
   const { t } = useTranslation();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -71,6 +73,10 @@ const SBOMUploader: React.FC<SBOMUploaderProps> = ({ onUpload, isLoading = false
     }
   };
   
+  const handleBrowseClick = () => {
+    fileInputRef.current?.click();
+  };
+  
   return (
     <div className="w-full">
       {/* File upload area */}
@@ -85,7 +91,7 @@ const SBOMUploader: React.FC<SBOMUploaderProps> = ({ onUpload, isLoading = false
       >
         <input
           type="file"
-          id="sbom-file"
+          ref={fileInputRef}
           className="hidden"
           onChange={handleFileInput}
           accept=".json,.xml,.txt,.spdx,.cdx"
@@ -119,11 +125,9 @@ const SBOMUploader: React.FC<SBOMUploaderProps> = ({ onUpload, isLoading = false
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
               {t('sbom.upload.supportedFormats')}
             </p>
-            <label htmlFor="sbom-file">
-              <Button variant="outline" className="cursor-pointer">
-                {t('sbom.upload.browseFiles')}
-              </Button>
-            </label>
+            <Button variant="outline" className="cursor-pointer" onClick={handleBrowseClick}>
+              {t('sbom.upload.browseFiles')}
+            </Button>
           </div>
         )}
       </div>
