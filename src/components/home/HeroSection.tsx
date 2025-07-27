@@ -70,15 +70,15 @@ const HeroSection: React.FC = () => {
               />
             </div>
             
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12 opacity-0 animate-fade-in-up animate-delay-700">
+         <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12 opacity-0 animate-fade-in-up animate-delay-700">
               <Link to="/supply-chain-assessment">
-                <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100 hover:scale-105 transition-all duration-300 hover:shadow-lg">
+                <Button variant="secondary" size="lg" className="bg-white text-vendorsoluce-green hover:bg-gray-100 hover:scale-105 transition-all duration-300 hover:shadow-lg flex items-center justify-center">
                   <Target className="h-5 w-5 mr-2" />
                   {t('home.hero.cta1')}
                 </Button>
               </Link>
               <Link to="/contact">
-                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg">
+                <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/20 hover:scale-105 transition-all duration-300 hover:shadow-lg flex items-center justify-center">
                   <Users className="h-5 w-5 mr-2" />
                   {t('home.hero.cta2')}
                 </Button>
