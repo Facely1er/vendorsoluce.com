@@ -30,6 +30,7 @@ const Navbar: React.FC = () => {
     { title: t('navigation.assessment'), path: '/supply-chain-assessment' },
     { title: t('navigation.sbom'), path: '/sbom-analyzer' },
     { title: t('navigation.vendorRisk'), path: '/vendor-risk-dashboard' },
+    { title: t('navigation.vendorRiskRadar'), path: '/tools/vendor-risk-radar' },
     { title: t('navigation.vendorAssessments'), path: '/vendor-assessments' },
   ];
 
