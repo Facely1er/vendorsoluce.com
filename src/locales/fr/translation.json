@@ -29,6 +29,27 @@
     "learnMore": "En savoir plus",
     "getStarted": "Commencer"
   },
+  "assessment": {
+    "title": "Évaluation de la chaîne d'approvisionnement",
+    "subtitle": "Évaluez la posture de sécurité de votre chaîne d'approvisionnement",
+    "backToHome": "Retour à l'accueil",
+    "backToStart": "Retour au début de l'évaluation",
+    "restartAssessment": "Redémarrer l'évaluation",
+    "score": "Score",
+    "complete": "Terminé",
+    "incomplete": "Incomplet",
+    "current": "Actuel",
+    "view": "Voir",
+    "overallScore": "Score global",
+    "section": "Section",
+    "sectionProgress": "Progrès de la section",
+    "previousSection": "Section précédente",
+    "nextSection": "Section suivante",
+    "viewResults": "Voir les résultats",
+    "saving": "Sauvegarde en cours...",
+    "saved": "Progrès sauvegardé automatiquement",
+    "saveError": "Erreur lors de la sauvegarde"
+  },
   "sbom": {
     "title": "Analyseur SBOM",
     "description": "Analysez les fichiers de nomenclature logicielle (SBOM) pour identifier les vulnérabilités, les problèmes de licence et les écarts de conformité dans vos composants logiciels.",
