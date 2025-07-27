@@ -92,7 +92,7 @@ const Navbar: React.FC = () => {
               <img 
                 src="/vendorsoluce.png" 
                 alt="VendorSoluce Logo" 
-                className="h-10 w-10" 
+                className="h-12 w-12" 
               />
               <span className="ml-2 text-xl font-bold text-vendorsoluce-green dark:text-white">
                 VendorSoluce™
