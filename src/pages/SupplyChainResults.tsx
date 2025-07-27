@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { Info } from 'lucide-react';
 import { AssessmentResults } from '../components/assessments/AssessmentResults';
 import { generateResultsPdf } from '../utils/generatePdf';
 import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
+import { useAuth } from '../context/AuthContext';
 
 interface SectionScore {
   title: string;
@@ -21,8 +23,14 @@ const SupplyChainResults = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
+  const { isAuthenticated } = useAuth();
   const { assessments, loading } = useSupplyChainAssessments();
   const [results, setResults] = useState<ResultData | null>(null);
+  const [assessmentMetadata, setAssessmentMetadata] = useState<{
+    assessmentName?: string;
+    completedAt?: string;
+    answers?: Record<string, string>;
+  }>({});
   
   // Get results from location state or fetch from most recent completed assessment
   useEffect(() => {
@@ -32,8 +40,15 @@ const SupplyChainResults = () => {
         overallScore: location.state.overallScore,
         sectionScores: location.state.sectionScores
       });
+      
+      // Store metadata for PDF generation and display
+      setAssessmentMetadata({
+        assessmentName: location.state.assessmentName || 'Supply Chain Risk Assessment',
+        completedAt: location.state.completedAt || new Date().toISOString(),
+        answers: location.state.answers || {}
+      });
       return; // Early return to prevent further processing
-    } else if (!loading && assessments.length > 0) {
+    } else if (isAuthenticated && !loading && assessments.length > 0) {
       // Find the most recent completed assessment
       const completedAssessments = assessments.filter(a => a.status === 'completed');
       const completedAssessment = completedAssessments.length > 0 ? completedAssessments[0] : null;
@@ -43,15 +58,31 @@ const SupplyChainResults = () => {
           overallScore: completedAssessment.overall_score || 0,
           sectionScores: completedAssessment.section_scores as SectionScore[] || []
         });
+        
+        setAssessmentMetadata({
+          assessmentName: completedAssessment.assessment_name || 'Supply Chain Risk Assessment',
+          completedAt: completedAssessment.completed_at || new Date().toISOString(),
+          answers: completedAssessment.answers as Record<string, string> || {}
+        });
       } else {
         // If no completed assessment found, use mock data
         setResults(getMockResults());
+        setAssessmentMetadata({
+          assessmentName: 'Supply Chain Risk Assessment (Demo)',
+          completedAt: new Date().toISOString(),
+          answers: {}
+        });
       }
-    } else if (!loading) {
+    } else if (!isAuthenticated || !loading) {
       // If no assessments found, use mock data
       setResults(getMockResults());
+      setAssessmentMetadata({
+        assessmentName: 'Supply Chain Risk Assessment (Demo)',
+        completedAt: new Date().toISOString(),
+        answers: {}
+      });
     }
-  }, [location.state, assessments, loading]);
+  }, [location.state, assessments, loading, isAuthenticated]);
   
   // Mock results for demo purposes
   const getMockResults = (): ResultData => {
@@ -72,22 +103,22 @@ const SupplyChainResults = () => {
     if (!results) return;
     
     await generateResultsPdf(
-      'Supply Chain Risk Assessment Results',
+      `${assessmentMetadata.assessmentName || 'Supply Chain Risk Assessment'} - Results`,
       results.overallScore,
       results.sectionScores,
-      new Date().toLocaleDateString('en-US', { 
+      new Date(assessmentMetadata.completedAt || Date.now()).toLocaleDateString('en-US', { 
         year: 'numeric', 
         month: 'long', 
         day: 'numeric' 
       }),
-      'supply-chain-assessment-results.pdf'
+      `${(assessmentMetadata.assessmentName || 'supply-chain-assessment').toLowerCase().replace(/\s+/g, '-')}-results.pdf`
     );
   };
 
   if (loading || !results) {
     return (
       <div className="container mx-auto px-4 py-8 flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-vendortal-navy"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-vendorsoluce-navy"></div>
       </div>
     );
   }
@@ -98,7 +129,7 @@ const SupplyChainResults = () => {
     sectionScores: results.sectionScores,
     assessmentType: 'supplychain' as const,
     frameworkName: "NIST SP 800-161 Supply Chain Risk Management",
-    completedDate: new Date().toLocaleDateString('en-US', { 
+    completedDate: new Date(assessmentMetadata.completedAt || Date.now()).toLocaleDateString('en-US', { 
       year: 'numeric', 
       month: 'long', 
       day: 'numeric' 
@@ -107,7 +138,38 @@ const SupplyChainResults = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Supply Chain Risk Assessment Results</h1>
+      <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+        {assessmentMetadata.assessmentName || 'Supply Chain Risk Assessment'} - Results
+      </h1>
+      
+      {/* Show info message for non-authenticated users */}
+      {!isAuthenticated && (
+        <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+          <div className="flex items-start">
+            <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-0.5 flex-shrink-0" />
+            <div>
+              <h3 className="font-medium text-blue-800 dark:text-blue-300 mb-1">
+                Create an account to save your results
+              </h3>
+              <p className="text-sm text-blue-700 dark:text-blue-400 mb-3">
+                Sign up for a free account to save your assessment results, track progress over time, and access additional features.
+              </p>
+              <div className="flex space-x-3">
+                <Link to="/signup">
+                  <button className="px-3 py-1.5 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 transition-colors">
+                    Create Account
+                  </button>
+                </Link>
+                <Link to="/signin">
+                  <button className="px-3 py-1.5 border border-blue-300 text-blue-600 rounded-md text-sm hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                    Sign In
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       
       <AssessmentResults 
         data={resultData}
@@ -148,7 +210,7 @@ const SupplyChainResults = () => {
       </div>
 
       <div className="mt-8 flex justify-end">
-        {assessments.length > 0 && assessments.find(a => a.status === 'completed') && (
+        {isAuthenticated && assessments.length > 0 && assessments.find(a => a.status === 'completed') && (
           <Link to={`/supply-chain-recommendations/${assessments.find(a => a.status === 'completed')?.id}`}>
         <button
           className="px-4 py-2 bg-vendorsoluce-navy text-white rounded hover:bg-vendorsoluce-navy/90 transition-colors"
@@ -157,7 +219,7 @@ const SupplyChainResults = () => {
         </button>
           </Link>
         )}
-        {(!assessments.length || !assessments.find(a => a.status === 'completed')) && (
+        {(!isAuthenticated || !assessments.length || !assessments.find(a => a.status === 'completed')) && (
           <Link to="/supply-chain-recommendations/demo">
             <button
               className="px-4 py-2 bg-vendorsoluce-navy text-white rounded hover:bg-vendorsoluce-navy/90 transition-colors"

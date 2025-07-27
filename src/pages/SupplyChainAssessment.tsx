@@ -364,43 +364,42 @@ const SupplyChainAssessment = () => {
     // Clear any existing error state
     setError(null);
     
+    // Calculate section scores for all users
+    const sectionScores = sections.map((section, index) => {
+      const score = calculateSectionScore(index);
+      return {
+        title: section.title,
+        percentage: score.percentage,
+        completed: score.completed
+      };
+    });
+    
+    const overallScore = getOverallScore();
+    
+    // Save assessment if user is authenticated
     if (isAuthenticated) {
-      // Calculate section scores
-      const sectionScores = sections.map((section, index) => {
-        const score = calculateSectionScore(index);
-        return {
-          title: section.title,
-          percentage: score.percentage,
-          completed: score.completed
-        };
-      });
-      
-      // Save assessment as completed
       try {
         await createOrUpdateAssessment({
           assessment_name: assessmentName,
-          overall_score: getOverallScore(),
+          overall_score: overallScore,
           section_scores: sectionScores,
           status: 'completed',
           completed_at: new Date().toISOString()
         }, answers);
       } catch (err) {
         console.error('Error completing assessment:', err);
+        // Don't prevent navigation if save fails
       }
     }
     
     // Navigate to results page
     navigate('/supply-chain-results', { 
       state: { 
-        overallScore: getOverallScore(),
-        sectionScores: sections.map((section, index) => {
-          const score = calculateSectionScore(index);
-          return {
-            title: section.title,
-            percentage: score.percentage,
-            completed: score.completed
-          };
-        })
+        overallScore,
+        sectionScores,
+        assessmentName,
+        answers,
+        completedAt: new Date().toISOString()
       }
     });
   };
