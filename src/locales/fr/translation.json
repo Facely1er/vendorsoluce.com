@@ -1611,8 +1611,14 @@
       "scanComplete": "Scan Terminé",
       "noVulnerabilities": "Aucune vulnérabilité critique trouvée",
       "fullAnalysis": "Exécuter l'Analyse Complète",
-      "formatInfo": "Supporte les formats SPDX, CycloneDX et SWID"
+      "formatInfo": "Supporte les formats SPDX, CycloneDX et SWID",
+"riskRadar": {
+  "title": "Radar des Risques Fournisseurs",
+  "description": "Visualisez les risques fournisseurs avec des graphiques radar complets et des évaluations de confidentialité",
+  "action": "Lancer le Radar"
+}
     },
+   
     "riskCalculator": {
       "title": "Calculateur de risque fournisseur",
       "description": "Calculez instantanément les scores de risque fournisseur",
