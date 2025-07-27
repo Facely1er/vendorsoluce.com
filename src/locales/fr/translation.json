@@ -1,4 +1,4 @@
- {
+{
   "nav": {
     "home": "Accueil",
     "solutions": "Solutions",
@@ -501,6 +501,37 @@
     "saved": "Progrès sauvegardé automatiquement",
     "saveError": "Erreur lors de la sauvegarde",
     "sections": "Sections",
+    
+    "startScreen": {
+      "startAssessment": "Commencer l'Évaluation",
+      "nistAligned": "Aligné NIST",
+      "nistDescription": "Évaluation basée sur le cadre de gestion des risques de la chaîne d'approvisionnement NIST SP 800-161",
+      "comprehensive": "Complet",
+      "comprehensiveDescription": "24 questions à travers 6 domaines clés de sécurité de la chaîne d'approvisionnement",
+      "actionable": "Exploitable",
+      "actionableDescription": "Obtenez des recommandations personnalisées et un rapport de conformité détaillé",
+      "infoMessage": "Cette évaluation vous aidera à évaluer la posture de sécurité de la chaîne d'approvisionnement de votre organisation par rapport aux directives NIST SP 800-161. Vous recevrez un score détaillé et des recommandations exploitables pour améliorer votre posture de sécurité."
+    },
+    
+    "onboarding": {
+      "nameYourAssessment": "Nommez Votre Évaluation",
+      "assessmentDescription": "Donnez à votre évaluation un nom descriptif pour vous aider à l'identifier plus tard. Ce nom apparaîtra dans votre liste d'évaluations et vos rapports.",
+      "assessmentNameLabel": "Nom de l'Évaluation",
+      "assessmentNamePlaceholder": "ex. Évaluation Chaîne d'Approvisionnement T3 2025",
+      "whatToExpect": "À quoi s'attendre :",
+      "expectation1": "24 questions à travers 6 domaines de sécurité de la chaîne d'approvisionnement",
+      "expectation2": "Environ 15-20 minutes pour terminer",
+      "expectation3": "Votre progrès est automatiquement sauvegardé",
+      "expectation4": "Résultats détaillés et recommandations",
+      "continueToAssessment": "Continuer vers l'Évaluation",
+      "back": "Retour"
+    },
+    
+    "progress": {
+      "progressLabel": "Progrès : {{answered}} / {{total}} questions",
+      "questionsAnswered": "{{count}} / {{total}}"
+    },
+    
     "supplyChain": {
       "title": "Évaluation des Risques de la Chaîne d'Approvisionnement",
       "description": "Évaluation complète basée sur le cadre NIST SP 800-161 pour évaluer la posture de sécurité des fournisseurs et les risques de la chaîne d'approvisionnement.",
