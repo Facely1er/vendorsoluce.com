@@ -4,12 +4,13 @@ import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card'
 import { Button } from '../components/ui/Button';
 import { 
   Shield, 
-  FileCheck, 
+  ClipboardCheck, 
   BarChart3, 
-  ArrowRight, 
+  Handshake, 
   CheckCircle,
   Upload,
   Users,
+  Activity,
   Target,
   TrendingUp,
   FileJson,
@@ -30,7 +31,7 @@ const HowItWorks: React.FC = () => {
       id: 1,
       title: t('howItWorks.steps.assess.title'),
       description: t('howItWorks.steps.assess.description'),
-      icon: <FileCheck className="h-12 w-12 text-vendorsoluce-green" />,
+      icon: <ClipboardCheck className="h-12 w-12 text-vendorsoluce-green" />,
       features: [
         t('howItWorks.steps.assess.features.nist'),
         t('howItWorks.steps.assess.features.questions'),
@@ -44,7 +45,7 @@ const HowItWorks: React.FC = () => {
       id: 2,
       title: t('howItWorks.steps.vendors.title'),
       description: t('howItWorks.steps.vendors.description'),
-      icon: <Users className="h-12 w-12 text-vendorsoluce-navy" />,
+      icon: <Handshake className="h-12 w-12 text-vendorsoluce-navy" />,
       features: [
         t('howItWorks.steps.vendors.features.assessment'),
         t('howItWorks.steps.vendors.features.monitoring'),
@@ -72,7 +73,7 @@ const HowItWorks: React.FC = () => {
       id: 4,
       title: t('howItWorks.steps.monitor.title'),
       description: t('howItWorks.steps.monitor.description'),
-      icon: <BarChart3 className="h-12 w-12 text-vendorsoluce-blue" />,
+      icon: <Activity className="h-12 w-12 text-vendorsoluce-blue" />,
       features: [
         t('howItWorks.steps.monitor.features.dashboard'),
         t('howItWorks.steps.monitor.features.alerts'),
