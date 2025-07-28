@@ -2,25 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
-import { 
-  Shield, 
-  ClipboardCheck, 
-  BarChart3, 
-  Handshake, 
-  CheckCircle,
-  Upload,
-  Users,
-  Activity,
-  Target,
-  TrendingUp,
-  FileJson,
-  AlertTriangle,
-  Download,
-  PlayCircle,
-  Zap,
-  Clock,
-  Star
-} from 'lucide-react';
+import { Shield, ClipboardCheck, BarChart3, HeartHandshake as Handshake, CheckCircle, Upload, Users, Activity, Target, TrendingUp, FileJson, AlertTriangle, Download, PlayCircle, Zap, Clock, Star } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const HowItWorks: React.FC = () => {
