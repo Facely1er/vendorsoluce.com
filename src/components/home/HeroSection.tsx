@@ -52,7 +52,7 @@ const HeroSection: React.FC = () => {
             <div className="flex justify-center mb-6">
             </div>
             
-            <h1 className="text-4xl md:text-4xl font-bold mb-6 opacity-0 animate-fade-in-up animate-delay-100">
+            <h1 className="text-4xl md:text-3xl font-bold mb-6 opacity-0 animate-fade-in-up animate-delay-100">
               {t('home.hero.title_line1')} <br />
               {t('home.hero.title_line2')}
             </h1>
