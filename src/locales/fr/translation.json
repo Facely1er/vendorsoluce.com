@@ -2079,14 +2079,6 @@
         "email": "contact@ermits.com",
         "phone": "+1 (240) 599-0102",
         "address": "Gaithersburg, MD"
-      },
-      "links": {
-        "company": {
-          "about": "À Propos de Nous",
-          "contact": "Contact",
-          "pricing": "Tarifs",
-          "privacy": "Politique de Confidentialité"
-        }
       }
     },
     "sections": {
@@ -2106,6 +2098,12 @@
         "apiDocs": "Documentation API",
         "integrationGuides": "Guides d'Intégration",
         "howItWorks": "Comment ça Marche"
+      },
+      "company": {
+        "about": "À Propos de Nous",
+        "contact": "Contact",
+        "pricing": "Tarifs",
+        "privacy": "Politique de Confidentialité"
       },
       "quickTools": {
         "title": "Outils Rapides",
