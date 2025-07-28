@@ -2080,15 +2080,15 @@
         "phone": "+1 (240) 599-0102",
         "address": "Gaithersburg, MD"
       },
-    }
       "links": {
-      "company": {
-        "about": "About Us",
-        "contact": "Contact",
-        "pricing": "Pricing", 
-        "privacy": "Privacy Policy"
-      },
-    }
+        "company": {
+          "about": "About Us",
+          "contact": "Contact",
+          "pricing": "Pricing", 
+          "privacy": "Privacy Policy"
+        }
+      }
+    },
     "sections": {
       "solutions": "Solutions",
       "resources": "Resources", 
