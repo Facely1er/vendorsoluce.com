@@ -30,50 +30,49 @@ const Footer: React.FC = () => {
           {/* Company Info - Back on the left */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center mb-3">
-              <img src="/vendorsoluce.png" alt={t('footer.company.name')} className="h-12 w-12 mr-2" />
+              <img src="/vendorsoluce.png" alt={t('footer.company.name', 'VendorSoluce™')} className="h-12 w-12 mr-2" />
 
               <span className="ml-2 text-xl font-bold text-vendorsoluce-green dark:text-white">
                 VendorSoluce™
                 <span className="block text-xs text-gray-600 dark:text-gray-400 font-normal">by ERMITS</span>
               </span>
-
-              {/*}   <span className="text-lg font-bold">{t('footer.company.name')}</span>
-              <span className="block text-xs text-gray-600 dark:text-gray-400 font-normal"> by ERMITS</span>*/}
             </div>
             <p className="text-gray-300 mb-3 text-sm">
-              {t('footer.company.description')}
+              {t('footer.company.description', 'Comprehensive supply chain risk management platform for modern organizations featuring assessments and automated compliance tools.')}
             </p>
           </div>
 
           {/* Solutions */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">{t('footer.sections.solutions')}</h3>
+            <h3 className="text-lg font-semibold mb-3">
+              {t('footer.sections.solutions', 'Solutions')}
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/supply-chain-assessment" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <Target className="h-4 w-4 mr-2 text-vendorsoluce-green" />
-                  <span>{t('footer.links.solutions.supplyChainAssessment')}</span>
+                  <span>{t('footer.links.solutions.supplyChainAssessment', 'Supply Chain Assessment')}</span>
                   <ArrowRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
                 <Link to="/sbom-analyzer" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <FileSearch className="h-4 w-4 mr-2 text-vendorsoluce-teal" />
-                  <span>{t('footer.links.solutions.sbomAnalysis')}</span>
+                  <span>{t('footer.links.solutions.sbomAnalysis', 'SBOM Analysis')}</span>
                   <ArrowRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
                 <Link to="/vendor-risk-dashboard" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <TrendingUp className="h-4 w-4 mr-2 text-vendorsoluce-blue" />
-                  <span>{t('footer.links.solutions.vendorRiskDashboard')}</span>
+                  <span>{t('footer.links.solutions.vendorRiskDashboard', 'Vendor Risk Dashboard')}</span>
                   <ArrowRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
                 <Link to="/vendor-assessments" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <Users className="h-4 w-4 mr-2 text-vendorsoluce-navy" />
-                  <span>{t('footer.links.solutions.vendorAssessments')}</span>
+                  <span>{t('footer.links.solutions.vendorAssessments', 'Vendor Security Assessments')}</span>
                   <Crown className="h-3 w-3 ml-1 text-yellow-500" />
                   <ArrowRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
@@ -83,33 +82,35 @@ const Footer: React.FC = () => {
 
           {/* Resources */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">{t('footer.sections.resources')}</h3>
+            <h3 className="text-lg font-semibold mb-3">
+              {t('footer.sections.resources', 'Resources')}
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/templates" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <FileText className="h-4 w-4 mr-2" />
-                  <span>{t('footer.links.resources.templates')}</span>
+                  <span>{t('footer.links.resources.templates', 'Templates & Downloads')}</span>
                   <ArrowRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
                 <Link to="/api-docs" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <Code className="h-4 w-4 mr-2" />
-                  <span>{t('footer.links.resources.apiDocs')}</span>
+                  <span>{t('footer.links.resources.apiDocs', 'API Documentation')}</span>
                   <ArrowRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
                 <Link to="/integration-guides" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <Code className="h-4 w-4 mr-2" />
-                  <span>{t('footer.links.resources.integrationGuides')}</span>
+                  <span>{t('footer.links.resources.integrationGuides', 'Integration Guides')}</span>
                   <ArrowRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
                 <Link to="/how-it-works" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <Shield className="h-4 w-4 mr-2" />
-                  <span>{t('footer.links.resources.howItWorks')}</span>
+                  <span>{t('footer.links.resources.howItWorks', 'How It Works')}</span>
                   <ArrowRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
@@ -118,33 +119,35 @@ const Footer: React.FC = () => {
 
           {/* Company */}
           <div>
-            <h3 className="text-lg font-semibold mb-3">{t('footer.sections.company')}</h3>
+            <h3 className="text-lg font-semibold mb-3">
+              {t('footer.sections.company', 'Company')}
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/about" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <Building className="h-4 w-4 mr-2" />
-                  <span>{t('footer.links.company.about')}</span>
+                  <span>{t('footer.links.company.about', 'About Us')}</span>
                   <ArrowRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <MessageSquare className="h-4 w-4 mr-2" />
-                  <span>{t('footer.links.company.contact')}</span>
+                  <span>{t('footer.links.company.contact', 'Contact')}</span>
                   <ArrowRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
                 <Link to="/pricing" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <DollarSign className="h-4 w-4 mr-2" />
-                  <span>{t('footer.links.company.pricing')}</span>
+                  <span>{t('footer.links.company.pricing', 'Pricing')}</span>
                   <ArrowRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
                 <Link to="/privacy" className="text-gray-300 hover:text-white flex items-center group text-sm">
                   <Shield className="h-4 w-4 mr-2" />
-                  <span>{t('footer.links.company.privacy')}</span>
+                  <span>{t('footer.links.company.privacy', 'Privacy Policy')}</span>
                   <ArrowRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
@@ -156,12 +159,12 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-800 mt-6 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-400 text-sm">
-              {t('footer.copyright')}
+              {t('footer.copyright', '© 2025 ERMITS LLC. All rights reserved.')}
             </div>
             <div className="mt-4 md:mt-0">
               <Link to="/supply-chain-assessment" className="inline-flex items-center px-4 py-2 bg-vendorsoluce-green text-white rounded-md hover:bg-vendorsoluce-dark-green transition-colors text-sm">
                 <Target className="h-4 w-4 mr-2" />
-                {t('footer.cta.text')}
+                {t('footer.cta.text', 'Start Free Assessment')}
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
             </div>
