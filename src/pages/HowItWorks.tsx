@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
-import { Shield, ClipboardCheck, BarChart3, Handshake, CheckCircle, Upload, Users, Activity, Target, TrendingUp, FileJson, AlertTriangle, Download, PlayCircle, Zap, Clock, Star, ArrowRight, Eye, Layers, Network, Globe } from 'lucide-react';
+import { Shield, ClipboardCheck, BarChart3, HeartHandshake, CheckCircle, Upload, Users, Activity, Target, TrendingUp, FileJson, AlertTriangle, Download, PlayCircle, Zap, Clock, Star, ArrowRight, Eye, Layers, Network, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const HowItWorks: React.FC = () => {
@@ -33,7 +33,7 @@ const HowItWorks: React.FC = () => {
       id: 2,
       title: t('howItWorks.steps.vendors.title'),
       description: t('howItWorks.steps.vendors.description'),
-      icon: <Handshake className="h-12 w-12 text-vendorsoluce-navy" />,
+      icon: <HeartHandshake className="h-12 w-12 text-vendorsoluce-navy" />,
       features: [
         t('howItWorks.steps.vendors.features.assessment'),
         t('howItWorks.steps.vendors.features.monitoring'),
@@ -486,4 +486,4 @@ const HowItWorks: React.FC = () => {
   );
 };
 
-export default HowItWorks;
+export default HowItWorks; 
