@@ -2065,7 +2065,9 @@
     "login": "Se connecter",
     "logout": "Se déconnecter",
     "account": "Compte",
+    "dashboard": "Tableau de bord",
     "profile": "Profil"
+    
   },
   "components": {
     "yes": "Oui",
