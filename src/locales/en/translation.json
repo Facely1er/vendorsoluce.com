@@ -2064,6 +2064,7 @@
   "auth": {
     "login": "Log In",
     "logout": "Log Out",
+    "dashboard": " Dashboard",
     "account": "Account",
     "profile": "Profile"
   },
