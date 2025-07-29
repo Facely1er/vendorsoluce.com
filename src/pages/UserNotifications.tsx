@@ -1,22 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
-import { 
-  Bell, 
-  Settings, 
-  Check, 
-  X, 
-  Clock, 
-  AlertTriangle, 
-  Info, 
-  Shield,
-  Target,
-  FileText,
-  User,
-  MarkAllAsRead,
-  ArrowLeft,
-  Filter
-} from 'lucide-react';
+import { Bell, Settings, Check, X, Clock, AlertTriangle, Info, Shield, Target, FileText, User, ReplyAll as MarkAllAsRead, ArrowLeft, Filter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Notification {
