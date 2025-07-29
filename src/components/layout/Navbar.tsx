@@ -6,9 +6,11 @@ import ThemeToggle from './ThemeToggle';
 import UserMenu from './UserMenu';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../context/AuthContext';
 
 const Navbar: React.FC = () => {
   const { t } = useTranslation();
+  const { isAuthenticated } = useAuth();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
@@ -20,6 +22,7 @@ const Navbar: React.FC = () => {
 
   const primaryNav: MenuItem[] = [
     { title: t('navigation.home'), path: '/', icon: 'Home' },
+    { title: t('navigation.dashboard'), path: isAuthenticated ? '/dashboard' : '/dashboard-demo', icon: 'BarChart3' },
     { title: t('navigation.howItWorks'), path: '/how-it-works', icon: 'Layers' },
     { title: t('navigation.solutions'), path: '#', icon: 'Layers' },
     { title: t('navigation.resources'), path: '#', icon: 'BookOpen' },

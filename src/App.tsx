@@ -40,6 +40,7 @@ import UserActivity from './pages/UserActivity';
 import UserNotifications from './pages/UserNotifications';
 import StakeholderDashboardDemo from './pages/StakeholderDashboardDemo';
 import TemplatePreviewPage from './pages/TemplatePreviewPage';
+import DashboardDemoPage from './pages/DashboardDemoPage';
 
 function App() {
   return (
@@ -77,6 +78,9 @@ function App() {
                   <Route path="/sbom-analysis/:id" element={<SBOMAnalysisPage />} />
                   <Route path="/vendor-risk-dashboard" element={<VendorRiskDashboard />} />
                   <Route path="/vendors" element={<VendorsPage />} />
+                  
+                  {/* Dashboard Demo for non-authenticated users */}
+                  <Route path="/dashboard-demo" element={<DashboardDemoPage />} />
                   
                   {/* Vendor Security Assessments - Premium Feature */}
                   <Route path="/vendor-assessments" element={<VendorSecurityAssessments />} />
