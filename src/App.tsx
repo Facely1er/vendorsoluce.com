@@ -38,6 +38,7 @@ import AccountPage from './pages/AccountPage';
 import UserDashboard from './pages/UserDashboard';
 import UserActivity from './pages/UserActivity';
 import UserNotifications from './pages/UserNotifications';
+import StakeholderDashboardDemo from './pages/StakeholderDashboardDemo';
 
 function App() {
   return (
@@ -115,6 +116,9 @@ function App() {
                       <UserNotifications />
                     </ProtectedRoute>
                   } />
+                  
+                  {/* Stakeholder Dashboard Demo */}
+                  <Route path="/stakeholder-dashboard-demo" element={<StakeholderDashboardDemo />} />
                   
                   {/* Fallback route */}
                   <Route path="*" element={<Navigate to="/" replace />} />
