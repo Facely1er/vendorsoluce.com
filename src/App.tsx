@@ -39,6 +39,7 @@ import UserDashboard from './pages/UserDashboard';
 import UserActivity from './pages/UserActivity';
 import UserNotifications from './pages/UserNotifications';
 import StakeholderDashboardDemo from './pages/StakeholderDashboardDemo';
+import TemplatePreviewPage from './pages/TemplatePreviewPage';
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/privacy" element={<Privacy />} />
                   <Route path="/templates" element={<Templates />} />
+                  <Route path="/templates/preview" element={<TemplatePreviewPage />} />
                   <Route path="/how-it-works" element={<HowItWorks />} />
                   <Route path="/api-docs" element={<APIDocumentation />} />
                   <Route path="/integration-guides" element={<IntegrationGuides />} />

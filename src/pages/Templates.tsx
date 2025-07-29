@@ -1,24 +1,21 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { FileDown, Shield, FileJson, BarChart3, Info, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { downloadTemplateFile } from '../utils/generatePdf';
 import { useTranslation } from 'react-i18next';
-import { getTemplateUrl } from '../utils/supabaseStorage';
 
 const Templates: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  const handleDownload = (templatePath: string, filename: string) => {
-    downloadTemplateFile(templatePath, filename);
+  const handlePreview = (templatePath: string, filename: string) => {
+    navigate('/templates/preview', {
+      state: { templatePath, filename }
+    });
   };
   
-  // Get template URL for direct download link (optional, for future use)
-  const getDirectDownloadUrl = (templatePath: string) => {
-    return getTemplateUrl(templatePath);
-  };
-
   return (
     <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="mb-8">
@@ -47,10 +44,9 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('vendor-questionnaires/nist-800-161-complete-assessment.html', 'nist-800-161-complete-assessment.docx')}
+                  onClick={() => handlePreview('vendor-questionnaires/nist-800-161-complete-assessment.html', 'nist-800-161-complete-assessment.docx')}
                 >
-                  <FileDown size={16} />
-                  <span>DOCX</span>
+                  <span>Preview</span>
                 </Button>
               </li>
               <li className="flex justify-between items-center">
@@ -59,10 +55,9 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('vendor-questionnaires/vendor-security-quick-assessment.html', 'vendor-security-quick-assessment.docx')}
+                  onClick={() => handlePreview('vendor-questionnaires/vendor-security-quick-assessment.html', 'vendor-security-quick-assessment.docx')}
                 >
-                  <FileDown size={16} />
-                  <span>DOCX</span>
+                  <span>Preview</span>
                 </Button>
               </li>
               <li className="flex justify-between items-center">
@@ -71,10 +66,9 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('vendor-questionnaires/cloud-provider-assessment.html', 'cloud-provider-assessment.docx')}
+                  onClick={() => handlePreview('vendor-questionnaires/cloud-provider-assessment.html', 'cloud-provider-assessment.docx')}
                 >
-                  <FileDown size={16} />
-                  <span>DOCX</span>
+                  <span>Preview</span>
                 </Button>
               </li>
               <li className="flex justify-between items-center">
@@ -83,10 +77,9 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('vendor-questionnaires/software-provider-assessment.html', 'software-provider-assessment.docx')}
+                  onClick={() => handlePreview('vendor-questionnaires/software-provider-assessment.html', 'software-provider-assessment.docx')}
                 >
-                  <FileDown size={16} />
-                  <span>DOCX</span>
+                  <span>Preview</span>
                 </Button>
               </li>
             </ul>
@@ -111,10 +104,9 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('sbom/spdx-sbom-template.json', 'spdx-sbom-template.json')}
+                  onClick={() => handlePreview('sbom/spdx-sbom-template.json', 'spdx-sbom-template.json')}
                 >
-                  <FileDown size={16} />
-                  <span>JSON</span>
+                  <span>Preview</span>
                 </Button>
               </li>
               <li className="flex justify-between items-center">
@@ -123,10 +115,9 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('sbom/cyclonedx-sbom-template.json', 'cyclonedx-sbom-template.json')}
+                  onClick={() => handlePreview('sbom/cyclonedx-sbom-template.json', 'cyclonedx-sbom-template.json')}
                 >
-                  <FileDown size={16} />
-                  <span>JSON</span>
+                  <span>Preview</span>
                 </Button>
               </li>
               <li className="flex justify-between items-center">
@@ -135,10 +126,9 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('sbom/sbom-generator.sh', 'sbom-generator.sh')}
+                  onClick={() => handlePreview('sbom/sbom-generator.sh', 'sbom-generator.sh')}
                 >
-                  <FileDown size={16} />
-                  <span>SCRIPT</span>
+                  <span>Preview</span>
                 </Button>
               </li>
               <li className="flex justify-between items-center">
@@ -147,10 +137,9 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('sbom/sbom-example-report.html', 'sbom-example-report.pdf')}
+                  onClick={() => handlePreview('sbom/sbom-example-report.html', 'sbom-example-report.pdf')}
                 >
-                  <FileDown size={16} />
-                  <span>PDF</span>
+                  <span>Preview</span>
                 </Button>
               </li>
             </ul>
@@ -175,10 +164,9 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('risk-assessment/vendor-risk-scoring-matrix.csv', 'vendor-risk-scoring-matrix.xlsx')}
+                  onClick={() => handlePreview('risk-assessment/vendor-risk-scoring-matrix.csv', 'vendor-risk-scoring-matrix.xlsx')}
                 >
-                  <FileDown size={16} />
-                  <span>XLSX</span>
+                  <span>Preview</span>
                 </Button>
               </li>
               <li className="flex justify-between items-center">
@@ -187,10 +175,9 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('risk-assessment/risk-management-plan-template.html', 'risk-management-plan-template.docx')}
+                  onClick={() => handlePreview('risk-assessment/risk-management-plan-template.html', 'risk-management-plan-template.docx')}
                 >
-                  <FileDown size={16} />
-                  <span>DOCX</span>
+                  <span>Preview</span>
                 </Button>
               </li>
               <li className="flex justify-between items-center">
@@ -199,10 +186,9 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('risk-assessment/supply-chain-risk-register.csv', 'supply-chain-risk-register.xlsx')}
+                  onClick={() => handlePreview('risk-assessment/supply-chain-risk-register.csv', 'supply-chain-risk-register.xlsx')}
                 >
-                  <FileDown size={16} />
-                  <span>XLSX</span>
+                  <span>Preview</span>
                 </Button>
               </li>
               <li className="flex justify-between items-center">
@@ -211,10 +197,9 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('risk-assessment/exec-summary-template.html', 'exec-summary-template.pptx')}
+                  onClick={() => handlePreview('risk-assessment/exec-summary-template.html', 'exec-summary-template.pptx')}
                 >
-                  <FileDown size={16} />
-                  <span>PPT</span>
+                  <span>Preview</span>
                 </Button>
               </li>
             </ul>
@@ -262,10 +247,10 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('nist/nist-quickstart.html', 'nist-sp-800-161-quickstart.pdf')}
+                  onClick={() => handlePreview('nist/nist-quickstart.html', 'nist-sp-800-161-quickstart.pdf')}
                 >
                   <Download size={16} />
-                  <span>{t('resources.templates.download')} PDF</span>
+                  <span>Preview</span>
                 </Button>
               </div>
             </li>
@@ -283,10 +268,10 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('nist/nist-controls-mapping.csv', 'nist-controls-mapping.xlsx')}
+                  onClick={() => handlePreview('nist/nist-controls-mapping.csv', 'nist-controls-mapping.xlsx')}
                 >
                   <Download size={16} />
-                  <span>{t('resources.templates.download')} XLSX</span>
+                  <span>Preview</span>
                 </Button>
               </div>
             </li>
@@ -309,10 +294,10 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('nist/federal-compliance-guide.html', 'federal-compliance-guide.pdf')}
+                  onClick={() => handlePreview('nist/federal-compliance-guide.html', 'federal-compliance-guide.pdf')}
                 >
                   <Download size={16} />
-                  <span>{t('resources.templates.download')} PDF</span>
+                  <span>Preview</span>
                 </Button>
               </div>
             </li>
@@ -330,10 +315,10 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('nist/supply-chain-maturity-model.html', 'supply-chain-maturity-model.pdf')}
+                  onClick={() => handlePreview('nist/supply-chain-maturity-model.html', 'supply-chain-maturity-model.pdf')}
                 >
                   <Download size={16} />
-                  <span>{t('resources.templates.download')} PDF</span>
+                  <span>Preview</span>
                 </Button>
               </div>
             </li>
@@ -351,10 +336,10 @@ const Templates: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="flex items-center gap-1"
-                  onClick={() => handleDownload('nist/sbom-implementation-guide.html', 'sbom-implementation-guide.pdf')}
+                  onClick={() => handlePreview('nist/sbom-implementation-guide.html', 'sbom-implementation-guide.pdf')}
                 >
                   <Download size={16} />
-                  <span>{t('resources.templates.download')} PDF</span>
+                  <span>Preview</span>
                 </Button>
               </div>
             </li>
