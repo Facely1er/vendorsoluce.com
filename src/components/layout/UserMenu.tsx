@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { User, LogOut, Settings, UserCog } from 'lucide-react';
+import { User, LogOut, Settings, UserCog, Bell, Activity } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../ui/Button';
@@ -67,6 +67,15 @@ const UserMenu: React.FC = () => {
           </div>
           
           <Link
+            to="/user-dashboard"
+            className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
+            onClick={() => setIsOpen(false)}
+          >
+            <User className="h-4 w-4 mr-2" />
+            {t('auth.dashboard')}
+          </Link>
+          
+          <Link
             to="/profile"
             className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
             onClick={() => setIsOpen(false)}
@@ -82,6 +91,24 @@ const UserMenu: React.FC = () => {
           >
             <Settings className="h-4 w-4 mr-2" />
             {t('auth.account')}
+          </Link>
+          
+          <Link
+            to="/notifications"
+            className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
+            onClick={() => setIsOpen(false)}
+          >
+            <Bell className="h-4 w-4 mr-2" />
+            Notifications
+          </Link>
+          
+          <Link
+            to="/user-activity"
+            className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center"
+            onClick={() => setIsOpen(false)}
+          >
+            <Activity className="h-4 w-4 mr-2" />
+            Activity History
           </Link>
           
           <button

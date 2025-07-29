@@ -35,6 +35,9 @@ import VendorSecurityAssessments from './pages/VendorSecurityAssessments';
 import VendorAssessmentPortal from './pages/VendorAssessmentPortal';
 import ProfilePage from './pages/ProfilePage';
 import AccountPage from './pages/AccountPage';
+import UserDashboard from './pages/UserDashboard';
+import UserActivity from './pages/UserActivity';
+import UserNotifications from './pages/UserNotifications';
 
 function App() {
   return (
@@ -95,6 +98,21 @@ function App() {
                   <Route path="/account" element={
                     <ProtectedRoute>
                       <AccountPage />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/user-dashboard" element={
+                    <ProtectedRoute>
+                      <UserDashboard />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/user-activity" element={
+                    <ProtectedRoute>
+                      <UserActivity />
+                    </ProtectedRoute>
+                  } />
+                  <Route path="/notifications" element={
+                    <ProtectedRoute>
+                      <UserNotifications />
                     </ProtectedRoute>
                   } />
                   
