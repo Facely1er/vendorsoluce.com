@@ -582,7 +582,14 @@ const SBOMAnalyzer: React.FC = () => {
                           <span>Score: {analysis.risk_score}%</span>
                         </div>
                       </div>
-                      <Button variant="ghost" size="sm">
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        onClick={() => {
+                          // Navigate to detailed analysis view
+                          alert(`Viewing detailed analysis for ${analysis.filename}. This feature will open a comprehensive view of the SBOM analysis results including component breakdown, vulnerability details, and remediation recommendations.`);
+                        }}
+                      >
                         <Eye className="h-4 w-4" />
                       </Button>
                     </div>
