@@ -150,68 +150,68 @@ const VendorAssessmentPortal: React.FC = () => {
     
     const uploadFiles = async () => {
       try {
-      const uploadPromises = fileArray.map(async (file) => {
-        // Validate file size (limit to 10MB)
-        if (file.size > 10 * 1024 * 1024) {
-          throw new Error(`File ${file.name} is too large. Maximum size is 10MB.`);
-        }
+        const uploadPromises = fileArray.map(async (file) => {
+          // Validate file size (limit to 10MB)
+          if (file.size > 10 * 1024 * 1024) {
+            throw new Error(`File ${file.name} is too large. Maximum size is 10MB.`);
+          }
+          
+          // Validate file type
+          const allowedTypes = [
+            'application/pdf',
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.ms-excel',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'image/jpeg',
+            'image/png',
+            'text/plain'
+          ];
+          
+          if (!allowedTypes.includes(file.type)) {
+            throw new Error(`File ${file.name} has an unsupported format. Please use PDF, DOC, DOCX, XLS, XLSX, JPG, PNG, or TXT files.`);
+          }
+          
+          // Upload to Supabase Storage
+          const result = await uploadAssessmentEvidence(file, assessment?.id || 'demo', questionId);
+          return { file, url: result.url, path: result.path };
+        });
         
-        // Validate file type
-        const allowedTypes = [
-          'application/pdf',
-          'application/msword',
-          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-          'application/vnd.ms-excel',
-          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-          'image/jpeg',
-          'image/png',
-          'text/plain'
-        ];
+        const uploadResults = await Promise.all(uploadPromises);
         
-        if (!allowedTypes.includes(file.type)) {
-          throw new Error(`File ${file.name} has an unsupported format. Please use PDF, DOC, DOCX, XLS, XLSX, JPG, PNG, or TXT files.`);
-        }
+        // Update uploaded files state for UI display
+        setUploadedFiles(prev => ({
+          ...prev,
+          [questionId]: fileArray
+        }));
         
-        // Upload to Supabase Storage
-        const result = await uploadAssessmentEvidence(file, assessment?.id || 'demo', questionId);
-        return { file, url: result.url, path: result.path };
-      });
-      
-      const uploadResults = await Promise.all(uploadPromises);
-      
-      // Update uploaded files state for UI display
-      setUploadedFiles(prev => ({
-        ...prev,
-        [questionId]: fileArray
-      }));
-      
-      // Store file URLs in answers (comma-separated string)
-      const fileUrls = uploadResults.map(result => result.url).join(',');
-      handleAnswer(questionId, fileUrls);
-      
-      // Success feedback
-      setSaveStatus('saved');
-      setTimeout(() => setSaveStatus('idle'), 2000);
-      
+        // Store file URLs in answers (comma-separated string)
+        const fileUrls = uploadResults.map(result => result.url).join(',');
+        handleAnswer(questionId, fileUrls);
+        
+        // Success feedback
+        setSaveStatus('saved');
+        setTimeout(() => setSaveStatus('idle'), 2000);
+        
       } catch (error) {
-      console.error('File upload error:', error);
-      setUploadErrors(prev => ({
-        ...prev,
-        [questionId]: error instanceof Error ? error.message : 'Failed to upload files'
-      }));
-      setSaveStatus('error');
-      setTimeout(() => setSaveStatus('idle'), 3000);
+        console.error('File upload error:', error);
+        setUploadErrors(prev => ({
+          ...prev,
+          [questionId]: error instanceof Error ? error.message : 'Failed to upload files'
+        }));
+        setSaveStatus('error');
+        setTimeout(() => setSaveStatus('idle'), 3000);
       } finally {
-      setUploading(prev => ({ ...prev, [questionId]: false }));
+        setUploading(prev => ({ ...prev, [questionId]: false }));
       }
     };
     
     uploadFiles();
-    }
   };
 
   const handleFileUploadLegacy = (questionId: string, files: FileList) => {
     // Legacy function for UI display only (keeping for backward compatibility)
+    const fileArray = Array.from(files);
     setUploadedFiles(prev => ({
       ...prev,
       [questionId]: fileArray
