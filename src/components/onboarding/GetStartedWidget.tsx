@@ -143,11 +143,7 @@ const GetStartedWidget: React.FC<GetStartedWidgetProps> = ({
                     </p>
                   </div>
                 </Link>
-                  <Link 
-                    to={item.href} 
-                    state={item.id === 'first-vendor' ? { openAddVendorModal: true } : undefined}
-                    className="block h-full"
-                  >
+              )}
             </div>
           ))}
         </div>
