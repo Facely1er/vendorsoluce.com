@@ -36,11 +36,11 @@ const TextCarousel: React.FC<TextCarouselProps> = ({
   }
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative flex flex-col items-center ${className}`}>
       <div
         className={`transition-opacity duration-600 ease-in-out ${
           isVisible ? 'opacity-100' : 'opacity-0'
-        } ${textClassName}`}
+        } text-center ${textClassName}`}
         role="text"
         aria-live="polite"
         aria-atomic="true"
@@ -50,7 +50,7 @@ const TextCarousel: React.FC<TextCarouselProps> = ({
       
       {/* Optional: Dots indicator */}
       {texts.length > 1 && (
-        <div className="flex justify-center mt-4 space-x-2">
+        <div className="flex justify-center mt-6 space-x-2">
           {texts.map((_, index) => (
             <button
               key={index}
