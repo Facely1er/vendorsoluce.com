@@ -32,6 +32,7 @@ const SupplyChainResults = () => {
     assessmentName?: string;
     completedAt?: string;
     answers?: Record<string, string>;
+    assessmentId?: string;
   }>({});
   
   // Get results from location state or fetch from most recent completed assessment
@@ -47,7 +48,8 @@ const SupplyChainResults = () => {
       setAssessmentMetadata({
         assessmentName: location.state.assessmentName || 'Supply Chain Risk Assessment',
         completedAt: location.state.completedAt || new Date().toISOString(),
-        answers: location.state.answers || {}
+        answers: location.state.answers || {},
+        assessmentId: location.state.assessmentId || 'demo'
       });
       return; // Early return to prevent further processing
     } else if (isAuthenticated && !loading && assessments.length > 0) {
@@ -64,7 +66,8 @@ const SupplyChainResults = () => {
         setAssessmentMetadata({
           assessmentName: completedAssessment.assessment_name || 'Supply Chain Risk Assessment',
           completedAt: completedAssessment.completed_at || new Date().toISOString(),
-          answers: completedAssessment.answers as Record<string, string> || {}
+          answers: completedAssessment.answers as Record<string, string> || {},
+          assessmentId: completedAssessment.id
         });
       } else {
         // If no completed assessment found, use mock data
@@ -72,7 +75,8 @@ const SupplyChainResults = () => {
         setAssessmentMetadata({
           assessmentName: 'Supply Chain Risk Assessment (Demo)',
           completedAt: new Date().toISOString(),
-          answers: {}
+          answers: {},
+          assessmentId: 'demo'
         });
       }
     } else if (!isAuthenticated || !loading) {
@@ -81,7 +85,8 @@ const SupplyChainResults = () => {
       setAssessmentMetadata({
         assessmentName: 'Supply Chain Risk Assessment (Demo)',
         completedAt: new Date().toISOString(),
-        answers: {}
+        answers: {},
+        assessmentId: 'demo'
       });
     }
   }, [location.state, assessments, loading, isAuthenticated]);
@@ -212,24 +217,13 @@ const SupplyChainResults = () => {
       </div>
 
       <div className="mt-8 flex justify-end">
-        {isAuthenticated && assessments.length > 0 && assessments.find(a => a.status === 'completed') && (
-          <Link to={`/supply-chain-recommendations/${assessments.find(a => a.status === 'completed')?.id}`}>
-        <button
-          className="px-4 py-2 bg-vendorsoluce-navy text-white rounded hover:bg-vendorsoluce-navy/90 transition-colors"
-        >
-          {t('supplyChainResults.viewDetailedRecommendations')}
-        </button>
-          </Link>
-        )}
-        {(!isAuthenticated || !assessments.length || !assessments.find(a => a.status === 'completed')) && (
-          <Link to="/supply-chain-recommendations/demo">
-            <button
-              className="px-4 py-2 bg-vendorsoluce-navy text-white rounded hover:bg-vendorsoluce-navy/90 transition-colors"
-            >
-              {t('supplyChainResults.viewDetailedRecommendations')}
-            </button>
-          </Link>
-        )}
+        <Link to={`/supply-chain-recommendations/${assessmentMetadata.assessmentId || 'demo'}`}>
+          <button
+            className="px-4 py-2 bg-vendorsoluce-navy text-white rounded hover:bg-vendorsoluce-navy/90 transition-colors"
+          >
+            {t('supplyChainResults.viewDetailedRecommendations')}
+          </button>
+        </Link>
       </div>
     </div>
   );
