@@ -133,7 +133,7 @@ const Pricing: React.FC = () => {
       </div>
 
       {/* Pricing Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16 pt-6">
         {pricingTiers.map((tier, index) => (
           <Card 
             key={tier.name} 
@@ -142,7 +142,7 @@ const Pricing: React.FC = () => {
             }`}
           >
             {tier.popular && (
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
                 <span className="bg-vendorsoluce-green text-white px-4 py-1 rounded-full text-sm font-medium flex items-center">
                   <Star className="h-4 w-4 mr-1" />
                   {t('pricing.tiers.professional.popular')}
