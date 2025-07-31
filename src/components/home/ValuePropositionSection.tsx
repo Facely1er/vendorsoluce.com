@@ -1,4 +1,4 @@
- import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
@@ -96,7 +96,7 @@ const ValuePropositionSection: React.FC = () => {
             t('home.stakeholders.procurement.solutions.calculator.benefits.integration')
           ],
           cta: t('home.stakeholders.procurement.solutions.calculator.cta'),
-          link: '/tools/vendor-risk-calculator'
+          link: '/tools/vendor-risk-radar'
         },
         {
           title: t('home.stakeholders.procurement.solutions.dashboard.title'),
@@ -108,7 +108,7 @@ const ValuePropositionSection: React.FC = () => {
             t('home.stakeholders.procurement.solutions.dashboard.benefits.reporting')
           ],
           cta: t('home.stakeholders.procurement.solutions.dashboard.cta'),
-          link: '/vendor-risk-dashboard'
+          link: '/vendors'
         }
       ]
     },
@@ -172,7 +172,7 @@ const ValuePropositionSection: React.FC = () => {
             t('home.stakeholders.executives.solutions.dashboards.benefits.recommendations')
           ],
           cta: t('home.stakeholders.executives.solutions.dashboards.cta'),
-          link: '/dashboard'
+          link: '/stakeholder-dashboard-demo'
         },
         {
           title: t('home.stakeholders.executives.solutions.reporting.title'),
@@ -184,7 +184,7 @@ const ValuePropositionSection: React.FC = () => {
             t('home.stakeholders.executives.solutions.reporting.benefits.presentations')
           ],
           cta: t('home.stakeholders.executives.solutions.reporting.cta'),
-          link: '/vendor-risk-dashboard'
+          link: '/vendors'
         }
       ]
     }
