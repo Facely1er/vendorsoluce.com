@@ -360,7 +360,6 @@ const EnhancedSBOMAnalysis: React.FC<EnhancedSBOMAnalysisProps> = ({
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Security & Compliance Policies</h3>
             <Button variant="primary" size="sm">
-              <Plus className="h-4 w-4 mr-2" />
               Create Policy
             </Button>
           </div>
