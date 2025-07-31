@@ -286,7 +286,13 @@ const WorkflowAutomation: React.FC = () => {
         <div className="space-y-4">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Workflow Templates</h3>
-            <Button variant="primary" size="sm">
+            <Button 
+              variant="primary" 
+              size="sm"
+              onClick={() => {
+                alert('Create Template functionality will allow you to design custom workflow templates with automated task sequences, approval chains, and notification rules for vendor risk management processes.');
+              }}
+            >
               Create Template
             </Button>
           </div>
@@ -331,10 +337,22 @@ const WorkflowAutomation: React.FC = () => {
                     ))}
                   </div>
                   <div className="mt-4 flex space-x-2">
-                    <Button variant="outline" size="sm">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => {
+                        alert(`Edit Template functionality will open the workflow designer for "${template.name}". You'll be able to modify task sequences, update assignees, adjust timelines, and customize automation rules.`);
+                      }}
+                    >
                       Edit Template
                     </Button>
-                    <Button variant="primary" size="sm">
+                    <Button 
+                      variant="primary" 
+                      size="sm"
+                      onClick={() => {
+                        alert(`Using template "${template.name}" will start a new workflow instance. You'll be prompted to specify the vendor, assign team members, and set due dates for each task in the workflow.`);
+                      }}
+                    >
                       Use Template
                     </Button>
                   </div>
@@ -350,7 +368,13 @@ const WorkflowAutomation: React.FC = () => {
         <div className="space-y-4">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Automation Rules</h3>
-            <Button variant="primary" size="sm">
+            <Button 
+              variant="primary" 
+              size="sm"
+              onClick={() => {
+                alert('Create Rule functionality will open the automation rule builder. You can define triggers (risk score changes, assessment completion, etc.) and actions (notifications, task creation, escalations) to automate your vendor risk management processes.');
+              }}
+            >
               Create Rule
             </Button>
           </div>

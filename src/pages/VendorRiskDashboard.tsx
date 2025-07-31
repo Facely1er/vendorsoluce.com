@@ -104,13 +104,11 @@ const VendorRiskDashboard: React.FC = () => {
   };
 
   const handleCreateWorkflow = () => {
-    // This would open a workflow creation modal in a real implementation
-    alert('Workflow creation would open here. This feature allows you to create custom automation rules for vendor risk management.');
+    alert('Create New Workflow: This feature opens the workflow designer where you can build custom automation sequences for vendor onboarding, risk assessments, compliance checks, and remediation tracking. Define triggers, assign tasks, set deadlines, and configure notifications.');
   };
 
   const handleManageAutomation = () => {
-    // This would open automation management interface
-    alert('Automation management interface would open here. Configure triggers, actions, and notification settings.');
+    alert('Manage Automation: This opens the automation control center where you can view active rules, configure triggers (risk score changes, assessment deadlines, compliance status), set up notifications, and manage workflow templates. Monitor automation performance and adjust rules as needed.');
   };
 
   if (loading) {

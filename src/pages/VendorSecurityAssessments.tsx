@@ -289,7 +289,11 @@ const VendorSecurityAssessments: React.FC = () => {
             </div>
             <Button variant="outline" size="sm">
               <Download className="h-4 w-4 mr-2" />
-              {t('vendorAssessments.actions.exportReport')}
+              <span onClick={() => {
+                alert('Export Report functionality will generate a comprehensive PDF report including assessment status, completion rates, compliance scores, and vendor risk summaries. The report will include executive dashboard views and detailed findings.');
+              }}>
+                {t('vendorAssessments.actions.exportReport')}
+              </span>
             </Button>
           </div>
         </CardContent>
@@ -408,7 +412,13 @@ const VendorSecurityAssessments: React.FC = () => {
                               <Eye className="h-4 w-4" />
                             </Button>
                           </Link>
-                          <Button variant="ghost" size="sm">
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            onClick={() => {
+                              alert(`Send Assessment functionality will deliver the ${assessment.frameworkName} assessment to ${assessment.contactEmail}. The vendor will receive a secure portal link with login credentials and instructions for completion.`);
+                            }}
+                          >
                             <Send className="h-4 w-4" />
                           </Button>
                         </div>
