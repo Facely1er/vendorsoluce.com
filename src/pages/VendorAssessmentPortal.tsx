@@ -15,6 +15,7 @@ import {
   User,
   Building
 } from 'lucide-react';
+import { uploadAssessmentEvidence } from '../utils/supabaseStorage';
 
 interface AssessmentQuestion {
   id: string;
@@ -45,6 +46,8 @@ const VendorAssessmentPortal: React.FC = () => {
   const [assessment, setAssessment] = useState<AssessmentData | null>(null);
   const [answers, setAnswers] = useState<Record<string, any>>({});
   const [uploadedFiles, setUploadedFiles] = useState<Record<string, File[]>>({});
+  const [uploading, setUploading] = useState<Record<string, boolean>>({});
+  const [uploadErrors, setUploadErrors] = useState<Record<string, string>>({});
   const [currentSection, setCurrentSection] = useState(0);
   const [loading, setLoading] = useState(true);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
@@ -140,6 +143,70 @@ const VendorAssessmentPortal: React.FC = () => {
 
   const handleFileUpload = (questionId: string, files: FileList) => {
     const fileArray = Array.from(files);
+    
+    // Set uploading state
+    setUploading(prev => ({ ...prev, [questionId]: true }));
+    setUploadErrors(prev => ({ ...prev, [questionId]: '' }));
+    
+    try {
+      const uploadPromises = fileArray.map(async (file) => {
+        // Validate file size (limit to 10MB)
+        if (file.size > 10 * 1024 * 1024) {
+          throw new Error(`File ${file.name} is too large. Maximum size is 10MB.`);
+        }
+        
+        // Validate file type
+        const allowedTypes = [
+          'application/pdf',
+          'application/msword',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          'application/vnd.ms-excel',
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          'image/jpeg',
+          'image/png',
+          'text/plain'
+        ];
+        
+        if (!allowedTypes.includes(file.type)) {
+          throw new Error(`File ${file.name} has an unsupported format. Please use PDF, DOC, DOCX, XLS, XLSX, JPG, PNG, or TXT files.`);
+        }
+        
+        // Upload to Supabase Storage
+        const result = await uploadAssessmentEvidence(file, assessment?.id || 'demo', questionId);
+        return { file, url: result.url, path: result.path };
+      });
+      
+      const uploadResults = await Promise.all(uploadPromises);
+      
+      // Update uploaded files state for UI display
+      setUploadedFiles(prev => ({
+        ...prev,
+        [questionId]: fileArray
+      }));
+      
+      // Store file URLs in answers (comma-separated string)
+      const fileUrls = uploadResults.map(result => result.url).join(',');
+      handleAnswer(questionId, fileUrls);
+      
+      // Success feedback
+      setSaveStatus('saved');
+      setTimeout(() => setSaveStatus('idle'), 2000);
+      
+    } catch (error) {
+      console.error('File upload error:', error);
+      setUploadErrors(prev => ({
+        ...prev,
+        [questionId]: error instanceof Error ? error.message : 'Failed to upload files'
+      }));
+      setSaveStatus('error');
+      setTimeout(() => setSaveStatus('idle'), 3000);
+    } finally {
+      setUploading(prev => ({ ...prev, [questionId]: false }));
+    }
+  };
+
+  const handleFileUploadLegacy = (questionId: string, files: FileList) => {
+    // Legacy function for UI display only (keeping for backward compatibility)
     setUploadedFiles(prev => ({
       ...prev,
       [questionId]: fileArray
@@ -246,38 +313,68 @@ const VendorAssessmentPortal: React.FC = () => {
               
               {question.type === 'file_upload' && (
                 <div className="mt-3">
+                  {uploadErrors[question.id] && (
+                    <div className="mb-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
+                      <div className="flex items-start">
+                        <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400 mr-2 flex-shrink-0 mt-0.5" />
+                        <span className="text-red-700 dark:text-red-400 text-sm">{uploadErrors[question.id]}</span>
+                      </div>
+                    </div>
+                  )}
+                  
                   <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6">
                     <input
                       type="file"
                       id={`file-${question.id}`}
                       multiple
+                      accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.txt"
                       onChange={(e) => e.target.files && handleFileUpload(question.id, e.target.files)}
                       className="hidden"
+                      disabled={uploading[question.id]}
                     />
                     <label htmlFor={`file-${question.id}`} className="cursor-pointer">
                       <div className="text-center">
-                        <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                          Click to upload files or drag and drop
-                        </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                          PDF, DOC, DOCX, XLS, XLSX up to 10MB each
-                        </p>
+                        {uploading[question.id] ? (
+                          <div className="flex flex-col items-center">
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-vendorsoluce-navy mx-auto mb-2"></div>
+                            <p className="text-sm text-vendorsoluce-navy font-medium">Uploading files...</p>
+                          </div>
+                        ) : (
+                          <>
+                            <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                              Click to upload files or drag and drop
+                            </p>
+                          </>
+                        )}
                       </div>
+                      {!uploading[question.id] && (
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          <span className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                            PDF, DOC, DOCX, XLS, XLSX, JPG, PNG, TXT up to 10MB each
+                          </span>
+                        </p>
+                      )}
                     </label>
                   </div>
                   
                   {uploadedFiles[question.id] && uploadedFiles[question.id].length > 0 && (
                     <div className="mt-3 space-y-2">
+                      <p className="text-sm font-medium text-green-800 dark:text-green-300">
+                        Successfully uploaded files:
+                      </p>
                       {uploadedFiles[question.id].map((file, index) => (
                         <div key={index} className="flex items-center justify-between p-2 bg-green-50 dark:bg-green-900/20 rounded">
                           <div className="flex items-center">
                             <FileText className="h-4 w-4 text-green-600 mr-2" />
                             <span className="text-sm text-green-800 dark:text-green-300">{file.name}</span>
                           </div>
-                          <span className="text-xs text-green-600 dark:text-green-400">
-                            {(file.size / 1024 / 1024).toFixed(2)} MB
-                          </span>
+                          <div className="flex items-center space-x-2">
+                            <span className="text-xs text-green-600 dark:text-green-400">
+                              {(file.size / 1024 / 1024).toFixed(2)} MB
+                            </span>
+                            <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+                          </div>
                         </div>
                       ))}
                     </div>

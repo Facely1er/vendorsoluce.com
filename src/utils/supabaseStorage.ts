@@ -2,6 +2,7 @@ import { supabase } from '../lib/supabase';
 
 // Storage bucket configuration
 const TEMPLATES_BUCKET = 'templates';
+const ASSESSMENT_EVIDENCE_BUCKET = 'assessment-evidence';
 
 /**
  * Get the public URL for a file in Supabase Storage
@@ -61,6 +62,31 @@ export const fileExists = async (bucketName: string, filePath: string): Promise<
   } catch {
     return false;
   }
+};
+
+/**
+ * Upload a file to the assessment evidence bucket
+ */
+export const uploadAssessmentEvidence = async (
+  file: File,
+  assessmentId: string,
+  questionId: string
+): Promise<{ path: string; url: string }> => {
+  const fileExtension = file.name.split('.').pop();
+  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const fileName = `${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}_${timestamp}`;
+  const filePath = `${assessmentId}/${questionId}/${fileName}`;
+
+  const uploadedPath = await uploadToStorage(
+    ASSESSMENT_EVIDENCE_BUCKET,
+    filePath,
+    file,
+    { upsert: false, contentType: file.type }
+  );
+
+  const url = getStorageUrl(ASSESSMENT_EVIDENCE_BUCKET, uploadedPath);
+  
+  return { path: uploadedPath, url };
 };
 
 /**
