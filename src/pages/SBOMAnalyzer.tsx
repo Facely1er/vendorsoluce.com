@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SBOMUploader from '../components/sbom/SBOMUploader';
+import EnhancedSBOMAnalysis from '../components/sbom/EnhancedSBOMAnalysis';
 import { useTranslation } from 'react-i18next';
 import { useSBOMAnalyses } from '../hooks/useSBOMAnalyses';
 import { useAuth } from '../context/AuthContext';
@@ -198,34 +199,43 @@ const SBOMAnalyzer: React.FC = () => {
   };
 
   const analyzeComponentsWithRealData = async (components: any[]) => {
+    // Process components in batches to improve performance while respecting API limits
+    const batchSize = 5; // Analyze 5 components concurrently
     const analyzed: ComponentAnalysis[] = [];
     
-    for (let i = 0; i < components.length; i++) {
-      const component = components[i];
+    for (let i = 0; i < components.length; i += batchSize) {
+      const batch = components.slice(i, i + batchSize);
       
+      // Update progress for current batch
       setAnalysisProgress({
         completed: i,
         total: components.length,
         percentage: Math.round((i / components.length) * 100),
-        currentComponent: `Analyzing ${component.name}@${component.version}...`
-      });
-
-      const analysis = await analyzeComponentVulnerabilities(
-        component.name,
-        component.version,
-        component.ecosystem
-      );
-      
-      analyzed.push({
-        ...component,
-        ...analysis,
-        vulnerabilityCount: analysis.vulnerabilities.length,
-        ntiaCompliance: assessNTIACompliance(component)
+        currentComponent: `Analyzing batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(components.length / batchSize)}...`
       });
       
-      // Rate limiting to avoid overwhelming the API
-      if (i < components.length - 1) {
-        await new Promise(resolve => setTimeout(resolve, 500));
+      // Process batch concurrently
+      const batchPromises = batch.map(async (component) => {
+        const analysis = await analyzeComponentVulnerabilities(
+          component.name,
+          component.version,
+          component.ecosystem
+        );
+        
+        return {
+          ...component,
+          ...analysis,
+          vulnerabilityCount: analysis.vulnerabilities.length,
+          ntiaCompliance: assessNTIACompliance(component)
+        };
+      });
+      
+      const batchResults = await Promise.all(batchPromises);
+      analyzed.push(...batchResults);
+      
+      // Rate limiting between batches to avoid overwhelming the API
+      if (i + batchSize < components.length) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
       }
     }
     
@@ -675,109 +685,13 @@ const SBOMAnalyzer: React.FC = () => {
 
                   {/* Detailed Component Analysis */}
                   {currentAnalysis.components && currentAnalysis.components.length > 0 && (
-                    <div className="space-y-4">
-                      <h4 className="font-medium text-gray-900 dark:text-white flex items-center">
-                        <Shield className="h-4 w-4 mr-2 text-blue-600" />
-                        Component Analysis (Real Vulnerability Data)
-                      </h4>
-                      <div className="max-h-96 overflow-y-auto space-y-2">
-                        {currentAnalysis.components
-                          .filter(comp => comp.vulnerabilities.length > 0)
-                          .slice(0, 5)
-                          .map((component) => (
-                          <div
-                            key={component.id}
-                            className="border border-gray-200 rounded-lg p-3 hover:bg-gray-50 transition-colors cursor-pointer"
-                            onClick={() => toggleComponent(component.id)}
-                          >
-                            <div className="flex items-center justify-between">
-                              <div className="flex-1">
-                                <div className="flex items-center space-x-2">
-                                  <h5 className="font-medium text-gray-900">
-                                    {component.name}
-                                    <span className="text-gray-500 ml-1">v{component.version}</span>
-                                  </h5>
-                                  <span className={`px-2 py-1 rounded text-xs font-medium border ${getRiskColor(getRiskLevel(component.riskScore))}`}>
-                                    {getRiskLevel(component.riskScore)}
-                                  </span>
-                                  {component.vulnerabilities.length > 0 && (
-                                    <span className="text-sm text-red-600">
-                                      {component.vulnerabilities.length} vulns
-                                    </span>
-                                  )}
-                                </div>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <span className="text-sm text-gray-500">Score: {component.riskScore}</span>
-                                <svg 
-                                  className={`w-4 h-4 text-gray-400 transition-transform ${expandedComponents.has(component.id) ? 'rotate-180' : ''}`} 
-                                  fill="none" 
-                                  stroke="currentColor" 
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                </svg>
-                              </div>
-                            </div>
-                            
-                            {expandedComponents.has(component.id) && (
-                              <div className="mt-3 pl-4 border-l-2 border-gray-200">
-                                <div className="grid grid-cols-2 gap-2 text-sm mb-3">
-                                  <div>
-                                    <span className="text-gray-600">Type: </span>
-                                    <span className="font-medium">{component.type}</span>
-                                  </div>
-                                  <div>
-                                    <span className="text-gray-600">Ecosystem: </span>
-                                    <span className="font-medium">{component.ecosystem}</span>
-                                  </div>
-                                </div>
-                                
-                                {component.vulnerabilities.length > 0 && (
-                                  <div className="space-y-2">
-                                    <h6 className="text-sm font-medium text-gray-900">Real Vulnerabilities:</h6>
-                                    {component.vulnerabilities.slice(0, 3).map((vuln, index) => (
-                                      <div key={index} className="bg-red-50 p-2 rounded border border-red-200">
-                                        <div className="flex items-center justify-between mb-1">
-                                          <span className="font-medium text-red-900 text-sm">
-                                            {vuln.cve || vuln.id}
-                                          </span>
-                                          <span className={`px-2 py-1 rounded text-xs font-medium ${getSeverityColor(vuln.severity)}`}>
-                                            {vuln.severity}
-                                          </span>
-                                        </div>
-                                        <p className="text-xs text-red-800 mb-1">{vuln.summary}</p>
-                                        {vuln.references.length > 0 && (
-                                          <a 
-                                            href={vuln.references[0]} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="text-xs text-blue-600 hover:underline flex items-center"
-                                            onClick={(e) => e.stopPropagation()}
-                                          >
-                                            Reference <ExternalLink className="h-3 w-3 ml-1" />
-                                          </a>
-                                        )}
-                                      </div>
-                                    ))}
-                                    {component.vulnerabilities.length > 3 && (
-                                      <p className="text-xs text-gray-600">
-                                        + {component.vulnerabilities.length - 3} more vulnerabilities
-                                      </p>
-                                    )}
-                                  </div>
-                                )}
-                              </div>
-                            )}
-                          </div>
-                        ))}
-                        {currentAnalysis.components.filter(comp => comp.vulnerabilities.length > 0).length > 5 && (
-                          <p className="text-sm text-gray-600 text-center">
-                            + {currentAnalysis.components.filter(comp => comp.vulnerabilities.length > 0).length - 5} more components with vulnerabilities
-                          </p>
-                        )}
-                      </div>
-                    </div>
+                    <EnhancedSBOMAnalysis 
+                      components={currentAnalysis.components}
+                      onPolicyUpdate={(policies) => {
+                        console.log('Policy updated:', policies);
+                        // Future: Save policy changes to database
+                      }}
+                    />
                   )}
 
                   {/* Recommendations */}

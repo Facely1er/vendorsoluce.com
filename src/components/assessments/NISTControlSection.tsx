@@ -60,7 +60,6 @@ const NISTControlSection: React.FC = () => {
       <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">NIST SP 800-161 Controls</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {nistControls.map((control) => (
-          <div key={control.id} className="border border-gray-200 dark:border-gray-700 rounded-md p-4 hover:border-vendortal-navy dark:hover:border-vendortal-navy transition-colors">
           <div key={control.id} className="border border-gray-200 dark:border-gray-700 rounded-md p-4 hover:border-vendorsoluce-navy dark:hover:border-vendorsoluce-navy transition-colors">
             <div className="flex items-start">
               <div className="bg-gray-100 dark:bg-gray-800 text-vendorsoluce-navy dark:text-vendorsoluce-blue font-bold px-3 py-1 rounded text-sm mr-3 mt-1">
@@ -74,8 +73,6 @@ const NISTControlSection: React.FC = () => {
           </div>
         ))}
       </div>
-    )
-    )
     }
     </section>
   );
