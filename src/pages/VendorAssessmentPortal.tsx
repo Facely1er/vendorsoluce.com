@@ -148,7 +148,8 @@ const VendorAssessmentPortal: React.FC = () => {
     setUploading(prev => ({ ...prev, [questionId]: true }));
     setUploadErrors(prev => ({ ...prev, [questionId]: '' }));
     
-    try {
+    const uploadFiles = async () => {
+      try {
       const uploadPromises = fileArray.map(async (file) => {
         // Validate file size (limit to 10MB)
         if (file.size > 10 * 1024 * 1024) {
@@ -192,7 +193,7 @@ const VendorAssessmentPortal: React.FC = () => {
       setSaveStatus('saved');
       setTimeout(() => setSaveStatus('idle'), 2000);
       
-    } catch (error) {
+      } catch (error) {
       console.error('File upload error:', error);
       setUploadErrors(prev => ({
         ...prev,
@@ -200,8 +201,12 @@ const VendorAssessmentPortal: React.FC = () => {
       }));
       setSaveStatus('error');
       setTimeout(() => setSaveStatus('idle'), 3000);
-    } finally {
+      } finally {
       setUploading(prev => ({ ...prev, [questionId]: false }));
+      }
+    };
+    
+    uploadFiles();
     }
   };
 
