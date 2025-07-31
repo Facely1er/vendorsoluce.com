@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Card, { CardHeader, CardTitle, CardContent } from '../components/ui/Card';
 import VendorRiskTable from '../components/vendor/VendorRiskTable';
 import { VendorRisk } from '../types';
@@ -19,6 +20,7 @@ import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
 
 const VendorRiskDashboard: React.FC = () => {
   const { t } = useTranslation();
+  const location = useLocation();
   const { vendors, loading, error, refetch } = useVendors();
   const { analyses } = useSBOMAnalyses();
   const { assessments } = useSupplyChainAssessments();
@@ -36,6 +38,15 @@ const VendorRiskDashboard: React.FC = () => {
     threatsToday: 142,
     coverage: 98
   });
+
+  // Auto-open Add Vendor modal if navigated from Get Started widget
+  React.useEffect(() => {
+    if (location.state?.openAddVendorModal) {
+      setShowAddModal(true);
+      // Clear the state to prevent modal from reopening on subsequent visits
+      window.history.replaceState({}, '', location.pathname);
+    }
+  }, [location]);
 
   // Transform vendors data to match VendorRisk interface
   const vendorRiskData: VendorRisk[] = vendors.map(vendor => ({

@@ -41,7 +41,7 @@ const GetStartedWidget: React.FC<GetStartedWidgetProps> = ({
       title: 'Add Your First Vendor',
       description: 'Start building your vendor risk portfolio by adding your first vendor.',
       icon: <Plus className="h-6 w-6" />,
-      href: '/vendor-risk',
+      href: '/vendors',
       completed: vendorCount > 0,
       completedText: `${vendorCount} vendors added`
     },
@@ -143,7 +143,11 @@ const GetStartedWidget: React.FC<GetStartedWidgetProps> = ({
                     </p>
                   </div>
                 </Link>
-              )}
+                  <Link 
+                    to={item.href} 
+                    state={item.id === 'first-vendor' ? { openAddVendorModal: true } : undefined}
+                    className="block h-full"
+                  >
             </div>
           ))}
         </div>
