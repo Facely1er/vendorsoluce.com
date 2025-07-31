@@ -1368,6 +1368,104 @@
       }
     }
   },
+  "supplyChainResults": {
+    "defaultTitle": "Évaluation des risques de la chaîne d'approvisionnement",
+    "resultsTitle": "Résultats",
+    "accountPrompt": {
+      "title": "Créez un compte pour sauvegarder vos résultats",
+      "description": "Inscrivez-vous gratuitement pour sauvegarder vos résultats d'évaluation, suivre les progrès au fil du temps et accéder à des fonctionnalités supplémentaires.",
+      "createAccount": "Créer un compte",
+      "signIn": "Se connecter"
+    },
+    "keyFindings": {
+      "title": "Principales conclusions",
+      "primaryRiskAreas": "Zones de risque principales",
+      "strengths": "Points forts",
+      "compliance": "conformité",
+      "noCriticalRisks": "Aucune zone de risque critique identifiée",
+      "noSignificantStrengths": "Aucun point fort significatif identifié"
+    },
+    "viewDetailedRecommendations": "Voir les recommandations détaillées"
+  },
+  "supplyChainRecommendations": {
+    "title": "Recommandations de gestion des risques de la chaîne d'approvisionnement",
+    "subtitle": "Recommandations priorisées pour améliorer votre posture de sécurité de la chaîne d'approvisionnement",
+    "stats": {
+      "totalRecommendations": "Total des recommandations",
+      "criticalPriority": "Priorité critique",
+      "inProgress": "En cours",
+      "completed": "Terminé"
+    },
+    "search": {
+      "placeholder": "Rechercher des recommandations par titre, description ou catégorie..."
+    },
+    "filters": {
+      "priority": "Priorité",
+      "category": "Catégorie",
+      "timeframe": "Délai",
+      "effort": "Effort",
+      "status": "Statut",
+      "allPriorities": "Toutes les priorités",
+      "allCategories": "Toutes les catégories",
+      "allTimeframes": "Tous les délais",
+      "allEffortLevels": "Tous les niveaux d'effort",
+      "allStatuses": "Tous les statuts",
+      "clearAll": "Effacer tous les filtres"
+    },
+    "priorities": {
+      "critical": "Critique",
+      "high": "Élevé",
+      "medium": "Moyen",
+      "low": "Faible"
+    },
+    "timeframes": {
+      "immediate": "Immédiat",
+      "shortterm": "Court terme",
+      "mediumterm": "Moyen terme",
+      "longterm": "Long terme"
+    },
+    "efforts": {
+      "minimal": "Minimal",
+      "moderate": "Modéré",
+      "significant": "Significatif"
+    },
+    "statuses": {
+      "notStarted": "Pas commencé",
+      "inProgress": "En cours",
+      "completed": "Terminé"
+    },
+    "impactLevels": {
+      "high": "Élevé"
+    },
+    "labels": {
+      "timeframe": "Délai",
+      "effort": "Effort",
+      "impact": "Impact",
+      "expectedImpact": "Impact attendu",
+      "implementationSteps": "Étapes de mise en œuvre",
+      "references": "Références"
+    },
+    "actions": {
+      "filters": "Filtres",
+      "exportPdf": "Exporter PDF",
+      "exporting": "Exportation en cours...",
+      "retry": "Réessayer",
+      "viewSteps": "Voir les étapes de mise en œuvre",
+      "completed": "Terminé",
+      "markComplete": "Marquer comme terminé"
+    },
+    "navigation": {
+      "backToResults": "Retour aux résultats"
+    },
+    "errors": {
+      "loadingError": "Erreur lors du chargement des recommandations"
+    },
+    "emptyState": {
+      "noRecommendations": "Aucune recommandation trouvée",
+      "tryDifferentFilters": "Essayez d'ajuster vos termes de recherche ou filtres pour trouver des recommandations."
+    },
+    "resultsCount": "Affichage de {{filtered}} sur {{total}} recommandations"
+  },
   "quickTools": {
     "nistChecklist": {
       "title": "Liste de Contrôle Conformité NIST",

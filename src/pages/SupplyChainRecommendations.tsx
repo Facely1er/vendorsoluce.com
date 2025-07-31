@@ -253,7 +253,7 @@ const SupplyChainRecommendations = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="text-center py-12">
             <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{t('supplyChainRecommendations.errors.loadingTitle')}</h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{t('supplyChainRecommendations.errors.loadingError')}</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6">{error}</p>
             <button
               onClick={() => window.location.reload()}
@@ -459,8 +459,8 @@ const SupplyChainRecommendations = () => {
           {filteredRecommendations.length === 0 ? (
             <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
               <FileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('supplyChainRecommendations.emptyState.title')}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{t('supplyChainRecommendations.emptyState.description')}</p>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">{t('supplyChainRecommendations.emptyState.noRecommendations')}</h3>
+              <p className="text-gray-600 dark:text-gray-400">{t('supplyChainRecommendations.emptyState.tryDifferentFilters')}</p>
             </div>
           ) : (
             filteredRecommendations.map((recommendation) => (

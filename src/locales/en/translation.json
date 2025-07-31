@@ -1368,6 +1368,104 @@
       }
     }
   },
+  "supplyChainResults": {
+    "defaultTitle": "Supply Chain Risk Assessment",
+    "resultsTitle": "Results",
+    "accountPrompt": {
+      "title": "Create an account to save your results",
+      "description": "Sign up for a free account to save your assessment results, track progress over time, and access additional features.",
+      "createAccount": "Create Account",
+      "signIn": "Sign In"
+    },
+    "keyFindings": {
+      "title": "Key Findings",
+      "primaryRiskAreas": "Primary Risk Areas",
+      "strengths": "Strengths",
+      "compliance": "compliance",
+      "noCriticalRisks": "No critical risk areas identified",
+      "noSignificantStrengths": "No significant strengths identified"
+    },
+    "viewDetailedRecommendations": "View Detailed Recommendations"
+  },
+  "supplyChainRecommendations": {
+    "title": "Supply Chain Risk Management Recommendations",
+    "subtitle": "Prioritized recommendations to improve your supply chain security posture",
+    "stats": {
+      "totalRecommendations": "Total Recommendations",
+      "criticalPriority": "Critical Priority",
+      "inProgress": "In Progress",
+      "completed": "Completed"
+    },
+    "search": {
+      "placeholder": "Search recommendations by title, description, or category..."
+    },
+    "filters": {
+      "priority": "Priority",
+      "category": "Category",
+      "timeframe": "Timeframe",
+      "effort": "Effort",
+      "status": "Status",
+      "allPriorities": "All Priorities",
+      "allCategories": "All Categories",
+      "allTimeframes": "All Timeframes",
+      "allEffortLevels": "All Effort Levels",
+      "allStatuses": "All Statuses",
+      "clearAll": "Clear All Filters"
+    },
+    "priorities": {
+      "critical": "Critical",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "timeframes": {
+      "immediate": "Immediate",
+      "shortterm": "Short-term",
+      "mediumterm": "Medium-term",
+      "longterm": "Long-term"
+    },
+    "efforts": {
+      "minimal": "Minimal",
+      "moderate": "Moderate",
+      "significant": "Significant"
+    },
+    "statuses": {
+      "notStarted": "Not Started",
+      "inProgress": "In Progress",
+      "completed": "Completed"
+    },
+    "impactLevels": {
+      "high": "High"
+    },
+    "labels": {
+      "timeframe": "Timeframe",
+      "effort": "Effort",
+      "impact": "Impact",
+      "expectedImpact": "Expected Impact",
+      "implementationSteps": "Implementation Steps",
+      "references": "References"
+    },
+    "actions": {
+      "filters": "Filters",
+      "exportPdf": "Export PDF",
+      "exporting": "Exporting...",
+      "retry": "Retry",
+      "viewSteps": "View Implementation Steps",
+      "completed": "Completed",
+      "markComplete": "Mark Complete"
+    },
+    "navigation": {
+      "backToResults": "Back to Results"
+    },
+    "errors": {
+      "loadingError": "Error Loading Recommendations"
+    },
+    "emptyState": {
+      "noRecommendations": "No recommendations found",
+      "tryDifferentFilters": "Try adjusting your search terms or filters to find recommendations."
+    },
+    "resultsCount": "Showing {{filtered}} of {{total}} recommendations"
+  },
   "quickTools": {
     "nistChecklist": {
       "title": "NIST Compliance Checklist",

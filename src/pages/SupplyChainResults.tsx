@@ -7,6 +7,7 @@ import { AssessmentResults } from '../components/assessments/AssessmentResults';
 import { generateResultsPdf } from '../utils/generatePdf';
 import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 interface SectionScore {
   title: string;
@@ -20,6 +21,7 @@ interface ResultData {
 }
 
 const SupplyChainResults = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
@@ -139,7 +141,7 @@ const SupplyChainResults = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
-        {assessmentMetadata.assessmentName || 'Supply Chain Risk Assessment'} - Results
+        {assessmentMetadata.assessmentName || t('supplyChainResults.defaultTitle')} - {t('supplyChainResults.resultsTitle')}
       </h1>
       
       {/* Show info message for non-authenticated users */}
@@ -149,20 +151,20 @@ const SupplyChainResults = () => {
             <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-0.5 flex-shrink-0" />
             <div>
               <h3 className="font-medium text-blue-800 dark:text-blue-300 mb-1">
-                Create an account to save your results
+                {t('supplyChainResults.accountPrompt.title')}
               </h3>
               <p className="text-sm text-blue-700 dark:text-blue-400 mb-3">
-                Sign up for a free account to save your assessment results, track progress over time, and access additional features.
+                {t('supplyChainResults.accountPrompt.description')}
               </p>
               <div className="flex space-x-3">
                 <Link to="/signup">
                   <button className="px-3 py-1.5 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700 transition-colors">
-                    Create Account
+                    {t('supplyChainResults.accountPrompt.createAccount')}
                   </button>
                 </Link>
                 <Link to="/signin">
                   <button className="px-3 py-1.5 border border-blue-300 text-blue-600 rounded-md text-sm hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
-                    Sign In
+                    {t('supplyChainResults.accountPrompt.signIn')}
                   </button>
                 </Link>
               </div>
@@ -177,32 +179,32 @@ const SupplyChainResults = () => {
       />
       
       <div className="mt-8">
-        <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Key Findings</h2>
+        <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">{t('supplyChainResults.keyFindings.title')}</h2>
         <div className="space-y-4">
           <div className="p-4 bg-gray-100/30 dark:bg-gray-800/30 rounded-lg border border-gray-200 dark:border-gray-700">
-            <h3 className="font-medium mb-2 text-gray-900 dark:text-white">Primary Risk Areas</h3>
+            <h3 className="font-medium mb-2 text-gray-900 dark:text-white">{t('supplyChainResults.keyFindings.primaryRiskAreas')}</h3>
             <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
               {results.sectionScores
                 .filter(s => s.percentage < 60)
                 .map((section, index) => (
-                  <li key={index}>{section.title} ({section.percentage}% compliance)</li>
+                  <li key={index}>{section.title} ({section.percentage}% {t('supplyChainResults.keyFindings.compliance')})</li>
                 ))}
               {results.sectionScores.filter(s => s.percentage < 60).length === 0 && (
-                <li>No critical risk areas identified</li>
+                <li>{t('supplyChainResults.keyFindings.noCriticalRisks')}</li>
               )}
             </ul>
           </div>
           
           <div className="p-4 bg-gray-100/30 dark:bg-gray-800/30 rounded-lg border border-gray-200 dark:border-gray-700">
-            <h3 className="font-medium mb-2 text-gray-900 dark:text-white">Strengths</h3>
+            <h3 className="font-medium mb-2 text-gray-900 dark:text-white">{t('supplyChainResults.keyFindings.strengths')}</h3>
             <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400">
               {results.sectionScores
                 .filter(s => s.percentage >= 70)
                 .map((section, index) => (
-                  <li key={index}>{section.title} ({section.percentage}% compliance)</li>
+                  <li key={index}>{section.title} ({section.percentage}% {t('supplyChainResults.keyFindings.compliance')})</li>
                 ))}
               {results.sectionScores.filter(s => s.percentage >= 70).length === 0 && (
-                <li>No significant strengths identified</li>
+                <li>{t('supplyChainResults.keyFindings.noSignificantStrengths')}</li>
               )}
             </ul>
           </div>
@@ -215,7 +217,7 @@ const SupplyChainResults = () => {
         <button
           className="px-4 py-2 bg-vendorsoluce-navy text-white rounded hover:bg-vendorsoluce-navy/90 transition-colors"
         >
-          View Detailed Recommendations
+          {t('supplyChainResults.viewDetailedRecommendations')}
         </button>
           </Link>
         )}
@@ -224,7 +226,7 @@ const SupplyChainResults = () => {
             <button
               className="px-4 py-2 bg-vendorsoluce-navy text-white rounded hover:bg-vendorsoluce-navy/90 transition-colors"
             >
-              View Detailed Recommendations
+              {t('supplyChainResults.viewDetailedRecommendations')}
             </button>
           </Link>
         )}
