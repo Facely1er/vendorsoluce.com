@@ -218,7 +218,7 @@ const WorkflowAutomation: React.FC = () => {
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">Active Workflow Tasks</h3>
             <Button variant="primary" size="sm">
               <PlayCircle className="h-4 w-4 mr-2" />
-              Start New Workflow
+              Start New
             </Button>
           </div>
           
@@ -262,14 +262,21 @@ const WorkflowAutomation: React.FC = () => {
                     <div className="flex space-x-2 ml-4">
                       {task.status !== 'completed' && (
                         <Button
-                          variant="outline"
+                          variant="secondary"
                           size="sm"
                           onClick={() => completeTask(task.id)}
                         >
-                          Mark Complete
+                          <CheckCircle className="h-4 w-4 mr-1" />
+                          Complete
                         </Button>
                       )}
-                      <Button variant="ghost" size="sm">
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        onClick={() => {
+                          alert(`View details for "${task.title}". This would open a detailed task view with description, comments, attachments, and completion tracking.`);
+                        }}
+                      >
                         <ArrowRight className="h-4 w-4" />
                       </Button>
                     </div>
