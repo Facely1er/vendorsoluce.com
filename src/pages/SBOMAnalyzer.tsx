@@ -199,43 +199,61 @@ const SBOMAnalyzer: React.FC = () => {
   };
 
   const analyzeComponentsWithRealData = async (components: any[]) => {
-    // Process components in batches to improve performance while respecting API limits
-    const batchSize = 5; // Analyze 5 components concurrently
+    // Process components with improved concurrency control for better performance
+    const concurrencyLimit = 10; // Analyze up to 10 components concurrently
     const analyzed: ComponentAnalysis[] = [];
     
-    for (let i = 0; i < components.length; i += batchSize) {
-      const batch = components.slice(i, i + batchSize);
+    for (let i = 0; i < components.length; i += concurrencyLimit) {
+      const batch = components.slice(i, i + concurrencyLimit);
       
       // Update progress for current batch
       setAnalysisProgress({
         completed: i,
         total: components.length,
         percentage: Math.round((i / components.length) * 100),
-        currentComponent: `Analyzing batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(components.length / batchSize)}...`
+        currentComponent: `Analyzing batch ${Math.floor(i / concurrencyLimit) + 1}/${Math.ceil(components.length / concurrencyLimit)}...`
       });
       
-      // Process batch concurrently
+      // Process batch concurrently with improved error handling
       const batchPromises = batch.map(async (component) => {
-        const analysis = await analyzeComponentVulnerabilities(
-          component.name,
-          component.version,
-          component.ecosystem
-        );
-        
-        return {
-          ...component,
-          ...analysis,
-          vulnerabilityCount: analysis.vulnerabilities.length,
-          ntiaCompliance: assessNTIACompliance(component)
-        };
+        try {
+          const analysis = await analyzeComponentVulnerabilities(
+            component.name,
+            component.version,
+            component.ecosystem
+          );
+          
+          return {
+            ...component,
+            ...analysis,
+            vulnerabilityCount: analysis.vulnerabilities.length,
+            ntiaCompliance: assessNTIACompliance(component)
+          };
+        } catch (error) {
+          console.warn(`Failed to analyze ${component.name}@${component.version}:`, error);
+          return {
+            ...component,
+            vulnerabilities: [],
+            riskScore: 50,
+            vulnerabilityCount: 0,
+            lastAnalyzed: new Date().toISOString(),
+            ntiaCompliance: assessNTIACompliance(component),
+            analysisError: error instanceof Error ? error.message : 'Analysis failed'
+          };
+        }
       });
       
-      const batchResults = await Promise.all(batchPromises);
-      analyzed.push(...batchResults);
+      // Wait for all components in the batch to complete
+      const batchResults = await Promise.allSettled(batchPromises);
+      const successfulResults = batchResults
+        .filter(result => result.status === 'fulfilled')
+        .map(result => (result as PromiseFulfilledResult<ComponentAnalysis>).value);
       
-      // Rate limiting between batches to avoid overwhelming the API
-      if (i + batchSize < components.length) {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+      analyzed.push(...successfulResults);
+      
+      // Short delay between batches to respect API rate limits
+      if (i + concurrencyLimit < components.length) {
+        await new Promise(resolve => setTimeout(resolve, 500));
       }
     }
     
@@ -685,13 +703,18 @@ const SBOMAnalyzer: React.FC = () => {
 
                   {/* Detailed Component Analysis */}
                   {currentAnalysis.components && currentAnalysis.components.length > 0 && (
-                    <EnhancedSBOMAnalysis 
-                      components={currentAnalysis.components}
-                      onPolicyUpdate={(policies) => {
-                        console.log('Policy updated:', policies);
-                        // Future: Save policy changes to database
-                      }}
-                    />
+                    <div className="space-y-4">
+                      <h4 className="text-lg font-medium text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+                        {t('sbom.results.detailedAnalysis')}
+                      </h4>
+                      <EnhancedSBOMAnalysis 
+                        components={currentAnalysis.components}
+                        onPolicyUpdate={(policies) => {
+                          console.log('Policy updated:', policies);
+                          // Future: Save policy changes to database
+                        }}
+                      />
+                    </div>
                   )}
 
                   {/* Recommendations */}

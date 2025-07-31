@@ -1239,7 +1239,8 @@
       "recommendations": "Recommendations:",
       "immediateAction": "Immediate action required: {{count}} critical vulnerabilities found",
       "goodPosture": "Good security posture. Continue monitoring for new vulnerabilities.",
-      "reviewComponents": "Review and update vulnerable components. Consider implementing automated scanning."
+      "reviewComponents": "Review components with vulnerabilities and consider updates.",
+      "detailedAnalysis": "Detailed Component Analysis"
     },
     "recentAnalyses": "Recent Analyses",
     "export": "Export",

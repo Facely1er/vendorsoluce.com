@@ -112,8 +112,8 @@ const EnhancedSBOMAnalysis: React.FC<EnhancedSBOMAnalysisProps> = ({
     maintainer: 'Community',
     downloadCount: Math.floor(Math.random() * 1000000),
     isDeprecated: Math.random() > 0.9,
-    riskScore: comp.riskScore || Math.floor(Math.random() * 100),
-    vulnerabilities: generateMockVulnerabilities(comp.name),
+    riskScore: comp.riskScore || 50,
+    vulnerabilities: comp.vulnerabilities || generateMockVulnerabilities(comp.name),
     policyViolations: []
   }));
 
