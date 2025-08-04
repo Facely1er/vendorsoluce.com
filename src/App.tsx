@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { I18nProvider } from './context/I18nContext';
+import NotificationManager from './components/common/NotificationManager';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
@@ -49,6 +50,7 @@ function App() {
         <Router>
           <AuthProvider>
             <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+              <NotificationManager />
               <Navbar />
               <main className="flex-1">
                 <Routes>

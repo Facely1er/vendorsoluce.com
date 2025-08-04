@@ -6,12 +6,14 @@ import AssessmentSection from '../components/home/AssessmentSection';
 import FeatureSection from '../components/home/FeatureSection';
 import QuickToolsSection from '../components/home/QuickToolsSection';
 import CTASection from '../components/home/CTASection';
+import NotificationManager from '../components/common/NotificationManager';
 
 const HomePage: React.FC = () => {
   const { t } = useTranslation();
   
   return (
     <main className="min-h-screen">
+      <NotificationManager />
       <HeroSection />
       {/*<AssessmentSection /> */}
        <ValuePropositionSection />

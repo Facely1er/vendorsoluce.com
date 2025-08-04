@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { X, Save } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { useVendors } from '../../hooks/useVendors';
+import { useVendorStore } from '../../stores/vendorStore';
+import { useAppStore } from '../../stores/appStore';
+import { useAuth } from '../../context/AuthContext';
 
 interface AddVendorModalProps {
   onClose: () => void;
@@ -9,7 +11,9 @@ interface AddVendorModalProps {
 }
 
 const AddVendorModal: React.FC<AddVendorModalProps> = ({ onClose, onSuccess }) => {
-  const { createVendor } = useVendors();
+  const { user } = useAuth();
+  const createVendor = useVendorStore((state) => state.createVendor);
+  const addNotification = useAppStore((state) => state.addNotification);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -22,7 +26,7 @@ const AddVendorModal: React.FC<AddVendorModalProps> = ({ onClose, onSuccess }) =
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name.trim()) return;
+    if (!formData.name.trim() || !user?.id) return;
 
     setLoading(true);
     try {
@@ -35,10 +39,22 @@ const AddVendorModal: React.FC<AddVendorModalProps> = ({ onClose, onSuccess }) =
         risk_score: 50, // Default risk score
         risk_level: 'Medium',
         compliance_status: 'Non-Compliant',
+      }, user.id);
+      
+      addNotification({
+        title: 'Vendor Added Successfully',
+        message: `${formData.name} has been added to your vendor portfolio.`,
+        type: 'success'
       });
+      
       onSuccess();
     } catch (error) {
       console.error('Error creating vendor:', error);
+      addNotification({
+        title: 'Failed to Add Vendor',
+        message: 'There was an error adding the vendor. Please try again.',
+        type: 'error'
+      });
     } finally {
       setLoading(false);
     }

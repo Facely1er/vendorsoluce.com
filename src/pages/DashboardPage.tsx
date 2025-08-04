@@ -19,14 +19,29 @@ import { useSBOMAnalyses } from '../hooks/useSBOMAnalyses';
 import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
 import GetStartedWidget from '../components/onboarding/GetStartedWidget';
 import CustomizableDashboard from '../components/dashboard/CustomizableDashboard';
+import EnhancedVendorManagement from '../components/vendor/EnhancedVendorManagement';
+import { useAppStore } from '../stores/appStore';
 
 const DashboardPage: React.FC = () => {
   const { user, profile } = useAuth();
+  const addNotification = useAppStore((state) => state.addNotification);
   const { vendors, loading: vendorsLoading } = useVendors();
   const { analyses, loading: sbomLoading } = useSBOMAnalyses();
   const { assessments, loading: assessmentsLoading } = useSupplyChainAssessments();
 
   const isLoading = vendorsLoading || sbomLoading || assessmentsLoading;
+
+  // Welcome back notification for returning users
+  React.useEffect(() => {
+    if (user && !isLoading) {
+      addNotification({
+        title: 'Welcome back!',
+        message: `You have ${vendors.length} vendors and ${assessments.length} assessments in your portfolio.`,
+        type: 'info',
+        duration: 4000
+      });
+    }
+  }, [user, isLoading, vendors.length, assessments.length, addNotification]);
 
   // Calculate risk distribution
   const riskDistribution = {
@@ -309,7 +324,7 @@ const DashboardPage: React.FC = () => {
               </Button>
             </Link>
           </div>
-          <CustomizableDashboard />
+          <EnhancedVendorManagement />
         </div>
       ) : null}
     </div>
