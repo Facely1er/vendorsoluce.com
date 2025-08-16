@@ -199,7 +199,7 @@ const VendorSecurityAssessments: React.FC = () => {
       {/* Premium Features Showcase */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <Card className="border-l-4 border-l-yellow-500">
-          <CardContent className="p-6">
+          <CardContent className="p-8">
             <div className="flex items-center mb-4">
               <Shield className="h-8 w-8 text-yellow-500 mr-3" />
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
@@ -218,7 +218,7 @@ const VendorSecurityAssessments: React.FC = () => {
         </Card>
 
         <Card className="border-l-4 border-l-blue-500">
-          <CardContent className="p-6">
+          <CardContent className="p-8">
             <div className="flex items-center mb-4">
               <Users className="h-8 w-8 text-blue-500 mr-3" />
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
@@ -237,7 +237,7 @@ const VendorSecurityAssessments: React.FC = () => {
         </Card>
 
         <Card className="border-l-4 border-l-green-500">
-          <CardContent className="p-6">
+          <CardContent className="p-8">
             <div className="flex items-center mb-4">
               <BarChart3 className="h-8 w-8 text-green-500 mr-3" />
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">
