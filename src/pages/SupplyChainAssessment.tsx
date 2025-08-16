@@ -430,7 +430,7 @@ const SupplyChainAssessment = () => {
 
   // Start Screen Component
   const StartScreen = () => (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <BackToDashboardLink />
 
       <Card className="border-vendortal-navy dark:border-trust-blue border-l-4">
@@ -505,7 +505,7 @@ const SupplyChainAssessment = () => {
 
   // Onboarding Component
   const OnboardingScreen = () => (
-    <div className="container mx-auto px-4 py-8 max-w-2xl">
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <BackToDashboardLink />
 
       <Card>
@@ -579,7 +579,7 @@ const SupplyChainAssessment = () => {
 
   // The main assessment UI (original code with minor adjustments)
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <BackToDashboardLink />
       
       {/* Enhanced Navigation Header */}
