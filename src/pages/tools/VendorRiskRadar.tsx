@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useVendors } from '../../hooks/useVendors';
 import { useAuth } from '../../context/AuthContext';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, Legend } from 'recharts';
+import BackToDashboardLink from '../../components/common/BackToDashboardLink';
 
 interface RiskDimension {
   id: string;
@@ -363,11 +364,9 @@ const VendorRiskRadar: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <BackToDashboardLink />
+      
       <div className="mb-6">
-        <Link to="/" className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue transition-colors mb-4">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          {t('navigation.home')}
-        </Link>
         <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{t('vendorRiskRadar.title')}</h1>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
           {t('vendorRiskRadar.description')}

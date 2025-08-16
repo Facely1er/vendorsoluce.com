@@ -23,6 +23,7 @@ import { Link } from 'react-router-dom';
 import { useVendors } from '../hooks/useVendors';
 import CreateAssessmentModal from '../components/vendor-assessments/CreateAssessmentModal';
 import AssessmentProgressTracker from '../components/vendor-assessments/AssessmentProgressTracker';
+import BackToDashboardLink from '../components/common/BackToDashboardLink';
 
 interface Assessment {
   id: string;
@@ -167,6 +168,8 @@ const VendorSecurityAssessments: React.FC = () => {
 
   return (
     <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <BackToDashboardLink />
+      
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between">

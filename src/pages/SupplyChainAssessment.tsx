@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { useSupplyChainAssessments } from '../hooks/useSupplyChainAssessments';
 import { useAuth } from '../context/AuthContext';
 import DataImportExport from '../components/data/DataImportExport';
+import BackToDashboardLink from '../components/common/BackToDashboardLink';
 import { Card as UICard } from '../components/ui/Card';
 
 const SupplyChainAssessment = () => {
@@ -430,12 +431,7 @@ const SupplyChainAssessment = () => {
   // Start Screen Component
   const StartScreen = () => (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <div className="mb-6">
-        <Link to="/" className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue transition-colors mb-4">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          {t('assessment.backToHome')}
-        </Link>
-      </div>
+      <BackToDashboardLink />
 
       <Card className="border-vendortal-navy dark:border-trust-blue border-l-4">
         <CardHeader className="text-center pb-0">
@@ -510,15 +506,7 @@ const SupplyChainAssessment = () => {
   // Onboarding Component
   const OnboardingScreen = () => (
     <div className="container mx-auto px-4 py-8 max-w-2xl">
-      <div className="mb-6">
-        <button 
-          onClick={() => setAssessmentStage('startScreen')}
-          className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendortal-navy dark:hover:text-trust-blue transition-colors mb-4"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          {t('assessment.onboarding.back')}
-        </button>
-      </div>
+      <BackToDashboardLink />
 
       <Card>
         <CardHeader>
@@ -592,6 +580,8 @@ const SupplyChainAssessment = () => {
   // The main assessment UI (original code with minor adjustments)
   return (
     <div className="container mx-auto px-4 py-8">
+      <BackToDashboardLink />
+      
       {/* Enhanced Navigation Header */}
       <div className="mb-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -606,10 +596,6 @@ const SupplyChainAssessment = () => {
               {t('assessment.backToStart')}
             </Button>
             
-            <Link to="/" className="inline-flex items-center text-gray-700 dark:text-gray-300 hover:text-vendorsoluce-navy dark:hover:text-vendorsoluce-blue transition-colors">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              {t('assessment.backToHome')}
-            </Link>
           </div>
           
           <div className="flex items-center space-x-3">
