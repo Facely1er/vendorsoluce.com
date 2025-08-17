@@ -8,11 +8,29 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   build: {
+    target: 'es2020',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
     rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          charts: ['recharts'],
+          supabase: ['@supabase/supabase-js'],
+          utils: ['jspdf', 'html2canvas', 'i18next'],
+        },
+      },
       input: {
         main: '/index.html'
       }
-    }
+    },
+    sourcemap: false,
+    reportCompressedSize: false,
   },
   preview: {
     port: 4173,
@@ -21,15 +39,6 @@ export default defineConfig({
   server: {
     port: 5173,
     strictPort: true,
-    headers: {
-      'Cross-Origin-Embedder-Policy': 'require-corp',
-      'Cross-Origin-Opener-Policy': 'same-origin',
-    },
-    cors: {
-      origin: '*',
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-      credentials: true,
-    },
     historyApiFallback: {
       index: '/index.html',
     },

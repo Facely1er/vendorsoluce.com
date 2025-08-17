@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { I18nProvider } from './context/I18nContext';
+import ErrorBoundary from './components/common/ErrorBoundary';
 import NotificationManager from './components/common/NotificationManager';
+import OfflineDetector from './components/common/OfflineDetector';
+import AccessibilityHelper from './components/common/AccessibilityHelper';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
@@ -45,15 +48,17 @@ import DashboardDemoPage from './pages/DashboardDemoPage';
 
 function App() {
   return (
-    <I18nProvider>
-      <ThemeProvider>
-        <Router>
-          <AuthProvider>
-            <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
-              <NotificationManager />
-              <Navbar />
-              <main className="flex-1">
-                <Routes>
+    <ErrorBoundary>
+      <I18nProvider>
+        <ThemeProvider>
+          <Router>
+            <AuthProvider>
+              <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+                <NotificationManager />
+                <OfflineDetector />
+                <Navbar />
+                <main className="flex-1">
+                  <Routes>
                   {/* Public routes */}
                   <Route path="/" element={<HomePage />} />
                   <Route path="/signin" element={<SignInPage />} />
@@ -134,11 +139,13 @@ function App() {
               </main>
               <Footer />
               <Analytics />
+              <AccessibilityHelper />
             </div>
           </AuthProvider>
         </Router>
       </ThemeProvider>
     </I18nProvider>
+    </ErrorBoundary>
   );
 }
 
