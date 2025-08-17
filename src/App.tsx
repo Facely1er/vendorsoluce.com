@@ -5,8 +5,6 @@ import { ThemeProvider } from './context/ThemeContext';
 import { I18nProvider } from './context/I18nContext';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import NotificationManager from './components/common/NotificationManager';
-import OfflineDetector from './components/common/OfflineDetector';
-import AccessibilityHelper from './components/common/AccessibilityHelper';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
@@ -55,7 +53,6 @@ function App() {
             <AuthProvider>
               <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
                 <NotificationManager />
-                <OfflineDetector />
                 <Navbar />
                 <main className="flex-1">
                   <Routes>
@@ -136,15 +133,14 @@ function App() {
                   {/* Fallback route */}
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
-              </main>
-              <Footer />
-              <Analytics />
-              <AccessibilityHelper />
-            </div>
-          </AuthProvider>
-        </Router>
-      </ThemeProvider>
-    </I18nProvider>
+                </main>
+                <Footer />
+                <Analytics />
+              </div>
+            </AuthProvider>
+          </Router>
+        </ThemeProvider>
+      </I18nProvider>
     </ErrorBoundary>
   );
 }
