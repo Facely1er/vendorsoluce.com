@@ -46,10 +46,21 @@ vi.mock('@vercel/analytics/react', () => ({
 vi.mock('dompurify', () => ({
   default: {
     sanitize: vi.fn((input: string, options: any) => {
-      if (options?.ALLOWED_TAGS?.length === 0) {
+      // Simulate DOMPurify behavior
+      if (options?.ALLOWED_TAGS && options.ALLOWED_TAGS.length === 0) {
+        // Strip all HTML tags
         return input.replace(/<[^>]*>/g, '');
       }
-      return input;
+      if (options?.ALLOWED_TAGS) {
+        // Allow only specified tags
+        const allowedTags = options.ALLOWED_TAGS;
+        return input.replace(/<(\/?[^>]+)>/g, (match, tag) => {
+          const tagName = tag.replace('/', '').split(' ')[0].toLowerCase();
+          return allowedTags.includes(tagName) ? match : '';
+        });
+      }
+      // Default: remove script tags but keep safe ones
+      return input.replace(/<script[^>]*>.*?<\/script>/gi, '');
     })
   }
 }));
