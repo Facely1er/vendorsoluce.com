@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
@@ -9,40 +9,43 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import { Analytics } from '@vercel/analytics/react';
+import LoadingSpinner from './components/common/LoadingSpinner';
 
-// Pages
+// Critical pages - loaded immediately
 import HomePage from './pages/HomePage';
 import SignInPage from './pages/SignInPage';
-import DashboardPage from './pages/DashboardPage';
-import VendorsPage from './pages/VendorsPage';
-import SBOMAnalyzer from './pages/SBOMAnalyzer';
-import SBOMAnalysisPage from './pages/SBOMAnalysisPage';
-import SupplyChainAssessment from './pages/SupplyChainAssessment';
-import SupplyChainResults from './pages/SupplyChainResults';
-import SupplyChainRecommendations from './pages/SupplyChainRecommendations';
-import VendorRiskDashboard from './pages/VendorRiskDashboard';
-import OnboardingPage from './pages/OnboardingPage';
-import Pricing from './pages/Pricing';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Privacy from './pages/Privacy';
-import Templates from './pages/Templates';
-import HowItWorks from './pages/HowItWorks';
-import APIDocumentation from './pages/APIDocumentation';
-import IntegrationGuides from './pages/IntegrationGuides';
-import NISTChecklist from './pages/tools/NISTChecklist';
-import SBOMQuickScan from './pages/tools/SBOMQuickScan';
-import VendorRiskRadar from './pages/tools/VendorRiskRadar';
-import VendorSecurityAssessments from './pages/VendorSecurityAssessments';
-import VendorAssessmentPortal from './pages/VendorAssessmentPortal';
-import ProfilePage from './pages/ProfilePage';
-import AccountPage from './pages/AccountPage';
-import UserDashboard from './pages/UserDashboard';
-import UserActivity from './pages/UserActivity';
-import UserNotifications from './pages/UserNotifications';
-import StakeholderDashboardDemo from './pages/StakeholderDashboardDemo';
-import TemplatePreviewPage from './pages/TemplatePreviewPage';
-import DashboardDemoPage from './pages/DashboardDemoPage';
+
+// Lazy loaded pages - split into chunks
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const VendorsPage = lazy(() => import('./pages/VendorsPage'));
+const SBOMAnalyzer = lazy(() => import('./pages/SBOMAnalyzer'));
+const SBOMAnalysisPage = lazy(() => import('./pages/SBOMAnalysisPage'));
+const SupplyChainAssessment = lazy(() => import('./pages/SupplyChainAssessment'));
+const SupplyChainResults = lazy(() => import('./pages/SupplyChainResults'));
+const SupplyChainRecommendations = lazy(() => import('./pages/SupplyChainRecommendations'));
+const VendorRiskDashboard = lazy(() => import('./pages/VendorRiskDashboard'));
+const OnboardingPage = lazy(() => import('./pages/OnboardingPage'));
+const Pricing = lazy(() => import('./pages/Pricing'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const Templates = lazy(() => import('./pages/Templates'));
+const HowItWorks = lazy(() => import('./pages/HowItWorks'));
+const APIDocumentation = lazy(() => import('./pages/APIDocumentation'));
+const IntegrationGuides = lazy(() => import('./pages/IntegrationGuides'));
+const NISTChecklist = lazy(() => import('./pages/tools/NISTChecklist'));
+const SBOMQuickScan = lazy(() => import('./pages/tools/SBOMQuickScan'));
+const VendorRiskRadar = lazy(() => import('./pages/tools/VendorRiskRadar'));
+const VendorSecurityAssessments = lazy(() => import('./pages/VendorSecurityAssessments'));
+const VendorAssessmentPortal = lazy(() => import('./pages/VendorAssessmentPortal'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const AccountPage = lazy(() => import('./pages/AccountPage'));
+const UserDashboard = lazy(() => import('./pages/UserDashboard'));
+const UserActivity = lazy(() => import('./pages/UserActivity'));
+const UserNotifications = lazy(() => import('./pages/UserNotifications'));
+const StakeholderDashboardDemo = lazy(() => import('./pages/StakeholderDashboardDemo'));
+const TemplatePreviewPage = lazy(() => import('./pages/TemplatePreviewPage'));
+const DashboardDemoPage = lazy(() => import('./pages/DashboardDemoPage'));
 
 function App() {
   return (
@@ -55,7 +58,8 @@ function App() {
                 <NotificationManager />
                 <Navbar />
                 <main className="flex-1">
-                  <Routes>
+                  <Suspense fallback={<LoadingSpinner size="lg" message="Loading page..." className="min-h-[400px]" />}>
+                    <Routes>
                   {/* Public routes */}
                   <Route path="/" element={<HomePage />} />
                   <Route path="/signin" element={<SignInPage />} />
@@ -133,6 +137,7 @@ function App() {
                   {/* Fallback route */}
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
+                  </Suspense>
                 </main>
                 <Footer />
                 <Analytics />

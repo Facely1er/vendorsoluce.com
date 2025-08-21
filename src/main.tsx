@@ -3,14 +3,10 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import './context/I18nContext'; // Import i18n configuration
-import { usePerformanceMonitoring } from './hooks/usePerformanceMonitoring';
+import { initSentry } from './utils/sentry';
 
-// Initialize performance monitoring
-if (import.meta.env.PROD) {
-  import('./hooks/usePerformanceMonitoring').then(({ usePerformanceMonitoring }) => {
-    // Performance monitoring will be initialized when components mount
-  });
-}
+// Initialize error monitoring
+initSentry();
 
 const rootElement = document.getElementById('root');
 
