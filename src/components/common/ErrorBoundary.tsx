@@ -2,11 +2,13 @@ import React from 'react';
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Link } from 'react-router-dom';
+import { logger } from '../../utils/monitoring';
 
 interface ErrorBoundaryState {
   hasError: boolean;
   error?: Error;
   errorInfo?: React.ErrorInfo;
+  errorId?: string;
 }
 
 interface ErrorBoundaryProps {
@@ -31,21 +33,59 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+    // Generate unique error ID for tracking
+    const errorId = `error_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
     this.setState({
       error,
       errorInfo,
+      errorId,
     });
 
-    // Log to external error monitoring service in production
+    // Log error with structured data
+    logger.error('ErrorBoundary caught an error', {
+      error: {
+        message: error.message,
+        stack: error.stack,
+        name: error.name,
+      },
+      errorInfo: {
+        componentStack: errorInfo.componentStack,
+      },
+      errorId,
+      url: window.location.href,
+      userAgent: navigator.userAgent,
+      timestamp: new Date().toISOString(),
+    });
+
+    // Send to external error monitoring service in production
     if (import.meta.env.PROD) {
-      // Example: Sentry.captureException(error, { contexts: { react: errorInfo } });
+      // Sentry integration
+      if (window.Sentry) {
+        window.Sentry.captureException(error, {
+          contexts: { react: errorInfo },
+          tags: { errorId, component: 'ErrorBoundary' },
+        });
+      }
+      
+      // Google Analytics error tracking
+      if (window.gtag) {
+        window.gtag('event', 'exception', {
+          description: error.message,
+          fatal: true,
+          custom_parameter: errorId,
+        });
+      }
     }
   }
 
   resetError = () => {
-    this.setState({ hasError: false, error: undefined, errorInfo: undefined });
+    this.setState({ 
+      hasError: false, 
+      error: undefined, 
+      errorInfo: undefined,
+      errorId: undefined 
+    });
   };
 
   render() {
@@ -69,6 +109,11 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
             
             <p className="text-gray-600 dark:text-gray-300 mb-6">
               We're sorry, but something unexpected happened. Our team has been notified.
+              {this.state.errorId && (
+                <span className="block text-sm text-gray-500 mt-2">
+                  Error ID: {this.state.errorId}
+                </span>
+              )}
             </p>
             
             {import.meta.env.DEV && this.state.error && (
@@ -93,6 +138,19 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
                   <Home className="h-4 w-4 mr-2" />
                   Go Home
                 </Button>
+              </Link>
+            </div>
+            
+            {/* Contact support link */}
+            <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                Still having issues?
+              </p>
+              <Link 
+                to="/contact" 
+                className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                Contact Support
               </Link>
             </div>
           </div>
