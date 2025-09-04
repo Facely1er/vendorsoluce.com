@@ -1,6 +1,6 @@
  import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, ShieldCheck,FileJson, BarChart3, Zap } from 'lucide-react';
+import { Shield, FileJson, BarChart3, Zap } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useTranslation } from 'react-i18next';
 

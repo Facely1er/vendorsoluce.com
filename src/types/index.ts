@@ -123,6 +123,8 @@ export interface QuickTool {
   category: 'assessment' | 'analysis' | 'reporting' | 'compliance';
 }
 
+import React from 'react';
+
 // Navigation types
 export interface MenuItem {
   label: string;

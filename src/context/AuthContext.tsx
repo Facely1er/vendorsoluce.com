@@ -2,10 +2,11 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 import { useNavigate } from 'react-router-dom';
+import { Profile } from '../types';
 
 interface AuthContextType {
   user: User | null;
-  profile: any | null;
+  profile: Profile | null;
   isLoading: boolean;
   isAuthenticated: boolean;
   signIn: (email: string, password: string) => Promise<void>;
@@ -26,7 +27,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [profile, setProfile] = useState<any | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
    const [isTourRunning, setIsTourRunning] = useState(false);
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [fetchProfile]);
 
   const fetchProfile = async (userId: string) => {
     try {
@@ -157,7 +158,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (!user) return;
 
     try {
-      const updateData: any = { is_first_login: false };
+      const updateData: Partial<Profile> = { is_first_login: false };
       
       // Add profile data if provided
       if (profileData) {
@@ -174,7 +175,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (error) throw error;
 
       // Update local profile state
-      setProfile((prev: any) => ({ ...prev, ...updateData }));
+      setProfile((prev: Profile | null) => prev ? ({ ...prev, ...updateData }) : null);
 
       // Navigate to dashboard after onboarding
       navigate('/dashboard');
@@ -195,7 +196,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
        if (error) throw error;
  
        // Update local profile state
-       setProfile((prev: any) => ({ ...prev, tour_completed: true }));
+       setProfile((prev: Profile | null) => prev ? ({ ...prev, tour_completed: true }) : null);
        setIsTourRunning(false);
      } catch (error) {
        console.error('Error marking tour complete:', error);

@@ -13,9 +13,6 @@ import {
   Building,
   MessageSquare,
   DollarSign,
-  Mail,
-  Phone,
-  MapPin,
   ArrowRight
 } from 'lucide-react';
 

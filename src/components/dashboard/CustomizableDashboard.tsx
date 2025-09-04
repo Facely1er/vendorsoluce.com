@@ -20,7 +20,7 @@ interface DashboardWidget {
   title: string;
   type: 'metric' | 'chart' | 'table' | 'alerts';
   size: 'small' | 'medium' | 'large';
-  data: any;
+  data: Record<string, unknown>;
   isVisible: boolean;
   position: { x: number; y: number };
 }
@@ -146,7 +146,7 @@ const CustomizableDashboard: React.FC = () => {
             <PieChart className="h-24 w-24 text-gray-400 dark:text-gray-600" />
             <div className="ml-4">
               <div className="space-y-2">
-                {data.data.map((item: any, index: number) => (
+                {data.data.map((item: Record<string, unknown>, index: number) => (
                   <div key={index} className="flex items-center text-sm">
                     <div 
                       className="w-3 h-3 rounded-full mr-2" 
@@ -175,7 +175,7 @@ const CustomizableDashboard: React.FC = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {data.alerts.map((alert: any) => (
+            {data.alerts.map((alert: Record<string, unknown>) => (
               <div key={alert.id} className="border-l-4 border-orange-400 pl-3 py-2">
                 <p className="text-sm font-medium text-gray-900 dark:text-white">{alert.message}</p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">{alert.time}</p>
