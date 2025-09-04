@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import WelcomeScreen from '../components/onboarding/WelcomeScreen';
 
 const OnboardingPage: React.FC = () => {
-  const { markOnboardingComplete } = useAuth();
   const [showWelcome, setShowWelcome] = useState(true);
 
   const handleOnboardingComplete = () => {

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Home } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { Button } from '../ui/Button';
 
 interface BackToDashboardLinkProps {
   className?: string;
@@ -10,8 +9,7 @@ interface BackToDashboardLinkProps {
 }
 
 const BackToDashboardLink: React.FC<BackToDashboardLinkProps> = ({ 
-  className = 'mb-6', 
-  showIcon = true 
+  className = 'mb-6'
 }) => {
   const { isAuthenticated } = useAuth();
   

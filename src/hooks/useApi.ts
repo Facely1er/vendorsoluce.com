@@ -5,7 +5,7 @@ import { defaultRateLimiter } from '../utils/security';
 interface ApiOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
   headers?: Record<string, string>;
-  body?: any;
+  body?: Record<string, unknown> | FormData | string;
   timeout?: number;
   retries?: number;
 }
@@ -16,7 +16,7 @@ interface ApiState<T> {
   error: string | null;
 }
 
-export const useApi = <T = any>() => {
+export const useApi = <T = unknown>() => {
   const [state, setState] = useState<ApiState<T>>({
     data: null,
     loading: false,

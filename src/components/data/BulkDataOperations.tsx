@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
+import { Card, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { 
   Trash2, 
   Archive, 
   CheckSquare, 
-  AlertTriangle,
-  RotateCcw,
-  Download,
-  Upload
+  AlertTriangle
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { supabase } from '../../lib/supabase';

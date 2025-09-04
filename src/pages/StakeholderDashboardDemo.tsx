@@ -10,23 +10,10 @@ import {
   BarChart3,
   TrendingUp,
   TrendingDown,
-  AlertTriangle,
-  CheckCircle,
-  Target,
-  DollarSign,
-  Clock,
-  FileCheck,
-  Zap,
-  Eye,
-  Award,
-  Globe,
-  Database,
-  Network,
   Calendar,
   Download,
   ArrowRight,
   Activity,
-  Briefcase
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -57,7 +44,6 @@ interface StakeholderView {
 }
 
 const StakeholderDashboardDemo: React.FC = () => {
-  const { t } = useTranslation();
   const [activeView, setActiveView] = useState<string>('security');
 
   const stakeholderViews: StakeholderView[] = [

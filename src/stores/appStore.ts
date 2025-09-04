@@ -13,7 +13,7 @@ interface Modal {
   id: string;
   type: 'addVendor' | 'deleteConfirm' | 'settings' | 'help';
   isOpen: boolean;
-  data?: any;
+  data?: Record<string, unknown>;
 }
 
 interface AppState {
@@ -43,13 +43,13 @@ interface AppState {
   clearNotifications: () => void;
   
   // Modal actions
-  openModal: (type: Modal['type'], data?: any) => void;
+  openModal: (type: Modal['type'], data?: Record<string, unknown>) => void;
   closeModal: (id: string) => void;
   closeAllModals: () => void;
   
   // Search & Filter actions
   setGlobalSearch: (search: string) => void;
-  setFilter: (key: string, value: any) => void;
+  setFilter: (key: string, value: unknown) => void;
   clearFilters: () => void;
 }
 

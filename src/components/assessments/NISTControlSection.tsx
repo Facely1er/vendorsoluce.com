@@ -73,7 +73,6 @@ const NISTControlSection: React.FC = () => {
           </div>
         ))}
       </div>
-    }
     </section>
   );
 };

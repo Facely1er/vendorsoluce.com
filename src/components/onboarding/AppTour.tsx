@@ -10,7 +10,7 @@ interface AppTourProps {
 }
 
 const AppTour: React.FC<AppTourProps> = ({ isRunning, onComplete, onSkip }) => {
-  const { user, profile } = useAuth();
+  const { } = useAuth();
   const location = useLocation();
   const [stepIndex, setStepIndex] = useState(0);
   const [run, setRun] = useState(false);

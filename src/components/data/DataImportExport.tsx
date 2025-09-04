@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
+import { Card, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { 
   Upload, 
-  Download, 
   FileSpreadsheet, 
   FileJson, 
   AlertCircle, 

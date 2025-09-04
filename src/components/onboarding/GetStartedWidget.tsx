@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { 
   FileCheck, 
-  BarChart3, 
   Shield, 
   Plus,
   ArrowRight,

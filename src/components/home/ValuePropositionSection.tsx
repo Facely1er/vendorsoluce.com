@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
+import { Card, CardHeader, CardContent } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { 
   Shield, 
@@ -8,8 +8,6 @@ import {
   Users, 
   ArrowRight,
   Lock, 
-  ChevronRight,
-  Target,
   CheckCircle,
   AlertTriangle
 } from 'lucide-react';
