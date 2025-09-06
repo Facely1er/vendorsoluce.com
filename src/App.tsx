@@ -46,10 +46,10 @@ import DashboardDemoPage from './pages/DashboardDemoPage';
 
 function App() {
   return (
-    <ErrorBoundary>
-      <I18nProvider>
-        <ThemeProvider>
-          <Router>
+    <I18nProvider>
+      <ThemeProvider>
+        <Router>
+          <ErrorBoundary>
             <AuthProvider>
               <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
                 <NotificationManager />
@@ -138,10 +138,10 @@ function App() {
                 <Analytics />
               </div>
             </AuthProvider>
-          </Router>
-        </ThemeProvider>
-      </I18nProvider>
-    </ErrorBoundary>
+          </ErrorBoundary>
+        </Router>
+      </ThemeProvider>
+    </I18nProvider>
   );
 }
 
